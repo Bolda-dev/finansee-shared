@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, ChevronLeft, ArrowLeft } from "lucide-react";
+import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar } from "lucide-react";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 
@@ -9,7 +8,7 @@ const formatCurrency = (n: number) =>
 
 const RadialGauge = ({ percent, current, max }: { percent: number; current: number; max: number }) => {
   const radius = 80;
-  const stroke = 12;
+  const stroke = 16;
   const circumference = 2 * Math.PI * radius;
   const arcLength = circumference * 0.75; // 270 degrees
   const offset = arcLength - (arcLength * percent) / 100;
@@ -50,7 +49,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
         <text x="100" y="88" textAnchor="middle" className="text-[11px]" fill="hsl(230, 20%, 55%)" fontFamily="inherit">
           הפוטנציאל שלך
         </text>
-        <text x="100" y="115" textAnchor="middle" className="text-2xl font-extrabold" fill="hsl(250, 40%, 25%)" fontFamily="inherit" fontSize="24" fontWeight="800">
+        <text x="100" y="115" textAnchor="middle" fill="hsl(250, 40%, 25%)" fontFamily="inherit" fontSize="18" fontWeight="800">
           {formatCurrency(current)}
         </text>
         <text x="100" y="138" textAnchor="middle" className="text-[10px]" fill="hsl(230, 20%, 65%)" fontFamily="inherit" fontSize="10">
@@ -62,7 +61,6 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 };
 
 const IndexB = () => {
-  const navigate = useNavigate();
   const [chatOpen, setChatOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
@@ -95,13 +93,6 @@ const IndexB = () => {
             <p className="text-xs" style={{ color: "hsl(230, 20%, 60%)" }}>שלום,</p>
             <h1 className="text-xl font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>{userData.name} 👋</h1>
           </div>
-          <button
-            onClick={() => navigate("/")}
-            className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ background: "hsl(250, 60%, 55%)", color: "white" }}
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </button>
         </div>
 
         {/* Subtle tabs */}
@@ -254,8 +245,8 @@ const IndexB = () => {
         </div>
       )}
 
-      {/* Chatbot */}
-      <ChatBot open={chatOpen} onOpenChange={setChatOpen} />
+      {/* Chatbot - centered bottom */}
+      <ChatBot open={chatOpen} onOpenChange={setChatOpen} variant="centered" />
     </div>
   );
 };

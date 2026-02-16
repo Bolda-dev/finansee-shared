@@ -15,6 +15,7 @@ const iconMap: Record<string, React.ReactNode> = {
 interface ChatBotProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  variant?: "default" | "centered";
 }
 
 interface Message {
@@ -22,7 +23,7 @@ interface Message {
   text: string;
 }
 
-export function ChatBot({ open, onOpenChange }: ChatBotProps) {
+export function ChatBot({ open, onOpenChange, variant = "default" }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [inputText, setInputText] = useState("");
@@ -46,16 +47,35 @@ export function ChatBot({ open, onOpenChange }: ChatBotProps) {
   return (
     <>
       {/* FAB */}
-      <button
-        onClick={() => onOpenChange(true)}
-        className="fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full shadow-lg px-4 py-3 transition-transform hover:scale-105"
-        style={{
-          background: "linear-gradient(135deg, hsl(262, 60%, 45%), hsl(220, 70%, 40%))",
-        }}
-      >
-        <img src={advisorImg} alt="יועצת" className="w-8 h-8 rounded-full border-2 border-white/50 object-cover" />
-        <span className="text-white text-sm font-medium">אני כאן לעזור!</span>
-      </button>
+      {variant === "centered" ? (
+        <button
+          onClick={() => onOpenChange(true)}
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 transition-transform hover:scale-105"
+        >
+          <img
+            src={advisorImg}
+            alt="יועצת"
+            className="w-16 h-16 rounded-full border-4 object-cover animate-bounce"
+            style={{
+              borderColor: "hsl(250, 60%, 55%)",
+              boxShadow: "0 6px 24px hsla(250, 60%, 45%, 0.4)",
+              animationDuration: "3s",
+              animationIterationCount: "infinite",
+            }}
+          />
+        </button>
+      ) : (
+        <button
+          onClick={() => onOpenChange(true)}
+          className="fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full shadow-lg px-4 py-3 transition-transform hover:scale-105"
+          style={{
+            background: "linear-gradient(135deg, hsl(262, 60%, 45%), hsl(220, 70%, 40%))",
+          }}
+        >
+          <img src={advisorImg} alt="יועצת" className="w-8 h-8 rounded-full border-2 border-white/50 object-cover" />
+          <span className="text-white text-sm font-medium">אני כאן לעזור!</span>
+        </button>
+      )}
 
       <Sheet open={open} onOpenChange={onOpenChange}>
         <SheetContent side="bottom" className="h-[80vh] rounded-t-2xl p-0" dir="rtl">
