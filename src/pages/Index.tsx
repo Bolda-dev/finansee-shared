@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, HelpCircle } from "lucide-react";
+import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, HelpCircle, Menu } from "lucide-react";
 import { userData, recommendations, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 
@@ -64,6 +64,9 @@ const Index = () => {
               {new Date().toLocaleDateString("he-IL", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
             </p>
           </div>
+          <button className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/15 hover:bg-white/25 transition-all hover:scale-105 active:scale-95">
+            <Menu className="h-5 w-5 text-white" />
+          </button>
         </div>
 
         <div className="mb-2 relative">
