@@ -76,18 +76,25 @@ const IndexB = () => {
       {/* Tab Content */}
       {activeTab === "status" && (
         <div className="px-5">
-          <div className="rounded-2xl p-5 mb-5" style={{ background: "white", boxShadow: "0 4px 24px rgba(100, 80, 180, 0.08)" }}>
-            <RadialGauge percent={progressPercent} current={userData.currentPotential} max={userData.maxPotential} />
-            {/* Improvement note - glass card with nature background */}
-            <div className="relative rounded-xl mt-3 overflow-hidden">
-              <img src={natureBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          {/* Main card - glass over nature background */}
+          <div className="relative rounded-2xl mb-5 overflow-hidden">
+            <img src={natureBg} alt="" className="absolute inset-0 w-full h-full object-cover scale-110" />
+            <div
+              className="relative rounded-2xl p-5"
+              style={{
+                background: "hsla(250, 40%, 99%, 0.72)",
+                backdropFilter: "blur(24px) saturate(180%)",
+                WebkitBackdropFilter: "blur(24px) saturate(180%)",
+                border: "1px solid hsla(250, 50%, 92%, 0.6)",
+                boxShadow: "0 4px 24px rgba(100, 80, 180, 0.1)",
+              }}
+            >
+              <RadialGauge percent={progressPercent} current={userData.currentPotential} max={userData.maxPotential} />
               <div
-                className="relative text-center py-4 px-5"
+                className="text-center py-3.5 px-5 rounded-xl mt-2"
                 style={{
-                  background: "hsla(250, 40%, 98%, 0.7)",
-                  backdropFilter: "blur(16px) saturate(180%)",
-                  WebkitBackdropFilter: "blur(16px) saturate(180%)",
-                  border: "1px solid hsla(250, 50%, 90%, 0.5)",
+                  background: "hsla(250, 50%, 96%, 0.6)",
+                  border: "1px solid hsla(250, 50%, 90%, 0.4)",
                 }}
               >
                 <p className="text-sm font-bold mb-1" style={{ color: "hsl(250, 50%, 35%)" }}>
