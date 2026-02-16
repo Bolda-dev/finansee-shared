@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, HelpCircle } from "lucide-react";
 import { userData, recommendations, criticalityConfig } from "@/lib/data";
-import { Progress } from "@/components/ui/progress";
 import { ChatBot } from "@/components/ChatBot";
 
 const formatCurrency = (n: number) =>
@@ -12,13 +11,27 @@ const Index = () => {
   const navigate = useNavigate();
   const [chatOpen, setChatOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [autoTooltip, setAutoTooltip] = useState(true);
+  const [autoTooltip, setAutoTooltip] = useState(false);
+  const [waveIndex, setWaveIndex] = useState(-1);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
 
+  // Auto tooltip on mount — show for 4 seconds
   useEffect(() => {
     const showTimer = setTimeout(() => setAutoTooltip(true), 500);
-    const hideTimer = setTimeout(() => setAutoTooltip(false), 2500);
+    const hideTimer = setTimeout(() => setAutoTooltip(false), 4500);
     return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+  }, []);
+
+  // Wave animation every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Animate cards 0, 1, 2 sequentially with 200ms delay
+      [0, 1, 2].forEach((i) => {
+        setTimeout(() => setWaveIndex(i), i * 200);
+      });
+      setTimeout(() => setWaveIndex(-1), 800);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const summaryCards = [
@@ -31,6 +44,8 @@ const Index = () => {
     Home: <Home className="h-5 w-5" />,
     Plus: <Plus className="h-5 w-5" />,
     Calendar: <Calendar className="h-5 w-5" />,
+    Shield: <Shield className="h-5 w-5" />,
+    TrendingUp: <TrendingUp className="h-5 w-5" />,
   };
 
   return (
@@ -57,9 +72,9 @@ const Index = () => {
             <div className="relative">
               <button
                 onClick={() => setShowTooltip((v) => !v)}
-                className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+                className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
               >
-                <HelpCircle className="h-3.5 w-3.5 text-white/90" />
+                <HelpCircle className="h-4 w-4 text-white/90" />
               </button>
               <div
                 className={`absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-50 transition-all duration-500 ${
@@ -101,11 +116,15 @@ const Index = () => {
       <div className="px-5 -mt-6 relative z-10">
         <div className="bg-card rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-4 border border-border/50">
           <div className="grid grid-cols-3 gap-3">
-            {summaryCards.map((card) => (
+            {summaryCards.map((card, idx) => (
               <button
                 key={card.label}
                 onClick={() => navigate(card.route)}
-                className="text-center hover:scale-[1.03] transition-transform relative"
+                className="text-center transition-transform relative"
+                style={{
+                  transform: waveIndex === idx ? "translateY(-4px) scale(1.05)" : "translateY(0) scale(1)",
+                  transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                }}
               >
                 {(card as any).badge && (
                   <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center shadow-sm z-10">
@@ -134,7 +153,7 @@ const Index = () => {
           {recommendations.map((rec) => (
             <div
               key={rec.id}
-              className="min-w-[210px] bg-card rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-border/50 flex-shrink-0 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow"
+              className="min-w-[210px] h-[220px] bg-card rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-border/50 flex-shrink-0 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow flex flex-col"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
@@ -151,19 +170,21 @@ const Index = () => {
                 </span>
               </div>
               <h3 className="text-sm font-bold text-card-foreground">{rec.title}</h3>
-              <p className="text-xs text-muted-foreground mt-1">{rec.description}</p>
+              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{rec.description}</p>
               {rec.saving && (
                 <p className="text-sm font-bold mt-1" style={{ color: "hsl(152, 60%, 40%)" }}>{rec.saving}</p>
               )}
-              <button
-                className="mt-3 w-full text-sm font-medium py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg"
-                style={{
-                  background: "linear-gradient(135deg, hsl(152, 60%, 40%), hsl(140, 55%, 35%))",
-                  color: "white",
-                }}
-              >
-                {rec.action}
-              </button>
+              <div className="mt-auto pt-3">
+                <button
+                  className="w-full text-sm font-medium py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(152, 60%, 40%), hsl(140, 55%, 35%))",
+                    color: "white",
+                  }}
+                >
+                  {rec.action}
+                </button>
+              </div>
             </div>
           ))}
         </div>
