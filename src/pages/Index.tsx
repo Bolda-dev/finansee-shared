@@ -70,51 +70,55 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="px-5 -mt-4">
-        {/* Summary Cards */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          {summaryCards.map((card) => (
-            <button
-              key={card.label}
-              onClick={() => navigate(card.route)}
-              className="bg-card rounded-xl p-3 shadow-md border border-border text-center hover:shadow-lg transition-shadow relative"
-            >
-              {(card as any).badge && (
-                <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
-                  {(card as any).badge}
-                </span>
-              )}
-              <div
-                className={`w-10 h-10 rounded-full bg-gradient-to-br ${card.color} flex items-center justify-center mx-auto mb-2`}
+      {/* Floating Summary Cards - overlapping header */}
+      <div className="px-5 -mt-6 relative z-10">
+        <div className="bg-card rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-4 border border-border/50">
+          <div className="grid grid-cols-3 gap-3">
+            {summaryCards.map((card) => (
+              <button
+                key={card.label}
+                onClick={() => navigate(card.route)}
+                className="text-center hover:scale-[1.03] transition-transform relative"
               >
-                <card.icon className="h-5 w-5 text-white" />
-              </div>
-              <p className="text-xs text-muted-foreground">{card.label}</p>
-              <p className="text-sm font-bold text-card-foreground">{card.amount}</p>
-              <p className="text-[10px] text-muted-foreground">{card.sub}</p>
-            </button>
-          ))}
+                {(card as any).badge && (
+                  <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center shadow-sm z-10">
+                    {(card as any).badge}
+                  </span>
+                )}
+                <div
+                  className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${card.color} flex items-center justify-center mx-auto mb-2 shadow-lg`}
+                >
+                  <card.icon className="h-5 w-5 text-white" />
+                </div>
+                <p className="text-[11px] text-muted-foreground">{card.label}</p>
+                <p className="text-sm font-bold text-card-foreground">{card.amount}</p>
+                <p className="text-[10px] text-muted-foreground">{card.sub}</p>
+              </button>
+            ))}
+          </div>
         </div>
+      </div>
 
+      {/* Bottom Section */}
+      <div className="px-5 mt-6">
         {/* Recommendations */}
         <h2 className="text-base font-bold text-foreground mb-3">המלצות לשיפור</h2>
-        <div className="flex gap-3 overflow-x-auto pb-4 -mx-5 px-5 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-6 -mx-5 px-5 scrollbar-hide">
           {recommendations.map((rec) => (
             <div
               key={rec.id}
-              className="min-w-[200px] bg-card rounded-xl p-4 shadow-md border border-border flex-shrink-0"
+              className="min-w-[210px] bg-card rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-border/50 flex-shrink-0 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow"
             >
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center mb-3">
+              <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center mb-3">
                 {recIcons[rec.icon]}
               </div>
               <h3 className="text-sm font-bold text-card-foreground">{rec.title}</h3>
               <p className="text-xs text-muted-foreground mt-1">{rec.description}</p>
               {rec.saving && (
-                <p className="text-sm font-bold text-emerald-600 mt-1">{rec.saving}</p>
+                <p className="text-sm font-bold mt-1" style={{ color: "hsl(152, 60%, 40%)" }}>{rec.saving}</p>
               )}
               <button
-                className="mt-3 w-full text-sm font-medium py-2 rounded-lg transition-colors"
+                className="mt-3 w-full text-sm font-medium py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg"
                 style={{
                   background: "linear-gradient(135deg, hsl(152, 60%, 40%), hsl(140, 55%, 35%))",
                   color: "white",
