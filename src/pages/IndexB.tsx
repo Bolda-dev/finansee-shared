@@ -40,7 +40,7 @@ const IndexB = () => {
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
 
   const navItems = [
-    { key: "status" as const, label: "סטטוס", icon: BarChart3 },
+    { key: "status" as const, label: "בית", icon: Home },
     { key: "income" as const, label: "הכנסות", icon: TrendingUp },
     { key: "expenses" as const, label: "הוצאות", icon: Wallet },
     { key: "insurance" as const, label: "ביטוחים", icon: ShieldCheck },
@@ -79,8 +79,8 @@ const IndexB = () => {
       <div className="relative z-10 px-5 pt-12 pb-4">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <p className="text-xs" style={{ color: "hsla(0, 0%, 100%, 0.75)" }}>שלום,</p>
-            <h1 className="text-xl font-bold" style={{ color: "white" }}>{userData.name} 👋</h1>
+            <p className="text-xs" style={{ color: "hsl(250, 40%, 20%)" }}>שלום,</p>
+            <h1 className="text-xl font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{userData.name} 👋</h1>
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@ const IndexB = () => {
           {/* Center Chat Button - raised above the bar with bounce */}
           <button
             onClick={() => setChatOpen(true)}
-            className="absolute -top-5 left-1/2 -translate-x-1/2 z-10 transition-transform hover:scale-105 active:scale-95 animate-bounce"
+            className="absolute -top-5 inset-x-0 mx-auto w-fit z-10 transition-transform hover:scale-105 active:scale-95 animate-bounce"
             style={{ animationDuration: "3s", animationIterationCount: "infinite" }}
           >
             <div
