@@ -3,6 +3,7 @@ import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wall
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import advisorImg from "@/assets/advisor-avatar.jpg";
+import natureBg from "@/assets/nature-bg.jpg";
 
 const formatCurrency = (n: number) =>
   "₪" + n.toLocaleString("he-IL");
@@ -77,10 +78,25 @@ const IndexB = () => {
         <div className="px-5">
           <div className="rounded-2xl p-5 mb-5" style={{ background: "white", boxShadow: "0 4px 24px rgba(100, 80, 180, 0.08)" }}>
             <RadialGauge percent={progressPercent} current={userData.currentPotential} max={userData.maxPotential} />
-            <div className="text-center py-2.5 px-4 rounded-xl mt-2" style={{ background: "hsl(250, 50%, 97%)" }}>
-              <p className="text-xs" style={{ color: "hsl(250, 40%, 50%)" }}>
-                ניתן לשפר ב-<span className="font-bold">{formatCurrency(userData.improvementAmount)}</span> נוספים 🚀
-              </p>
+            {/* Improvement note - glass card with nature background */}
+            <div className="relative rounded-xl mt-3 overflow-hidden">
+              <img src={natureBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <div
+                className="relative text-center py-4 px-5"
+                style={{
+                  background: "hsla(250, 40%, 98%, 0.7)",
+                  backdropFilter: "blur(16px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(16px) saturate(180%)",
+                  border: "1px solid hsla(250, 50%, 90%, 0.5)",
+                }}
+              >
+                <p className="text-sm font-bold mb-1" style={{ color: "hsl(250, 50%, 35%)" }}>
+                  💡 ניתן לשפר ב-{formatCurrency(userData.improvementAmount)} נוספים
+                </p>
+                <p className="text-[11px] leading-relaxed" style={{ color: "hsl(250, 30%, 45%)" }}>
+                  על בסיס ניתוח ההכנסות, ההוצאות והביטוחים שלך — זיהינו הזדמנויות לחיסכון ולהגדלת התשואה. לחץ על ההמלצות למטה כדי להתחיל 🚀
+                </p>
+              </div>
             </div>
           </div>
 
@@ -176,10 +192,11 @@ const IndexB = () => {
         <div
           className="relative flex items-end justify-center"
         >
-          {/* Center Chat Button - raised above the bar */}
+          {/* Center Chat Button - raised above the bar with bounce */}
           <button
             onClick={() => setChatOpen(true)}
-            className="absolute -top-5 left-1/2 -translate-x-1/2 z-10 transition-transform hover:scale-105 active:scale-95"
+            className="absolute -top-5 left-1/2 -translate-x-1/2 z-10 transition-transform hover:scale-105 active:scale-95 animate-bounce"
+            style={{ animationDuration: "3s", animationIterationCount: "infinite" }}
           >
             <div
               className="w-[60px] h-[60px] rounded-full flex items-center justify-center"
