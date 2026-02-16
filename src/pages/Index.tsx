@@ -153,7 +153,7 @@ const Index = () => {
           {recommendations.map((rec) => (
             <div
               key={rec.id}
-              className="min-w-[210px] h-[220px] bg-card rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-border/50 flex-shrink-0 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow flex flex-col"
+              className="min-w-[70%] max-w-[70%] h-[220px] bg-card rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-border/50 flex-shrink-0 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow flex flex-col"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
