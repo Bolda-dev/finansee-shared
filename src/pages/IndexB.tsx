@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar } from "lucide-react";
-import { userData, recommendations, incomeItems, expenseItems, insuranceItems } from "@/lib/data";
+import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 
 const formatCurrency = (n: number) =>
@@ -80,8 +80,8 @@ const IndexB = () => {
 
   const extendedRecs = [
     ...recommendations,
-    { id: 4, title: "אופטימיזציה של ביטוחים", description: "ניתן לחסוך על ביטוחים קיימים", saving: "₪1,800/שנה", action: "בדוק עכשיו", icon: "Home" },
-    { id: 5, title: "הגדלת הפקדות לפנסיה", description: "ניצול מלא של הטבות מס", saving: "₪5,000/שנה", action: "פרטים", icon: "Plus" },
+    { id: 4, title: "אופטימיזציה של ביטוחים", description: "ניתן לחסוך על ביטוחים קיימים", saving: "₪1,800/שנה", action: "בדוק עכשיו", icon: "Home", criticality: "high" as const },
+    { id: 5, title: "הגדלת הפקדות לפנסיה", description: "ניצול מלא של הטבות מס", saving: "₪5,000/שנה", action: "פרטים", icon: "Plus", criticality: "medium" as const },
   ];
 
   return (
@@ -155,14 +155,25 @@ const IndexB = () => {
                   {recIcons[rec.icon]}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>{rec.title}</h3>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <h3 className="text-sm font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>{rec.title}</h3>
+                    <span
+                      className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full"
+                      style={{
+                        background: criticalityConfig[rec.criticality].bg,
+                        color: criticalityConfig[rec.criticality].color,
+                      }}
+                    >
+                      {criticalityConfig[rec.criticality].label}
+                    </span>
+                  </div>
                   <p className="text-[11px]" style={{ color: "hsl(230, 15%, 55%)" }}>
                     {rec.description}
                     {rec.saving && <span className="font-bold" style={{ color: "hsl(250, 60%, 55%)" }}> • {rec.saving}</span>}
                   </p>
                 </div>
                 <button
-                  className="text-xs font-medium py-2 px-4 rounded-lg flex-shrink-0 transition-all"
+                  className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center"
                   style={{
                     background: "linear-gradient(135deg, hsl(250, 65%, 55%), hsl(220, 70%, 55%))",
                     color: "white",

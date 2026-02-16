@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, MessageCircle } from "lucide-react";
-import { userData, recommendations } from "@/lib/data";
+import { userData, recommendations, criticalityConfig } from "@/lib/data";
 import { Progress } from "@/components/ui/progress";
 import { ChatBot } from "@/components/ChatBot";
 
@@ -109,8 +109,19 @@ const Index = () => {
               key={rec.id}
               className="min-w-[210px] bg-card rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-border/50 flex-shrink-0 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow"
             >
-              <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center mb-3">
-                {recIcons[rec.icon]}
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
+                  {recIcons[rec.icon]}
+                </div>
+                <span
+                  className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                  style={{
+                    background: criticalityConfig[rec.criticality].bg,
+                    color: criticalityConfig[rec.criticality].color,
+                  }}
+                >
+                  {criticalityConfig[rec.criticality].label}
+                </span>
               </div>
               <h3 className="text-sm font-bold text-card-foreground">{rec.title}</h3>
               <p className="text-xs text-muted-foreground mt-1">{rec.description}</p>
