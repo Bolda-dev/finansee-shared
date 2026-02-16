@@ -40,6 +40,7 @@ export const recommendations = [
     saving: "₪32,000/שנה",
     action: "טפל עכשיו",
     icon: "Home",
+    criticality: "high" as const,
   },
   {
     id: 2,
@@ -48,6 +49,7 @@ export const recommendations = [
     saving: "",
     action: "הכנס",
     icon: "Plus",
+    criticality: "low" as const,
   },
   {
     id: 3,
@@ -56,8 +58,15 @@ export const recommendations = [
     saving: "",
     action: "קבע תור",
     icon: "Calendar",
+    criticality: "medium" as const,
   },
 ];
+
+export const criticalityConfig = {
+  high: { label: "קריטי", bg: "hsl(0, 70%, 95%)", color: "hsl(0, 65%, 45%)" },
+  medium: { label: "בינוני", bg: "hsl(45, 80%, 92%)", color: "hsl(35, 70%, 40%)" },
+  low: { label: "נמוך", bg: "hsl(130, 50%, 92%)", color: "hsl(130, 45%, 35%)" },
+};
 
 export const chatCategories = [
   {
