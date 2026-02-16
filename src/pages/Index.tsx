@@ -31,7 +31,7 @@ const Index = () => {
       <div
         className="px-5 pt-12 pb-8 text-white"
         style={{
-          background: "linear-gradient(135deg, hsl(240, 15%, 10%) 0%, hsl(260, 20%, 15%) 40%, hsl(250, 25%, 12%) 70%, hsl(230, 15%, 8%) 100%)",
+          background: "linear-gradient(135deg, hsl(240, 15%, 10%) 0%, hsl(265, 30%, 18%) 35%, hsl(255, 25%, 15%) 55%, hsl(250, 20%, 12%) 75%, hsl(230, 15%, 8%) 100%)",
         }}
       >
         <div className="flex items-center justify-between mb-6">
