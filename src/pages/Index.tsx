@@ -60,15 +60,15 @@ const Index = () => {
         }}
       >
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex-1">
+          <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/15 hover:bg-white/25 transition-all hover:scale-105 active:scale-95 flex-shrink-0">
+            <Menu className="h-5 w-5 text-white" />
+          </button>
+          <div>
             <h1 className="text-2xl font-bold">היי {userData.name}! 👋</h1>
             <p className="text-sm opacity-80 mt-1">
               {new Date().toLocaleDateString("he-IL", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
             </p>
           </div>
-          <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/15 hover:bg-white/25 transition-all hover:scale-105 active:scale-95 flex-shrink-0">
-            <Menu className="h-5 w-5 text-white" />
-          </button>
         </div>
 
         <div className="mb-2 relative">
