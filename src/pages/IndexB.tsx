@@ -76,16 +76,16 @@ const IndexB = () => {
       {/* Tab Content */}
       {activeTab === "status" && (
         <div className="px-5">
-          {/* Main card - glass over nature background */}
+          {/* Nature background behind the glass card */}
           <div className="relative rounded-2xl mb-5 overflow-hidden">
-            <img src={natureBg} alt="" className="absolute inset-0 w-full h-full object-cover scale-110" />
+            <img src={natureBg} alt="" className="w-full h-full object-cover absolute inset-0 scale-110" />
             <div
               className="relative rounded-2xl p-5"
               style={{
-                background: "hsla(250, 40%, 99%, 0.72)",
-                backdropFilter: "blur(24px) saturate(180%)",
-                WebkitBackdropFilter: "blur(24px) saturate(180%)",
-                border: "1px solid hsla(250, 50%, 92%, 0.6)",
+                background: "hsla(250, 40%, 99%, 0.55)",
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                border: "1px solid hsla(250, 50%, 92%, 0.5)",
                 boxShadow: "0 4px 24px rgba(100, 80, 180, 0.1)",
               }}
             >
@@ -93,8 +93,8 @@ const IndexB = () => {
               <div
                 className="text-center py-3.5 px-5 rounded-xl mt-2"
                 style={{
-                  background: "hsla(250, 50%, 96%, 0.6)",
-                  border: "1px solid hsla(250, 50%, 90%, 0.4)",
+                  background: "hsla(250, 50%, 96%, 0.45)",
+                  border: "1px solid hsla(250, 50%, 90%, 0.3)",
                 }}
               >
                 <p className="text-sm font-bold mb-1" style={{ color: "hsl(250, 50%, 35%)" }}>
