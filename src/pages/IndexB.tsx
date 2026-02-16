@@ -63,47 +63,56 @@ const IndexB = () => {
 
   return (
     <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: "hsl(235, 30%, 97%)" }}>
+      {/* Nature background - screen level */}
+      <div className="absolute inset-x-0 top-0 h-[420px] z-0 overflow-hidden">
+        <img src={natureBg} alt="" className="w-full h-full object-cover scale-110" />
+        {/* Gradient fade overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to bottom, transparent 30%, hsl(235, 30%, 97%) 100%)",
+          }}
+        />
+      </div>
+
       {/* Header */}
-      <div className="px-5 pt-12 pb-4">
+      <div className="relative z-10 px-5 pt-12 pb-4">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <p className="text-xs" style={{ color: "hsl(230, 20%, 60%)" }}>שלום,</p>
-            <h1 className="text-xl font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>{userData.name} 👋</h1>
+            <p className="text-xs" style={{ color: "hsla(0, 0%, 100%, 0.75)" }}>שלום,</p>
+            <h1 className="text-xl font-bold" style={{ color: "white" }}>{userData.name} 👋</h1>
           </div>
         </div>
       </div>
 
       {/* Tab Content */}
       {activeTab === "status" && (
-        <div className="px-5">
-          {/* Nature background behind the glass card */}
-          <div className="relative rounded-2xl mb-5 overflow-hidden">
-            <img src={natureBg} alt="" className="w-full h-full object-cover absolute inset-0 scale-110" />
+        <div className="relative z-10 px-5">
+          {/* Glass card */}
+          <div
+            className="rounded-2xl p-5 mb-5"
+            style={{
+              background: "hsla(250, 40%, 99%, 0.55)",
+              backdropFilter: "blur(24px) saturate(180%)",
+              WebkitBackdropFilter: "blur(24px) saturate(180%)",
+              border: "1px solid hsla(250, 50%, 92%, 0.5)",
+              boxShadow: "0 4px 24px rgba(100, 80, 180, 0.1)",
+            }}
+          >
+            <RadialGauge percent={progressPercent} current={userData.currentPotential} max={userData.maxPotential} />
             <div
-              className="relative rounded-2xl p-5"
+              className="text-center py-3.5 px-5 rounded-xl mt-2"
               style={{
-                background: "hsla(250, 40%, 99%, 0.55)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid hsla(250, 50%, 92%, 0.5)",
-                boxShadow: "0 4px 24px rgba(100, 80, 180, 0.1)",
+                background: "hsla(250, 50%, 96%, 0.45)",
+                border: "1px solid hsla(250, 50%, 90%, 0.3)",
               }}
             >
-              <RadialGauge percent={progressPercent} current={userData.currentPotential} max={userData.maxPotential} />
-              <div
-                className="text-center py-3.5 px-5 rounded-xl mt-2"
-                style={{
-                  background: "hsla(250, 50%, 96%, 0.45)",
-                  border: "1px solid hsla(250, 50%, 90%, 0.3)",
-                }}
-              >
-                <p className="text-sm font-bold mb-1" style={{ color: "hsl(250, 50%, 35%)" }}>
-                  💡 ניתן לשפר ב-{formatCurrency(userData.improvementAmount)} נוספים
-                </p>
-                <p className="text-[11px] leading-relaxed" style={{ color: "hsl(250, 30%, 45%)" }}>
-                  על בסיס ניתוח ההכנסות, ההוצאות והביטוחים שלך — זיהינו הזדמנויות לחיסכון ולהגדלת התשואה. לחץ על ההמלצות למטה כדי להתחיל 🚀
-                </p>
-              </div>
+              <p className="text-sm font-bold mb-1" style={{ color: "hsl(250, 50%, 35%)" }}>
+                💡 ניתן לשפר ב-{formatCurrency(userData.improvementAmount)} נוספים
+              </p>
+              <p className="text-[11px] leading-relaxed" style={{ color: "hsl(250, 30%, 45%)" }}>
+                על בסיס ניתוח ההכנסות, ההוצאות והביטוחים שלך — זיהינו הזדמנויות לחיסכון ולהגדלת התשואה. לחץ על ההמלצות למטה כדי להתחיל 🚀
+              </p>
             </div>
           </div>
 
