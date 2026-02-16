@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck } from "lucide-react";
+import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu } from "lucide-react";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import advisorImg from "@/assets/advisor-avatar.jpg";
@@ -82,6 +82,9 @@ const IndexB = () => {
             <p className="text-xs" style={{ color: "hsl(250, 40%, 20%)" }}>שלום,</p>
             <h1 className="text-xl font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{userData.name} 👋</h1>
           </div>
+          <button className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
+            <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
+          </button>
         </div>
       </div>
 
