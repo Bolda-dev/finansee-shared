@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, AlertCircle, Plus } from "lucide-react";
 import { insuranceItems } from "@/lib/data";
 
 const InsurancePage = () => {
@@ -38,6 +38,10 @@ const InsurancePage = () => {
             <p className="text-xs text-muted-foreground mt-2">כיסוי: {item.coverage}</p>
           </div>
         ))}
+        <button className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-border text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+          <Plus className="h-4 w-4" />
+          הוספה ידנית / חיבור למסד נתונים
+        </button>
       </div>
     </div>
   );

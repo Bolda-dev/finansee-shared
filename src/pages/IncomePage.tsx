@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 import { incomeItems } from "@/lib/data";
 
 const IncomePage = () => {
@@ -25,6 +25,10 @@ const IncomePage = () => {
             <span className="text-sm font-bold text-card-foreground">₪{item.amount.toLocaleString("he-IL")}</span>
           </div>
         ))}
+        <button className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-border text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+          <Plus className="h-4 w-4" />
+          הוספה ידנית / חיבור למסד נתונים
+        </button>
       </div>
     </div>
   );

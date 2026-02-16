@@ -16,7 +16,7 @@ const Index = () => {
   const summaryCards = [
     { label: "הכנסות", amount: "₪38,000", sub: "לחודש", icon: TrendingUp, color: "from-emerald-500 to-emerald-600", route: "/income" },
     { label: "הוצאות", amount: "₪18,000", sub: "לחודש", icon: TrendingDown, color: "from-orange-500 to-orange-600", route: "/expenses" },
-    { label: "ביטוחים", amount: "5 פוליסות", sub: "סטטוס כללי", icon: Shield, color: "from-blue-500 to-blue-600", route: "/insurance" },
+    { label: "ביטוחים", amount: "5 פוליסות", sub: "סטטוס כללי", icon: Shield, color: "from-blue-500 to-blue-600", route: "/insurance", badge: 1 },
   ];
 
   const recIcons: Record<string, React.ReactNode> = {
@@ -31,7 +31,7 @@ const Index = () => {
       <div
         className="px-5 pt-12 pb-8 text-white"
         style={{
-          background: "linear-gradient(135deg, hsl(262, 60%, 35%) 0%, hsl(220, 70%, 30%) 50%, hsl(210, 80%, 25%) 100%)",
+          background: "linear-gradient(135deg, hsl(240, 15%, 10%) 0%, hsl(260, 20%, 15%) 40%, hsl(250, 25%, 12%) 70%, hsl(230, 15%, 8%) 100%)",
         }}
       >
         <div className="flex items-center justify-between mb-6">
@@ -78,8 +78,13 @@ const Index = () => {
             <button
               key={card.label}
               onClick={() => navigate(card.route)}
-              className="bg-card rounded-xl p-3 shadow-md border border-border text-center hover:shadow-lg transition-shadow"
+              className="bg-card rounded-xl p-3 shadow-md border border-border text-center hover:shadow-lg transition-shadow relative"
             >
+              {(card as any).badge && (
+                <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
+                  {(card as any).badge}
+                </span>
+              )}
               <div
                 className={`w-10 h-10 rounded-full bg-gradient-to-br ${card.color} flex items-center justify-center mx-auto mb-2`}
               >
@@ -111,7 +116,7 @@ const Index = () => {
               <button
                 className="mt-3 w-full text-sm font-medium py-2 rounded-lg transition-colors"
                 style={{
-                  background: "linear-gradient(135deg, hsl(262, 60%, 45%), hsl(220, 70%, 40%))",
+                  background: "linear-gradient(135deg, hsl(152, 60%, 40%), hsl(140, 55%, 35%))",
                   color: "white",
                 }}
               >
