@@ -2,9 +2,9 @@
 
 export const userData = {
   name: "משה",
-  currentPotential: 14250300,
+  currentPotential: 10200000,
   maxPotential: 15300000,
-  improvementAmount: 1049700,
+  improvementAmount: 5100000,
 };
 
 export const incomeItems = [
