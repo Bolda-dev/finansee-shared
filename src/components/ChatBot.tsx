@@ -15,7 +15,7 @@ const iconMap: Record<string, React.ReactNode> = {
 interface ChatBotProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  variant?: "default" | "centered";
+  variant?: "default" | "centered" | "no-fab";
 }
 
 interface Message {
@@ -47,7 +47,7 @@ export function ChatBot({ open, onOpenChange, variant = "default" }: ChatBotProp
   return (
     <>
       {/* FAB */}
-      {variant === "centered" ? (
+      {variant === "no-fab" ? null : variant === "centered" ? (
         <button
           onClick={() => onOpenChange(true)}
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 transition-transform hover:scale-105"
