@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, MessageCircle } from "lucide-react";
+import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, HelpCircle } from "lucide-react";
 import { userData, recommendations, criticalityConfig } from "@/lib/data";
 import { Progress } from "@/components/ui/progress";
 import { ChatBot } from "@/components/ChatBot";
@@ -11,7 +11,15 @@ const formatCurrency = (n: number) =>
 const Index = () => {
   const navigate = useNavigate();
   const [chatOpen, setChatOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [autoTooltip, setAutoTooltip] = useState(true);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
+
+  useEffect(() => {
+    const showTimer = setTimeout(() => setAutoTooltip(true), 500);
+    const hideTimer = setTimeout(() => setAutoTooltip(false), 2500);
+    return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+  }, []);
 
   const summaryCards = [
     { label: "הכנסות", amount: "₪38,000", sub: "לחודש", icon: TrendingUp, color: "from-emerald-500 to-emerald-600", route: "/income" },
@@ -43,8 +51,27 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="mb-2">
-          <p className="text-sm opacity-80 mb-1">הפוטנציאל הכספי שלך</p>
+        <div className="mb-2 relative">
+          <div className="flex items-center gap-2 mb-1">
+            <p className="text-sm opacity-80">הפוטנציאל הכספי שלך</p>
+            <div className="relative">
+              <button
+                onClick={() => setShowTooltip((v) => !v)}
+                className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+              >
+                <HelpCircle className="h-3.5 w-3.5 text-white/90" />
+              </button>
+              <div
+                className={`absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-50 transition-all duration-500 ${
+                  showTooltip || autoTooltip
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 -translate-y-1 pointer-events-none"
+                }`}
+              >
+                הפוטנציאל הכספי שלך מחושב על בסיס הנכסים, ההכנסות וההשקעות שלך — ומראה כמה אתה יכול להרוויח עם ניהול פיננסי מיטבי 🚀
+              </div>
+            </div>
+          </div>
           <p className="text-4xl font-extrabold tracking-tight animate-fade-in">
             {formatCurrency(userData.currentPotential)}
           </p>
