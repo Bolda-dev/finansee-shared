@@ -89,7 +89,7 @@ const Index = () => {
                   <HelpCircle className="h-3 w-3 text-white/90" />
                 </button>
                 <div
-                  className={`absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-50 transition-all duration-500 ${
+                  className={`absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-[100] transition-all duration-500 ${
                     showTooltip || autoTooltip
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 -translate-y-1 pointer-events-none"
