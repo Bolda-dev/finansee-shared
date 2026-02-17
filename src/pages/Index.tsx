@@ -90,7 +90,7 @@ const Index = () => {
                 </button>
                 {(showTooltip || autoTooltip) && (
                   <div
-                    className="absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-[9999] animate-fade-in"
+                    className="absolute bottom-full right-0 mb-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-[9999] animate-fade-in"
                   >
                     הפוטנציאל הכספי שלך מחושב על בסיס הנכסים, ההכנסות וההשקעות שלך — ומראה כמה אתה יכול להרוויח עם ניהול פיננסי מיטבי 🚀
                   </div>
