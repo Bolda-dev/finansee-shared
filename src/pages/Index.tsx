@@ -72,7 +72,13 @@ const Index = () => {
         </div>
 
         <div className="mb-2 relative">
-          <div className="flex items-center gap-2 mb-1">
+          <p className="text-4xl font-extrabold tracking-tight animate-fade-in">
+            {formatCurrency(userData.currentPotential)}
+          </p>
+        </div>
+
+        <div className="mt-5">
+          <div className="flex items-center gap-2 mb-2">
             <p className="text-sm opacity-80">הפוטנציאל הכספי שלך</p>
             <div className="relative">
               <button
@@ -92,12 +98,6 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <p className="text-4xl font-extrabold tracking-tight animate-fade-in">
-            {formatCurrency(userData.currentPotential)}
-          </p>
-        </div>
-
-        <div className="mt-5">
           <div className="flex justify-between text-xs opacity-80 mb-2">
             <span>מצב נוכחי</span>
             <span>{formatCurrency(userData.maxPotential)}</span>
