@@ -31,6 +31,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
         <text x="100" y="115" textAnchor="middle" fill="hsl(250, 40%, 25%)" fontFamily="inherit" fontSize="18" fontWeight="800">{formatCurrency(current)}</text>
         <text x="100" y="138" textAnchor="middle" className="text-[10px]" fill="hsl(230, 20%, 65%)" fontFamily="inherit" fontSize="10">מתוך {formatCurrency(max)}</text>
       </svg>
+      <p className="text-xs text-muted-foreground mt-1">חישוב הפוטנציאל</p>
     </div>
   );
 };
