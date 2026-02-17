@@ -81,22 +81,20 @@ const Index = () => {
           <div className="flex justify-between text-xs opacity-80 mb-2">
             <div className="flex items-center gap-1.5">
               <span>הפוטנציאל הכספי שלך</span>
-              <div className="relative">
+              <div className="relative z-[9999]">
                 <button
                   onClick={() => setShowTooltip((v) => !v)}
                   className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
                 >
                   <HelpCircle className="h-3 w-3 text-white/90" />
                 </button>
-                <div
-                  className={`absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-[100] transition-all duration-500 ${
-                    showTooltip || autoTooltip
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 -translate-y-1 pointer-events-none"
-                  }`}
-                >
-                  הפוטנציאל הכספי שלך מחושב על בסיס הנכסים, ההכנסות וההשקעות שלך — ומראה כמה אתה יכול להרוויח עם ניהול פיננסי מיטבי 🚀
-                </div>
+                {(showTooltip || autoTooltip) && (
+                  <div
+                    className="absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-[9999] animate-fade-in"
+                  >
+                    הפוטנציאל הכספי שלך מחושב על בסיס הנכסים, ההכנסות וההשקעות שלך — ומראה כמה אתה יכול להרוויח עם ניהול פיננסי מיטבי 🚀
+                  </div>
+                )}
               </div>
             </div>
             <span>{formatCurrency(userData.maxPotential)}</span>
