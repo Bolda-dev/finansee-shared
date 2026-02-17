@@ -31,7 +31,6 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
         <text x="100" y="115" textAnchor="middle" fill="hsl(250, 40%, 25%)" fontFamily="inherit" fontSize="18" fontWeight="800">{formatCurrency(current)}</text>
         <text x="100" y="138" textAnchor="middle" className="text-[10px]" fill="hsl(230, 20%, 65%)" fontFamily="inherit" fontSize="10">מתוך {formatCurrency(max)}</text>
       </svg>
-      <p className="text-xs text-muted-foreground mt-1">חישוב הפוטנציאל</p>
     </div>
   );
 };
@@ -105,6 +104,7 @@ const IndexB = () => {
               boxShadow: "0 4px 24px rgba(100, 80, 180, 0.1)",
             }}
           >
+            <p className="text-xs font-semibold mb-2" style={{ color: "hsl(250, 30%, 45%)" }}>חישוב הפוטנציאל</p>
             <RadialGauge percent={progressPercent} current={userData.currentPotential} max={userData.maxPotential} />
             <div
               className="text-center py-3.5 px-5 rounded-xl mt-2"
