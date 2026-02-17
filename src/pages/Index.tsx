@@ -78,28 +78,27 @@ const Index = () => {
         </div>
 
         <div className="mt-5">
-          <div className="flex items-center gap-2 mb-2">
-            <p className="text-sm opacity-80">הפוטנציאל הכספי שלך</p>
-            <div className="relative">
-              <button
-                onClick={() => setShowTooltip((v) => !v)}
-                className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
-              >
-                <HelpCircle className="h-4 w-4 text-white/90" />
-              </button>
-              <div
-                className={`absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-50 transition-all duration-500 ${
-                  showTooltip || autoTooltip
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 -translate-y-1 pointer-events-none"
-                }`}
-              >
-                הפוטנציאל הכספי שלך מחושב על בסיס הנכסים, ההכנסות וההשקעות שלך — ומראה כמה אתה יכול להרוויח עם ניהול פיננסי מיטבי 🚀
+          <div className="flex justify-between text-xs opacity-80 mb-2">
+            <div className="flex items-center gap-1.5">
+              <span>הפוטנציאל הכספי שלך</span>
+              <div className="relative">
+                <button
+                  onClick={() => setShowTooltip((v) => !v)}
+                  className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+                >
+                  <HelpCircle className="h-3 w-3 text-white/90" />
+                </button>
+                <div
+                  className={`absolute top-full right-0 mt-2 w-56 bg-white text-foreground text-xs rounded-xl p-3 shadow-lg z-50 transition-all duration-500 ${
+                    showTooltip || autoTooltip
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 -translate-y-1 pointer-events-none"
+                  }`}
+                >
+                  הפוטנציאל הכספי שלך מחושב על בסיס הנכסים, ההכנסות וההשקעות שלך — ומראה כמה אתה יכול להרוויח עם ניהול פיננסי מיטבי 🚀
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex justify-between text-xs opacity-80 mb-2">
-            <span>מצב נוכחי</span>
             <span>{formatCurrency(userData.maxPotential)}</span>
           </div>
           <div className="h-3 rounded-full bg-white/20 overflow-hidden">
