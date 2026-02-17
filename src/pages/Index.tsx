@@ -38,7 +38,7 @@ const Index = () => {
 
   const summaryCards = [
     { label: "נכסים", amount: "₪38,000", sub: "לחודש", icon: TrendingUp, color: "from-emerald-500 to-emerald-600", route: "/income" },
-    { label: "הוצאות", amount: "₪18,000", sub: "לחודש", icon: TrendingDown, color: "from-orange-500 to-orange-600", route: "/expenses" },
+    { label: "התחייבויות", amount: "₪18,000", sub: "לחודש", icon: TrendingDown, color: "from-orange-500 to-orange-600", route: "/expenses" },
     { label: "ביטוחים", amount: "5 פוליסות", sub: "סטטוס כללי", icon: Shield, color: "from-blue-500 to-blue-600", route: "/insurance", badge: 1 },
   ];
 
