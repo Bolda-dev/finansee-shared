@@ -54,7 +54,7 @@ const Index = () => {
     <div className="min-h-screen bg-background max-w-[430px] mx-auto relative" dir="rtl">
       {/* Header - Purple-Blue Gradient */}
       <div
-        className="px-5 pt-12 pb-8 text-white"
+        className="px-5 pt-12 pb-8 text-white relative z-20"
         style={{
           background: "linear-gradient(135deg, hsl(240, 15%, 10%) 0%, hsl(265, 30%, 18%) 35%, hsl(255, 25%, 15%) 55%, hsl(250, 20%, 12%) 75%, hsl(230, 15%, 8%) 100%)",
         }}
