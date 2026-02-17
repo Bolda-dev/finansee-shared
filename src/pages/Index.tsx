@@ -115,7 +115,7 @@ const Index = () => {
       </div>
 
       {/* Floating Summary Cards - overlapping header */}
-      <div className="px-5 -mt-6 relative z-10">
+      <div className="px-5 -mt-6 relative z-30">
         <div className="bg-card rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-4 border border-border/50">
           <div className="grid grid-cols-3 gap-3">
             {summaryCards.map((card, idx) => (
