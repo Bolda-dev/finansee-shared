@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, Send, Mic, Sparkles } from "lucide-react";
 import { incomeItems, expenseItems, insuranceItems } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
@@ -121,10 +121,19 @@ const Donut = ({
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>("assets");
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const tab = tabsConfig[activeTab];
   const total = tab.items.reduce((s, i) => s + i.value, 0);
   const isInsurance = activeTab === "insurance";
+
+  // Autofocus input when sheet opens — pops the mobile keyboard
+  useEffect(() => {
+    if (open) {
+      const t = setTimeout(() => inputRef.current?.focus(), 380);
+      return () => clearTimeout(t);
+    }
+  }, [open]);
 
   if (!open) return null;
 
@@ -142,121 +151,194 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
         style={{ maxHeight: "85vh", animation: "slide-up 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)" }}
       >
         {/* Drag handle */}
-        <div className="flex justify-center pt-3 pb-2">
+        <div className="flex justify-center pt-3 pb-3">
           <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 88%)" }} />
         </div>
 
-        {/* Header — like reference image #2 */}
-        <div className="flex items-center justify-between px-5 pb-4">
-          <div className="flex items-center gap-3">
-            <div
-              className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0"
-              style={{
-                boxShadow: "0 0 0 2px white, 0 0 0 3px hsla(290, 70%, 55%, 0.4)",
-              }}
-            >
-              <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <p className="text-sm font-bold" style={{ color: "hsl(250, 45%, 15%)" }}>
-                Finansee AI
-              </p>
-              <p className="text-[11px] flex items-center gap-1" style={{ color: "hsl(150, 60%, 40%)" }}>
-                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(150, 60%, 45%)" }} />
-                זמין עכשיו
-              </p>
-            </div>
-          </div>
+        {/* Header — avatar centered on top like reference */}
+        <div className="relative flex flex-col items-center px-5 pb-4">
           <button
             onClick={() => onOpenChange(false)}
-            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+            className="absolute top-0 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
           >
             <X className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </button>
+
+          <div
+            className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 mb-2"
+            style={{
+              boxShadow:
+                "0 0 0 3px white, 0 0 0 5px hsla(290, 70%, 55%, 0.35), 0 8px 24px hsla(290, 70%, 55%, 0.25)",
+            }}
+          >
+            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+          </div>
+          <p className="text-sm font-bold" style={{ color: "hsl(250, 45%, 15%)" }}>
+            דנה — Finansee AI
+          </p>
+          <p
+            className="text-[11px] flex items-center gap-1 mt-0.5"
+            style={{ color: "hsl(150, 60%, 40%)" }}
+          >
+            <span
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: "hsl(150, 60%, 45%)" }}
+            />
+            זמין עכשיו
+          </p>
         </div>
 
         {/* Scrollable content */}
         <div className="overflow-y-auto px-5 pb-4 flex-1">
-          {/* Greeting */}
-          <div
-            className="rounded-2xl p-3.5 mb-4 flex items-start gap-2.5"
-            style={{
-              background: "linear-gradient(135deg, hsla(285, 75%, 95%, 0.7), hsla(310, 70%, 95%, 0.7))",
-              border: "1px solid hsla(290, 70%, 85%, 0.4)",
-            }}
-          >
-            <Sparkles className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "hsl(290, 70%, 55%)" }} />
-            <p className="text-xs leading-relaxed" style={{ color: "hsl(250, 35%, 25%)" }}>
-              היי משה 👋 הכנתי לך תובנות על המצב הפיננסי שלך. בחר קטגוריה למטה או שאל אותי כל שאלה.
-            </p>
-          </div>
-
-          {/* Tabs */}
-          <div className="flex gap-2 mb-4">
-            {(Object.keys(tabsConfig) as TabKey[]).map((key) => {
-              const t = tabsConfig[key];
-              const isActive = activeTab === key;
-              return (
-                <button
-                  key={key}
-                  onClick={() => setActiveTab(key)}
-                  className="flex-1 py-2 rounded-xl text-xs font-semibold transition-all"
-                  style={{
-                    background: isActive ? t.gradient : "hsl(230, 20%, 96%)",
-                    color: isActive ? "white" : "hsl(230, 15%, 45%)",
-                    boxShadow: isActive ? `0 4px 12px hsla(${t.accent.match(/\d+/)?.[0] || 280}, 60%, 50%, 0.3)` : "none",
-                  }}
+          {/* Chat-style greeting bubble */}
+          <div className="flex items-end gap-2 mb-3 animate-fade-in">
+            <div
+              className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+              style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+            >
+              <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex flex-col items-end max-w-[85%]">
+              <div
+                className="rounded-2xl rounded-bl-md px-3.5 py-2.5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, hsla(285, 75%, 95%, 0.9), hsla(310, 70%, 95%, 0.9))",
+                  border: "1px solid hsla(290, 70%, 85%, 0.5)",
+                }}
+              >
+                <p
+                  className="text-xs leading-relaxed"
+                  style={{ color: "hsl(250, 35%, 25%)" }}
                 >
-                  {t.label}
-                </button>
-              );
-            })}
+                  היי משה 👋 הכנתי לך תובנות על המצב הפיננסי שלך. בחר קטגוריה למטה או שאל אותי כל שאלה.
+                </p>
+              </div>
+              <p
+                className="text-[9px] mt-1 mr-1"
+                style={{ color: "hsl(230, 15%, 60%)" }}
+              >
+                עכשיו
+              </p>
+            </div>
           </div>
 
-          {/* Insight panel */}
-          <div className="rounded-2xl p-4 mb-4" style={{ background: "hsl(230, 25%, 98%)", border: "1px solid hsl(230, 20%, 93%)" }}>
-            <p className="text-[11px] mb-3" style={{ color: "hsl(230, 15%, 55%)" }}>{tab.headline}</p>
+          {/* Insights as a chat bubble from Dana */}
+          <div className="flex items-end gap-2 mb-3">
+            <div
+              className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+              style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+            >
+              <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex flex-col items-end max-w-[92%] flex-1">
+              <div
+                className="rounded-2xl rounded-bl-md p-3.5 w-full"
+                style={{
+                  background: "white",
+                  border: "1px solid hsl(230, 20%, 92%)",
+                  boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                }}
+              >
+                {/* Tabs inside the bubble */}
+                <div className="flex gap-1.5 mb-3">
+                  {(Object.keys(tabsConfig) as TabKey[]).map((key) => {
+                    const t = tabsConfig[key];
+                    const isActive = activeTab === key;
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => setActiveTab(key)}
+                        className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold transition-all"
+                        style={{
+                          background: isActive ? t.gradient : "hsl(230, 20%, 96%)",
+                          color: isActive ? "white" : "hsl(230, 15%, 45%)",
+                          boxShadow: isActive
+                            ? `0 3px 10px hsla(${t.accent.match(/\d+/)?.[0] || 280}, 60%, 50%, 0.3)`
+                            : "none",
+                        }}
+                      >
+                        {t.label}
+                      </button>
+                    );
+                  })}
+                </div>
 
-            <div className="flex items-center gap-4">
-              <Donut
-                data={tab.items.map((i) => ({ label: i.label, value: Math.max(i.value, 0.001) }))}
-                centerLabel={isInsurance ? "פוליסות פעילות" : "סה״כ"}
-                centerValue={isInsurance ? `${tab.items.filter((i) => i.value === 1).length}/${tab.items.length}` : formatNIS(total)}
-                baseColor={tab.accent}
-              />
+                <p
+                  className="text-[10px] mb-2.5"
+                  style={{ color: "hsl(230, 15%, 55%)" }}
+                >
+                  {tab.headline}
+                </p>
 
-              <div className="flex-1 space-y-1.5 min-w-0">
-                {tab.items.slice(0, 5).map((item, i) => {
-                  const match = tab.accent.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-                  const h = match ? parseInt(match[1]) : 280;
-                  const s = match ? parseInt(match[2]) : 70;
-                  const baseL = match ? parseInt(match[3]) : 55;
-                  const lightness = Math.max(35, Math.min(78, baseL - 18 + i * 9));
-                  const pct = isInsurance
-                    ? item.value === 1
-                      ? "פעיל"
-                      : "חסר"
-                    : `${Math.round((item.value / (total || 1)) * 100)}%`;
-                  return (
-                    <div key={i} className="flex items-center gap-2 text-[11px]">
-                      <span
-                        className="w-2 h-2 rounded-full flex-shrink-0"
-                        style={{ background: `hsl(${h}, ${s}%, ${lightness}%)` }}
-                      />
-                      <span className="truncate flex-1" style={{ color: "hsl(250, 35%, 25%)" }}>{item.label}</span>
-                      <span className="font-bold flex-shrink-0" style={{ color: "hsl(250, 40%, 20%)" }}>{pct}</span>
-                    </div>
-                  );
-                })}
+                <div className="flex items-center gap-3">
+                  <Donut
+                    data={tab.items.map((i) => ({
+                      label: i.label,
+                      value: Math.max(i.value, 0.001),
+                    }))}
+                    centerLabel={isInsurance ? "פעילות" : "סה״כ"}
+                    centerValue={
+                      isInsurance
+                        ? `${tab.items.filter((i) => i.value === 1).length}/${tab.items.length}`
+                        : formatNIS(total)
+                    }
+                    baseColor={tab.accent}
+                  />
+
+                  <div className="flex-1 space-y-1.5 min-w-0">
+                    {tab.items.slice(0, 5).map((item, i) => {
+                      const match = tab.accent.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+                      const h = match ? parseInt(match[1]) : 280;
+                      const s = match ? parseInt(match[2]) : 70;
+                      const baseL = match ? parseInt(match[3]) : 55;
+                      const lightness = Math.max(35, Math.min(78, baseL - 18 + i * 9));
+                      const pct = isInsurance
+                        ? item.value === 1
+                          ? "פעיל"
+                          : "חסר"
+                        : `${Math.round((item.value / (total || 1)) * 100)}%`;
+                      return (
+                        <div key={i} className="flex items-center gap-2 text-[11px]">
+                          <span
+                            className="w-2 h-2 rounded-full flex-shrink-0"
+                            style={{ background: `hsl(${h}, ${s}%, ${lightness}%)` }}
+                          />
+                          <span
+                            className="truncate flex-1"
+                            style={{ color: "hsl(250, 35%, 25%)" }}
+                          >
+                            {item.label}
+                          </span>
+                          <span
+                            className="font-bold flex-shrink-0"
+                            style={{ color: "hsl(250, 40%, 20%)" }}
+                          >
+                            {pct}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
+              <p
+                className="text-[9px] mt-1 mr-1"
+                style={{ color: "hsl(230, 15%, 60%)" }}
+              >
+                עכשיו
+              </p>
             </div>
           </div>
 
           {/* Suggested questions */}
-          <p className="text-[11px] font-semibold mb-2" style={{ color: "hsl(230, 15%, 55%)" }}>
+          <p
+            className="text-[11px] font-semibold mb-2 text-right"
+            style={{ color: "hsl(230, 15%, 55%)" }}
+          >
             שאל אותי על {tab.label}:
           </p>
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-2 justify-end">
             {(activeTab === "assets"
               ? ["איך להגדיל הכנסות?", "איפה כדאי להשקיע?", "מה התשואה הצפויה?"]
               : activeTab === "liabilities"
@@ -265,6 +347,10 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             ).map((q) => (
               <button
                 key={q}
+                onClick={() => {
+                  setInput(q);
+                  inputRef.current?.focus();
+                }}
                 className="text-[11px] px-3 py-1.5 rounded-full transition-all hover:scale-[1.02]"
                 style={{
                   background: "white",
@@ -279,7 +365,11 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
         </div>
 
         {/* Input bar */}
-        <div className="px-5 py-3 border-t" style={{ borderColor: "hsl(230, 20%, 93%)", background: "white" }}>
+        <div
+          className="px-5 py-3 border-t"
+          style={{ borderColor: "hsl(230, 20%, 93%)", background: "white" }}
+          dir="rtl"
+        >
           <div
             className="flex items-center gap-2 rounded-full px-4 py-2"
             style={{
@@ -288,11 +378,12 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             }}
           >
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="שאל את Finansee AI..."
-              className="flex-1 bg-transparent text-sm outline-none text-end placeholder:text-xs"
+              className="flex-1 bg-transparent text-sm outline-none text-right placeholder:text-xs"
               style={{ color: "hsl(250, 40%, 20%)" }}
               dir="rtl"
             />
@@ -309,7 +400,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
                 boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)",
               }}
             >
-              <Send className="h-3.5 w-3.5 -rotate-90" style={{ color: "white" }} />
+              <Send className="h-3.5 w-3.5 rotate-180" style={{ color: "white" }} />
             </button>
           </div>
         </div>
