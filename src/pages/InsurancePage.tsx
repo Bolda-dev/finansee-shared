@@ -65,6 +65,7 @@ const InsurancePage = () => {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const [danaBubbleDismissed, setDanaBubbleDismissed] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   // Show Dana invitation bubble after 5s on this page
   useEffect(() => {
