@@ -151,12 +151,15 @@ export const CategoryPage = ({
 
   return (
     <div
-      className="h-screen max-w-[430px] mx-auto relative overflow-hidden flex flex-col"
+      className="min-h-screen max-w-[430px] mx-auto relative"
       dir="rtl"
       style={{ background: theme.gradient }}
     >
-      {/* === Fixed hero (does NOT scroll) === */}
-      <div className="relative px-5 pt-10 pb-8 flex-shrink-0">
+      {/* === Hero — stays in place; sheet scrolls up over it === */}
+      <div
+        className="sticky top-0 z-0 px-5 pt-10 pb-12"
+        style={{ background: theme.gradient }}
+      >
         {/* Decorative blobs */}
         <div
           className="absolute -top-10 -left-12 w-44 h-44 rounded-full pointer-events-none"
@@ -245,16 +248,17 @@ export const CategoryPage = ({
         </div>
       </div>
 
-      {/* === White sheet — the ONLY scrollable surface === */}
+      {/* === White sheet — scrolls up over the hero === */}
       <div
-        className="relative -mt-6 rounded-t-3xl flex-1 overflow-y-auto"
+        className="relative -mt-6 rounded-t-3xl pb-32 z-10"
         style={{
           background: "hsl(235, 30%, 97%)",
           boxShadow: `0 -8px 28px ${theme.sheetShadow}`,
+          minHeight: "calc(100vh - 24px)",
         }}
       >
         {/* Drag handle */}
-        <div className="flex justify-center pt-2.5 pb-1 sticky top-0 z-10" style={{ background: "hsl(235, 30%, 97%)" }}>
+        <div className="flex justify-center pt-2.5 pb-1">
           <div
             className="w-10 h-1.5 rounded-full"
             style={{ background: "hsl(230, 20%, 88%)" }}
