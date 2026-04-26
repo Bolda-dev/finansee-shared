@@ -405,8 +405,6 @@ export const CategoryPage = ({
           {footerNote}
         </p>
 
-        {/* Bottom spacer so chat bar doesn't cover last items */}
-        <div className="h-32" />
       </div>
 
       {/* === Dana invitation bubble === */}
