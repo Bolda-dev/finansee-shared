@@ -297,6 +297,7 @@ const IndexB = () => {
                 sub: "/חודש", subLabel: "עלות ביטוח",
                 accent: "hsl(280, 65%, 50%)", accentBg: "hsl(280, 60%, 95%)",
                 badge: 1,
+                category: "insurance" as const,
               },
               {
                 label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500",
