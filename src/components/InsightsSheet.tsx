@@ -170,6 +170,7 @@ type ChatMessage =
 export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<ContextTabKey>("assets");
   const [selectedAction, setSelectedAction] = useState<ActionKey>("investments");
+  const [actionsView, setActionsView] = useState<"radio" | "list">("radio");
   const [input, setInput] = useState("");
   const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
