@@ -43,12 +43,12 @@ const IndexB = () => {
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
 
-  // Pop the proactive Dana bubble after 5 seconds on the screen
-  useEffect(() => {
-    if (activeTab !== "status") return;
-    const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
-    return () => clearTimeout(t);
-  }, [activeTab]);
+  // Proactive Dana bubble — currently disabled
+  // useEffect(() => {
+  //   if (activeTab !== "status") return;
+  //   const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
+  //   return () => clearTimeout(t);
+  // }, [activeTab]);
 
   const navItems = [
     { key: "status" as const, label: "בית", icon: Home },
