@@ -200,7 +200,7 @@ const IndexB = () => {
                     {rec.saving && <span className="font-bold" style={{ color: "hsl(250, 60%, 55%)" }}> • {rec.saving}</span>}
                   </p>
                 </div>
-                <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(250, 65%, 55%), hsl(220, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(250, 60%, 50%, 0.3)" }}>
+                <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
                   {rec.action}
                 </button>
               </div>
@@ -218,7 +218,7 @@ const IndexB = () => {
                 ₪{incomeItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(250, 65%, 55%), hsl(220, 70%, 55%))", boxShadow: "0 4px 12px hsla(250, 60%, 50%, 0.3)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -242,7 +242,7 @@ const IndexB = () => {
                 ₪{expenseItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(250, 65%, 55%), hsl(220, 70%, 55%))", boxShadow: "0 4px 12px hsla(250, 60%, 50%, 0.3)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -260,7 +260,7 @@ const IndexB = () => {
       {activeTab === "insurance" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(250, 65%, 55%), hsl(220, 70%, 55%))", boxShadow: "0 4px 12px hsla(250, 60%, 50%, 0.3)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -297,8 +297,8 @@ const IndexB = () => {
             <div
               className="w-[60px] h-[60px] rounded-full flex items-center justify-center"
               style={{
-                background: "linear-gradient(135deg, hsl(250, 65%, 55%), hsl(220, 70%, 55%))",
-                boxShadow: "0 6px 24px hsla(250, 60%, 45%, 0.4), 0 0 0 4px hsla(235, 30%, 97%, 0.8)",
+                background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))",
+                boxShadow: "0 6px 24px hsla(265, 65%, 45%, 0.45), 0 0 0 4px hsla(235, 30%, 97%, 0.8)",
               }}
             >
               <img
