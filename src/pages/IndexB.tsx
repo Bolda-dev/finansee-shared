@@ -4,6 +4,7 @@ import { userData, recommendations, incomeItems, expenseItems, insuranceItems, c
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
 import { InsightsSheet } from "@/components/InsightsSheet";
+import { InsuranceDetailSheet } from "@/components/InsuranceDetailSheet";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 
