@@ -122,9 +122,9 @@ All colors MUST be HSL.
     100deg,
     transparent 0%,
     transparent 42%,
-    hsla(285, 75%, 62%, 0.55) 49%,
-    hsla(300, 80%, 70%, 0.7) 50%,
-    hsla(285, 75%, 62%, 0.55) 51%,
+    hsla(280, 60%, 38%, 0.55) 49%,
+    hsla(290, 75%, 58%, 0.75) 50%,
+    hsla(280, 60%, 38%, 0.55) 51%,
     transparent 58%,
     transparent 100%
   );
