@@ -43,12 +43,12 @@ const IndexB = () => {
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
 
-  // Pop the proactive Dana bubble after 5 seconds on the screen
-  useEffect(() => {
-    if (activeTab !== "status") return;
-    const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
-    return () => clearTimeout(t);
-  }, [activeTab]);
+  // Proactive Dana bubble — currently disabled
+  // useEffect(() => {
+  //   if (activeTab !== "status") return;
+  //   const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
+  //   return () => clearTimeout(t);
+  // }, [activeTab]);
 
   const navItems = [
     { key: "status" as const, label: "בית", icon: Home },
@@ -297,38 +297,50 @@ const IndexB = () => {
                 sub: "/חודש", subLabel: "עלות ביטוח",
                 accent: "hsl(280, 65%, 50%)", accentBg: "hsl(280, 60%, 95%)",
                 badge: 1,
+                category: "insurance" as const,
               },
               {
                 label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500",
                 sub: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית",
                 accent: "hsl(250, 65%, 55%)", accentBg: "hsl(250, 55%, 95%)",
+                category: "assets" as const,
               },
               {
                 label: "השקעות", Icon: LineChart, value: "₪2,095,000",
                 sub: "", subLabel: "",
                 accent: "hsl(195, 80%, 45%)", accentBg: "hsl(195, 70%, 94%)",
                 badge: 1,
+                category: "assets" as const,
               },
               {
                 label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500",
                 sub: "", subLabel: "יתרה שוטפת",
                 accent: "hsl(220, 60%, 50%)", accentBg: "hsl(220, 55%, 95%)",
+                category: "assets" as const,
               },
               {
                 label: "הלוואות", Icon: Briefcase, value: "₪320,000",
                 sub: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום כולל", extraSuffix: "/חודש",
                 accent: "hsl(265, 55%, 50%)", accentBg: "hsl(265, 50%, 95%)",
+                category: "liabilities" as const,
               },
               {
                 label: "משכנתא", Icon: Building2, value: "₪1,110,000",
                 sub: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי כולל", extraSuffix: "/חודש",
                 accent: "hsl(28, 85%, 50%)", accentBg: "hsl(28, 80%, 94%)",
                 badge: 1,
+                category: "liabilities" as const,
               },
-            ].map((card) => (
+            ].map((card) => {
+              const categoryBar: Record<"assets" | "liabilities" | "insurance", string> = {
+                assets: "linear-gradient(90deg, hsl(190, 85%, 50%) 0%, hsla(195, 90%, 62%, 0.7) 100%)",
+                liabilities: "linear-gradient(90deg, hsl(18, 90%, 55%) 0%, hsla(28, 95%, 62%, 0.7) 100%)",
+                insurance: "linear-gradient(90deg, hsl(270, 75%, 55%) 0%, hsla(282, 80%, 65%, 0.7) 100%)",
+              };
+              return (
               <button
                 key={card.label}
-                className="relative rounded-2xl p-3.5 text-start flex flex-col gap-2 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="relative rounded-2xl p-3.5 text-start flex flex-col gap-2 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={{
                   background: "white",
                   boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
@@ -336,6 +348,12 @@ const IndexB = () => {
                   minHeight: "150px",
                 }}
               >
+                {/* Category indicator bar */}
+                <span
+                  className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
+                  style={{ background: categoryBar[card.category] }}
+                  aria-hidden
+                />
                 {/* Top row: label (right) + icon (left) */}
                 <div className="flex items-start justify-between">
                   <span className="text-xs font-semibold" style={{ color: "hsl(250, 35%, 25%)" }}>
@@ -401,7 +419,8 @@ const IndexB = () => {
                 {/* Bottom-left chevron pointing into the card */}
                 <ChevronLeft className="absolute bottom-3 left-3 h-3.5 w-3.5" style={{ color: card.accent }} />
               </button>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
