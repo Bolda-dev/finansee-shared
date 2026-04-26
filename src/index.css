@@ -199,25 +199,25 @@ All colors MUST be HSL.
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(circle at 20% 30%, hsla(195, 90%, 60%, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, hsla(282, 80%, 60%, 0.08) 0%, transparent 55%),
-    radial-gradient(circle at 60% 20%, hsla(28, 95%, 60%, 0.05) 0%, transparent 45%),
-    linear-gradient(135deg, hsl(0, 0%, 0%) 0%, hsl(240, 15%, 3%) 100%);
+    radial-gradient(circle at 20% 30%, hsla(195, 90%, 60%, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, hsla(282, 80%, 60%, 0.05) 0%, transparent 55%),
+    radial-gradient(circle at 60% 20%, hsla(28, 95%, 60%, 0.03) 0%, transparent 45%),
+    #000;
   color: white;
   overflow: hidden;
   border: none;
 }
-/* Drifting blob layer #1 — teal/blue + purple, subtle */
+/* Drifting blob layer #1 — teal/blue + purple, very subtle */
 .cta-tri::before {
   content: "";
   position: absolute;
   inset: -30%;
   z-index: -1;
   background:
-    radial-gradient(circle at 25% 35%, hsla(195, 90%, 60%, 0.16) 0%, transparent 38%),
-    radial-gradient(circle at 75% 65%, hsla(282, 80%, 60%, 0.14) 0%, transparent 40%);
+    radial-gradient(circle at 25% 35%, hsla(195, 90%, 60%, 0.10) 0%, transparent 38%),
+    radial-gradient(circle at 75% 65%, hsla(282, 80%, 60%, 0.09) 0%, transparent 40%);
   animation: cta-drift 9s ease-in-out infinite;
-  filter: blur(12px);
+  filter: blur(14px);
   pointer-events: none;
 }
 /* Drifting blob layer #2 — warm orange whisper */
@@ -227,9 +227,9 @@ All colors MUST be HSL.
   inset: -30%;
   z-index: -1;
   background:
-    radial-gradient(circle at 50% 50%, hsla(28, 95%, 60%, 0.10) 0%, transparent 35%);
+    radial-gradient(circle at 50% 50%, hsla(28, 95%, 60%, 0.06) 0%, transparent 35%);
   animation: cta-drift-2 11s ease-in-out infinite;
-  filter: blur(14px);
+  filter: blur(16px);
   pointer-events: none;
 }
 
