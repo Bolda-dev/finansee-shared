@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info } from "lucide-react";
+import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info, Send, Mic } from "lucide-react";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
+import { InsightsSheet } from "@/components/InsightsSheet";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 
