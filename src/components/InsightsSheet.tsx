@@ -312,61 +312,65 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
                 </div>
 
                 <p
-                  className="text-[10px] mb-2.5"
+                  className="text-[10px] mb-3"
                   style={{ color: "hsl(230, 15%, 55%)" }}
                 >
-                  {tab.headline}
+                  3 תובנות פעילות מחכות לך · החלף קטגוריה למעלה
                 </p>
 
-                <div className="flex items-center gap-3">
-                  <Donut
-                    data={tab.items.map((i) => ({
-                      label: i.label,
-                      value: Math.max(i.value, 0.001),
-                    }))}
-                    centerLabel={isInsurance ? "פעילות" : "סה״כ"}
-                    centerValue={
-                      isInsurance
-                        ? `${tab.items.filter((i) => i.value === 1).length}/${tab.items.length}`
-                        : formatNIS(total)
-                    }
-                    baseColor={tab.accent}
+                {/* Insight card */}
+                <div
+                  className="rounded-2xl p-3.5 relative overflow-hidden"
+                  style={{
+                    background: tab.accentBg,
+                    border: `1px solid ${tab.accent}33`,
+                  }}
+                >
+                  <div
+                    className="absolute top-0 right-0 left-0 h-1"
+                    style={{ background: tab.gradient }}
                   />
 
-                  <div className="flex-1 space-y-1.5 min-w-0">
-                    {tab.items.slice(0, 5).map((item, i) => {
-                      const match = tab.accent.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-                      const h = match ? parseInt(match[1]) : 280;
-                      const s = match ? parseInt(match[2]) : 70;
-                      const baseL = match ? parseInt(match[3]) : 55;
-                      const lightness = Math.max(35, Math.min(78, baseL - 18 + i * 9));
-                      const pct = isInsurance
-                        ? item.value === 1
-                          ? "פעיל"
-                          : "חסר"
-                        : `${Math.round((item.value / (total || 1)) * 100)}%`;
-                      return (
-                        <div key={i} className="flex items-center gap-2 text-[11px]">
-                          <span
-                            className="w-2 h-2 rounded-full flex-shrink-0"
-                            style={{ background: `hsl(${h}, ${s}%, ${lightness}%)` }}
-                          />
-                          <span
-                            className="truncate flex-1"
-                            style={{ color: "hsl(250, 35%, 25%)" }}
-                          >
-                            {item.label}
-                          </span>
-                          <span
-                            className="font-bold flex-shrink-0"
-                            style={{ color: "hsl(250, 40%, 20%)" }}
-                          >
-                            {pct}
-                          </span>
-                        </div>
-                      );
-                    })}
+                  <div className="flex items-start gap-2.5 mb-2 mt-1">
+                    <div
+                      className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: "white", boxShadow: `0 2px 8px ${tab.accent}25` }}
+                    >
+                      <ActiveIcon className="w-4 h-4" style={{ color: tab.accent }} />
+                    </div>
+                    <div className="flex-1 min-w-0 pt-0.5">
+                      <p
+                        className="text-[10px] font-semibold tracking-wide mb-0.5"
+                        style={{ color: tab.accent }}
+                      >
+                        {tab.label}
+                      </p>
+                      <p
+                        className="text-[13px] font-extrabold leading-tight"
+                        style={{ color: "hsl(250, 45%, 15%)" }}
+                      >
+                        {tab.title}
+                      </p>
+                    </div>
                   </div>
+
+                  <p
+                    className="text-[11px] leading-relaxed mb-3 text-right"
+                    style={{ color: "hsl(250, 25%, 30%)" }}
+                  >
+                    {tab.description}
+                  </p>
+
+                  <button
+                    className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-white transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                    style={{
+                      background: tab.gradient,
+                      boxShadow: `0 4px 12px ${tab.accent}40`,
+                    }}
+                  >
+                    {tab.cta}
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
               <p
