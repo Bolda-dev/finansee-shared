@@ -596,7 +596,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               </button>
             )}
             <button
-              disabled={!input}
+              onClick={handleSend}
+              disabled={!input.trim()}
               className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 background: input
