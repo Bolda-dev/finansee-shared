@@ -127,27 +127,27 @@ const IndexB = () => {
                 label: "נכסים",
                 value: "₪8.4M",
                 Icon: TrendingUp,
-                gradient: "linear-gradient(135deg, hsl(245, 40%, 10%) 0%, hsl(260, 55%, 28%) 55%, hsl(275, 70%, 52%) 100%)",
-                shadow: "0 8px 24px hsla(265, 60%, 25%, 0.4)",
-                iconColor: "hsl(265, 65%, 45%)",
+                gradient: "linear-gradient(135deg, hsl(195, 75%, 35%) 0%, hsl(195, 80%, 55%) 60%, hsl(190, 85%, 70%) 100%)",
+                shadow: "0 8px 24px hsla(195, 70%, 35%, 0.4)",
+                iconColor: "hsl(195, 80%, 40%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
               },
               {
                 label: "התחייבויות",
                 value: "₪1.37M",
                 Icon: TrendingDown,
-                gradient: "linear-gradient(135deg, hsl(255, 35%, 9%) 0%, hsl(295, 50%, 25%) 55%, hsl(330, 65%, 50%) 100%)",
-                shadow: "0 8px 24px hsla(310, 60%, 25%, 0.4)",
-                iconColor: "hsl(320, 65%, 45%)",
+                gradient: "linear-gradient(135deg, hsl(20, 80%, 38%) 0%, hsl(28, 90%, 55%) 60%, hsl(38, 95%, 65%) 100%)",
+                shadow: "0 8px 24px hsla(28, 80%, 35%, 0.4)",
+                iconColor: "hsl(25, 85%, 45%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
               },
               {
                 label: "ביטוח",
                 value: "5 פוליסות",
                 Icon: ShieldCheck,
-                gradient: "linear-gradient(135deg, hsl(250, 40%, 8%) 0%, hsl(270, 55%, 22%) 55%, hsl(285, 65%, 45%) 100%)",
-                shadow: "0 8px 24px hsla(275, 60%, 22%, 0.42)",
-                iconColor: "hsl(280, 65%, 42%)",
+                gradient: "linear-gradient(135deg, hsl(265, 55%, 30%) 0%, hsl(280, 65%, 50%) 60%, hsl(290, 75%, 65%) 100%)",
+                shadow: "0 8px 24px hsla(280, 60%, 30%, 0.42)",
+                iconColor: "hsl(280, 65%, 45%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
               },
             ].map((card) => (
@@ -237,7 +237,7 @@ const IndexB = () => {
                 ₪{incomeItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)", boxShadow: "0 6px 18px hsla(265, 60%, 25%, 0.45)" }}>
+            <button className="cta-tri w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -261,7 +261,7 @@ const IndexB = () => {
                 ₪{expenseItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)", boxShadow: "0 6px 18px hsla(265, 60%, 25%, 0.45)" }}>
+            <button className="cta-tri w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -279,7 +279,7 @@ const IndexB = () => {
       {activeTab === "insurance" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)", boxShadow: "0 6px 18px hsla(265, 60%, 25%, 0.45)" }}>
+            <button className="cta-tri w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -315,16 +315,14 @@ const IndexB = () => {
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
-          {/* Avatar — pinned to right (start in RTL), floating */}
+          {/* Avatar — pinned to right (start in RTL), floating, with rotating tri-color ring */}
           <span
-            className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 relative"
-            style={{
-              boxShadow:
-                "0 6px 20px hsla(275, 65%, 25%, 0.45), 0 0 0 2px white, 0 0 0 3px hsla(280, 60%, 38%, 0.5)",
-              transform: "translateY(-2px)",
-            }}
+            className="tri-ring w-11 h-11 rounded-full flex-shrink-0"
+            style={{ transform: "translateY(-2px)" }}
           >
-            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
+              <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            </span>
           </span>
 
           {/* Placeholder text — right-aligned */}
@@ -340,15 +338,13 @@ const IndexB = () => {
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
 
-          {/* Send button — left edge */}
-          <span
-            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{
-              background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
-              boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)",
-            }}
-          >
-            <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+          {/* Send button — left edge, with rotating tri-color ring */}
+          <span className="tri-ring w-9 h-9 rounded-full flex-shrink-0">
+            <span
+              className="flex w-full h-full rounded-full items-center justify-center cta-tri"
+            >
+              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+            </span>
           </span>
         </button>
       </div>

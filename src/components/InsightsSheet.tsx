@@ -25,25 +25,25 @@ const tabsConfig: Record<
 > = {
   assets: {
     label: "נכסים",
-    color: "hsl(265, 65%, 40%)",
-    gradient: "linear-gradient(135deg, hsl(245, 40%, 10%), hsl(275, 70%, 52%))",
-    accent: "hsl(265, 65%, 50%)",
+    color: "hsl(195, 80%, 40%)",
+    gradient: "linear-gradient(135deg, hsl(195, 75%, 35%) 0%, hsl(195, 80%, 55%) 60%, hsl(190, 85%, 70%) 100%)",
+    accent: "hsl(195, 80%, 45%)",
     items: incomeItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט מקורות הכנסה חודשיים",
   },
   liabilities: {
     label: "התחייבויות",
-    color: "hsl(320, 65%, 42%)",
-    gradient: "linear-gradient(135deg, hsl(255, 35%, 9%), hsl(330, 65%, 50%))",
-    accent: "hsl(320, 65%, 50%)",
+    color: "hsl(25, 85%, 45%)",
+    gradient: "linear-gradient(135deg, hsl(20, 80%, 38%) 0%, hsl(28, 90%, 55%) 60%, hsl(38, 95%, 65%) 100%)",
+    accent: "hsl(28, 85%, 50%)",
     items: expenseItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט הוצאות חודשיות",
   },
   insurance: {
     label: "ביטוח",
-    color: "hsl(280, 65%, 40%)",
-    gradient: "linear-gradient(135deg, hsl(250, 40%, 8%), hsl(285, 65%, 45%))",
-    accent: "hsl(280, 65%, 48%)",
+    color: "hsl(280, 65%, 45%)",
+    gradient: "linear-gradient(135deg, hsl(265, 55%, 30%) 0%, hsl(280, 65%, 50%) 60%, hsl(290, 75%, 65%) 100%)",
+    accent: "hsl(280, 70%, 50%)",
     items: insuranceItems.map((i) => ({
       label: i.label,
       value: i.status === "פעיל" ? 1 : 0,
@@ -213,16 +213,14 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           transition: "max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), height 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
-        {/* Floating avatar — half over the top of the sheet */}
+        {/* Floating avatar — half over the top of the sheet, with rotating tri-color ring */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full overflow-hidden"
-          style={{
-            top: "-32px",
-            boxShadow:
-              "0 0 0 3px white, 0 0 0 5px hsla(275, 65%, 25%, 0.45), 0 8px 24px hsla(275, 65%, 25%, 0.35)",
-          }}
+          className="tri-ring absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full"
+          style={{ top: "-32px" }}
         >
-          <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+          <div className="w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 8px 24px hsla(250, 30%, 20%, 0.3)" }}>
+            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+          </div>
         </div>
 
         {/* Drag handle */}
@@ -482,10 +480,9 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               return (
                 <div key={msg.id} className="flex justify-start mb-3 animate-fade-in" dir="rtl">
                   <div
-                    className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
+                    className="cta-tri max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
                     style={{
-                      background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)",
-                      boxShadow: "0 3px 12px hsla(265, 60%, 25%, 0.4)",
+                      boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)",
                     }}
                   >
                     <p className="text-xs leading-relaxed text-right" style={{ color: "white" }}>
@@ -589,12 +586,10 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             <button
               onClick={handleSend}
               disabled={!input.trim()}
-              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+              className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${input ? "cta-tri" : ""}`}
               style={{
-                background: input
-                  ? "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)"
-                  : "hsl(230, 20%, 88%)",
-                boxShadow: input ? "0 4px 12px hsla(265, 60%, 25%, 0.45)" : "none",
+                background: input ? undefined : "hsl(230, 20%, 88%)",
+                boxShadow: input ? "0 4px 12px hsla(250, 30%, 15%, 0.4)" : "none",
               }}
             >
               <Send className="h-3.5 w-3.5 rotate-180" style={{ color: "white" }} />
