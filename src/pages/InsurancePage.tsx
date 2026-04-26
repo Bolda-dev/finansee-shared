@@ -12,9 +12,12 @@ import {
   ShieldCheck,
   HeartPulse,
   X,
+  Mic,
+  Send,
 } from "lucide-react";
 import { insuranceItems } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
+import { InsightsSheet } from "@/components/InsightsSheet";
 
 const iconMap: Record<string, typeof Heart> = {
   Heart,
