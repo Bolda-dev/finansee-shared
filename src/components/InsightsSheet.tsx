@@ -121,11 +121,8 @@ const Donut = ({
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>("assets");
   const [input, setInput] = useState("");
+  const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const tab = tabsConfig[activeTab];
-  const total = tab.items.reduce((s, i) => s + i.value, 0);
-  const isInsurance = activeTab === "insurance";
 
   // Autofocus input when sheet opens — pops the mobile keyboard
   useEffect(() => {
@@ -134,6 +131,26 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
       return () => clearTimeout(t);
     }
   }, [open]);
+
+  // Stage progression: typing → greeting → typing → insights
+  useEffect(() => {
+    if (!open) {
+      setStage("typing-greeting");
+      return;
+    }
+    const t1 = setTimeout(() => setStage("greeting"), 900);
+    const t2 = setTimeout(() => setStage("typing-insights"), 1700);
+    const t3 = setTimeout(() => setStage("insights"), 2700);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [open]);
+
+  const tab = tabsConfig[activeTab];
+  const total = tab.items.reduce((s, i) => s + i.value, 0);
+  const isInsurance = activeTab === "insurance";
 
   if (!open) return null;
 
@@ -187,41 +204,92 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
         </div>
         {/* Scrollable content */}
         <div className="overflow-y-auto px-5 pb-4 flex-1">
-          {/* Chat-style greeting bubble */}
-          <div className="flex items-end gap-2 mb-3 animate-fade-in">
-            <div
-              className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
-              style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
-            >
-              <img src={advisorImg} alt="" className="w-full h-full object-cover" />
-            </div>
-            <div className="flex flex-col items-end max-w-[85%]">
+          {/* Typing indicator before greeting */}
+          {stage === "typing-greeting" && (
+            <div className="flex items-end gap-2 mb-3 animate-fade-in">
               <div
-                className="rounded-2xl rounded-bl-md px-3.5 py-2.5"
+                className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+                style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+              >
+                <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+              </div>
+              <div
+                className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1"
                 style={{
-                  background:
-                    "linear-gradient(135deg, hsla(285, 75%, 95%, 0.9), hsla(310, 70%, 95%, 0.9))",
-                  border: "1px solid hsla(290, 70%, 85%, 0.5)",
+                  background: "white",
+                  border: "1px solid hsl(230, 20%, 92%)",
+                  boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
                 }}
               >
-                <p
-                  className="text-xs leading-relaxed"
-                  style={{ color: "hsl(250, 35%, 25%)" }}
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0s" }} />
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.2s" }} />
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.4s" }} />
+              </div>
+            </div>
+          )}
+
+          {/* Greeting bubble */}
+          {stage !== "typing-greeting" && (
+            <div className="flex items-end gap-2 mb-3 animate-fade-in">
+              <div
+                className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+                style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+              >
+                <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+              </div>
+              <div className="flex flex-col items-start max-w-[85%]">
+                <div
+                  className="rounded-2xl rounded-br-md px-3.5 py-2.5"
+                  style={{
+                    background: "white",
+                    border: "1px solid hsl(230, 20%, 92%)",
+                    boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                  }}
                 >
-                  היי משה 👋 הכנתי לך תובנות על המצב הפיננסי שלך. בחר קטגוריה למטה או שאל אותי כל שאלה.
+                  <p
+                    className="text-xs leading-relaxed text-right"
+                    style={{ color: "hsl(250, 35%, 25%)" }}
+                  >
+                    היי משה 👋 הכנתי לך תובנות על המצב הפיננסי שלך. בחר קטגוריה למטה או שאל אותי כל שאלה.
+                  </p>
+                </div>
+                <p
+                  className="text-[9px] mt-1 mr-1"
+                  style={{ color: "hsl(230, 15%, 60%)" }}
+                >
+                  עכשיו
                 </p>
               </div>
-              <p
-                className="text-[9px] mt-1 mr-1"
-                style={{ color: "hsl(230, 15%, 60%)" }}
-              >
-                עכשיו
-              </p>
             </div>
-          </div>
+          )}
+
+          {/* Typing indicator before insights */}
+          {stage === "typing-insights" && (
+            <div className="flex items-end gap-2 mb-3 animate-fade-in">
+              <div
+                className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+                style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+              >
+                <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+              </div>
+              <div
+                className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1"
+                style={{
+                  background: "white",
+                  border: "1px solid hsl(230, 20%, 92%)",
+                  boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0s" }} />
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.2s" }} />
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.4s" }} />
+              </div>
+            </div>
+          )}
 
           {/* Insights as a chat bubble from Dana */}
-          <div className="flex items-end gap-2 mb-3">
+          {stage === "insights" && (
+          <div className="flex items-end gap-2 mb-3 animate-fade-in">
             <div
               className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
               style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
@@ -230,7 +298,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             </div>
             <div className="flex flex-col items-end max-w-[92%] flex-1">
               <div
-                className="rounded-2xl rounded-bl-md p-3.5 w-full"
+                className="rounded-2xl rounded-br-md p-3.5 w-full"
                 style={{
                   background: "white",
                   border: "1px solid hsl(230, 20%, 92%)",
@@ -327,7 +395,9 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               </p>
             </div>
           </div>
+          )}
 
+          {stage === "insights" && (<>
           {/* Suggested questions */}
           <p
             className="text-[11px] font-semibold mb-2 text-right"
@@ -359,6 +429,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               </button>
             ))}
           </div>
+          </>
+          )}
         </div>
 
         {/* Input bar */}
