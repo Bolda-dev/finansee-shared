@@ -395,6 +395,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               </p>
             </div>
           </div>
+          )}
 
           {stage === "insights" && (<>
           {/* Suggested questions */}
