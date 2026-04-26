@@ -25,25 +25,25 @@ const tabsConfig: Record<
 > = {
   assets: {
     label: "נכסים",
-    color: "hsl(200, 80%, 45%)",
-    gradient: "linear-gradient(135deg, hsl(190, 85%, 55%), hsl(205, 90%, 45%))",
-    accent: "hsl(190, 85%, 55%)",
+    color: "hsl(265, 65%, 40%)",
+    gradient: "linear-gradient(135deg, hsl(245, 40%, 10%), hsl(275, 70%, 52%))",
+    accent: "hsl(265, 65%, 50%)",
     items: incomeItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט מקורות הכנסה חודשיים",
   },
   liabilities: {
     label: "התחייבויות",
-    color: "hsl(345, 70%, 50%)",
-    gradient: "linear-gradient(135deg, hsl(335, 75%, 60%), hsl(350, 80%, 50%))",
-    accent: "hsl(345, 75%, 55%)",
+    color: "hsl(320, 65%, 42%)",
+    gradient: "linear-gradient(135deg, hsl(255, 35%, 9%), hsl(330, 65%, 50%))",
+    accent: "hsl(320, 65%, 50%)",
     items: expenseItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט הוצאות חודשיות",
   },
   insurance: {
     label: "ביטוח",
-    color: "hsl(28, 80%, 45%)",
-    gradient: "linear-gradient(135deg, hsl(40, 95%, 60%), hsl(25, 92%, 55%))",
-    accent: "hsl(30, 90%, 55%)",
+    color: "hsl(280, 65%, 40%)",
+    gradient: "linear-gradient(135deg, hsl(250, 40%, 8%), hsl(285, 65%, 45%))",
+    accent: "hsl(280, 65%, 48%)",
     items: insuranceItems.map((i) => ({
       label: i.label,
       value: i.status === "פעיל" ? 1 : 0,
@@ -219,7 +219,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           style={{
             top: "-32px",
             boxShadow:
-              "0 0 0 3px white, 0 0 0 5px hsla(290, 70%, 55%, 0.35), 0 8px 24px hsla(290, 70%, 55%, 0.25)",
+              "0 0 0 3px white, 0 0 0 5px hsla(275, 65%, 25%, 0.45), 0 8px 24px hsla(275, 65%, 25%, 0.35)",
           }}
         >
           <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
@@ -249,7 +249,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             <div className="flex items-end gap-2 mb-3 animate-fade-in">
               <div
                 className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
-                style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
               >
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
@@ -273,7 +273,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             <div className="flex items-end gap-2 mb-3 animate-fade-in">
               <div
                 className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
-                style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
               >
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
@@ -308,7 +308,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             <div className="flex items-end gap-2 mb-3 animate-fade-in">
               <div
                 className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
-                style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
               >
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
@@ -332,7 +332,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           <div className="flex items-end gap-2 mb-3 animate-fade-in">
             <div
               className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
-              style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+              style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
             >
               <img src={advisorImg} alt="" className="w-full h-full object-cover" />
             </div>
@@ -484,8 +484,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
                   <div
                     className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
                     style={{
-                      background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
-                      boxShadow: "0 3px 12px hsla(295, 70%, 50%, 0.28)",
+                      background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)",
+                      boxShadow: "0 3px 12px hsla(265, 60%, 25%, 0.4)",
                     }}
                   >
                     <p className="text-xs leading-relaxed text-right" style={{ color: "white" }}>
@@ -500,7 +500,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
                 <div key={msg.id} className="flex items-end gap-2 mb-3 animate-fade-in" dir="rtl">
                   <div
                     className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
-                    style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                    style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
                   >
                     <img src={advisorImg} alt="" className="w-full h-full object-cover" />
                   </div>
@@ -523,7 +523,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               <div key={msg.id} className="flex items-end gap-2 mb-3 animate-fade-in" dir="rtl">
                 <div
                   className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
-                  style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                  style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
                 >
                   <img src={advisorImg} alt="" className="w-full h-full object-cover" />
                 </div>
@@ -557,9 +557,9 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             style={{
               background: input ? "white" : "hsl(230, 25%, 96%)",
               border: input
-                ? "1px solid hsla(290, 70%, 55%, 0.5)"
+                ? "1px solid hsla(280, 60%, 38%, 0.55)"
                 : "1px solid hsl(230, 20%, 90%)",
-              boxShadow: input ? "0 0 0 3px hsla(290, 70%, 55%, 0.12)" : "none",
+              boxShadow: input ? "0 0 0 3px hsla(280, 60%, 38%, 0.14)" : "none",
             }}
           >
             <input
@@ -592,9 +592,9 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 background: input
-                  ? "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))"
+                  ? "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)"
                   : "hsl(230, 20%, 88%)",
-                boxShadow: input ? "0 4px 12px hsla(295, 70%, 50%, 0.38)" : "none",
+                boxShadow: input ? "0 4px 12px hsla(265, 60%, 25%, 0.45)" : "none",
               }}
             >
               <Send className="h-3.5 w-3.5 rotate-180" style={{ color: "white" }} />
