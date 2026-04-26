@@ -480,10 +480,9 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               return (
                 <div key={msg.id} className="flex justify-start mb-3 animate-fade-in" dir="rtl">
                   <div
-                    className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
+                    className="cta-tri max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
                     style={{
-                      background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)",
-                      boxShadow: "0 3px 12px hsla(265, 60%, 25%, 0.4)",
+                      boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)",
                     }}
                   >
                     <p className="text-xs leading-relaxed text-right" style={{ color: "white" }}>
