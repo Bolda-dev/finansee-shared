@@ -301,116 +301,58 @@ const IndexB = () => {
         </div>
       )}
 
-      {/* Bottom Navigation - Glass Capsule with Center Notch */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4">
-        <div
-          className="relative flex items-end justify-center"
+      {/* Bottom Chat Bar */}
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none">
+        <button
+          onClick={() => setChatOpen(true)}
+          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pl-2 pr-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+          style={{
+            background: "white",
+            boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
+            border: "1px solid hsl(230, 20%, 92%)",
+          }}
+          aria-label="פתח צ׳אט עם Finansee AI"
         >
-          {/* Center Chat Button - raised above the bar with bounce */}
-          <button
-            onClick={() => setChatOpen(true)}
-            className="absolute -top-5 inset-x-0 mx-auto w-fit z-10 transition-transform hover:scale-105 active:scale-95 animate-bounce"
-            style={{ animationDuration: "3s", animationIterationCount: "infinite" }}
-          >
-            <div
-              className="w-[60px] h-[60px] rounded-full flex items-center justify-center"
-              style={{
-                background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
-                boxShadow: "0 6px 24px hsla(295, 70%, 45%, 0.45), 0 0 0 4px hsla(235, 30%, 97%, 0.8)",
-              }}
-            >
-              <img
-                src={advisorImg}
-                alt="יועצת"
-                className="w-[48px] h-[48px] rounded-full object-cover border-2"
-                style={{ borderColor: "hsla(0, 0%, 100%, 0.5)" }}
-              />
-            </div>
-          </button>
-
-          {/* Glass Capsule Bar */}
-          <div
-            className="w-full rounded-2xl flex items-center justify-between px-2 py-2"
+          {/* Send button (leftmost in RTL) */}
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
             style={{
-              background: "hsla(0, 0%, 100%, 0.65)",
-              backdropFilter: "blur(20px) saturate(180%)",
-              WebkitBackdropFilter: "blur(20px) saturate(180%)",
-              border: "1px solid hsla(0, 0%, 100%, 0.5)",
-              boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.12), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
+              background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
+              boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)",
             }}
           >
-            {/* Right side tabs (RTL: appear on right) */}
-            <div className="flex items-center gap-1 flex-1 justify-around">
-              {leftNav.map((item) => {
-                const isActive = activeTab === item.key;
-                return (
-                  <button
-                    key={item.key}
-                    onClick={() => setActiveTab(item.key)}
-                    className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
-                    style={{
-                      background: isActive ? "hsla(290, 70%, 55%, 0.14)" : "transparent",
-                    }}
-                  >
-                    <item.icon
-                      className="h-5 w-5 transition-colors"
-                      style={{
-                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
-                      }}
-                    />
-                    <span
-                      className="text-[10px] font-medium transition-colors"
-                      style={{
-                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+            <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+          </span>
 
-            {/* Spacer for center notch */}
-            <div className="w-[72px] flex-shrink-0" />
+          {/* Mic button */}
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: "hsl(230, 25%, 96%)", border: "1px solid hsl(230, 20%, 90%)" }}
+          >
+            <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
+          </span>
 
-            {/* Left side tabs (RTL: appear on left) */}
-            <div className="flex items-center gap-1 flex-1 justify-around">
-              {rightNav.map((item) => {
-                const isActive = activeTab === item.key;
-                return (
-                  <button
-                    key={item.key}
-                    onClick={() => setActiveTab(item.key)}
-                    className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
-                    style={{
-                      background: isActive ? "hsla(290, 70%, 55%, 0.14)" : "transparent",
-                    }}
-                  >
-                    <item.icon
-                      className="h-5 w-5 transition-colors"
-                      style={{
-                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
-                      }}
-                    />
-                    <span
-                      className="text-[10px] font-medium transition-colors"
-                      style={{
-                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+          {/* Placeholder text */}
+          <span className="flex-1 text-end text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
+            שאל את Finansee AI
+          </span>
+
+          {/* Avatar (rightmost in RTL — floating) */}
+          <span
+            className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 relative"
+            style={{
+              boxShadow:
+                "0 6px 20px hsla(295, 70%, 45%, 0.35), 0 0 0 2px white, 0 0 0 3px hsla(290, 70%, 55%, 0.4)",
+              transform: "translateY(-2px)",
+            }}
+          >
+            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+          </span>
+        </button>
       </div>
 
-      {/* Chatbot - no FAB, opened from nav */}
-      <ChatBot open={chatOpen} onOpenChange={setChatOpen} variant="no-fab" />
+      {/* Insights Sheet */}
+      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} />
       <MenuDrawer open={menuOpen} onOpenChange={setMenuOpen} />
     </div>
   );
