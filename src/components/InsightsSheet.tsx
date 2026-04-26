@@ -497,10 +497,12 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
                   {(() => {
                     const sel = actionsConfig[selectedAction];
                     return (
-                      <button className="cta-tri mt-3 w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]">
-                        {sel.cta}
-                        <ArrowLeft className="w-3.5 h-3.5" />
-                      </button>
+                      <div className="mt-3 flex justify-start" dir="ltr">
+                        <button className="cta-tri inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]">
+                          {sel.cta}
+                          <ArrowLeft className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     );
                   })()}
                 </>
@@ -539,10 +541,12 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
                           <p className="text-[10px] leading-snug mb-2" style={{ color: "hsl(230, 15%, 45%)" }}>
                             {t.description}
                           </p>
-                          <button className="cta-tri inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]">
-                            {t.cta}
-                            <ArrowLeft className="w-3 h-3" />
-                          </button>
+                          <div className="flex justify-start" dir="ltr">
+                            <button className="cta-tri inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                              {t.cta}
+                              <ArrowLeft className="w-3 h-3" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     );
