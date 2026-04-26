@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info, Send, Mic } from "lucide-react";
+import { useState, useEffect } from "react";
+import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info, Send, Mic, ChevronLeft, PiggyBank, Landmark, Briefcase, CreditCard, Building2, LineChart, Sparkles, MessageCircle } from "lucide-react";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
@@ -40,7 +40,15 @@ const IndexB = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
+  const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
+
+  // Pop the proactive Dana bubble after 5 seconds on the screen
+  useEffect(() => {
+    if (activeTab !== "status") return;
+    const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
+    return () => clearTimeout(t);
+  }, [activeTab]);
 
   const navItems = [
     { key: "status" as const, label: "בית", icon: Home },
@@ -200,29 +208,192 @@ const IndexB = () => {
             ))}
           </div>
 
-          <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>המלצות לשיפור</h2>
-          <div className="space-y-3 pb-32">
-            {extendedRecs.map((rec) => (
-              <div key={rec.id} className="rounded-xl p-4 flex items-center gap-4" style={{ background: "white", boxShadow: "0 2px 12px rgba(100, 80, 180, 0.06)" }}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "hsl(270, 45%, 95%)" }}>
-                  {recIcons[rec.icon]}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <h3 className="text-sm font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>{rec.title}</h3>
-                    <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full" style={{ background: criticalityConfig[rec.criticality].bg, color: criticalityConfig[rec.criticality].color }}>
-                      {criticalityConfig[rec.criticality].label}
-                    </span>
-                  </div>
-                  <p className="text-[11px]" style={{ color: "hsl(230, 15%, 55%)" }}>
-                    {rec.description}
-                    {rec.saving && <span className="font-bold" style={{ color: "hsl(275, 65%, 45%)" }}> • {rec.saving}</span>}
+          {/* Dana — Active Insights Card */}
+          <div className="relative mb-6">
+            {/* Proactive bubble — pops out of the card after 5s */}
+            {danaBubbleOpen && (
+              <button
+                onClick={() => {
+                  setDanaBubbleOpen(false);
+                  setChatOpen(true);
+                }}
+                className="absolute z-30 right-3 -top-3 max-w-[78%] text-right rounded-2xl rounded-br-sm px-3.5 py-2.5 flex items-start gap-2"
+                style={{
+                  background: "white",
+                  border: "1px solid hsl(230, 20%, 92%)",
+                  boxShadow: "0 10px 28px hsla(250, 30%, 25%, 0.18), 0 2px 6px hsla(250, 30%, 25%, 0.08)",
+                  animation: "bubble-pop 0.55s cubic-bezier(0.22, 1.4, 0.36, 1) both",
+                  transformOrigin: "top right",
+                }}
+                aria-label="פתח את דנה"
+              >
+                <span className="text-xs leading-snug" style={{ color: "hsl(250, 35%, 20%)" }}>
+                  יש לך 3 פעולות חדשות להעלות את השווי נטו שלך :)
+                </span>
+              </button>
+            )}
+
+            <button
+              onClick={() => setChatOpen(true)}
+              className="relative w-full rounded-2xl p-4 text-start flex items-center gap-3 overflow-hidden transition-transform hover:scale-[1.01] active:scale-[0.99]"
+              style={{
+                background: "white",
+                boxShadow: "0 4px 18px hsla(250, 30%, 25%, 0.08)",
+                border: "1px solid hsl(230, 20%, 93%)",
+              }}
+            >
+              {/* Avatar with rotating tri-color ring + badge */}
+              <span className="relative flex-shrink-0">
+                <span className="tri-ring relative w-12 h-12 rounded-full block">
+                  <span className="block w-full h-full rounded-full overflow-hidden">
+                    <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
+                  </span>
+                </span>
+                {/* Badge: 3 unread insights */}
+                <span
+                  className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+                  style={{
+                    background: "hsl(0, 78%, 55%)",
+                    border: "2px solid white",
+                    animation: "badge-pulse 2.2s ease-out infinite",
+                  }}
+                >
+                  3
+                </span>
+              </span>
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <p className="text-sm font-bold" style={{ color: "hsl(250, 40%, 18%)" }}>
+                    דנה — Finansee AI
                   </p>
+                  <span
+                    className="w-1.5 h-1.5 rounded-full"
+                    style={{ background: "hsl(150, 65%, 48%)", boxShadow: "0 0 0 3px hsla(150, 65%, 48%, 0.18)" }}
+                  />
                 </div>
-                <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)", color: "white", boxShadow: "0 6px 18px hsla(265, 60%, 25%, 0.45)" }}>
-                  {rec.action}
-                </button>
+                <p className="text-[11px] mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>
+                  תובנות פעילות מחכות לך
+                </p>
               </div>
+
+              <ChevronLeft className="h-4 w-4 flex-shrink-0" style={{ color: "hsl(230, 15%, 55%)" }} />
+            </button>
+          </div>
+
+          {/* Financial Center */}
+          <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>מרכז פיננסי</h2>
+          <div className="grid grid-cols-2 gap-3 pb-32">
+            {[
+              {
+                label: "ביטוח", Icon: ShieldCheck, value: "₪1,642",
+                sub: "/חודש", subLabel: "עלות ביטוח",
+                accent: "hsl(280, 65%, 50%)", accentBg: "hsl(280, 60%, 95%)",
+                badge: 1,
+              },
+              {
+                label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500",
+                sub: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית",
+                accent: "hsl(250, 65%, 55%)", accentBg: "hsl(250, 55%, 95%)",
+              },
+              {
+                label: "השקעות", Icon: LineChart, value: "₪2,095,000",
+                sub: "", subLabel: "",
+                accent: "hsl(195, 80%, 45%)", accentBg: "hsl(195, 70%, 94%)",
+                badge: 1,
+              },
+              {
+                label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500",
+                sub: "", subLabel: "יתרה שוטפת",
+                accent: "hsl(220, 60%, 50%)", accentBg: "hsl(220, 55%, 95%)",
+              },
+              {
+                label: "הלוואות", Icon: Briefcase, value: "₪320,000",
+                sub: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום כולל", extraSuffix: "/חודש",
+                accent: "hsl(265, 55%, 50%)", accentBg: "hsl(265, 50%, 95%)",
+              },
+              {
+                label: "משכנתא", Icon: Building2, value: "₪1,110,000",
+                sub: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי כולל", extraSuffix: "/חודש",
+                accent: "hsl(28, 85%, 50%)", accentBg: "hsl(28, 80%, 94%)",
+                badge: 1,
+              },
+            ].map((card) => (
+              <button
+                key={card.label}
+                className="relative rounded-2xl p-3.5 text-start flex flex-col gap-2 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  background: "white",
+                  boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+                  border: "1px solid hsl(230, 20%, 94%)",
+                  minHeight: "150px",
+                }}
+              >
+                {/* Top row: label (right) + icon (left) */}
+                <div className="flex items-start justify-between">
+                  <span className="text-xs font-semibold" style={{ color: "hsl(250, 35%, 25%)" }}>
+                    {card.label}
+                  </span>
+                  <span className="relative">
+                    <span
+                      className="w-9 h-9 rounded-full flex items-center justify-center"
+                      style={{ background: card.accentBg }}
+                    >
+                      <card.Icon className="h-4 w-4" style={{ color: card.accent }} />
+                    </span>
+                    {card.badge && (
+                      <span
+                        className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
+                        style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+                      >
+                        {card.badge}
+                      </span>
+                    )}
+                  </span>
+                </div>
+
+                {/* Main value */}
+                <div className="flex items-baseline gap-1 flex-wrap">
+                  <p className="text-base font-extrabold" style={{ color: "hsl(250, 45%, 14%)" }}>
+                    {card.value}
+                  </p>
+                  {card.sub && !card.extra && (
+                    <span className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
+                      {card.sub}
+                    </span>
+                  )}
+                </div>
+                {card.subLabel && (
+                  <p className="text-[10px] -mt-1" style={{ color: "hsl(230, 15%, 55%)" }}>
+                    {card.subLabel}
+                  </p>
+                )}
+                {card.sub && card.extra && (
+                  <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>{card.sub}</p>
+                )}
+
+                {/* Optional secondary metric with separator */}
+                {card.extra && (
+                  <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
+                    <div className="flex items-baseline gap-1">
+                      <p className="text-sm font-bold" style={{ color: "hsl(250, 40%, 22%)" }}>
+                        {card.extra}
+                      </p>
+                      {card.extraSuffix && (
+                        <span className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
+                          {card.extraSuffix}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
+                      {card.extraSub}
+                    </p>
+                  </div>
+                )}
+
+                {/* Bottom-left chevron pointing into the card */}
+                <ChevronLeft className="absolute bottom-3 left-3 h-3.5 w-3.5" style={{ color: card.accent }} />
+              </button>
             ))}
           </div>
         </div>
