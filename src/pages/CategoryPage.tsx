@@ -330,18 +330,12 @@ export const CategoryPage = ({
         </div>
 
         {/* Section header */}
-        <div className="px-5 pt-1 pb-1 flex items-center justify-between">
+        <div className="px-5 pt-1 pb-1 flex items-center justify-end">
           <span
             className="text-[11px] font-semibold tracking-wide"
             style={{ color: "hsl(230, 15%, 55%)" }}
           >
             {filteredItems.length} {itemNoun}
-          </span>
-          <span
-            className="text-[11px] font-semibold tracking-wide"
-            style={{ color: "hsl(250, 30%, 25%)" }}
-          >
-            {sectionTitle}
           </span>
         </div>
 
