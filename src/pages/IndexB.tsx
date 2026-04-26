@@ -291,136 +291,132 @@ const IndexB = () => {
           {/* Financial Center */}
           <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>מרכז פיננסי</h2>
           <div className="grid grid-cols-2 gap-3 pb-32">
-            {[
-              {
-                label: "ביטוח", Icon: ShieldCheck, value: "₪1,642",
-                sub: "/חודש", subLabel: "עלות ביטוח",
-                accent: "hsl(280, 65%, 50%)", accentBg: "hsl(280, 60%, 95%)",
-                badge: 1,
-                category: "insurance" as const,
-              },
-              {
-                label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500",
-                sub: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית",
-                accent: "hsl(250, 65%, 55%)", accentBg: "hsl(250, 55%, 95%)",
-                category: "assets" as const,
-              },
-              {
-                label: "השקעות", Icon: LineChart, value: "₪2,095,000",
-                sub: "", subLabel: "",
-                accent: "hsl(195, 80%, 45%)", accentBg: "hsl(195, 70%, 94%)",
-                badge: 1,
-                category: "assets" as const,
-              },
-              {
-                label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500",
-                sub: "", subLabel: "יתרה שוטפת",
-                accent: "hsl(220, 60%, 50%)", accentBg: "hsl(220, 55%, 95%)",
-                category: "assets" as const,
-              },
-              {
-                label: "הלוואות", Icon: Briefcase, value: "₪320,000",
-                sub: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום כולל", extraSuffix: "/חודש",
-                accent: "hsl(265, 55%, 50%)", accentBg: "hsl(265, 50%, 95%)",
-                category: "liabilities" as const,
-              },
-              {
-                label: "משכנתא", Icon: Building2, value: "₪1,110,000",
-                sub: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי כולל", extraSuffix: "/חודש",
-                accent: "hsl(28, 85%, 50%)", accentBg: "hsl(28, 80%, 94%)",
-                badge: 1,
-                category: "liabilities" as const,
-              },
-            ].map((card) => {
-              const categoryBar: Record<"assets" | "liabilities" | "insurance", string> = {
-                assets: "linear-gradient(90deg, hsl(190, 85%, 50%) 0%, hsla(195, 90%, 62%, 0.7) 100%)",
-                liabilities: "linear-gradient(90deg, hsl(18, 90%, 55%) 0%, hsla(28, 95%, 62%, 0.7) 100%)",
-                insurance: "linear-gradient(90deg, hsl(270, 75%, 55%) 0%, hsla(282, 80%, 65%, 0.7) 100%)",
+            {(() => {
+              type Category = "assets" | "liabilities" | "insurance";
+              const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
+                assets: {
+                  accent: "hsl(195, 85%, 42%)",
+                  accentBg: "hsl(190, 80%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(190, 85%, 50%) 0%, hsla(195, 90%, 62%, 0.7) 100%)",
+                },
+                liabilities: {
+                  accent: "hsl(22, 90%, 48%)",
+                  accentBg: "hsl(28, 90%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(18, 90%, 55%) 0%, hsla(28, 95%, 62%, 0.7) 100%)",
+                },
+                insurance: {
+                  accent: "hsl(280, 75%, 50%)",
+                  accentBg: "hsl(280, 70%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(270, 75%, 55%) 0%, hsla(282, 80%, 65%, 0.7) 100%)",
+                },
               };
-              return (
-              <button
-                key={card.label}
-                className="relative rounded-2xl p-3.5 text-start flex flex-col gap-2 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  background: "white",
-                  boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-                  border: "1px solid hsl(230, 20%, 94%)",
-                  minHeight: "150px",
-                }}
-              >
-                {/* Category indicator bar */}
-                <span
-                  className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
-                  style={{ background: categoryBar[card.category] }}
-                  aria-hidden
-                />
-                {/* Top row: label (right) + icon (left) */}
-                <div className="flex items-start justify-between">
-                  <span className="text-xs font-semibold" style={{ color: "hsl(250, 35%, 25%)" }}>
-                    {card.label}
-                  </span>
-                  <span className="relative">
+
+              const cards: Array<{
+                label: string;
+                Icon: typeof ShieldCheck;
+                value: string;
+                subLabel?: string;
+                extra?: string;
+                extraSub?: string;
+                extraSuffix?: string;
+                badge?: number;
+                category: Category;
+              }> = [
+                { label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500", subLabel: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית", category: "assets" },
+                { label: "השקעות", Icon: LineChart, value: "₪2,095,000", subLabel: "תיק השקעות", badge: 1, category: "assets" },
+                { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
+                { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
+                { label: "משכנתא", Icon: Building2, value: "₪1,110,000", subLabel: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי", extraSuffix: "/חודש", badge: 1, category: "liabilities" },
+                { label: "ביטוח", Icon: ShieldCheck, value: "₪1,642", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance" },
+              ];
+
+              return cards.map((card) => {
+                const colors = categoryColors[card.category];
+                return (
+                  <button
+                    key={card.label}
+                    className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                    style={{
+                      background: "white",
+                      boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+                      border: "1px solid hsl(230, 20%, 94%)",
+                      minHeight: "150px",
+                    }}
+                  >
                     <span
-                      className="w-9 h-9 rounded-full flex items-center justify-center"
-                      style={{ background: card.accentBg }}
-                    >
-                      <card.Icon className="h-4 w-4" style={{ color: card.accent }} />
-                    </span>
-                    {card.badge && (
+                      className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
+                      style={{ background: colors.bar }}
+                      aria-hidden
+                    />
+
+                    <div className="flex items-start justify-between mb-1">
                       <span
-                        className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
-                        style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+                        className="text-[10px] font-semibold tracking-wide"
+                        style={{ color: "hsl(250, 20%, 50%)" }}
                       >
-                        {card.badge}
+                        {card.label}
                       </span>
-                    )}
-                  </span>
-                </div>
+                      <span className="relative">
+                        <span
+                          className="w-9 h-9 rounded-full flex items-center justify-center"
+                          style={{ background: colors.accentBg }}
+                        >
+                          <card.Icon className="h-4 w-4" style={{ color: colors.accent }} strokeWidth={2} />
+                        </span>
+                        {card.badge && (
+                          <span
+                            className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
+                            style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+                          >
+                            {card.badge}
+                          </span>
+                        )}
+                      </span>
+                    </div>
 
-                {/* Main value */}
-                <div className="flex items-baseline gap-1 flex-wrap">
-                  <p className="text-base font-extrabold" style={{ color: "hsl(250, 45%, 14%)" }}>
-                    {card.value}
-                  </p>
-                  {card.sub && !card.extra && (
-                    <span className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
-                      {card.sub}
-                    </span>
-                  )}
-                </div>
-                {card.subLabel && (
-                  <p className="text-[10px] -mt-1" style={{ color: "hsl(230, 15%, 55%)" }}>
-                    {card.subLabel}
-                  </p>
-                )}
-                {card.sub && card.extra && (
-                  <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>{card.sub}</p>
-                )}
-
-                {/* Optional secondary metric with separator */}
-                {card.extra && (
-                  <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
-                    <div className="flex items-baseline gap-1">
-                      <p className="text-sm font-bold" style={{ color: "hsl(250, 40%, 22%)" }}>
-                        {card.extra}
+                    <div className="flex items-baseline gap-1 flex-wrap">
+                      <p
+                        className="text-[17px] font-extrabold tracking-tight leading-none"
+                        style={{ color: "hsl(250, 50%, 12%)" }}
+                      >
+                        {card.value}
                       </p>
-                      {card.extraSuffix && (
-                        <span className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
+                      {!card.extra && card.extraSuffix && (
+                        <span className="text-[10px]" style={{ color: "hsl(230, 12%, 58%)" }}>
                           {card.extraSuffix}
                         </span>
                       )}
                     </div>
-                    <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
-                      {card.extraSub}
-                    </p>
-                  </div>
-                )}
+                    {card.subLabel && (
+                      <p className="text-[10px] mt-0.5" style={{ color: "hsl(230, 12%, 58%)" }}>
+                        {card.subLabel}
+                      </p>
+                    )}
 
-                {/* Bottom-left chevron pointing into the card */}
-                <ChevronLeft className="absolute bottom-3 left-3 h-3.5 w-3.5" style={{ color: card.accent }} />
-              </button>
-              );
-            })}
+                    {card.extra && (
+                      <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
+                        <p
+                          className="text-[9px] font-semibold tracking-wide mb-0.5"
+                          style={{ color: "hsl(230, 12%, 58%)" }}
+                        >
+                          {card.extraSub}
+                        </p>
+                        <div className="flex items-baseline gap-1">
+                          <p className="text-sm font-bold" style={{ color: colors.accent }}>
+                            {card.extra}
+                          </p>
+                          {card.extraSuffix && (
+                            <span className="text-[10px]" style={{ color: "hsl(230, 12%, 58%)" }}>
+                              {card.extraSuffix}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </button>
+                );
+              });
+            })()}
           </div>
         </div>
       )}
