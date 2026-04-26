@@ -194,10 +194,10 @@ All colors MUST be HSL.
   z-index: -2;
   background: conic-gradient(
     from 0deg,
-    hsl(195, 80%, 55%) 0deg,
-    hsl(28, 90%, 58%) 130deg,
-    hsl(280, 70%, 55%) 240deg,
-    hsl(195, 80%, 55%) 360deg
+    hsl(195, 90%, 62%) 0deg,
+    hsl(28, 95%, 62%) 130deg,
+    hsl(282, 80%, 65%) 240deg,
+    hsl(195, 90%, 62%) 360deg
   );
   animation: cta-rotate 6s linear infinite;
   opacity: 0.95;
