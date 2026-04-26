@@ -48,7 +48,7 @@ export const InsuranceDetailSheet = ({ open, onOpenChange }: InsuranceDetailShee
     "linear-gradient(135deg, hsl(270, 75%, 55%) 0%, hsl(282, 80%, 65%) 55%, hsl(295, 90%, 78%) 100%)";
 
   return (
-    <div className="fixed inset-0 z-40 flex items-end justify-center" dir="rtl">
+    <div className="fixed inset-0 z-30 flex items-end justify-center" dir="rtl">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/30"
