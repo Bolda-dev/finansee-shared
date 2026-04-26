@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ChevronRight,
@@ -10,6 +11,7 @@ import {
   Plane,
   ShieldCheck,
   HeartPulse,
+  X,
 } from "lucide-react";
 import { insuranceItems } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
@@ -27,21 +29,46 @@ const iconMap: Record<string, typeof Heart> = {
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
 
-const categoryTiles: {
-  key: string;
-  label: string;
-  Icon: typeof Heart;
-  bg: string;
-  accent: string;
-}[] = [
-  { key: "life", label: "חיים", Icon: Heart, bg: "hsl(160, 60%, 92%)", accent: "hsl(160, 65%, 38%)" },
-  { key: "car", label: "רכב", Icon: Car, bg: "hsl(45, 95%, 90%)", accent: "hsl(35, 90%, 45%)" },
-  { key: "home", label: "דירה", Icon: Home, bg: "hsl(8, 80%, 92%)", accent: "hsl(8, 75%, 50%)" },
-  { key: "health", label: "בריאות", Icon: Activity, bg: "hsl(195, 80%, 92%)", accent: "hsl(195, 75%, 42%)" },
-];
+// Quick filter chips — same visual language as chat chips
+const filterChips = [
+  { key: "all", label: "הכל" },
+  { key: "monthly", label: "חודשי" },
+  { key: "yearly", label: "שנתי" },
+  { key: "missing", label: "חסר" },
+  { key: "life", label: "חיים" },
+  { key: "health", label: "בריאות" },
+  { key: "car", label: "רכב" },
+  { key: "home", label: "דירה" },
+] as const;
+type FilterKey = (typeof filterChips)[number]["key"];
+
+const matchesFilter = (
+  item: (typeof insuranceItems)[number],
+  filter: FilterKey,
+): boolean => {
+  if (filter === "all") return true;
+  if (filter === "monthly") return item.status === "פעיל" && item.billing === "monthly";
+  if (filter === "yearly") return item.status === "פעיל" && item.billing === "yearly";
+  if (filter === "missing") return item.status === "חסר";
+  if (filter === "life") return item.label.includes("חיים") || item.label.includes("מנהלים") || item.label.includes("סיעודי") || item.label.includes("כושר");
+  if (filter === "health") return item.label.includes("בריאות");
+  if (filter === "car") return item.label.includes("רכב");
+  if (filter === "home") return item.label.includes("דירה");
+  return true;
+};
 
 const InsurancePage = () => {
   const navigate = useNavigate();
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+  const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
+  const [danaBubbleDismissed, setDanaBubbleDismissed] = useState(false);
+
+  // Show Dana invitation bubble after 5s on this page
+  useEffect(() => {
+    if (danaBubbleDismissed) return;
+    const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
+    return () => clearTimeout(t);
+  }, [danaBubbleDismissed]);
 
   const activePolicies = insuranceItems.filter((i) => i.status === "פעיל");
   const monthlyPolicies = activePolicies.filter((i) => i.billing === "monthly");
@@ -54,17 +81,16 @@ const InsurancePage = () => {
   const headerGradient =
     "linear-gradient(160deg, hsl(270, 78%, 52%) 0%, hsl(278, 82%, 60%) 55%, hsl(288, 88%, 70%) 100%)";
 
+  const filteredItems = insuranceItems.filter((i) => matchesFilter(i, activeFilter));
+
   return (
     <div
-      className="min-h-screen max-w-[430px] mx-auto relative"
+      className="min-h-screen max-w-[430px] mx-auto relative overflow-hidden"
       dir="rtl"
-      style={{ background: "hsl(235, 30%, 97%)" }}
+      style={{ background: headerGradient }}
     >
-      {/* === Purple gradient hero === */}
-      <div
-        className="relative px-5 pt-10 pb-7"
-        style={{ background: headerGradient }}
-      >
+      {/* === Purple gradient hero (sits underneath; sheet covers it on scroll) === */}
+      <div className="relative px-5 pt-10 pb-12">
         {/* Decorative blobs */}
         <div
           className="absolute -top-10 -left-12 w-44 h-44 rounded-full pointer-events-none"
@@ -116,11 +142,7 @@ const InsurancePage = () => {
                 className="block w-full h-full rounded-full overflow-hidden"
                 style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
               >
-                <img
-                  src={advisorImg}
-                  alt="דנה"
-                  className="w-full h-full object-cover"
-                />
+                <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
               </span>
             </span>
             <span>איך לחסוך בביטוחים שלי?</span>
@@ -128,37 +150,45 @@ const InsurancePage = () => {
         </div>
       </div>
 
-      {/* === Body === */}
-      <div className="pb-32">
-        {/* Category quick-tiles row */}
-        <div className="px-4 pt-5 pb-4">
-          <div className="grid grid-cols-4 gap-2.5">
-            {categoryTiles.map((tile) => {
-              const Icon = tile.Icon;
+      {/* === White sheet that overlaps the purple area and covers it on scroll === */}
+      <div
+        className="relative -mt-6 rounded-t-3xl pb-32"
+        style={{
+          background: "hsl(235, 30%, 97%)",
+          boxShadow: "0 -8px 28px hsla(280, 60%, 25%, 0.18)",
+          minHeight: "70vh",
+        }}
+      >
+        {/* Drag handle */}
+        <div className="flex justify-center pt-2.5 pb-1">
+          <div
+            className="w-10 h-1.5 rounded-full"
+            style={{ background: "hsl(230, 20%, 88%)" }}
+          />
+        </div>
+
+        {/* Filter chips — matches chat chip styling */}
+        <div className="px-4 pt-3 pb-3">
+          <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
+            {filterChips.map((chip) => {
+              const isActive = chip.key === activeFilter;
               return (
                 <button
-                  key={tile.key}
-                  className="flex flex-col items-center gap-1.5 transition-transform hover:scale-[1.04] active:scale-[0.96]"
+                  key={chip.key}
+                  onClick={() => setActiveFilter(chip.key)}
+                  className="inline-flex items-center text-[11px] font-medium px-3 py-1.5 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98] flex-shrink-0"
+                  style={{
+                    background: isActive ? "hsl(250, 30%, 12%)" : "white",
+                    border: isActive
+                      ? "1px solid hsl(250, 30%, 12%)"
+                      : "1px solid hsl(230, 20%, 90%)",
+                    color: isActive ? "white" : "hsl(230, 20%, 35%)",
+                    boxShadow: isActive
+                      ? "0 4px 12px hsla(250, 30%, 15%, 0.25)"
+                      : "0 1px 2px hsla(230, 20%, 40%, 0.04)",
+                  }}
                 >
-                  <span
-                    className="w-full aspect-square rounded-2xl flex items-center justify-center"
-                    style={{
-                      background: tile.bg,
-                      boxShadow: "0 2px 8px hsla(250, 30%, 25%, 0.05)",
-                    }}
-                  >
-                    <Icon
-                      className="h-6 w-6"
-                      style={{ color: tile.accent }}
-                      strokeWidth={2}
-                    />
-                  </span>
-                  <span
-                    className="text-[11px] font-medium"
-                    style={{ color: "hsl(250, 30%, 25%)" }}
-                  >
-                    {tile.label}
-                  </span>
+                  {chip.label}
                 </button>
               );
             })}
@@ -166,12 +196,12 @@ const InsurancePage = () => {
         </div>
 
         {/* Section header */}
-        <div className="px-5 pt-2 pb-1 flex items-center justify-between">
+        <div className="px-5 pt-1 pb-1 flex items-center justify-between">
           <span
             className="text-[11px] font-semibold tracking-wide"
             style={{ color: "hsl(230, 15%, 55%)" }}
           >
-            {activePolicies.length} פוליסות
+            {filteredItems.length} פוליסות
           </span>
           <span
             className="text-[11px] font-semibold tracking-wide"
@@ -181,7 +211,7 @@ const InsurancePage = () => {
           </span>
         </div>
 
-        {/* Policy list */}
+        {/* === Policy list (RTL: icon on right, title+coverage middle-right, price+chevron on left) === */}
         <div
           className="mx-4 mt-2 rounded-2xl overflow-hidden"
           style={{
@@ -190,7 +220,14 @@ const InsurancePage = () => {
             border: "1px solid hsl(230, 20%, 94%)",
           }}
         >
-          {insuranceItems.map((item, i) => {
+          {filteredItems.length === 0 && (
+            <div className="px-4 py-8 text-center">
+              <p className="text-[12px]" style={{ color: "hsl(230, 15%, 55%)" }}>
+                אין פוליסות בקטגוריה זו
+              </p>
+            </div>
+          )}
+          {filteredItems.map((item, i) => {
             const Icon = iconMap[item.icon] || ShieldCheck;
             const isActive = item.status === "פעיל";
             const showAlert = (item as { alert?: boolean }).alert;
@@ -198,63 +235,18 @@ const InsurancePage = () => {
               item.billing === "monthly"
                 ? item.cost
                 : Math.round(item.cost / 12);
-            const isLast = i === insuranceItems.length - 1;
+            const isLast = i === filteredItems.length - 1;
 
             return (
               <button
                 key={i}
-                className="w-full flex items-center gap-3 px-4 py-3.5 text-start transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
+                className="w-full flex items-center gap-3 px-4 py-3.5 transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
                 style={{
                   borderBottom: isLast ? "none" : "1px solid hsl(230, 20%, 94%)",
                 }}
+                dir="rtl"
               >
-                <ChevronLeft
-                  className="h-4 w-4 flex-shrink-0"
-                  style={{ color: "hsl(230, 15%, 60%)" }}
-                />
-
-                <span className="flex-shrink-0 min-w-[70px]">
-                  {isActive && monthlyCost > 0 ? (
-                    <span
-                      className="text-[13px] font-bold tracking-tight"
-                      style={{ color: "hsl(250, 50%, 12%)" }}
-                    >
-                      {formatNIS(monthlyCost)}
-                      <span
-                        className="text-[10px] font-medium mr-0.5"
-                        style={{ color: "hsl(230, 15%, 55%)" }}
-                      >
-                        /חודש
-                      </span>
-                    </span>
-                  ) : (
-                    <span
-                      className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
-                      style={{
-                        background: "hsl(0, 80%, 95%)",
-                        color: "hsl(0, 65%, 45%)",
-                      }}
-                    >
-                      חסר
-                    </span>
-                  )}
-                </span>
-
-                <div className="flex-1 min-w-0 text-end">
-                  <p
-                    className="text-[13.5px] font-bold tracking-tight"
-                    style={{ color: "hsl(250, 50%, 12%)" }}
-                  >
-                    {item.label}
-                  </p>
-                  <p
-                    className="text-[10.5px] mt-0.5 truncate"
-                    style={{ color: "hsl(230, 15%, 55%)" }}
-                  >
-                    {isActive ? item.coverage : "אין כיסוי פעיל"}
-                  </p>
-                </div>
-
+                {/* RIGHT (RTL start): icon */}
                 <span className="relative flex-shrink-0">
                   <span
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -287,6 +279,56 @@ const InsurancePage = () => {
                     </span>
                   )}
                 </span>
+
+                {/* MIDDLE: title + coverage (RTL right-aligned) */}
+                <div className="flex-1 min-w-0 text-right">
+                  <p
+                    className="text-[13.5px] font-bold tracking-tight"
+                    style={{ color: "hsl(250, 50%, 12%)" }}
+                  >
+                    {item.label}
+                  </p>
+                  <p
+                    className="text-[10.5px] mt-0.5 truncate"
+                    style={{ color: "hsl(230, 15%, 55%)" }}
+                  >
+                    {isActive ? item.coverage : "אין כיסוי פעיל"}
+                  </p>
+                </div>
+
+                {/* LEFT (RTL end): monthly price + chevron */}
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  {isActive && monthlyCost > 0 ? (
+                    <span className="text-end leading-tight">
+                      <span
+                        className="block text-[13px] font-bold tracking-tight"
+                        style={{ color: "hsl(250, 50%, 12%)" }}
+                      >
+                        {formatNIS(monthlyCost)}
+                      </span>
+                      <span
+                        className="block text-[10px] font-medium"
+                        style={{ color: "hsl(230, 15%, 55%)" }}
+                      >
+                        /חודש
+                      </span>
+                    </span>
+                  ) : (
+                    <span
+                      className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                      style={{
+                        background: "hsl(0, 80%, 95%)",
+                        color: "hsl(0, 65%, 45%)",
+                      }}
+                    >
+                      חסר
+                    </span>
+                  )}
+                  <ChevronLeft
+                    className="h-4 w-4 flex-shrink-0"
+                    style={{ color: "hsl(230, 15%, 60%)" }}
+                  />
+                </div>
               </button>
             );
           })}
@@ -299,6 +341,72 @@ const InsurancePage = () => {
           כל הפוליסות מתעדכנות אוטומטית מהחיבור לקופות
         </p>
       </div>
+
+      {/* === Dana invitation bubble (after 5s) === */}
+      {danaBubbleOpen && !danaBubbleDismissed && (
+        <div
+          className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pointer-events-none"
+          dir="rtl"
+        >
+          <div
+            className="pointer-events-auto flex items-end gap-2 ml-auto"
+            style={{ animation: "bubble-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both" }}
+          >
+            {/* Avatar */}
+            <span className="tri-ring relative w-10 h-10 rounded-full flex-shrink-0">
+              <span
+                className="block w-full h-full rounded-full overflow-hidden"
+                style={{ boxShadow: "0 4px 12px hsla(275, 65%, 25%, 0.45)" }}
+              >
+                <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
+              </span>
+            </span>
+
+            {/* Bubble */}
+            <div className="flex-1 max-w-[300px]">
+              <div
+                className="relative rounded-2xl rounded-br-md p-3.5 pr-4"
+                style={{
+                  background: "white",
+                  border: "1px solid hsl(230, 20%, 92%)",
+                  boxShadow: "0 8px 28px hsla(250, 30%, 25%, 0.18)",
+                }}
+              >
+                <button
+                  onClick={() => {
+                    setDanaBubbleOpen(false);
+                    setDanaBubbleDismissed(true);
+                  }}
+                  className="absolute top-1.5 left-1.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+                  aria-label="סגור"
+                >
+                  <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 55%)" }} />
+                </button>
+                <p
+                  className="text-[12px] leading-relaxed pr-1"
+                  style={{ color: "hsl(250, 35%, 20%)" }}
+                >
+                  היי משה 👋 ראיתי שיש לך 7 פוליסות פעילות —
+                  <br />
+                  אני יכולה לעזור לך לחסוך עד <strong>₪450 בחודש</strong>. רוצה שנבדוק יחד?
+                </p>
+                <button
+                  className="cta-tri mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                >
+                  בוא/י נחסוך ביחד
+                  <ChevronLeft className="h-3.5 w-3.5" />
+                </button>
+              </div>
+              <p
+                className="text-[9px] mt-1 mr-1 text-right"
+                style={{ color: "hsl(230, 15%, 60%)" }}
+              >
+                דנה • עכשיו
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
