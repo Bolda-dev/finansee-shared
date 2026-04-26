@@ -49,9 +49,9 @@ const IndexB = () => {
   ];
 
   const recIcons: Record<string, React.ReactNode> = {
-    Home: <Home className="h-4 w-4" style={{ color: "hsl(250, 60%, 55%)" }} />,
-    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(250, 60%, 55%)" }} />,
-    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(250, 60%, 55%)" }} />,
+    Home: <Home className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
+    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
+    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
   };
 
   const extendedRecs = [
@@ -106,7 +106,7 @@ const IndexB = () => {
                 style={{
                   background: "hsla(250, 50%, 99%, 0.7)",
                   border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(250, 65%, 55%)",
+                  color: "hsl(270, 70%, 58%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
@@ -126,22 +126,25 @@ const IndexB = () => {
                 label: "נכסים",
                 value: "₪8.4M",
                 Icon: TrendingUp,
-                gradient: "linear-gradient(135deg, hsl(230, 90%, 65%) 0%, hsl(215, 95%, 55%) 100%)",
-                shadow: "0 8px 24px hsla(220, 90%, 55%, 0.35)",
+                gradient: "linear-gradient(135deg, hsl(190, 85%, 55%) 0%, hsl(205, 90%, 45%) 100%)",
+                shadow: "0 8px 24px hsla(195, 85%, 45%, 0.35)",
+                iconColor: "hsl(200, 80%, 35%)",
               },
               {
                 label: "התחייבויות",
                 value: "₪1.37M",
                 Icon: TrendingDown,
-                gradient: "linear-gradient(135deg, hsl(220, 12%, 55%) 0%, hsl(225, 15%, 35%) 100%)",
-                shadow: "0 8px 24px hsla(225, 15%, 30%, 0.3)",
+                gradient: "linear-gradient(135deg, hsl(335, 75%, 60%) 0%, hsl(350, 80%, 50%) 100%)",
+                shadow: "0 8px 24px hsla(345, 75%, 50%, 0.35)",
+                iconColor: "hsl(345, 70%, 40%)",
               },
               {
                 label: "ביטוח",
                 value: "5 פוליסות",
                 Icon: ShieldCheck,
-                gradient: "linear-gradient(135deg, hsl(45, 95%, 65%) 0%, hsl(22, 92%, 58%) 100%)",
-                shadow: "0 8px 24px hsla(28, 90%, 55%, 0.35)",
+                gradient: "linear-gradient(135deg, hsl(40, 95%, 60%) 0%, hsl(25, 92%, 55%) 100%)",
+                shadow: "0 8px 24px hsla(30, 90%, 50%, 0.35)",
+                iconColor: "hsl(28, 80%, 38%)",
               },
             ].map((card) => (
               <button
@@ -153,14 +156,25 @@ const IndexB = () => {
                   minHeight: "130px",
                 }}
               >
-                <div
-                  className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full"
-                  style={{ background: "hsla(0, 0%, 100%, 0.18)" }}
-                />
-                <div
-                  className="absolute -top-4 -right-4 w-16 h-16 rounded-full"
-                  style={{ background: "hsla(0, 0%, 100%, 0.12)" }}
-                />
+                {/* Static ripples emanating from bottom-right */}
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 140 140"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  {[28, 52, 78, 106].map((r) => (
+                    <circle
+                      key={r}
+                      cx="120"
+                      cy="125"
+                      r={r}
+                      fill="none"
+                      stroke="hsla(0, 0%, 100%, 0.22)"
+                      strokeWidth="1"
+                    />
+                  ))}
+                </svg>
+
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center mb-4 relative z-10"
                   style={{
@@ -168,7 +182,7 @@ const IndexB = () => {
                     boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.1)",
                   }}
                 >
-                  <card.Icon className="h-4 w-4" style={{ color: "hsl(265, 50%, 30%)" }} />
+                  <card.Icon className="h-4 w-4" style={{ color: card.iconColor }} />
                 </div>
                 <div className="relative z-10">
                   <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(0, 0%, 100%, 0.9)" }}>
@@ -198,7 +212,7 @@ const IndexB = () => {
                   </div>
                   <p className="text-[11px]" style={{ color: "hsl(230, 15%, 55%)" }}>
                     {rec.description}
-                    {rec.saving && <span className="font-bold" style={{ color: "hsl(250, 60%, 55%)" }}> • {rec.saving}</span>}
+                    {rec.saving && <span className="font-bold" style={{ color: "hsl(270, 70%, 58%)" }}> • {rec.saving}</span>}
                   </p>
                 </div>
                 <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
@@ -332,19 +346,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(250, 60%, 55%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
@@ -367,19 +381,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(250, 60%, 55%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
