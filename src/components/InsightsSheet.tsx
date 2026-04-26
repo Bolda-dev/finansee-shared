@@ -9,7 +9,7 @@ interface InsightsSheetProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
+
 
 const tabsConfig: Record<
   TabKey,
