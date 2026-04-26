@@ -190,7 +190,17 @@ All colors MUST be HSL.
 .cta-tri::before {
   content: "";
   position: absolute;
-  inset: -60%;
+  /* Use a square (1:1) sized to the button's diagonal so the rotating
+     conic gradient fully covers the rectangle at every angle.
+     300% of the longest side guarantees full corner coverage. */
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  aspect-ratio: 1 / 1;
+  min-width: 300%;
+  min-height: 300%;
+  transform-origin: center center;
+  translate: -50% -50%;
   z-index: -2;
   background: conic-gradient(
     from 0deg,
@@ -200,7 +210,7 @@ All colors MUST be HSL.
     hsl(195, 90%, 62%) 360deg
   );
   animation: cta-rotate 6s linear infinite;
-  opacity: 0.95;
+  opacity: 1;
 }
 .cta-tri::after {
   content: "";
