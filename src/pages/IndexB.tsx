@@ -143,6 +143,7 @@ const IndexB = () => {
                 shadow: "0 8px 24px hsla(195, 80%, 45%, 0.38)",
                 iconColor: "hsl(195, 85%, 42%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
+                onClick: () => navigate("/assets"),
               },
               {
                 label: "התחייבויות",
@@ -152,6 +153,7 @@ const IndexB = () => {
                 shadow: "0 8px 24px hsla(28, 90%, 50%, 0.38)",
                 iconColor: "hsl(22, 90%, 48%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
+                onClick: () => navigate("/liabilities"),
               },
               {
                 label: "ביטוח",
@@ -161,10 +163,12 @@ const IndexB = () => {
                 shadow: "0 8px 24px hsla(280, 75%, 50%, 0.4)",
                 iconColor: "hsl(280, 75%, 50%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
+                onClick: () => navigate("/insurance"),
               },
             ].map((card) => (
               <button
                 key={card.label}
+                onClick={card.onClick}
                 className="relative rounded-2xl p-4 text-start overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={{
                   background: card.gradient,

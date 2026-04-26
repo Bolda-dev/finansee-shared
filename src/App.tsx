@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import IncomePage from "./pages/IncomePage";
 import ExpensesPage from "./pages/ExpensesPage";
 import InsurancePage from "./pages/InsurancePage";
+import AssetsPage from "./pages/AssetsPage";
+import LiabilitiesPage from "./pages/LiabilitiesPage";
 import IndexB from "./pages/IndexB";
 import NotFound from "./pages/NotFound";
 
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/income" element={<IncomePage />} />
           <Route path="/expenses" element={<ExpensesPage />} />
           <Route path="/insurance" element={<InsurancePage />} />
+          <Route path="/assets" element={<AssetsPage />} />
+          <Route path="/liabilities" element={<LiabilitiesPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
