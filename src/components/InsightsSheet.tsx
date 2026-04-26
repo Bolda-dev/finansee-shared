@@ -576,6 +576,12 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
               placeholder="שאל את Finansee AI..."
               className="flex-1 bg-transparent text-sm outline-none text-right placeholder:text-xs"
               style={{ color: "hsl(250, 40%, 20%)" }}
