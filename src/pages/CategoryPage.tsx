@@ -139,12 +139,20 @@ export const CategoryPage = ({
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const [danaBubbleDismissed, setDanaBubbleDismissed] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [stickyVisible, setStickyVisible] = useState(false);
 
   useEffect(() => {
     if (danaBubbleDismissed) return;
     const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
     return () => clearTimeout(t);
   }, [danaBubbleDismissed]);
+
+  useEffect(() => {
+    const onScroll = () => setStickyVisible(window.scrollY > 180);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const activeFilterConfig = filters.find((f) => f.key === activeFilter) ?? filters[0];
   const filteredItems = items.filter((i) => activeFilterConfig.test(i));
@@ -155,6 +163,34 @@ export const CategoryPage = ({
       dir="rtl"
       style={{ background: theme.gradient }}
     >
+      {/* === Sticky compact header — appears on scroll === */}
+      <div
+        className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-30 transition-all duration-300"
+        style={{
+          background: theme.gradient,
+          boxShadow: stickyVisible ? `0 4px 14px ${theme.sheetShadow}` : "none",
+          transform: stickyVisible
+            ? "translate(-50%, 0)"
+            : "translate(-50%, -100%)",
+          opacity: stickyVisible ? 1 : 0,
+          pointerEvents: stickyVisible ? "auto" : "none",
+        }}
+        dir="rtl"
+      >
+        <div className="flex items-center justify-between px-4 py-3 text-white">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
+            aria-label="חזרה"
+          >
+            <ChevronRight className="h-4 w-4" />
+            חזרה
+          </button>
+          <h2 className="text-[14px] font-bold">{title}</h2>
+          <span className="w-12" aria-hidden />
+        </div>
+      </div>
+
       {/* === Hero — stays in place; sheet scrolls up over it === */}
       <div
         className="sticky top-0 z-0 px-5 pt-10 pb-12"
