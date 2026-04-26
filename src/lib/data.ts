@@ -35,6 +35,27 @@ export const insuranceItems = [
   { label: "ביטוח סיעודי", status: "חסר", coverage: "—", cost: 0, billing: "monthly" as const, icon: "HeartPulse", provider: "—" },
 ];
 
+export const assetItems = [
+  { label: "פנסיה", subLabel: "סך החיסכון", amount: 1233500, monthly: 9069, monthlyLabel: "צפי קצבה חודשית", icon: "PiggyBank", provider: "מנורה מבטחים" },
+  { label: "השקעות", subLabel: "תיק השקעות", amount: 2095000, icon: "LineChart", provider: "אלטשולר שחם", alert: true },
+  { label: "חשבון עו״ש", subLabel: "יתרה שוטפת", amount: 24500, icon: "CreditCard", provider: "בנק הפועלים" },
+  { label: "קרן השתלמות", subLabel: "נזילה", amount: 412000, icon: "Briefcase", provider: "כלל" },
+  { label: "נדל״ן להשקעה", subLabel: "דירה ברמת גן", amount: 2800000, monthly: 5500, monthlyLabel: "הכנסה חודשית", icon: "Home", provider: "פרטי" },
+  { label: "מטבע דיגיטלי", subLabel: "תיק קריפטו", amount: 87000, icon: "TrendingUp", provider: "Bits of Gold" },
+  { label: "פיקדון בנקאי", subLabel: "פיקדון לשנתיים", amount: 250000, icon: "Landmark", provider: "בנק לאומי" },
+  { label: "קופת גמל", subLabel: "השקעה לטווח ארוך", amount: 498000, icon: "PiggyBank", provider: "הראל" },
+];
+
+export const liabilityItems = [
+  { label: "משכנתא — דירה ראשית", subLabel: "מסלול משולב", balance: 720000, monthly: 5200, icon: "Home", provider: "בנק מזרחי" },
+  { label: "משכנתא — דירה להשקעה", subLabel: "פריים", balance: 390000, monthly: 2300, icon: "Home", provider: "בנק לאומי", alert: true },
+  { label: "הלוואת רכב", subLabel: "36 חודשים נותרו", balance: 65000, monthly: 1850, icon: "Car", provider: "ישראכרט" },
+  { label: "הלוואת חינוך", subLabel: "אוניברסיטה", balance: 42000, monthly: 1200, icon: "Briefcase", provider: "בנק הפועלים" },
+  { label: "כרטיס אשראי", subLabel: "תשלומים פרוסים", balance: 18500, monthly: 950, icon: "CreditCard", provider: "מקס" },
+  { label: "מסגרת אשראי", subLabel: "ניצול שוטף", balance: 12000, monthly: 700, icon: "Landmark", provider: "בנק דיסקונט" },
+  { label: "הלוואה משפחתית", subLabel: "ללא ריבית", balance: 80000, monthly: 1000, icon: "Wallet", provider: "פרטי" },
+];
+
 
 export const recommendations = [
   {
