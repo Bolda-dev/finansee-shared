@@ -166,9 +166,9 @@ const IndexB = () => {
                   viewBox="0 0 140 140"
                   preserveAspectRatio="xMidYMid slice"
                 >
-                  {card.ripple.radii.map((r) => (
+                  {card.ripple.radii.map((r, idx) => (
                     <circle
-                      key={r}
+                      key={`${r}-${idx}`}
                       cx={card.ripple.cx}
                       cy={card.ripple.cy}
                       r={r}
