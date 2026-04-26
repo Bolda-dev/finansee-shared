@@ -4,6 +4,7 @@ import { userData, recommendations, incomeItems, expenseItems, insuranceItems, c
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
 import { InsightsSheet } from "@/components/InsightsSheet";
+import { InsuranceDetailSheet } from "@/components/InsuranceDetailSheet";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 
@@ -39,6 +40,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 const IndexB = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
+  const [insuranceDetailOpen, setInsuranceDetailOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
@@ -322,13 +324,14 @@ const IndexB = () => {
                 extraSuffix?: string;
                 badge?: number;
                 category: Category;
+                onClick?: () => void;
               }> = [
                 { label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500", subLabel: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית", category: "assets" },
                 { label: "השקעות", Icon: LineChart, value: "₪2,095,000", subLabel: "תיק השקעות", badge: 1, category: "assets" },
                 { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
                 { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
                 { label: "משכנתא", Icon: Building2, value: "₪1,110,000", subLabel: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי", extraSuffix: "/חודש", badge: 1, category: "liabilities" },
-                { label: "ביטוח", Icon: ShieldCheck, value: "₪1,642", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance" },
+                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => setInsuranceDetailOpen(true) },
               ];
 
               return cards.map((card) => {
@@ -336,6 +339,7 @@ const IndexB = () => {
                 return (
                   <button
                     key={card.label}
+                    onClick={card.onClick}
                     className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     style={{
                       background: "white",
@@ -540,6 +544,8 @@ const IndexB = () => {
       <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
       {/* Insights Sheet — actions mode (from "התובנות של דנה" card) */}
       <InsightsSheet open={actionsOpen} onOpenChange={setActionsOpen} mode="actions" />
+      {/* Insurance Detail Sheet — from "ביטוח" card */}
+      <InsuranceDetailSheet open={insuranceDetailOpen} onOpenChange={setInsuranceDetailOpen} />
       <MenuDrawer open={menuOpen} onOpenChange={setMenuOpen} />
     </div>
   );
