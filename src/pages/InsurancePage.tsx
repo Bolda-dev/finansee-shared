@@ -133,7 +133,7 @@ const InsurancePage = () => {
 
           {/* Pill CTA — Dana invites you to chat */}
           <button
-            className="inline-flex items-center gap-2 pr-1 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
+            className="inline-flex items-center gap-2 pr-2 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
             style={{
               background: "white",
               color: "hsl(280, 60%, 30%)",
@@ -143,7 +143,7 @@ const InsurancePage = () => {
           >
             <span
               className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
-              style={{ marginTop: "-10px", marginBottom: "-10px" }}
+              style={{ marginTop: "-10px", marginBottom: "-10px", transform: "translateX(-6px)" }}
             >
               <span
                 className="block w-full h-full rounded-full overflow-hidden"
