@@ -65,14 +65,37 @@ const IndexB = () => {
 
   return (
     <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: "hsl(235, 30%, 97%)" }}>
-      {/* Nature background - screen level */}
-      <div className="absolute inset-x-0 top-0 h-[420px] z-0 overflow-hidden">
-        <img src={natureBg} alt="" className="w-full h-full object-cover scale-110" />
-        {/* Gradient fade overlay */}
+      {/* Ripple background — expanding circles */}
+      <div className="absolute inset-x-0 top-0 h-[520px] z-0 overflow-hidden pointer-events-none">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 430 520" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="rippleFade" cx="50%" cy="20%" r="80%">
+              <stop offset="0%" stopColor="hsl(230, 25%, 92%)" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="hsl(235, 30%, 97%)" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="430" height="520" fill="url(#rippleFade)" />
+          {[0, 1, 2, 3, 4].map((i) => (
+            <circle
+              key={i}
+              cx="215"
+              cy="80"
+              r="60"
+              fill="none"
+              stroke="hsl(230, 15%, 78%)"
+              strokeWidth="1"
+              opacity="0"
+              style={{
+                transformOrigin: "215px 80px",
+                animation: `ripple 6s ease-out ${i * 1.2}s infinite`,
+              }}
+            />
+          ))}
+        </svg>
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to bottom, transparent 30%, hsl(235, 30%, 97%) 100%)",
+            background: "linear-gradient(to bottom, transparent 60%, hsl(235, 30%, 97%) 100%)",
           }}
         />
       </div>
@@ -97,7 +120,7 @@ const IndexB = () => {
               <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 30%, 55%)" }} />
             </div>
             <div className="flex items-center justify-start gap-3 mb-1">
-              <p className="text-3xl font-extrabold tracking-tight" style={{ color: "hsl(250, 45%, 15%)" }}>
+              <p className="text-5xl font-extrabold tracking-tight" style={{ color: "hsl(250, 45%, 15%)" }}>
                 {formatCurrency(userData.currentPotential)}
               </p>
               <span
