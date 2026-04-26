@@ -40,7 +40,15 @@ const IndexB = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
+  const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
+
+  // Pop the proactive Dana bubble after 5 seconds on the screen
+  useEffect(() => {
+    if (activeTab !== "status") return;
+    const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
+    return () => clearTimeout(t);
+  }, [activeTab]);
 
   const navItems = [
     { key: "status" as const, label: "בית", icon: Home },
