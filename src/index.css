@@ -183,7 +183,7 @@ All colors MUST be HSL.
 .cta-tri {
   position: relative;
   isolation: isolate;
-  background: hsl(250, 30%, 8%);
+  background: hsl(248, 30%, 12%);
   color: white;
   overflow: hidden;
 }
