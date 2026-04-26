@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info, Send, Mic, ChevronLeft, PiggyBank, Landmark, Briefcase, CreditCard, Building2, LineChart, Sparkles, MessageCircle } from "lucide-react";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
 import { InsightsSheet } from "@/components/InsightsSheet";
-import { InsuranceDetailSheet } from "@/components/InsuranceDetailSheet";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 
@@ -38,9 +38,9 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 };
 
 const IndexB = () => {
+  const navigate = useNavigate();
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
-  const [insuranceDetailOpen, setInsuranceDetailOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
@@ -331,7 +331,7 @@ const IndexB = () => {
                 { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
                 { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
                 { label: "משכנתא", Icon: Building2, value: "₪1,110,000", subLabel: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי", extraSuffix: "/חודש", badge: 1, category: "liabilities" },
-                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => setInsuranceDetailOpen(true) },
+                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/insurance") },
               ];
 
               return cards.map((card) => {
@@ -544,8 +544,6 @@ const IndexB = () => {
       <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
       {/* Insights Sheet — actions mode (from "התובנות של דנה" card) */}
       <InsightsSheet open={actionsOpen} onOpenChange={setActionsOpen} mode="actions" />
-      {/* Insurance Detail Sheet — from "ביטוח" card */}
-      <InsuranceDetailSheet open={insuranceDetailOpen} onOpenChange={setInsuranceDetailOpen} />
       <MenuDrawer open={menuOpen} onOpenChange={setMenuOpen} />
     </div>
   );
