@@ -331,10 +331,16 @@ const IndexB = () => {
                 badge: 1,
                 category: "liabilities" as const,
               },
-            ].map((card) => (
+            ].map((card) => {
+              const categoryBar: Record<"assets" | "liabilities" | "insurance", string> = {
+                assets: "linear-gradient(90deg, hsl(190, 85%, 50%) 0%, hsla(195, 90%, 62%, 0.7) 100%)",
+                liabilities: "linear-gradient(90deg, hsl(18, 90%, 55%) 0%, hsla(28, 95%, 62%, 0.7) 100%)",
+                insurance: "linear-gradient(90deg, hsl(270, 75%, 55%) 0%, hsla(282, 80%, 65%, 0.7) 100%)",
+              };
+              return (
               <button
                 key={card.label}
-                className="relative rounded-2xl p-3.5 text-start flex flex-col gap-2 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="relative rounded-2xl p-3.5 text-start flex flex-col gap-2 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={{
                   background: "white",
                   boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
@@ -342,6 +348,12 @@ const IndexB = () => {
                   minHeight: "150px",
                 }}
               >
+                {/* Category indicator bar */}
+                <span
+                  className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
+                  style={{ background: categoryBar[card.category] }}
+                  aria-hidden
+                />
                 {/* Top row: label (right) + icon (left) */}
                 <div className="flex items-start justify-between">
                   <span className="text-xs font-semibold" style={{ color: "hsl(250, 35%, 25%)" }}>
