@@ -129,6 +129,7 @@ const IndexB = () => {
                 gradient: "linear-gradient(135deg, hsl(190, 85%, 55%) 0%, hsl(205, 90%, 45%) 100%)",
                 shadow: "0 8px 24px hsla(195, 85%, 45%, 0.35)",
                 iconColor: "hsl(200, 80%, 35%)",
+                ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
               },
               {
                 label: "התחייבויות",
@@ -137,6 +138,7 @@ const IndexB = () => {
                 gradient: "linear-gradient(135deg, hsl(335, 75%, 60%) 0%, hsl(350, 80%, 50%) 100%)",
                 shadow: "0 8px 24px hsla(345, 75%, 50%, 0.35)",
                 iconColor: "hsl(345, 70%, 40%)",
+                ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
               },
               {
                 label: "ביטוח",
@@ -145,6 +147,7 @@ const IndexB = () => {
                 gradient: "linear-gradient(135deg, hsl(40, 95%, 60%) 0%, hsl(25, 92%, 55%) 100%)",
                 shadow: "0 8px 24px hsla(30, 90%, 50%, 0.35)",
                 iconColor: "hsl(28, 80%, 38%)",
+                ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
               },
             ].map((card) => (
               <button
@@ -156,17 +159,17 @@ const IndexB = () => {
                   minHeight: "130px",
                 }}
               >
-                {/* Static ripples emanating from bottom-right */}
+                {/* Static ripples — unique placement per card */}
                 <svg
                   className="absolute inset-0 w-full h-full pointer-events-none"
                   viewBox="0 0 140 140"
                   preserveAspectRatio="xMidYMid slice"
                 >
-                  {[28, 52, 78, 106].map((r) => (
+                  {card.ripple.radii.map((r) => (
                     <circle
                       key={r}
-                      cx="120"
-                      cy="125"
+                      cx={card.ripple.cx}
+                      cy={card.ripple.cy}
                       r={r}
                       fill="none"
                       stroke="hsla(0, 0%, 100%, 0.22)"
