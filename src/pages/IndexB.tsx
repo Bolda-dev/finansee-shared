@@ -256,8 +256,6 @@ const IndexB = () => {
                   className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
                   style={{
                     background: "hsl(0, 78%, 55%)",
-                    border: "2px solid white",
-                    animation: "badge-pulse 2.2s ease-out infinite",
                   }}
                 >
                   3
