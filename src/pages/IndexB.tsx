@@ -78,12 +78,12 @@ const IndexB = () => {
       </div>
 
       {/* Header */}
-      <div className="relative z-10 px-5 pt-12 pb-4">
-        <div className="flex flex-col items-end gap-3 mb-4">
+      <div className="relative z-10 px-5 pt-12 pb-4" dir="rtl">
+        <div className="flex flex-col items-start gap-3 mb-4 text-start">
           <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
             <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
           </button>
-          <h1 className="text-lg font-bold text-end" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
+          <h1 className="text-lg font-bold text-start" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
       </div>
 
