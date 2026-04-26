@@ -315,16 +315,14 @@ const IndexB = () => {
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
-          {/* Avatar — pinned to right (start in RTL), floating */}
+          {/* Avatar — pinned to right (start in RTL), floating, with rotating tri-color ring */}
           <span
-            className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 relative"
-            style={{
-              boxShadow:
-                "0 6px 20px hsla(275, 65%, 25%, 0.45), 0 0 0 2px white, 0 0 0 3px hsla(280, 60%, 38%, 0.5)",
-              transform: "translateY(-2px)",
-            }}
+            className="tri-ring w-11 h-11 rounded-full flex-shrink-0"
+            style={{ transform: "translateY(-2px)" }}
           >
-            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
+              <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            </span>
           </span>
 
           {/* Placeholder text — right-aligned */}
