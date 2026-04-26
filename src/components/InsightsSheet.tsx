@@ -400,35 +400,48 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
 
           {stage === "insights" && (<>
           {/* Suggested questions */}
-          <p
-            className="text-[11px] font-semibold mb-2 text-right"
-            style={{ color: "hsl(230, 15%, 55%)" }}
-          >
-            שאל אותי על {tab.label}:
-          </p>
-          <div className="flex flex-wrap gap-2 mb-2 justify-end">
+          <div className="flex items-center gap-1.5 mb-2.5 justify-end">
+            <p
+              className="text-[11px] font-semibold"
+              style={{ color: "hsl(230, 20%, 40%)" }}
+            >
+              שאל אותי על {tab.label}
+            </p>
+            <Sparkles className="w-3 h-3" style={{ color: tab.accent }} />
+          </div>
+          <div className="flex flex-wrap gap-1.5 mb-2 justify-end">
             {(activeTab === "assets"
               ? ["איך להגדיל הכנסות?", "איפה כדאי להשקיע?", "מה התשואה הצפויה?"]
               : activeTab === "liabilities"
               ? ["איך להוריד הוצאות?", "כדאי למחזר משכנתא?", "מה הוצאה גבוהה מדי?"]
               : ["איזה ביטוח חסר לי?", "אני משלם יותר מדי?", "מה הכיסוי המיטבי?"]
-            ).map((q) => (
-              <button
-                key={q}
-                onClick={() => {
-                  setInput(q);
-                  inputRef.current?.focus();
-                }}
-                className="text-[11px] px-3 py-1.5 rounded-full transition-all hover:scale-[1.02]"
-                style={{
-                  background: "white",
-                  border: `1px solid ${tab.accent}40`,
-                  color: tab.color,
-                }}
-              >
-                {q}
-              </button>
-            ))}
+            ).map((q) => {
+              const m = tab.accent.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
+              const h = m ? parseInt(m[1]) : 280;
+              const s = m ? parseInt(m[2]) : 70;
+              return (
+                <button
+                  key={q}
+                  onClick={() => {
+                    setInput(q);
+                    inputRef.current?.focus();
+                  }}
+                  className="group inline-flex items-center gap-1.5 text-[11px] font-medium px-3 py-1.5 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98]"
+                  style={{
+                    background: `linear-gradient(135deg, hsla(${h}, ${s}%, 96%, 1), hsla(${h}, ${s}%, 92%, 1))`,
+                    border: `1px solid hsla(${h}, ${s}%, 75%, 0.5)`,
+                    color: `hsl(${h}, ${Math.min(s + 5, 90)}%, 35%)`,
+                    boxShadow: `0 1px 3px hsla(${h}, ${s}%, 50%, 0.08), inset 0 1px 0 hsla(0, 0%, 100%, 0.6)`,
+                  }}
+                >
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ background: tab.accent }}
+                  />
+                  <span>{q}</span>
+                </button>
+              );
+            })}
           </div>
           </>
           )}
