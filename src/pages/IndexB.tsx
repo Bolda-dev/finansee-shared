@@ -79,47 +79,43 @@ const IndexB = () => {
 
       {/* Header */}
       <div className="relative z-10 px-5 pt-12 pb-4">
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-center justify-between mb-4">
           <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
             <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
           </button>
-          <div>
-            <p className="text-xs" style={{ color: "hsl(250, 40%, 20%)" }}>שלום,</p>
-            <h1 className="text-xl font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{userData.name} 👋</h1>
-          </div>
+          <h1 className="text-lg font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
       </div>
 
       {/* Tab Content */}
       {activeTab === "status" && (
         <div className="relative z-10 px-5">
-          {/* Glass card */}
-          <div
-            className="rounded-2xl p-5 mb-5"
-            style={{
-              background: "hsla(250, 40%, 99%, 0.55)",
-              backdropFilter: "blur(24px) saturate(180%)",
-              WebkitBackdropFilter: "blur(24px) saturate(180%)",
-              border: "1px solid hsla(250, 50%, 92%, 0.5)",
-              boxShadow: "0 4px 24px rgba(100, 80, 180, 0.1)",
-            }}
-          >
-            <p className="text-xs font-semibold mb-2" style={{ color: "hsl(250, 30%, 45%)" }}>חישוב הפוטנציאל</p>
-            <RadialGauge percent={progressPercent} current={userData.currentPotential} max={userData.maxPotential} />
-            <div
-              className="text-center py-3.5 px-5 rounded-xl mt-2"
-              style={{
-                background: "hsla(250, 50%, 96%, 0.45)",
-                border: "1px solid hsla(250, 50%, 90%, 0.3)",
-              }}
-            >
-              <p className="text-sm font-bold mb-1" style={{ color: "hsl(250, 50%, 35%)" }}>
-                💡 ניתן לשפר ב-{formatCurrency(userData.improvementAmount)} נוספים
-              </p>
-              <p className="text-[11px] leading-relaxed" style={{ color: "hsl(250, 30%, 45%)" }}>
-                על בסיס ניתוח ההכנסות, ההוצאות והביטוחים שלך — זיהינו הזדמנויות לחיסכון ולהגדלת התשואה. לחץ על ההמלצות למטה כדי להתחיל 🚀
+          {/* Net worth header block */}
+          <div className="mb-6">
+            <div className="flex items-center justify-end gap-1.5 mb-2">
+              <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 30%, 55%)" }} />
+              <p className="text-sm font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>שווי נטו</p>
+            </div>
+            <div className="flex items-center justify-end gap-3 mb-1">
+              <span
+                className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
+                style={{
+                  background: "hsla(250, 50%, 99%, 0.7)",
+                  border: "1px solid hsla(250, 50%, 88%, 0.6)",
+                  color: "hsl(250, 65%, 55%)",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                <TrendingUp className="h-3 w-3" />
+                1.8%+
+              </span>
+              <p className="text-3xl font-extrabold tracking-tight" style={{ color: "hsl(250, 45%, 15%)" }}>
+                {formatCurrency(userData.currentPotential)}
               </p>
             </div>
+            <p className="text-[11px] text-end" style={{ color: "hsl(230, 15%, 55%)" }}>
+              עודכן היום בשעה 09:41
+            </p>
           </div>
 
           <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>המלצות לשיפור</h2>
