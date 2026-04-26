@@ -586,12 +586,10 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             <button
               onClick={handleSend}
               disabled={!input.trim()}
-              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+              className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${input ? "cta-tri" : ""}`}
               style={{
-                background: input
-                  ? "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)"
-                  : "hsl(230, 20%, 88%)",
-                boxShadow: input ? "0 4px 12px hsla(265, 60%, 25%, 0.45)" : "none",
+                background: input ? undefined : "hsl(230, 20%, 88%)",
+                boxShadow: input ? "0 4px 12px hsla(250, 30%, 15%, 0.4)" : "none",
               }}
             >
               <Send className="h-3.5 w-3.5 rotate-180" style={{ color: "white" }} />
