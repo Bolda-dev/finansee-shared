@@ -191,6 +191,7 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
       setMessages([]);
       setInput("");
       setActiveTab("assets");
+      setSelectedAction("investments");
       return;
     }
     const t1 = setTimeout(() => setStage("greeting"), 900);
