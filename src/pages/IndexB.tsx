@@ -272,7 +272,7 @@ const IndexB = () => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
                   <p className="text-sm font-bold" style={{ color: "hsl(250, 40%, 18%)" }}>
-                    דנה — Finansee AI
+                    התובנות של דנה
                   </p>
                   <span
                     className="w-1.5 h-1.5 rounded-full"
