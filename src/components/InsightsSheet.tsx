@@ -69,7 +69,6 @@ type ChatMessage =
   | { id: string; role: "ai-typing" };
 
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
-  const [activeTab, setActiveTab] = useState<TabKey>("investments");
   const [input, setInput] = useState("");
   const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -132,8 +131,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
     }, 1800);
   };
 
-  const tab = tabsConfig[activeTab];
-  const ActiveIcon = tab.Icon;
+
+
 
   if (!open) return null;
 
@@ -269,7 +268,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             </div>
           )}
 
-          {/* Insights as a chat bubble from Dana */}
+          {/* Insights as a chat bubble from Dana — 3 insights side by side */}
           {stage === "insights" && (
           <div className="flex items-end gap-2 mb-3 animate-fade-in">
             <div
@@ -278,99 +277,91 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             >
               <img src={advisorImg} alt="" className="w-full h-full object-cover" />
             </div>
-            <div className="flex flex-col items-end max-w-[92%] flex-1">
+            <div className="flex flex-col items-end max-w-[92%] flex-1 min-w-0">
               <div
-                className="rounded-2xl rounded-br-md p-3.5 w-full"
+                className="rounded-2xl rounded-br-md p-3 w-full"
                 style={{
                   background: "white",
                   border: "1px solid hsl(230, 20%, 92%)",
                   boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
                 }}
               >
-                {/* Tabs inside the bubble */}
-                <div className="flex gap-1.5 mb-3">
-                  {(Object.keys(tabsConfig) as TabKey[]).map((key) => {
-                    const t = tabsConfig[key];
-                    const isActive = activeTab === key;
-                    return (
-                      <button
-                        key={key}
-                        onClick={() => setActiveTab(key)}
-                        className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold transition-all"
-                        style={{
-                          background: isActive ? t.gradient : "hsl(230, 20%, 96%)",
-                          color: isActive ? "white" : "hsl(230, 15%, 45%)",
-                          boxShadow: isActive
-                            ? `0 3px 10px hsla(${t.accent.match(/\d+/)?.[0] || 280}, 60%, 50%, 0.3)`
-                            : "none",
-                        }}
-                      >
-                        {t.label}
-                      </button>
-                    );
-                  })}
-                </div>
-
                 <p
-                  className="text-[10px] mb-3"
-                  style={{ color: "hsl(230, 15%, 55%)" }}
+                  className="text-[11px] mb-2.5 px-1 text-right"
+                  style={{ color: "hsl(250, 30%, 25%)" }}
                 >
-                  3 תובנות פעילות מחכות לך · החלף קטגוריה למעלה
+                  הנה 3 תובנות פעילות שהכנתי לך 👇
                 </p>
 
-                {/* Insight card */}
+                {/* Horizontally scrollable insight cards */}
                 <div
-                  className="rounded-2xl p-3.5 relative overflow-hidden"
-                  style={{
-                    background: tab.accentBg,
-                    border: `1px solid ${tab.accent}33`,
-                  }}
+                  className="flex gap-2.5 overflow-x-auto pb-1 -mx-1 px-1 snap-x snap-mandatory"
+                  style={{ scrollbarWidth: "none" }}
                 >
-                  <div
-                    className="absolute top-0 right-0 left-0 h-1"
-                    style={{ background: tab.gradient }}
-                  />
-
-                  <div className="flex items-start gap-2.5 mb-2 mt-1">
-                    <div
-                      className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: "white", boxShadow: `0 2px 8px ${tab.accent}25` }}
-                    >
-                      <ActiveIcon className="w-4 h-4" style={{ color: tab.accent }} />
-                    </div>
-                    <div className="flex-1 min-w-0 pt-0.5">
-                      <p
-                        className="text-[10px] font-semibold tracking-wide mb-0.5"
-                        style={{ color: tab.accent }}
+                  {(Object.keys(tabsConfig) as TabKey[]).map((key) => {
+                    const t = tabsConfig[key];
+                    const Icon = t.Icon;
+                    return (
+                      <div
+                        key={key}
+                        className="relative rounded-2xl p-3 pt-3.5 flex flex-col gap-1 overflow-hidden flex-shrink-0 snap-start"
+                        style={{
+                          background: "white",
+                          boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+                          border: "1px solid hsl(230, 20%, 94%)",
+                          width: "200px",
+                          minHeight: "210px",
+                        }}
                       >
-                        {tab.label}
-                      </p>
-                      <p
-                        className="text-[13px] font-extrabold leading-tight"
-                        style={{ color: "hsl(250, 45%, 15%)" }}
-                      >
-                        {tab.title}
-                      </p>
-                    </div>
-                  </div>
+                        {/* Top color bar — category accent */}
+                        <span
+                          className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
+                          style={{ background: t.gradient }}
+                          aria-hidden
+                        />
 
-                  <p
-                    className="text-[11px] leading-relaxed mb-3 text-right"
-                    style={{ color: "hsl(250, 25%, 30%)" }}
-                  >
-                    {tab.description}
-                  </p>
+                        {/* Header: label + icon (matching financial-center cards) */}
+                        <div className="flex items-start justify-between mb-1">
+                          <span
+                            className="text-[10px] font-semibold tracking-wide"
+                            style={{ color: "hsl(250, 20%, 50%)" }}
+                          >
+                            {t.label}
+                          </span>
+                          <span
+                            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                            style={{ background: t.accentBg }}
+                          >
+                            <Icon className="h-4 w-4" style={{ color: t.accent }} strokeWidth={2} />
+                          </span>
+                        </div>
 
-                  <button
-                    className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-white transition-transform hover:scale-[1.01] active:scale-[0.99]"
-                    style={{
-                      background: tab.gradient,
-                      boxShadow: `0 4px 12px ${tab.accent}40`,
-                    }}
-                  >
-                    {tab.cta}
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                  </button>
+                        {/* Insight title */}
+                        <p
+                          className="text-[14px] font-extrabold tracking-tight leading-tight text-right"
+                          style={{ color: "hsl(250, 50%, 12%)" }}
+                        >
+                          {t.title}
+                        </p>
+
+                        {/* Description */}
+                        <p
+                          className="text-[10.5px] leading-relaxed text-right mt-1"
+                          style={{ color: "hsl(230, 12%, 50%)" }}
+                        >
+                          {t.description}
+                        </p>
+
+                        {/* CTA — black with rotating tri-color gradient */}
+                        <button
+                          className="cta-tri mt-auto w-full flex items-center justify-center gap-1 py-2 rounded-xl text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                          {t.cta}
+                          <ArrowLeft className="w-3 h-3" />
+                        </button>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <p
@@ -391,16 +382,11 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               className="text-[11px] font-semibold"
               style={{ color: "hsl(230, 20%, 40%)" }}
             >
-              שאל אותי על {tab.label}
+              שאל אותי על התובנות שלך
             </p>
           </div>
           <div className="flex flex-wrap gap-1.5 mb-2 justify-center" dir="rtl">
-            {(activeTab === "investments"
-              ? ["איך מאזנים את התיק?", "מה רמת הסיכון שלי?", "מה התשואה הצפויה?"]
-              : activeTab === "liabilities"
-              ? ["כמה אחסוך במיחזור?", "מה תנאי המיחזור?", "כדאי למחזר עכשיו?"]
-              : ["איך לבטל כפילות?", "מה הכיסוי האופטימלי?", "אני משלם יותר מדי?"]
-            ).map((q) => (
+            {["איך מאזנים את התיק?", "כמה אחסוך במיחזור?", "איך לבטל כפילות?"].map((q) => (
               <button
                 key={q}
                 onClick={() => {
