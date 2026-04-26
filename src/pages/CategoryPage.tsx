@@ -330,7 +330,7 @@ export const CategoryPage = ({
         </div>
 
         {/* Section header */}
-        <div className="px-5 pt-1 pb-1 flex items-center justify-end">
+        <div className="px-5 pt-1 pb-1 flex items-center justify-start">
           <span
             className="text-[11px] font-semibold tracking-wide"
             style={{ color: "hsl(230, 15%, 55%)" }}
