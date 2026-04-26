@@ -400,16 +400,16 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
 
           {stage === "insights" && (<>
           {/* Suggested questions */}
-          <div className="flex items-center gap-1.5 mb-2.5 justify-start flex-row-reverse">
+          <div className="flex items-center gap-1.5 mb-2.5 justify-start" dir="rtl">
+            <Sparkles className="w-3 h-3" style={{ color: tab.accent }} />
             <p
               className="text-[11px] font-semibold"
               style={{ color: "hsl(230, 20%, 40%)" }}
             >
               שאל אותי על {tab.label}
             </p>
-            <Sparkles className="w-3 h-3" style={{ color: tab.accent }} />
           </div>
-          <div className="flex flex-wrap gap-1.5 mb-2 justify-start flex-row-reverse">
+          <div className="flex flex-wrap gap-1.5 mb-2 justify-start" dir="rtl">
             {(activeTab === "assets"
               ? ["איך להגדיל הכנסות?", "איפה כדאי להשקיע?", "מה התשואה הצפויה?"]
               : activeTab === "liabilities"
