@@ -212,28 +212,36 @@ const IndexB = () => {
           <div className="relative mb-6">
             {/* Proactive bubble — pops out of the card after 5s */}
             {danaBubbleOpen && (
-              <button
-                onClick={() => {
-                  setDanaBubbleOpen(false);
-                  setChatOpen(true);
-                }}
-                className="absolute z-30 text-right rounded-2xl rounded-br-sm px-3.5 py-2.5 flex items-start gap-2"
+              <div
+                className="absolute z-30"
                 style={{
                   right: "60px",
                   bottom: "calc(100% - 26px)",
-                  background: "white",
-                  border: "1px solid hsl(230, 20%, 92%)",
-                  boxShadow: "0 10px 28px hsla(250, 30%, 25%, 0.18), 0 2px 6px hsla(250, 30%, 25%, 0.08)",
-                  animation: "bubble-pop 0.55s cubic-bezier(0.22, 1.4, 0.36, 1) both",
+                  transform: "rotate(-1.2deg)",
                   transformOrigin: "bottom right",
-                  whiteSpace: "nowrap",
                 }}
-                aria-label="פתח את דנה"
               >
-                <span className="text-xs leading-snug" style={{ color: "hsl(250, 35%, 20%)" }}>
-                  יש לך 3 פעולות חדשות להעלות את השווי נטו שלך :)
-                </span>
-              </button>
+                <button
+                  onClick={() => {
+                    setDanaBubbleOpen(false);
+                    setChatOpen(true);
+                  }}
+                  className="text-right rounded-2xl rounded-br-sm px-3.5 py-2.5 flex items-start gap-2"
+                  style={{
+                    background: "white",
+                    border: "1px solid hsl(230, 20%, 92%)",
+                    boxShadow: "0 10px 28px hsla(250, 30%, 25%, 0.18), 0 2px 6px hsla(250, 30%, 25%, 0.08)",
+                    animation: "bubble-pop 0.55s cubic-bezier(0.22, 1.4, 0.36, 1) both",
+                    transformOrigin: "bottom right",
+                    whiteSpace: "nowrap",
+                  }}
+                  aria-label="פתח את דנה"
+                >
+                  <span className="text-xs leading-snug" style={{ color: "hsl(250, 35%, 20%)" }}>
+                    יש לך 3 פעולות חדשות להעלות את השווי נטו שלך :)
+                  </span>
+                </button>
+              </div>
             )}
 
             <button
