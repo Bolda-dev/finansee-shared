@@ -303,28 +303,33 @@ const IndexB = () => {
                 label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500",
                 sub: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית",
                 accent: "hsl(250, 65%, 55%)", accentBg: "hsl(250, 55%, 95%)",
+                category: "assets" as const,
               },
               {
                 label: "השקעות", Icon: LineChart, value: "₪2,095,000",
                 sub: "", subLabel: "",
                 accent: "hsl(195, 80%, 45%)", accentBg: "hsl(195, 70%, 94%)",
                 badge: 1,
+                category: "assets" as const,
               },
               {
                 label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500",
                 sub: "", subLabel: "יתרה שוטפת",
                 accent: "hsl(220, 60%, 50%)", accentBg: "hsl(220, 55%, 95%)",
+                category: "assets" as const,
               },
               {
                 label: "הלוואות", Icon: Briefcase, value: "₪320,000",
                 sub: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום כולל", extraSuffix: "/חודש",
                 accent: "hsl(265, 55%, 50%)", accentBg: "hsl(265, 50%, 95%)",
+                category: "liabilities" as const,
               },
               {
                 label: "משכנתא", Icon: Building2, value: "₪1,110,000",
                 sub: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי כולל", extraSuffix: "/חודש",
                 accent: "hsl(28, 85%, 50%)", accentBg: "hsl(28, 80%, 94%)",
                 badge: 1,
+                category: "liabilities" as const,
               },
             ].map((card) => (
               <button
