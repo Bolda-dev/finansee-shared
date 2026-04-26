@@ -25,12 +25,16 @@ export const expenseItems = [
 ];
 
 export const insuranceItems = [
-  { label: "ביטוח חיים", status: "פעיל", coverage: "₪2,000,000" },
-  { label: "אובדן כושר עבודה", status: "פעיל", coverage: "₪15,000/חודש" },
-  { label: "ביטוח בריאות", status: "פעיל", coverage: "מורחב" },
-  { label: "ביטוח סיעודי", status: "חסר", coverage: "—" },
-  { label: "ביטוח דירה", status: "פעיל", coverage: "₪1,800,000" },
+  { label: "ביטוח חיים", status: "פעיל", coverage: "₪2,000,000", cost: 650, billing: "monthly" as const, icon: "Heart", provider: "מגדל" },
+  { label: "ביטוח בריאות", status: "פעיל", coverage: "קו הזהב הפניקס", cost: 350, billing: "monthly" as const, icon: "Activity", provider: "הפניקס", alert: true },
+  { label: "ביטוח רכב", status: "פעיל", coverage: "מקיף", cost: 420, billing: "monthly" as const, icon: "Car", provider: "כלל" },
+  { label: "ביטוח דירה", status: "פעיל", coverage: "₪1,800,000", cost: 180, billing: "monthly" as const, icon: "Home", provider: "מנורה מבטחים" },
+  { label: "אובדן כושר עבודה", status: "פעיל", coverage: "₪15,000/חודש", cost: 4800, billing: "yearly" as const, icon: "Briefcase", provider: "הראל" },
+  { label: "ביטוח נסיעות לחו״ל", status: "פעיל", coverage: "כיסוי שנתי מלא", cost: 1200, billing: "yearly" as const, icon: "Plane", provider: "PassportCard" },
+  { label: "ביטוח מנהלים", status: "פעיל", coverage: "פנסיוני משלים", cost: 18800, billing: "yearly" as const, icon: "ShieldCheck", provider: "מנורה" },
+  { label: "ביטוח סיעודי", status: "חסר", coverage: "—", cost: 0, billing: "monthly" as const, icon: "HeartPulse", provider: "—" },
 ];
+
 
 export const recommendations = [
   {
