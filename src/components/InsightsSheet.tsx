@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Send, Mic, Sparkles } from "lucide-react";
-import { incomeItems, expenseItems, insuranceItems } from "@/lib/data";
+import { X, Send, Mic, Sparkles, TrendingUp, Shield, Landmark, ArrowLeft } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 
-type TabKey = "assets" | "liabilities" | "insurance";
+type TabKey = "investments" | "insurance" | "liabilities";
 
 interface InsightsSheetProps {
   open: boolean;
