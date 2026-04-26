@@ -96,7 +96,9 @@ const IndexB = () => {
               <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 30%, 55%)" }} />
             </div>
             <div className="flex items-center justify-start gap-3 mb-1">
-              <p className="text-5xl font-extrabold tracking-tight" style={{ color: "hsl(250, 45%, 15%)" }}>
+              <p
+                className="text-5xl font-extrabold tracking-tight networth-shimmer"
+              >
                 {formatCurrency(userData.currentPotential)}
               </p>
               <span
