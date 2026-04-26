@@ -544,6 +544,8 @@ const IndexB = () => {
       <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
       {/* Insights Sheet — actions mode (from "התובנות של דנה" card) */}
       <InsightsSheet open={actionsOpen} onOpenChange={setActionsOpen} mode="actions" />
+      {/* Insurance Detail Sheet — from "ביטוח" card */}
+      <InsuranceDetailSheet open={insuranceDetailOpen} onOpenChange={setInsuranceDetailOpen} />
       <MenuDrawer open={menuOpen} onOpenChange={setMenuOpen} />
     </div>
   );
