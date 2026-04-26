@@ -38,6 +38,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 
 const IndexB = () => {
   const [chatOpen, setChatOpen] = useState(false);
+  const [actionsOpen, setActionsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
@@ -243,7 +244,7 @@ const IndexB = () => {
             )}
 
             <button
-              onClick={() => setChatOpen(true)}
+              onClick={() => setActionsOpen(true)}
               className="relative w-full rounded-2xl p-4 text-start flex items-center gap-3 overflow-hidden transition-transform hover:scale-[1.01] active:scale-[0.99]"
               style={{
                 background: "white",
@@ -280,7 +281,7 @@ const IndexB = () => {
                   />
                 </div>
                 <p className="text-[11px] mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>
-                  תובנות פעילות מחכות לך
+                  פעולות לשיפור מחכות לך
                 </p>
               </div>
 
@@ -535,8 +536,10 @@ const IndexB = () => {
         </button>
       </div>
 
-      {/* Insights Sheet */}
-      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} />
+      {/* Insights Sheet — context mode (from bottom chat bar) */}
+      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      {/* Insights Sheet — actions mode (from "התובנות של דנה" card) */}
+      <InsightsSheet open={actionsOpen} onOpenChange={setActionsOpen} mode="actions" />
       <MenuDrawer open={menuOpen} onOpenChange={setMenuOpen} />
     </div>
   );
