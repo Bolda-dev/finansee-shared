@@ -339,7 +339,7 @@ const IndexB = () => {
           </span>
 
           {/* Send button — left edge, with rotating tri-color ring */}
-          <span className="tri-ring w-9 h-9 rounded-full flex-shrink-0">
+          <span className="tri-ring relative w-9 h-9 rounded-full flex-shrink-0">
             <span
               className="flex w-full h-full rounded-full items-center justify-center cta-tri"
             >
