@@ -12,9 +12,12 @@ import {
   ShieldCheck,
   HeartPulse,
   X,
+  Mic,
+  Send,
 } from "lucide-react";
 import { insuranceItems } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
+import { InsightsSheet } from "@/components/InsightsSheet";
 
 const iconMap: Record<string, typeof Heart> = {
   Heart,
@@ -62,6 +65,7 @@ const InsurancePage = () => {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const [danaBubbleDismissed, setDanaBubbleDismissed] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   // Show Dana invitation bubble after 5s on this page
   useEffect(() => {
@@ -129,7 +133,7 @@ const InsurancePage = () => {
 
           {/* Pill CTA — Dana invites you to chat */}
           <button
-            className="inline-flex items-center gap-2 pr-1.5 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
+            className="inline-flex items-center gap-2 pr-1 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
             style={{
               background: "white",
               color: "hsl(280, 60%, 30%)",
@@ -137,10 +141,13 @@ const InsurancePage = () => {
             }}
             aria-label="שאל את דנה איך לחסוך בביטוחים"
           >
-            <span className="tri-ring relative w-7 h-7 rounded-full flex-shrink-0">
+            <span
+              className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
+              style={{ marginTop: "-10px", marginBottom: "-10px" }}
+            >
               <span
                 className="block w-full h-full rounded-full overflow-hidden"
-                style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
+                style={{ boxShadow: "0 4px 10px hsla(275, 65%, 25%, 0.4)" }}
               >
                 <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
               </span>
@@ -407,6 +414,48 @@ const InsurancePage = () => {
           </div>
         </div>
       )}
+      {/* Bottom Chat Bar — identical to home */}
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none" dir="rtl">
+        <button
+          onClick={() => setChatOpen(true)}
+          dir="rtl"
+          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+          style={{
+            background: "white",
+            boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
+            border: "1px solid hsl(230, 20%, 92%)",
+          }}
+          aria-label="פתח צ׳אט עם Finansee AI"
+        >
+          <span
+            className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
+            style={{ transform: "translateY(-2px)" }}
+          >
+            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
+              <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            </span>
+          </span>
+
+          <span className="flex-1 text-start text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
+            שאל את Finansee AI
+          </span>
+
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: "hsl(230, 25%, 96%)", border: "1px solid hsl(230, 20%, 90%)" }}
+          >
+            <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
+          </span>
+
+          <span className="tri-ring relative w-9 h-9 rounded-full flex-shrink-0">
+            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri">
+              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+            </span>
+          </span>
+        </button>
+      </div>
+
+      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
     </div>
   );
 };
