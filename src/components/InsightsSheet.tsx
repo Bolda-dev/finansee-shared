@@ -552,8 +552,8 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
             </div>
           )}
 
-          {/* Suggested questions */}
-          {stage === "insights" && (
+          {/* Suggested questions — hidden in actions mode */}
+          {stage === "insights" && mode !== "actions" && (
             <>
               <div className="flex items-center gap-1.5 mb-2.5 justify-center" dir="rtl">
                 <Sparkles className="w-3 h-3" style={{ color: "hsl(230, 15%, 55%)" }} />
