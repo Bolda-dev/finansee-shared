@@ -40,6 +40,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 const IndexB = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
+  const [insuranceDetailOpen, setInsuranceDetailOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
