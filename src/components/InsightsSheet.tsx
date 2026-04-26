@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, Send, Mic, Sparkles } from "lucide-react";
 import { incomeItems, expenseItems, insuranceItems } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
