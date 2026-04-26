@@ -216,7 +216,7 @@ const IndexB = () => {
                 className="absolute z-30"
                 style={{
                   right: "60px",
-                  bottom: "calc(100% - 24px)",
+                  bottom: "calc(100% - 22px)",
                 }}
               >
                 <button
