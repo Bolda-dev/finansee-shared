@@ -376,7 +376,7 @@ const IndexB = () => {
 
                     <div className="flex items-baseline gap-1 flex-wrap">
                       <p
-                        className="text-[17px] font-extrabold tracking-tight leading-none"
+                        className="text-[22px] font-extrabold tracking-tight leading-none"
                         style={{ color: "hsl(250, 50%, 12%)" }}
                       >
                         {card.value}
@@ -388,29 +388,22 @@ const IndexB = () => {
                       )}
                     </div>
                     {card.subLabel && (
-                      <p className="text-[10px] mt-0.5" style={{ color: "hsl(230, 12%, 58%)" }}>
+                      <p className="text-[10px] mt-1" style={{ color: "hsl(230, 12%, 58%)" }}>
                         {card.subLabel}
                       </p>
                     )}
 
                     {card.extra && (
                       <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
-                        <p
-                          className="text-[9px] font-semibold tracking-wide mb-0.5"
-                          style={{ color: "hsl(230, 12%, 58%)" }}
-                        >
-                          {card.extraSub}
-                        </p>
-                        <div className="flex items-baseline gap-1">
-                          <p className="text-sm font-bold" style={{ color: colors.accent }}>
+                        <p className="text-[11px] leading-none whitespace-nowrap">
+                          <span className="font-bold" style={{ color: colors.accent }}>
                             {card.extra}
-                          </p>
-                          {card.extraSuffix && (
-                            <span className="text-[10px]" style={{ color: "hsl(230, 12%, 58%)" }}>
-                              {card.extraSuffix}
-                            </span>
-                          )}
-                        </div>
+                          </span>
+                          <span className="mx-1" style={{ color: "hsl(230, 12%, 70%)" }}>·</span>
+                          <span style={{ color: "hsl(230, 12%, 55%)" }}>
+                            {card.extraSub}
+                          </span>
+                        </p>
                       </div>
                     )}
                   </button>
