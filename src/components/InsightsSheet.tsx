@@ -167,9 +167,10 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
       <div
         className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
         style={{
-          maxHeight: "85vh",
-          marginTop: "32px",
-          animation: "slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both",
+          height: "calc(100vh - 48px)",
+          maxHeight: "calc(100vh - 48px)",
+          marginTop: "48px",
+          animation: "sheet-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both",
           transition: "max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), height 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
