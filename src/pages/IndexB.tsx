@@ -92,11 +92,14 @@ const IndexB = () => {
         <div className="relative z-10 px-5">
           {/* Net worth header block */}
           <div className="mb-6">
-            <div className="flex items-center justify-end gap-1.5 mb-2">
-              <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 30%, 55%)" }} />
+            <div className="flex items-center justify-start gap-1.5 mb-2">
               <p className="text-sm font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>שווי נטו</p>
+              <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 30%, 55%)" }} />
             </div>
-            <div className="flex items-center justify-end gap-3 mb-1">
+            <div className="flex items-center justify-start gap-3 mb-1">
+              <p className="text-3xl font-extrabold tracking-tight" style={{ color: "hsl(250, 45%, 15%)" }}>
+                {formatCurrency(userData.currentPotential)}
+              </p>
               <span
                 className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
                 style={{
@@ -109,11 +112,8 @@ const IndexB = () => {
                 <TrendingUp className="h-3 w-3" />
                 1.8%+
               </span>
-              <p className="text-3xl font-extrabold tracking-tight" style={{ color: "hsl(250, 45%, 15%)" }}>
-                {formatCurrency(userData.currentPotential)}
-              </p>
             </div>
-            <p className="text-[11px] text-end" style={{ color: "hsl(230, 15%, 55%)" }}>
+            <p className="text-[11px] text-start" style={{ color: "hsl(230, 15%, 55%)" }}>
               עודכן היום בשעה 09:41
             </p>
           </div>
