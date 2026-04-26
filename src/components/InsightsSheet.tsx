@@ -131,8 +131,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
     }, 1800);
   };
 
-  const tab = tabsConfig[activeTab];
-  const ActiveIcon = tab.Icon;
+
+
 
   if (!open) return null;
 
