@@ -133,8 +133,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   };
 
   const tab = tabsConfig[activeTab];
-  const total = tab.items.reduce((s, i) => s + i.value, 0);
-  const isInsurance = activeTab === "insurance";
+  const ActiveIcon = tab.Icon;
 
   if (!open) return null;
 
