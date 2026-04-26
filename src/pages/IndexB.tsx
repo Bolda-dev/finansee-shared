@@ -317,7 +317,7 @@ const IndexB = () => {
         >
           {/* Avatar — pinned to right (start in RTL), floating, with rotating tri-color ring */}
           <span
-            className="tri-ring w-11 h-11 rounded-full flex-shrink-0"
+            className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
             style={{ transform: "translateY(-2px)" }}
           >
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
@@ -339,7 +339,7 @@ const IndexB = () => {
           </span>
 
           {/* Send button — left edge, with rotating tri-color ring */}
-          <span className="tri-ring w-9 h-9 rounded-full flex-shrink-0">
+          <span className="tri-ring relative w-9 h-9 rounded-full flex-shrink-0">
             <span
               className="flex w-full h-full rounded-full items-center justify-center cta-tri"
             >

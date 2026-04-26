@@ -478,10 +478,11 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           {messages.map((msg) => {
             if (msg.role === "user") {
               return (
-                <div key={msg.id} className="flex justify-start mb-3 animate-fade-in" dir="rtl">
+                <div key={msg.id} className="flex justify-end mb-3 animate-fade-in" dir="rtl">
                   <div
-                    className="cta-tri max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
+                    className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
                     style={{
+                      background: "hsl(250, 30%, 8%)",
                       boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)",
                     }}
                   >
