@@ -105,11 +105,14 @@ All colors MUST be HSL.
 }
 
 @keyframes networth-shine {
-  0%, 75%, 100% {
+  0% {
     background-position: 200% center;
   }
-  92% {
-    background-position: -50% center;
+  60% {
+    background-position: -100% center;
+  }
+  100% {
+    background-position: -100% center;
   }
 }
 
@@ -119,9 +122,9 @@ All colors MUST be HSL.
     100deg,
     transparent 0%,
     transparent 42%,
-    hsla(270, 70%, 60%, 0.55) 49%,
-    hsla(280, 75%, 68%, 0.7) 50%,
-    hsla(270, 70%, 60%, 0.55) 51%,
+    hsla(270, 70%, 60%, 0.5) 49%,
+    hsla(280, 75%, 68%, 0.65) 50%,
+    hsla(270, 70%, 60%, 0.5) 51%,
     transparent 58%,
     transparent 100%
   );
@@ -132,8 +135,9 @@ All colors MUST be HSL.
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: networth-shine 9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: networth-shine 12s linear infinite;
 }
+
 
 
 
