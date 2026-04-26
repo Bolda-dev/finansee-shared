@@ -173,7 +173,7 @@ const IndexB = () => {
                       cy={card.ripple.cy}
                       r={r}
                       fill="none"
-                      stroke="hsla(0, 0%, 100%, 0.22)"
+                      stroke="hsla(0, 0%, 100%, 0.06)"
                       strokeWidth="1"
                     />
                   ))}
