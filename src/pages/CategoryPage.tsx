@@ -139,12 +139,20 @@ export const CategoryPage = ({
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const [danaBubbleDismissed, setDanaBubbleDismissed] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [stickyVisible, setStickyVisible] = useState(false);
 
   useEffect(() => {
     if (danaBubbleDismissed) return;
     const t = setTimeout(() => setDanaBubbleOpen(true), 5000);
     return () => clearTimeout(t);
   }, [danaBubbleDismissed]);
+
+  useEffect(() => {
+    const onScroll = () => setStickyVisible(window.scrollY > 180);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const activeFilterConfig = filters.find((f) => f.key === activeFilter) ?? filters[0];
   const filteredItems = items.filter((i) => activeFilterConfig.test(i));
