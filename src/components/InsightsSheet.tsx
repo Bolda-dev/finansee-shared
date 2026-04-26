@@ -213,16 +213,14 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           transition: "max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), height 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
-        {/* Floating avatar — half over the top of the sheet */}
+        {/* Floating avatar — half over the top of the sheet, with rotating tri-color ring */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full overflow-hidden"
-          style={{
-            top: "-32px",
-            boxShadow:
-              "0 0 0 3px white, 0 0 0 5px hsla(275, 65%, 25%, 0.45), 0 8px 24px hsla(275, 65%, 25%, 0.35)",
-          }}
+          className="tri-ring absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full"
+          style={{ top: "-32px" }}
         >
-          <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+          <div className="w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 8px 24px hsla(250, 30%, 20%, 0.3)" }}>
+            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+          </div>
         </div>
 
         {/* Drag handle */}
