@@ -411,7 +411,7 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
             </div>
           )}
 
-          {/* === ACTIONS MODE: 3 stacked improvement cards inside Dana's bubble === */}
+          {/* === ACTIONS MODE: 3 compact cards in a 2-col grid + selection + single CTA === */}
           {stage === "insights" && mode === "actions" && (
             <div className="flex items-end gap-2 mb-3 animate-fade-in">
               <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0" style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}>
@@ -423,51 +423,52 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
                     הנה 3 פעולות לשיפור שהכנתי לך 👇
                   </p>
 
-                  {/* Stacked cards — one below the other */}
-                  <div className="flex flex-col gap-2.5">
+                  {/* Compact cards — 2 per row */}
+                  <div className="grid grid-cols-2 gap-2">
                     {(Object.keys(actionsConfig) as ActionKey[]).map((key) => {
                       const t = actionsConfig[key];
                       const Icon = t.Icon;
+                      const isSelected = selectedAction === key;
                       return (
-                        <div
+                        <button
                           key={key}
-                          className="relative rounded-2xl p-3 pt-3.5 flex flex-col gap-1 overflow-hidden"
+                          onClick={() => setSelectedAction(key)}
+                          className="relative rounded-xl p-2.5 flex flex-col gap-1 overflow-hidden text-right transition-all hover:scale-[1.02] active:scale-[0.98]"
                           style={{
                             background: "white",
-                            boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-                            border: "1px solid hsl(230, 20%, 94%)",
+                            boxShadow: isSelected
+                              ? `0 4px 14px hsla(250, 30%, 25%, 0.10), 0 0 0 2px ${t.accent}`
+                              : "0 2px 8px hsla(250, 30%, 25%, 0.05)",
+                            border: isSelected ? "1px solid transparent" : "1px solid hsl(230, 20%, 94%)",
                           }}
                         >
-                          {/* Top color bar — category accent */}
-                          <span className="absolute top-0 inset-x-0 h-[3px] pointer-events-none" style={{ background: t.gradient }} aria-hidden />
-
-                          {/* Header: label + icon */}
-                          <div className="flex items-start justify-between mb-1">
-                            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "hsl(250, 20%, 50%)" }}>
+                          {/* Header row: small icon + label, both in category color */}
+                          <div className="flex items-center gap-1.5">
+                            <Icon className="h-3 w-3 flex-shrink-0" style={{ color: t.accent }} strokeWidth={2.5} />
+                            <span className="text-[10px] font-bold tracking-wide" style={{ color: t.accent }}>
                               {t.label}
-                            </span>
-                            <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: t.accentBg }}>
-                              <Icon className="h-4 w-4" style={{ color: t.accent }} strokeWidth={2} />
                             </span>
                           </div>
 
-                          <p className="text-[14px] font-extrabold tracking-tight leading-tight text-right" style={{ color: "hsl(250, 50%, 12%)" }}>
+                          {/* Title */}
+                          <p className="text-[12px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(250, 50%, 12%)" }}>
                             {t.title}
                           </p>
-
-                          <p className="text-[11px] leading-relaxed text-right mt-1" style={{ color: "hsl(230, 12%, 50%)" }}>
-                            {t.description}
-                          </p>
-
-                          {/* CTA — black with rotating tri-color gradient */}
-                          <button className="cta-tri mt-2 w-full flex items-center justify-center gap-1 py-2 rounded-xl text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]">
-                            {t.cta}
-                            <ArrowLeft className="w-3 h-3" />
-                          </button>
-                        </div>
+                        </button>
                       );
                     })}
                   </div>
+
+                  {/* Single CTA for the selected card */}
+                  {(() => {
+                    const sel = actionsConfig[selectedAction];
+                    return (
+                      <button className="cta-tri mt-3 w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]">
+                        {sel.cta}
+                        <ArrowLeft className="w-3.5 h-3.5" />
+                      </button>
+                    );
+                  })()}
                 </div>
                 <p className="text-[9px] mt-1 mr-1" style={{ color: "hsl(230, 15%, 60%)" }}>עכשיו</p>
               </div>
