@@ -288,7 +288,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           )}
 
           {/* Insights as a chat bubble from Dana */}
-          <div className="flex items-end gap-2 mb-3">
+          {stage === "insights" && (
+          <div className="flex items-end gap-2 mb-3 animate-fade-in">
             <div
               className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
               style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
@@ -297,7 +298,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             </div>
             <div className="flex flex-col items-end max-w-[92%] flex-1">
               <div
-                className="rounded-2xl rounded-bl-md p-3.5 w-full"
+                className="rounded-2xl rounded-br-md p-3.5 w-full"
                 style={{
                   background: "white",
                   border: "1px solid hsl(230, 20%, 92%)",
@@ -426,6 +427,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               </button>
             ))}
           </div>
+          </>
+          )}
         </div>
 
         {/* Input bar */}
