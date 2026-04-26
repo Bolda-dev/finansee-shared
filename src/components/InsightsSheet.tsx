@@ -400,7 +400,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
 
           {stage === "insights" && (<>
           {/* Suggested questions */}
-          <div className="flex items-center gap-1.5 mb-2.5 justify-end">
+          <div className="flex items-center gap-1.5 mb-2.5 justify-start flex-row-reverse">
             <p
               className="text-[11px] font-semibold"
               style={{ color: "hsl(230, 20%, 40%)" }}
@@ -409,7 +409,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             </p>
             <Sparkles className="w-3 h-3" style={{ color: tab.accent }} />
           </div>
-          <div className="flex flex-wrap gap-1.5 mb-2 justify-end">
+          <div className="flex flex-wrap gap-1.5 mb-2 justify-start flex-row-reverse">
             {(activeTab === "assets"
               ? ["איך להגדיל הכנסות?", "איפה כדאי להשקיע?", "מה התשואה הצפויה?"]
               : activeTab === "liabilities"
@@ -454,10 +454,13 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           dir="rtl"
         >
           <div
-            className="flex items-center gap-2 rounded-full px-4 py-2"
+            className="flex items-center gap-2 rounded-full px-4 py-2 transition-all"
             style={{
-              background: "hsl(230, 25%, 96%)",
-              border: "1px solid hsl(230, 20%, 90%)",
+              background: input ? "white" : "hsl(230, 25%, 96%)",
+              border: input
+                ? "1px solid hsla(290, 70%, 55%, 0.5)"
+                : "1px solid hsl(230, 20%, 90%)",
+              boxShadow: input ? "0 0 0 3px hsla(290, 70%, 55%, 0.12)" : "none",
             }}
           >
             <input
@@ -470,17 +473,22 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               style={{ color: "hsl(250, 40%, 20%)" }}
               dir="rtl"
             />
+            {!input && (
+              <button
+                className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 active:scale-95"
+                style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}
+              >
+                <Mic className="h-3.5 w-3.5" style={{ color: "hsl(230, 15%, 45%)" }} />
+              </button>
+            )}
             <button
-              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 active:scale-95"
-              style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}
-            >
-              <Mic className="h-3.5 w-3.5" style={{ color: "hsl(230, 15%, 45%)" }} />
-            </button>
-            <button
-              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 active:scale-95"
+              disabled={!input}
+              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
-                background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
-                boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)",
+                background: input
+                  ? "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))"
+                  : "hsl(230, 20%, 88%)",
+                boxShadow: input ? "0 4px 12px hsla(295, 70%, 50%, 0.38)" : "none",
               }}
             >
               <Send className="h-3.5 w-3.5 rotate-180" style={{ color: "white" }} />
