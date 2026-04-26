@@ -18,103 +18,49 @@ const tabsConfig: Record<
     color: string;
     gradient: string;
     accent: string;
-    items: { label: string; value: number }[];
-    headline: string;
+    accentBg: string;
+    Icon: typeof TrendingUp;
+    title: string;
+    description: string;
+    cta: string;
   }
 > = {
-  assets: {
-    label: "נכסים",
+  investments: {
+    label: "השקעות",
     color: "hsl(195, 85%, 45%)",
     gradient: "linear-gradient(135deg, hsl(190, 85%, 50%) 0%, hsl(195, 90%, 62%) 55%, hsl(190, 95%, 75%) 100%)",
-    accent: "hsl(195, 85%, 50%)",
-    items: incomeItems.map((i) => ({ label: i.label, value: i.amount })),
-    headline: "פירוט מקורות הכנסה חודשיים",
-  },
-  liabilities: {
-    label: "התחייבויות",
-    color: "hsl(22, 90%, 50%)",
-    gradient: "linear-gradient(135deg, hsl(18, 90%, 55%) 0%, hsl(28, 95%, 62%) 55%, hsl(38, 100%, 72%) 100%)",
-    accent: "hsl(28, 90%, 55%)",
-    items: expenseItems.map((i) => ({ label: i.label, value: i.amount })),
-    headline: "פירוט הוצאות חודשיות",
+    accent: "hsl(195, 85%, 42%)",
+    accentBg: "hsl(190, 80%, 95%)",
+    Icon: TrendingUp,
+    title: "איזון תיק השקעות",
+    description:
+      "הקצאת המניות שלך גבוהה כרגע ב-15% מפרופיל הסיכון היעד שלך.",
+    cta: "איזון אוטומטי של התיק",
   },
   insurance: {
     label: "ביטוח",
     color: "hsl(280, 75%, 52%)",
     gradient: "linear-gradient(135deg, hsl(270, 75%, 55%) 0%, hsl(282, 80%, 65%) 55%, hsl(295, 90%, 78%) 100%)",
-    accent: "hsl(282, 80%, 58%)",
-    items: insuranceItems.map((i) => ({
-      label: i.label,
-      value: i.status === "פעיל" ? 1 : 0,
-    })),
-    headline: "סטטוס פוליסות הביטוח",
+    accent: "hsl(280, 75%, 50%)",
+    accentBg: "hsl(280, 70%, 95%)",
+    Icon: Shield,
+    title: "ביטוח כפול",
+    description:
+      "ייתכן שאתה משלם פעמיים על כיסוי בריאות דרך מקום העבודה ופוליסה פרטית.",
+    cta: "בדוק פרטי כיסוי",
   },
-};
-
-const Donut = ({
-  data,
-  centerLabel,
-  centerValue,
-  baseColor,
-}: {
-  data: { label: string; value: number }[];
-  centerLabel: string;
-  centerValue: string;
-  baseColor: string;
-}) => {
-  const size = 160;
-  const radius = 60;
-  const stroke = 22;
-  const cx = size / 2;
-  const cy = size / 2;
-  const circumference = 2 * Math.PI * radius;
-  const total = data.reduce((s, d) => s + d.value, 0) || 1;
-
-  // Generate harmonious shades from baseColor by varying lightness
-  // baseColor expected as "hsl(H, S%, L%)"
-  const match = baseColor.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-  const h = match ? parseInt(match[1]) : 280;
-  const s = match ? parseInt(match[2]) : 70;
-  const baseL = match ? parseInt(match[3]) : 55;
-
-  let cumulative = 0;
-  return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        {data.map((d, i) => {
-          const fraction = d.value / total;
-          const dash = fraction * circumference;
-          const gap = circumference - dash;
-          const offset = -cumulative * circumference;
-          cumulative += fraction;
-          const lightness = Math.max(35, Math.min(78, baseL - 18 + i * 9));
-          return (
-            <circle
-              key={i}
-              cx={cx}
-              cy={cy}
-              r={radius}
-              fill="none"
-              stroke={`hsl(${h}, ${s}%, ${lightness}%)`}
-              strokeWidth={stroke}
-              strokeDasharray={`${dash} ${gap}`}
-              strokeDashoffset={offset}
-              transform={`rotate(-90 ${cx} ${cy})`}
-              style={{ transition: "all 0.5s ease" }}
-            />
-          );
-        })}
-      </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
-          {centerLabel}
-        </p>
-        <p className="text-base font-extrabold" style={{ color: "hsl(250, 45%, 15%)" }}>
-          {centerValue}
-        </p>
-      </div>
-    </div>
-  );
+  liabilities: {
+    label: "התחייבויות",
+    color: "hsl(22, 90%, 50%)",
+    gradient: "linear-gradient(135deg, hsl(18, 90%, 55%) 0%, hsl(28, 95%, 62%) 55%, hsl(38, 100%, 72%) 100%)",
+    accent: "hsl(22, 90%, 48%)",
+    accentBg: "hsl(28, 90%, 95%)",
+    Icon: Landmark,
+    title: "אופטימיזציה של משכנתא",
+    description:
+      "ריבית המשכנתא ירדה — תוכל לחסוך ₪500 בחודש על ידי מיחזור התוכנית הנוכחית.",
+    cta: "בדוק הצעת מיחזור",
+  },
 };
 
 type ChatMessage =
