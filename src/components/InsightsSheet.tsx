@@ -118,11 +118,18 @@ const Donut = ({
   );
 };
 
+type ChatMessage =
+  | { id: string; role: "user"; text: string }
+  | { id: string; role: "ai"; text: string }
+  | { id: string; role: "ai-typing" };
+
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>("assets");
   const [input, setInput] = useState("");
   const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Autofocus input when sheet opens — pops the mobile keyboard
   useEffect(() => {
@@ -136,6 +143,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   useEffect(() => {
     if (!open) {
       setStage("typing-greeting");
+      setMessages([]);
+      setInput("");
       return;
     }
     const t1 = setTimeout(() => setStage("greeting"), 900);
@@ -147,6 +156,36 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
       clearTimeout(t3);
     };
   }, [open]);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    }
+  }, [messages, stage]);
+
+  const handleSend = () => {
+    const text = input.trim();
+    if (!text) return;
+    const userId = `u-${Date.now()}`;
+    const typingId = `t-${Date.now()}`;
+    setMessages((m) => [...m, { id: userId, role: "user", text }]);
+    setInput("");
+    // simulate AI typing then reply
+    setTimeout(() => {
+      setMessages((m) => [...m, { id: typingId, role: "ai-typing" }]);
+    }, 400);
+    setTimeout(() => {
+      setMessages((m) => [
+        ...m.filter((x) => x.id !== typingId),
+        {
+          id: `a-${Date.now()}`,
+          role: "ai",
+          text: "שאלה מצוינת! אני בודקת את הנתונים שלך ואחזור אליך עם המלצה מותאמת אישית בעוד רגע 💡",
+        },
+      ]);
+    }, 1800);
+  };
 
   const tab = tabsConfig[activeTab];
   const total = tab.items.reduce((s, i) => s + i.value, 0);
@@ -204,7 +243,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           </p>
         </div>
         {/* Scrollable content */}
-        <div className="overflow-y-auto px-5 pb-4 flex-1">
+        <div ref={scrollRef} className="overflow-y-auto px-5 pb-4 flex-1">
           {/* Typing indicator before greeting */}
           {stage === "typing-greeting" && (
             <div className="flex items-end gap-2 mb-3 animate-fade-in">
@@ -445,6 +484,75 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           </div>
           </>
           )}
+
+          {/* Conversation messages */}
+          {messages.map((msg) => {
+            if (msg.role === "user") {
+              return (
+                <div key={msg.id} className="flex justify-start mb-3 animate-fade-in" dir="rtl">
+                  <div
+                    className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
+                    style={{
+                      background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
+                      boxShadow: "0 3px 12px hsla(295, 70%, 50%, 0.28)",
+                    }}
+                  >
+                    <p className="text-xs leading-relaxed text-right" style={{ color: "white" }}>
+                      {msg.text}
+                    </p>
+                  </div>
+                </div>
+              );
+            }
+            if (msg.role === "ai-typing") {
+              return (
+                <div key={msg.id} className="flex items-end gap-2 mb-3 animate-fade-in" dir="rtl">
+                  <div
+                    className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+                    style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                  >
+                    <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+                  </div>
+                  <div
+                    className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1"
+                    style={{
+                      background: "white",
+                      border: "1px solid hsl(230, 20%, 92%)",
+                      boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0s" }} />
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.2s" }} />
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.4s" }} />
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <div key={msg.id} className="flex items-end gap-2 mb-3 animate-fade-in" dir="rtl">
+                <div
+                  className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+                  style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                >
+                  <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+                </div>
+                <div className="max-w-[85%]">
+                  <div
+                    className="rounded-2xl rounded-br-md px-3.5 py-2.5"
+                    style={{
+                      background: "white",
+                      border: "1px solid hsl(230, 20%, 92%)",
+                      boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                    }}
+                  >
+                    <p className="text-xs leading-relaxed text-right" style={{ color: "hsl(250, 35%, 25%)" }}>
+                      {msg.text}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Input bar */}
@@ -468,6 +576,12 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSend();
+                }
+              }}
               placeholder="שאל את Finansee AI..."
               className="flex-1 bg-transparent text-sm outline-none text-right placeholder:text-xs"
               style={{ color: "hsl(250, 40%, 20%)" }}
@@ -482,7 +596,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
               </button>
             )}
             <button
-              disabled={!input}
+              onClick={handleSend}
+              disabled={!input.trim()}
               className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 background: input
