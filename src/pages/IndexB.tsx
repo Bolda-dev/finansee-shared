@@ -49,9 +49,9 @@ const IndexB = () => {
   ];
 
   const recIcons: Record<string, React.ReactNode> = {
-    Home: <Home className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
-    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
-    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
+    Home: <Home className="h-4 w-4" style={{ color: "hsl(290, 70%, 55%)" }} />,
+    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(290, 70%, 55%)" }} />,
+    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(290, 70%, 55%)" }} />,
   };
 
   const extendedRecs = [
@@ -106,7 +106,7 @@ const IndexB = () => {
                 style={{
                   background: "hsla(250, 50%, 99%, 0.7)",
                   border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(270, 70%, 58%)",
+                  color: "hsl(290, 70%, 55%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
@@ -129,6 +129,7 @@ const IndexB = () => {
                 gradient: "linear-gradient(135deg, hsl(190, 85%, 55%) 0%, hsl(205, 90%, 45%) 100%)",
                 shadow: "0 8px 24px hsla(195, 85%, 45%, 0.35)",
                 iconColor: "hsl(200, 80%, 35%)",
+                ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
               },
               {
                 label: "התחייבויות",
@@ -137,6 +138,7 @@ const IndexB = () => {
                 gradient: "linear-gradient(135deg, hsl(335, 75%, 60%) 0%, hsl(350, 80%, 50%) 100%)",
                 shadow: "0 8px 24px hsla(345, 75%, 50%, 0.35)",
                 iconColor: "hsl(345, 70%, 40%)",
+                ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
               },
               {
                 label: "ביטוח",
@@ -145,6 +147,7 @@ const IndexB = () => {
                 gradient: "linear-gradient(135deg, hsl(40, 95%, 60%) 0%, hsl(25, 92%, 55%) 100%)",
                 shadow: "0 8px 24px hsla(30, 90%, 50%, 0.35)",
                 iconColor: "hsl(28, 80%, 38%)",
+                ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
               },
             ].map((card) => (
               <button
@@ -156,17 +159,17 @@ const IndexB = () => {
                   minHeight: "130px",
                 }}
               >
-                {/* Static ripples emanating from bottom-right */}
+                {/* Static ripples — unique placement per card */}
                 <svg
                   className="absolute inset-0 w-full h-full pointer-events-none"
                   viewBox="0 0 140 140"
                   preserveAspectRatio="xMidYMid slice"
                 >
-                  {[28, 52, 78, 106].map((r) => (
+                  {card.ripple.radii.map((r) => (
                     <circle
                       key={r}
-                      cx="120"
-                      cy="125"
+                      cx={card.ripple.cx}
+                      cy={card.ripple.cy}
                       r={r}
                       fill="none"
                       stroke="hsla(0, 0%, 100%, 0.22)"
@@ -212,10 +215,10 @@ const IndexB = () => {
                   </div>
                   <p className="text-[11px]" style={{ color: "hsl(230, 15%, 55%)" }}>
                     {rec.description}
-                    {rec.saving && <span className="font-bold" style={{ color: "hsl(270, 70%, 58%)" }}> • {rec.saving}</span>}
+                    {rec.saving && <span className="font-bold" style={{ color: "hsl(290, 70%, 55%)" }}> • {rec.saving}</span>}
                   </p>
                 </div>
-                <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+                <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
                   {rec.action}
                 </button>
               </div>
@@ -233,7 +236,7 @@ const IndexB = () => {
                 ₪{incomeItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -257,7 +260,7 @@ const IndexB = () => {
                 ₪{expenseItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -275,7 +278,7 @@ const IndexB = () => {
       {activeTab === "insurance" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -312,8 +315,8 @@ const IndexB = () => {
             <div
               className="w-[60px] h-[60px] rounded-full flex items-center justify-center"
               style={{
-                background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))",
-                boxShadow: "0 6px 24px hsla(265, 65%, 45%, 0.45), 0 0 0 4px hsla(235, 30%, 97%, 0.8)",
+                background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
+                boxShadow: "0 6px 24px hsla(295, 70%, 45%, 0.45), 0 0 0 4px hsla(235, 30%, 97%, 0.8)",
               }}
             >
               <img
@@ -346,19 +349,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(290, 70%, 55%, 0.14)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
@@ -381,19 +384,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(290, 70%, 55%, 0.14)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
