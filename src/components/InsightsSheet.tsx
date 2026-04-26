@@ -121,11 +121,8 @@ const Donut = ({
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>("assets");
   const [input, setInput] = useState("");
+  const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const tab = tabsConfig[activeTab];
-  const total = tab.items.reduce((s, i) => s + i.value, 0);
-  const isInsurance = activeTab === "insurance";
 
   // Autofocus input when sheet opens — pops the mobile keyboard
   useEffect(() => {
@@ -134,6 +131,26 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
       return () => clearTimeout(t);
     }
   }, [open]);
+
+  // Stage progression: typing → greeting → typing → insights
+  useEffect(() => {
+    if (!open) {
+      setStage("typing-greeting");
+      return;
+    }
+    const t1 = setTimeout(() => setStage("greeting"), 900);
+    const t2 = setTimeout(() => setStage("typing-insights"), 1700);
+    const t3 = setTimeout(() => setStage("insights"), 2700);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [open]);
+
+  const tab = tabsConfig[activeTab];
+  const total = tab.items.reduce((s, i) => s + i.value, 0);
+  const isInsurance = activeTab === "insurance";
 
   if (!open) return null;
 
