@@ -279,7 +279,7 @@ const IndexB = () => {
       {activeTab === "insurance" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(250, 35%, 8%) 0%, hsl(265, 45%, 18%) 35%, hsl(280, 60%, 38%) 70%, hsl(290, 75%, 58%) 100%)", boxShadow: "0 6px 18px hsla(265, 60%, 25%, 0.45)" }}>
+            <button className="cta-tri w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
