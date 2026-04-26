@@ -170,6 +170,7 @@ type ChatMessage =
 export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<ContextTabKey>("assets");
   const [selectedAction, setSelectedAction] = useState<ActionKey>("investments");
+  const [actionsView, setActionsView] = useState<"radio" | "list">("radio");
   const [input, setInput] = useState("");
   const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -192,6 +193,7 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
       setInput("");
       setActiveTab("assets");
       setSelectedAction("investments");
+      setActionsView("radio");
       return;
     }
     const t1 = setTimeout(() => setStage("greeting"), 900);
@@ -416,66 +418,142 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
           {/* === ACTIONS MODE: 3 compact cards in a 2-col grid + selection + single CTA, no surrounding bubble === */}
           {stage === "insights" && mode === "actions" && (
             <div className="mb-3 animate-fade-in" dir="rtl">
-              <p className="text-[11px] mb-2.5 px-1 text-right" style={{ color: "hsl(250, 30%, 25%)" }}>
-                הנה 3 פעולות לשיפור שהכנתי לך 👇
-              </p>
-
-              {/* Compact cards — 2 per row, no outer bubble */}
-              <div className="grid grid-cols-2 gap-2">
-                {(Object.keys(actionsConfig) as ActionKey[]).map((key) => {
-                  const t = actionsConfig[key];
-                  const Icon = t.Icon;
-                  const isSelected = selectedAction === key;
+              {/* Toggle between two display modes */}
+              <div
+                className="flex p-1 rounded-full mb-3 mx-auto"
+                style={{
+                  background: "hsl(230, 25%, 95%)",
+                  border: "1px solid hsl(230, 20%, 92%)",
+                  width: "fit-content",
+                }}
+              >
+                {([
+                  { key: "radio" as const, label: "מומלץ" },
+                  { key: "list" as const, label: "כל הפעולות" },
+                ]).map((opt) => {
+                  const isActive = actionsView === opt.key;
                   return (
                     <button
-                      key={key}
-                      onClick={() => setSelectedAction(key)}
-                      className="relative rounded-xl p-2.5 flex flex-col gap-1.5 overflow-hidden text-right transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      key={opt.key}
+                      onClick={() => setActionsView(opt.key)}
+                      className="px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all"
                       style={{
-                        background: "white",
-                        boxShadow: isSelected
-                          ? `0 4px 14px hsla(250, 30%, 25%, 0.10), 0 0 0 2px ${t.accent}`
-                          : "0 2px 8px hsla(250, 30%, 25%, 0.05)",
-                        border: isSelected ? "1px solid transparent" : "1px solid hsl(230, 20%, 94%)",
+                        background: isActive
+                          ? "linear-gradient(135deg, hsl(265, 60%, 35%), hsl(290, 70%, 60%))"
+                          : "transparent",
+                        color: isActive ? "white" : "hsl(230, 20%, 45%)",
+                        boxShadow: isActive ? "0 2px 8px hsla(280, 60%, 40%, 0.3)" : "none",
                       }}
                     >
-                      {/* Header row: small icon + label, both in category color */}
-                      <div className="flex items-center gap-1.5">
-                        <Icon className="h-3 w-3 flex-shrink-0" style={{ color: t.accent }} strokeWidth={2.5} />
-                        <span className="text-[10px] font-bold tracking-wide" style={{ color: t.accent }}>
-                          {t.label}
-                        </span>
-                      </div>
-
-                      {/* Title */}
-                      <p className="text-[12px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(250, 50%, 12%)" }}>
-                        {t.title}
-                      </p>
-
-                      {/* Description */}
-                      <p className="text-[10px] leading-snug" style={{ color: "hsl(230, 15%, 45%)" }}>
-                        {t.description}
-                      </p>
+                      {opt.label}
                     </button>
                   );
                 })}
               </div>
 
-              {/* Single CTA for the selected card */}
-              {(() => {
-                const sel = actionsConfig[selectedAction];
-                return (
-                  <button className="cta-tri mt-3 w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]">
-                    {sel.cta}
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                  </button>
-                );
-              })()}
+              {actionsView === "radio" && (
+                <>
+                  <p className="text-[11px] mb-2.5 px-1 text-right" style={{ color: "hsl(250, 30%, 25%)" }}>
+                    הנה 3 פעולות לשיפור שהכנתי לך 👇
+                  </p>
+
+                  {/* Compact cards — 2 per row, no outer bubble */}
+                  <div className="grid grid-cols-2 gap-2">
+                    {(Object.keys(actionsConfig) as ActionKey[]).map((key) => {
+                      const t = actionsConfig[key];
+                      const Icon = t.Icon;
+                      const isSelected = selectedAction === key;
+                      return (
+                        <button
+                          key={key}
+                          onClick={() => setSelectedAction(key)}
+                          className="relative rounded-xl p-2.5 flex flex-col gap-1.5 overflow-hidden text-right transition-all hover:scale-[1.02] active:scale-[0.98]"
+                          style={{
+                            background: "white",
+                            boxShadow: isSelected
+                              ? `0 4px 14px hsla(250, 30%, 25%, 0.10), 0 0 0 2px ${t.accent}`
+                              : "0 2px 8px hsla(250, 30%, 25%, 0.05)",
+                            border: isSelected ? "1px solid transparent" : "1px solid hsl(230, 20%, 94%)",
+                          }}
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <Icon className="h-3 w-3 flex-shrink-0" style={{ color: t.accent }} strokeWidth={2.5} />
+                            <span className="text-[10px] font-bold tracking-wide" style={{ color: t.accent }}>
+                              {t.label}
+                            </span>
+                          </div>
+                          <p className="text-[12px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(250, 50%, 12%)" }}>
+                            {t.title}
+                          </p>
+                          <p className="text-[10px] leading-snug" style={{ color: "hsl(230, 15%, 45%)" }}>
+                            {t.description}
+                          </p>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Single CTA for the selected card */}
+                  {(() => {
+                    const sel = actionsConfig[selectedAction];
+                    return (
+                      <button className="cta-tri mt-3 w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]">
+                        {sel.cta}
+                        <ArrowLeft className="w-3.5 h-3.5" />
+                      </button>
+                    );
+                  })()}
+                </>
+              )}
+
+              {actionsView === "list" && (
+                <div className="space-y-2">
+                  {(Object.keys(actionsConfig) as ActionKey[]).map((key) => {
+                    const t = actionsConfig[key];
+                    const Icon = t.Icon;
+                    return (
+                      <div
+                        key={key}
+                        className="rounded-xl p-3 flex items-start gap-3 text-right"
+                        style={{
+                          background: "white",
+                          border: "1px solid hsl(230, 20%, 94%)",
+                          boxShadow: "0 2px 8px hsla(250, 30%, 25%, 0.05)",
+                        }}
+                      >
+                        <div
+                          className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                          style={{ background: t.accentBg }}
+                        >
+                          <Icon className="h-4 w-4" style={{ color: t.accent }} strokeWidth={2.5} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5 mb-0.5">
+                            <span className="text-[9px] font-bold tracking-wide" style={{ color: t.accent }}>
+                              {t.label}
+                            </span>
+                          </div>
+                          <p className="text-[12px] font-extrabold tracking-tight leading-tight mb-1" style={{ color: "hsl(250, 50%, 12%)" }}>
+                            {t.title}
+                          </p>
+                          <p className="text-[10px] leading-snug mb-2" style={{ color: "hsl(230, 15%, 45%)" }}>
+                            {t.description}
+                          </p>
+                          <button className="cta-tri inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                            {t.cta}
+                            <ArrowLeft className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
 
-          {/* Suggested questions */}
-          {stage === "insights" && (
+          {/* Suggested questions — hidden in actions mode */}
+          {stage === "insights" && mode !== "actions" && (
             <>
               <div className="flex items-center gap-1.5 mb-2.5 justify-center" dir="rtl">
                 <Sparkles className="w-3 h-3" style={{ color: "hsl(230, 15%, 55%)" }} />
