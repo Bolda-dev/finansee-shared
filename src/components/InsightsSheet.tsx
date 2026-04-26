@@ -118,11 +118,18 @@ const Donut = ({
   );
 };
 
+type ChatMessage =
+  | { id: string; role: "user"; text: string }
+  | { id: string; role: "ai"; text: string }
+  | { id: string; role: "ai-typing" };
+
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>("assets");
   const [input, setInput] = useState("");
   const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Autofocus input when sheet opens — pops the mobile keyboard
   useEffect(() => {
@@ -136,6 +143,8 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   useEffect(() => {
     if (!open) {
       setStage("typing-greeting");
+      setMessages([]);
+      setInput("");
       return;
     }
     const t1 = setTimeout(() => setStage("greeting"), 900);
@@ -147,6 +156,36 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
       clearTimeout(t3);
     };
   }, [open]);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    }
+  }, [messages, stage]);
+
+  const handleSend = () => {
+    const text = input.trim();
+    if (!text) return;
+    const userId = `u-${Date.now()}`;
+    const typingId = `t-${Date.now()}`;
+    setMessages((m) => [...m, { id: userId, role: "user", text }]);
+    setInput("");
+    // simulate AI typing then reply
+    setTimeout(() => {
+      setMessages((m) => [...m, { id: typingId, role: "ai-typing" }]);
+    }, 400);
+    setTimeout(() => {
+      setMessages((m) => [
+        ...m.filter((x) => x.id !== typingId),
+        {
+          id: `a-${Date.now()}`,
+          role: "ai",
+          text: "שאלה מצוינת! אני בודקת את הנתונים שלך ואחזור אליך עם המלצה מותאמת אישית בעוד רגע 💡",
+        },
+      ]);
+    }, 1800);
+  };
 
   const tab = tabsConfig[activeTab];
   const total = tab.items.reduce((s, i) => s + i.value, 0);
