@@ -126,22 +126,25 @@ const IndexB = () => {
                 label: "נכסים",
                 value: "₪8.4M",
                 Icon: TrendingUp,
-                gradient: "linear-gradient(135deg, hsl(230, 90%, 65%) 0%, hsl(215, 95%, 55%) 100%)",
-                shadow: "0 8px 24px hsla(220, 90%, 55%, 0.35)",
+                gradient: "linear-gradient(135deg, hsl(190, 85%, 55%) 0%, hsl(205, 90%, 45%) 100%)",
+                shadow: "0 8px 24px hsla(195, 85%, 45%, 0.35)",
+                iconColor: "hsl(200, 80%, 35%)",
               },
               {
                 label: "התחייבויות",
                 value: "₪1.37M",
                 Icon: TrendingDown,
-                gradient: "linear-gradient(135deg, hsl(220, 12%, 55%) 0%, hsl(225, 15%, 35%) 100%)",
-                shadow: "0 8px 24px hsla(225, 15%, 30%, 0.3)",
+                gradient: "linear-gradient(135deg, hsl(335, 75%, 60%) 0%, hsl(350, 80%, 50%) 100%)",
+                shadow: "0 8px 24px hsla(345, 75%, 50%, 0.35)",
+                iconColor: "hsl(345, 70%, 40%)",
               },
               {
                 label: "ביטוח",
                 value: "5 פוליסות",
                 Icon: ShieldCheck,
-                gradient: "linear-gradient(135deg, hsl(45, 95%, 65%) 0%, hsl(22, 92%, 58%) 100%)",
-                shadow: "0 8px 24px hsla(28, 90%, 55%, 0.35)",
+                gradient: "linear-gradient(135deg, hsl(40, 95%, 60%) 0%, hsl(25, 92%, 55%) 100%)",
+                shadow: "0 8px 24px hsla(30, 90%, 50%, 0.35)",
+                iconColor: "hsl(28, 80%, 38%)",
               },
             ].map((card) => (
               <button
@@ -153,14 +156,25 @@ const IndexB = () => {
                   minHeight: "130px",
                 }}
               >
-                <div
-                  className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full"
-                  style={{ background: "hsla(0, 0%, 100%, 0.18)" }}
-                />
-                <div
-                  className="absolute -top-4 -right-4 w-16 h-16 rounded-full"
-                  style={{ background: "hsla(0, 0%, 100%, 0.12)" }}
-                />
+                {/* Static ripples emanating from bottom-right */}
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 140 140"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  {[28, 52, 78, 106].map((r) => (
+                    <circle
+                      key={r}
+                      cx="120"
+                      cy="125"
+                      r={r}
+                      fill="none"
+                      stroke="hsla(0, 0%, 100%, 0.22)"
+                      strokeWidth="1"
+                    />
+                  ))}
+                </svg>
+
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center mb-4 relative z-10"
                   style={{
@@ -168,7 +182,7 @@ const IndexB = () => {
                     boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.1)",
                   }}
                 >
-                  <card.Icon className="h-4 w-4" style={{ color: "hsl(265, 50%, 30%)" }} />
+                  <card.Icon className="h-4 w-4" style={{ color: card.iconColor }} />
                 </div>
                 <div className="relative z-10">
                   <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(0, 0%, 100%, 0.9)" }}>
