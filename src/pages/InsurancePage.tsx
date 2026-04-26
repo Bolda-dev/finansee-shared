@@ -133,7 +133,7 @@ const InsurancePage = () => {
 
           {/* Pill CTA — Dana invites you to chat */}
           <button
-            className="inline-flex items-center gap-2 pr-1.5 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
+            className="inline-flex items-center gap-2 pr-1 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
             style={{
               background: "white",
               color: "hsl(280, 60%, 30%)",
@@ -141,10 +141,13 @@ const InsurancePage = () => {
             }}
             aria-label="שאל את דנה איך לחסוך בביטוחים"
           >
-            <span className="tri-ring relative w-7 h-7 rounded-full flex-shrink-0">
+            <span
+              className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
+              style={{ marginTop: "-10px", marginBottom: "-10px" }}
+            >
               <span
                 className="block w-full h-full rounded-full overflow-hidden"
-                style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}
+                style={{ boxShadow: "0 4px 10px hsla(275, 65%, 25%, 0.4)" }}
               >
                 <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
               </span>
