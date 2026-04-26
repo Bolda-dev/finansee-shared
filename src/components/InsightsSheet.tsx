@@ -243,7 +243,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           </p>
         </div>
         {/* Scrollable content */}
-        <div className="overflow-y-auto px-5 pb-4 flex-1">
+        <div ref={scrollRef} className="overflow-y-auto px-5 pb-4 flex-1">
           {/* Typing indicator before greeting */}
           {stage === "typing-greeting" && (
             <div className="flex items-end gap-2 mb-3 animate-fade-in">
