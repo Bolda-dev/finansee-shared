@@ -1,16 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Send, Mic, Sparkles } from "lucide-react";
-import { incomeItems, expenseItems, insuranceItems } from "@/lib/data";
+import { X, Send, Mic, Sparkles, TrendingUp, Shield, Landmark, ArrowLeft } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 
-type TabKey = "assets" | "liabilities" | "insurance";
+type TabKey = "investments" | "insurance" | "liabilities";
 
 interface InsightsSheetProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
+
 
 const tabsConfig: Record<
   TabKey,
@@ -19,103 +18,49 @@ const tabsConfig: Record<
     color: string;
     gradient: string;
     accent: string;
-    items: { label: string; value: number }[];
-    headline: string;
+    accentBg: string;
+    Icon: typeof TrendingUp;
+    title: string;
+    description: string;
+    cta: string;
   }
 > = {
-  assets: {
-    label: "נכסים",
+  investments: {
+    label: "השקעות",
     color: "hsl(195, 85%, 45%)",
     gradient: "linear-gradient(135deg, hsl(190, 85%, 50%) 0%, hsl(195, 90%, 62%) 55%, hsl(190, 95%, 75%) 100%)",
-    accent: "hsl(195, 85%, 50%)",
-    items: incomeItems.map((i) => ({ label: i.label, value: i.amount })),
-    headline: "פירוט מקורות הכנסה חודשיים",
-  },
-  liabilities: {
-    label: "התחייבויות",
-    color: "hsl(22, 90%, 50%)",
-    gradient: "linear-gradient(135deg, hsl(18, 90%, 55%) 0%, hsl(28, 95%, 62%) 55%, hsl(38, 100%, 72%) 100%)",
-    accent: "hsl(28, 90%, 55%)",
-    items: expenseItems.map((i) => ({ label: i.label, value: i.amount })),
-    headline: "פירוט הוצאות חודשיות",
+    accent: "hsl(195, 85%, 42%)",
+    accentBg: "hsl(190, 80%, 95%)",
+    Icon: TrendingUp,
+    title: "איזון תיק השקעות",
+    description:
+      "הקצאת המניות שלך גבוהה כרגע ב-15% מפרופיל הסיכון היעד שלך.",
+    cta: "איזון אוטומטי של התיק",
   },
   insurance: {
     label: "ביטוח",
     color: "hsl(280, 75%, 52%)",
     gradient: "linear-gradient(135deg, hsl(270, 75%, 55%) 0%, hsl(282, 80%, 65%) 55%, hsl(295, 90%, 78%) 100%)",
-    accent: "hsl(282, 80%, 58%)",
-    items: insuranceItems.map((i) => ({
-      label: i.label,
-      value: i.status === "פעיל" ? 1 : 0,
-    })),
-    headline: "סטטוס פוליסות הביטוח",
+    accent: "hsl(280, 75%, 50%)",
+    accentBg: "hsl(280, 70%, 95%)",
+    Icon: Shield,
+    title: "ביטוח כפול",
+    description:
+      "ייתכן שאתה משלם פעמיים על כיסוי בריאות דרך מקום העבודה ופוליסה פרטית.",
+    cta: "בדוק פרטי כיסוי",
   },
-};
-
-const Donut = ({
-  data,
-  centerLabel,
-  centerValue,
-  baseColor,
-}: {
-  data: { label: string; value: number }[];
-  centerLabel: string;
-  centerValue: string;
-  baseColor: string;
-}) => {
-  const size = 160;
-  const radius = 60;
-  const stroke = 22;
-  const cx = size / 2;
-  const cy = size / 2;
-  const circumference = 2 * Math.PI * radius;
-  const total = data.reduce((s, d) => s + d.value, 0) || 1;
-
-  // Generate harmonious shades from baseColor by varying lightness
-  // baseColor expected as "hsl(H, S%, L%)"
-  const match = baseColor.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-  const h = match ? parseInt(match[1]) : 280;
-  const s = match ? parseInt(match[2]) : 70;
-  const baseL = match ? parseInt(match[3]) : 55;
-
-  let cumulative = 0;
-  return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        {data.map((d, i) => {
-          const fraction = d.value / total;
-          const dash = fraction * circumference;
-          const gap = circumference - dash;
-          const offset = -cumulative * circumference;
-          cumulative += fraction;
-          const lightness = Math.max(35, Math.min(78, baseL - 18 + i * 9));
-          return (
-            <circle
-              key={i}
-              cx={cx}
-              cy={cy}
-              r={radius}
-              fill="none"
-              stroke={`hsl(${h}, ${s}%, ${lightness}%)`}
-              strokeWidth={stroke}
-              strokeDasharray={`${dash} ${gap}`}
-              strokeDashoffset={offset}
-              transform={`rotate(-90 ${cx} ${cy})`}
-              style={{ transition: "all 0.5s ease" }}
-            />
-          );
-        })}
-      </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
-          {centerLabel}
-        </p>
-        <p className="text-base font-extrabold" style={{ color: "hsl(250, 45%, 15%)" }}>
-          {centerValue}
-        </p>
-      </div>
-    </div>
-  );
+  liabilities: {
+    label: "התחייבויות",
+    color: "hsl(22, 90%, 50%)",
+    gradient: "linear-gradient(135deg, hsl(18, 90%, 55%) 0%, hsl(28, 95%, 62%) 55%, hsl(38, 100%, 72%) 100%)",
+    accent: "hsl(22, 90%, 48%)",
+    accentBg: "hsl(28, 90%, 95%)",
+    Icon: Landmark,
+    title: "אופטימיזציה של משכנתא",
+    description:
+      "ריבית המשכנתא ירדה — תוכל לחסוך ₪500 בחודש על ידי מיחזור התוכנית הנוכחית.",
+    cta: "בדוק הצעת מיחזור",
+  },
 };
 
 type ChatMessage =
@@ -124,7 +69,7 @@ type ChatMessage =
   | { id: string; role: "ai-typing" };
 
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
-  const [activeTab, setActiveTab] = useState<TabKey>("assets");
+  const [activeTab, setActiveTab] = useState<TabKey>("investments");
   const [input, setInput] = useState("");
   const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -188,8 +133,7 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
   };
 
   const tab = tabsConfig[activeTab];
-  const total = tab.items.reduce((s, i) => s + i.value, 0);
-  const isInsurance = activeTab === "insurance";
+  const ActiveIcon = tab.Icon;
 
   if (!open) return null;
 
@@ -368,61 +312,65 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
                 </div>
 
                 <p
-                  className="text-[10px] mb-2.5"
+                  className="text-[10px] mb-3"
                   style={{ color: "hsl(230, 15%, 55%)" }}
                 >
-                  {tab.headline}
+                  3 תובנות פעילות מחכות לך · החלף קטגוריה למעלה
                 </p>
 
-                <div className="flex items-center gap-3">
-                  <Donut
-                    data={tab.items.map((i) => ({
-                      label: i.label,
-                      value: Math.max(i.value, 0.001),
-                    }))}
-                    centerLabel={isInsurance ? "פעילות" : "סה״כ"}
-                    centerValue={
-                      isInsurance
-                        ? `${tab.items.filter((i) => i.value === 1).length}/${tab.items.length}`
-                        : formatNIS(total)
-                    }
-                    baseColor={tab.accent}
+                {/* Insight card */}
+                <div
+                  className="rounded-2xl p-3.5 relative overflow-hidden"
+                  style={{
+                    background: tab.accentBg,
+                    border: `1px solid ${tab.accent}33`,
+                  }}
+                >
+                  <div
+                    className="absolute top-0 right-0 left-0 h-1"
+                    style={{ background: tab.gradient }}
                   />
 
-                  <div className="flex-1 space-y-1.5 min-w-0">
-                    {tab.items.slice(0, 5).map((item, i) => {
-                      const match = tab.accent.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-                      const h = match ? parseInt(match[1]) : 280;
-                      const s = match ? parseInt(match[2]) : 70;
-                      const baseL = match ? parseInt(match[3]) : 55;
-                      const lightness = Math.max(35, Math.min(78, baseL - 18 + i * 9));
-                      const pct = isInsurance
-                        ? item.value === 1
-                          ? "פעיל"
-                          : "חסר"
-                        : `${Math.round((item.value / (total || 1)) * 100)}%`;
-                      return (
-                        <div key={i} className="flex items-center gap-2 text-[11px]">
-                          <span
-                            className="w-2 h-2 rounded-full flex-shrink-0"
-                            style={{ background: `hsl(${h}, ${s}%, ${lightness}%)` }}
-                          />
-                          <span
-                            className="truncate flex-1"
-                            style={{ color: "hsl(250, 35%, 25%)" }}
-                          >
-                            {item.label}
-                          </span>
-                          <span
-                            className="font-bold flex-shrink-0"
-                            style={{ color: "hsl(250, 40%, 20%)" }}
-                          >
-                            {pct}
-                          </span>
-                        </div>
-                      );
-                    })}
+                  <div className="flex items-start gap-2.5 mb-2 mt-1">
+                    <div
+                      className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: "white", boxShadow: `0 2px 8px ${tab.accent}25` }}
+                    >
+                      <ActiveIcon className="w-4 h-4" style={{ color: tab.accent }} />
+                    </div>
+                    <div className="flex-1 min-w-0 pt-0.5">
+                      <p
+                        className="text-[10px] font-semibold tracking-wide mb-0.5"
+                        style={{ color: tab.accent }}
+                      >
+                        {tab.label}
+                      </p>
+                      <p
+                        className="text-[13px] font-extrabold leading-tight"
+                        style={{ color: "hsl(250, 45%, 15%)" }}
+                      >
+                        {tab.title}
+                      </p>
+                    </div>
                   </div>
+
+                  <p
+                    className="text-[11px] leading-relaxed mb-3 text-right"
+                    style={{ color: "hsl(250, 25%, 30%)" }}
+                  >
+                    {tab.description}
+                  </p>
+
+                  <button
+                    className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-white transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                    style={{
+                      background: tab.gradient,
+                      boxShadow: `0 4px 12px ${tab.accent}40`,
+                    }}
+                  >
+                    {tab.cta}
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
               <p
@@ -447,11 +395,11 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
             </p>
           </div>
           <div className="flex flex-wrap gap-1.5 mb-2 justify-center" dir="rtl">
-            {(activeTab === "assets"
-              ? ["איך להגדיל הכנסות?", "איפה כדאי להשקיע?", "מה התשואה הצפויה?"]
+            {(activeTab === "investments"
+              ? ["איך מאזנים את התיק?", "מה רמת הסיכון שלי?", "מה התשואה הצפויה?"]
               : activeTab === "liabilities"
-              ? ["איך להוריד הוצאות?", "כדאי למחזר משכנתא?", "מה הוצאה גבוהה מדי?"]
-              : ["איזה ביטוח חסר לי?", "אני משלם יותר מדי?", "מה הכיסוי המיטבי?"]
+              ? ["כמה אחסוך במיחזור?", "מה תנאי המיחזור?", "כדאי למחזר עכשיו?"]
+              : ["איך לבטל כפילות?", "מה הכיסוי האופטימלי?", "אני משלם יותר מדי?"]
             ).map((q) => (
               <button
                 key={q}
