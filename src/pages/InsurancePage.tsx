@@ -143,7 +143,7 @@ const InsurancePage = () => {
           >
             <span
               className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
-              style={{ marginTop: "-10px", marginBottom: "-10px", transform: "translateX(-6px)" }}
+              style={{ marginTop: "-10px", marginBottom: "-10px", marginRight: "-8px" }}
             >
               <span
                 className="block w-full h-full rounded-full overflow-hidden"
