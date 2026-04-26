@@ -49,9 +49,9 @@ const IndexB = () => {
   ];
 
   const recIcons: Record<string, React.ReactNode> = {
-    Home: <Home className="h-4 w-4" style={{ color: "hsl(250, 60%, 55%)" }} />,
-    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(250, 60%, 55%)" }} />,
-    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(250, 60%, 55%)" }} />,
+    Home: <Home className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
+    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
+    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
   };
 
   const extendedRecs = [
@@ -106,7 +106,7 @@ const IndexB = () => {
                 style={{
                   background: "hsla(250, 50%, 99%, 0.7)",
                   border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(250, 65%, 55%)",
+                  color: "hsl(270, 70%, 58%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
@@ -212,7 +212,7 @@ const IndexB = () => {
                   </div>
                   <p className="text-[11px]" style={{ color: "hsl(230, 15%, 55%)" }}>
                     {rec.description}
-                    {rec.saving && <span className="font-bold" style={{ color: "hsl(250, 60%, 55%)" }}> • {rec.saving}</span>}
+                    {rec.saving && <span className="font-bold" style={{ color: "hsl(270, 70%, 58%)" }}> • {rec.saving}</span>}
                   </p>
                 </div>
                 <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
@@ -346,19 +346,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(250, 60%, 55%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
@@ -381,19 +381,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(250, 60%, 55%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(250, 60%, 55%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
