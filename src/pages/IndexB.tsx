@@ -49,9 +49,9 @@ const IndexB = () => {
   ];
 
   const recIcons: Record<string, React.ReactNode> = {
-    Home: <Home className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
-    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
-    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(270, 70%, 58%)" }} />,
+    Home: <Home className="h-4 w-4" style={{ color: "hsl(290, 70%, 55%)" }} />,
+    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(290, 70%, 55%)" }} />,
+    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(290, 70%, 55%)" }} />,
   };
 
   const extendedRecs = [
@@ -106,7 +106,7 @@ const IndexB = () => {
                 style={{
                   background: "hsla(250, 50%, 99%, 0.7)",
                   border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(270, 70%, 58%)",
+                  color: "hsl(290, 70%, 55%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
@@ -212,10 +212,10 @@ const IndexB = () => {
                   </div>
                   <p className="text-[11px]" style={{ color: "hsl(230, 15%, 55%)" }}>
                     {rec.description}
-                    {rec.saving && <span className="font-bold" style={{ color: "hsl(270, 70%, 58%)" }}> • {rec.saving}</span>}
+                    {rec.saving && <span className="font-bold" style={{ color: "hsl(290, 70%, 55%)" }}> • {rec.saving}</span>}
                   </p>
                 </div>
-                <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+                <button className="text-xs font-medium py-2 rounded-lg flex-shrink-0 transition-all w-20 text-center" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", color: "white", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
                   {rec.action}
                 </button>
               </div>
@@ -233,7 +233,7 @@ const IndexB = () => {
                 ₪{incomeItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -257,7 +257,7 @@ const IndexB = () => {
                 ₪{expenseItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -275,7 +275,7 @@ const IndexB = () => {
       {activeTab === "insurance" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
-            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))", boxShadow: "0 4px 12px hsla(265, 65%, 50%, 0.35)" }}>
+            <button className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95" style={{ background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))", boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)" }}>
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -312,8 +312,8 @@ const IndexB = () => {
             <div
               className="w-[60px] h-[60px] rounded-full flex items-center justify-center"
               style={{
-                background: "linear-gradient(135deg, hsl(270, 75%, 60%), hsl(250, 70%, 55%))",
-                boxShadow: "0 6px 24px hsla(265, 65%, 45%, 0.45), 0 0 0 4px hsla(235, 30%, 97%, 0.8)",
+                background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
+                boxShadow: "0 6px 24px hsla(295, 70%, 45%, 0.45), 0 0 0 4px hsla(235, 30%, 97%, 0.8)",
               }}
             >
               <img
@@ -346,19 +346,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(290, 70%, 55%, 0.14)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
@@ -381,19 +381,19 @@ const IndexB = () => {
                     onClick={() => setActiveTab(item.key)}
                     className="flex flex-col items-center gap-0.5 py-1.5 px-3 rounded-xl transition-all"
                     style={{
-                      background: isActive ? "hsla(270, 70%, 58%, 0.12)" : "transparent",
+                      background: isActive ? "hsla(290, 70%, 55%, 0.14)" : "transparent",
                     }}
                   >
                     <item.icon
                       className="h-5 w-5 transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     />
                     <span
                       className="text-[10px] font-medium transition-colors"
                       style={{
-                        color: isActive ? "hsl(270, 70%, 58%)" : "hsl(230, 15%, 55%)",
+                        color: isActive ? "hsl(290, 70%, 55%)" : "hsl(230, 15%, 55%)",
                       }}
                     >
                       {item.label}
