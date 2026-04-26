@@ -133,7 +133,7 @@ const InsurancePage = () => {
 
           {/* Pill CTA — Dana invites you to chat */}
           <button
-            className="inline-flex items-center gap-2 pr-1 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
+            className="inline-flex items-center gap-2 pr-2 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
             style={{
               background: "white",
               color: "hsl(280, 60%, 30%)",
@@ -143,7 +143,7 @@ const InsurancePage = () => {
           >
             <span
               className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
-              style={{ marginTop: "-10px", marginBottom: "-10px" }}
+              style={{ marginTop: "-10px", marginBottom: "-10px", transform: "translateX(-6px)" }}
             >
               <span
                 className="block w-full h-full rounded-full overflow-hidden"
@@ -349,67 +349,53 @@ const InsurancePage = () => {
         </p>
       </div>
 
-      {/* === Dana invitation bubble (after 5s) === */}
+      {/* === Dana invitation bubble (after 5s) — anchored to bottom chat bar's avatar === */}
       {danaBubbleOpen && !danaBubbleDismissed && (
         <div
-          className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pointer-events-none"
+          className="fixed bottom-[88px] left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pointer-events-none"
           dir="rtl"
         >
           <div
-            className="pointer-events-auto flex items-end gap-2 ml-auto"
-            style={{ animation: "bubble-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both" }}
+            className="pointer-events-auto max-w-[300px] mr-1"
+            style={{ animation: "bubble-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both", transformOrigin: "bottom right" }}
           >
-            {/* Avatar */}
-            <span className="tri-ring relative w-10 h-10 rounded-full flex-shrink-0">
-              <span
-                className="block w-full h-full rounded-full overflow-hidden"
-                style={{ boxShadow: "0 4px 12px hsla(275, 65%, 25%, 0.45)" }}
-              >
-                <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
-              </span>
-            </span>
-
-            {/* Bubble */}
-            <div className="flex-1 max-w-[300px]">
-              <div
-                className="relative rounded-2xl rounded-br-md p-3.5 pr-4"
-                style={{
-                  background: "white",
-                  border: "1px solid hsl(230, 20%, 92%)",
-                  boxShadow: "0 8px 28px hsla(250, 30%, 25%, 0.18)",
+            <div
+              className="relative rounded-2xl rounded-br-sm p-3.5 pr-4"
+              style={{
+                background: "white",
+                border: "1px solid hsl(230, 20%, 92%)",
+                boxShadow: "0 8px 28px hsla(250, 30%, 25%, 0.18)",
+              }}
+            >
+              <button
+                onClick={() => {
+                  setDanaBubbleOpen(false);
+                  setDanaBubbleDismissed(true);
                 }}
+                className="absolute top-1.5 left-1.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+                aria-label="סגור"
               >
-                <button
-                  onClick={() => {
-                    setDanaBubbleOpen(false);
-                    setDanaBubbleDismissed(true);
-                  }}
-                  className="absolute top-1.5 left-1.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
-                  aria-label="סגור"
-                >
-                  <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 55%)" }} />
-                </button>
-                <p
-                  className="text-[12px] leading-relaxed pr-1"
-                  style={{ color: "hsl(250, 35%, 20%)" }}
-                >
-                  היי משה 👋 ראיתי שיש לך 7 פוליסות פעילות —
-                  <br />
-                  אני יכולה לעזור לך לחסוך עד <strong>₪450 בחודש</strong>. רוצה שנבדוק יחד?
-                </p>
-                <button
-                  className="cta-tri mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
-                >
-                  בוא/י נחסוך ביחד
-                  <ChevronLeft className="h-3.5 w-3.5" />
-                </button>
-              </div>
+                <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 55%)" }} />
+              </button>
               <p
-                className="text-[9px] mt-1 mr-1 text-right"
-                style={{ color: "hsl(230, 15%, 60%)" }}
+                className="text-[12px] leading-relaxed pr-1 text-right"
+                style={{ color: "hsl(250, 35%, 20%)" }}
               >
-                דנה • עכשיו
+                היי משה 👋 ראיתי שיש לך 7 פוליסות פעילות —
+                <br />
+                אני יכולה לעזור לך לחסוך עד <strong>₪450 בחודש</strong>. רוצה שנבדוק יחד?
               </p>
+              <button
+                onClick={() => {
+                  setDanaBubbleOpen(false);
+                  setDanaBubbleDismissed(true);
+                  setChatOpen(true);
+                }}
+                className="cta-tri mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
+              >
+                בוא/י נחסוך ביחד
+                <ChevronLeft className="h-3.5 w-3.5" />
+              </button>
             </div>
           </div>
         </div>
