@@ -303,10 +303,11 @@ const IndexB = () => {
       )}
 
       {/* Bottom Chat Bar */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none" dir="rtl">
         <button
           onClick={() => setChatOpen(true)}
-          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pl-2 pr-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+          dir="rtl"
+          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
           style={{
             background: "white",
             boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
@@ -314,15 +315,21 @@ const IndexB = () => {
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
-          {/* Send button (leftmost in RTL) */}
+          {/* Avatar — pinned to right (start in RTL), floating */}
           <span
-            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+            className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 relative"
             style={{
-              background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
-              boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)",
+              boxShadow:
+                "0 6px 20px hsla(295, 70%, 45%, 0.35), 0 0 0 2px white, 0 0 0 3px hsla(290, 70%, 55%, 0.4)",
+              transform: "translateY(-2px)",
             }}
           >
-            <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+          </span>
+
+          {/* Placeholder text — right-aligned */}
+          <span className="flex-1 text-start text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
+            שאל את Finansee AI
           </span>
 
           {/* Mic button */}
@@ -333,21 +340,15 @@ const IndexB = () => {
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
 
-          {/* Placeholder text */}
-          <span className="flex-1 text-end text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
-            שאל את Finansee AI
-          </span>
-
-          {/* Avatar (rightmost in RTL — floating) */}
+          {/* Send button — left edge */}
           <span
-            className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 relative"
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
             style={{
-              boxShadow:
-                "0 6px 20px hsla(295, 70%, 45%, 0.35), 0 0 0 2px white, 0 0 0 3px hsla(290, 70%, 55%, 0.4)",
-              transform: "translateY(-2px)",
+              background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
+              boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)",
             }}
           >
-            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
           </span>
         </button>
       </div>
