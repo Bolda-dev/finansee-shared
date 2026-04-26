@@ -338,15 +338,13 @@ const IndexB = () => {
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
 
-          {/* Send button — left edge */}
-          <span
-            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{
-              background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
-              boxShadow: "0 4px 12px hsla(295, 70%, 50%, 0.38)",
-            }}
-          >
-            <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+          {/* Send button — left edge, with rotating tri-color ring */}
+          <span className="tri-ring w-9 h-9 rounded-full flex-shrink-0">
+            <span
+              className="flex w-full h-full rounded-full items-center justify-center cta-tri"
+            >
+              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+            </span>
           </span>
         </button>
       </div>
