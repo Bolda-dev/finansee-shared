@@ -118,6 +118,69 @@ const IndexB = () => {
             </p>
           </div>
 
+          {/* Category Cards */}
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            {[
+              {
+                label: "נכסים",
+                value: "₪8.4M",
+                Icon: TrendingUp,
+                gradient: "linear-gradient(135deg, hsl(230, 90%, 65%) 0%, hsl(215, 95%, 55%) 100%)",
+                shadow: "0 8px 24px hsla(220, 90%, 55%, 0.35)",
+              },
+              {
+                label: "התחייבויות",
+                value: "₪1.37M",
+                Icon: TrendingDown,
+                gradient: "linear-gradient(135deg, hsl(220, 12%, 55%) 0%, hsl(225, 15%, 35%) 100%)",
+                shadow: "0 8px 24px hsla(225, 15%, 30%, 0.3)",
+              },
+              {
+                label: "ביטוח",
+                value: "5 פוליסות",
+                Icon: ShieldCheck,
+                gradient: "linear-gradient(135deg, hsl(45, 95%, 65%) 0%, hsl(22, 92%, 58%) 100%)",
+                shadow: "0 8px 24px hsla(28, 90%, 55%, 0.35)",
+              },
+            ].map((card) => (
+              <button
+                key={card.label}
+                className="relative rounded-2xl p-4 text-start overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  background: card.gradient,
+                  boxShadow: card.shadow,
+                  minHeight: "130px",
+                }}
+              >
+                <div
+                  className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full"
+                  style={{ background: "hsla(0, 0%, 100%, 0.18)" }}
+                />
+                <div
+                  className="absolute -top-4 -right-4 w-16 h-16 rounded-full"
+                  style={{ background: "hsla(0, 0%, 100%, 0.12)" }}
+                />
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center mb-4 relative z-10"
+                  style={{
+                    background: "hsla(0, 0%, 100%, 0.95)",
+                    boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.1)",
+                  }}
+                >
+                  <card.Icon className="h-4 w-4" style={{ color: "hsl(265, 50%, 30%)" }} />
+                </div>
+                <div className="relative z-10">
+                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(0, 0%, 100%, 0.9)" }}>
+                    {card.label}
+                  </p>
+                  <p className="text-lg font-extrabold" style={{ color: "white" }}>
+                    {card.value}
+                  </p>
+                </div>
+              </button>
+            ))}
+          </div>
+
           <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>המלצות לשיפור</h2>
           <div className="space-y-3 pb-32">
             {extendedRecs.map((rec) => (
