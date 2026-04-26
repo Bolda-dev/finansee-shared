@@ -220,7 +220,7 @@ const IndexB = () => {
                 className="absolute z-30 text-right rounded-2xl rounded-br-sm px-3.5 py-2.5 flex items-start gap-2"
                 style={{
                   right: "60px",
-                  bottom: "calc(100% - 8px)",
+                  bottom: "calc(100% - 26px)",
                   background: "white",
                   border: "1px solid hsl(230, 20%, 92%)",
                   boxShadow: "0 10px 28px hsla(250, 30%, 25%, 0.18), 0 2px 6px hsla(250, 30%, 25%, 0.08)",
