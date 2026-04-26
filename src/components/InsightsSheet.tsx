@@ -484,6 +484,75 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
           </div>
           </>
           )}
+
+          {/* Conversation messages */}
+          {messages.map((msg) => {
+            if (msg.role === "user") {
+              return (
+                <div key={msg.id} className="flex justify-start mb-3 animate-fade-in" dir="rtl">
+                  <div
+                    className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5"
+                    style={{
+                      background: "linear-gradient(135deg, hsl(285, 75%, 62%), hsl(310, 70%, 55%))",
+                      boxShadow: "0 3px 12px hsla(295, 70%, 50%, 0.28)",
+                    }}
+                  >
+                    <p className="text-xs leading-relaxed text-right" style={{ color: "white" }}>
+                      {msg.text}
+                    </p>
+                  </div>
+                </div>
+              );
+            }
+            if (msg.role === "ai-typing") {
+              return (
+                <div key={msg.id} className="flex items-end gap-2 mb-3 animate-fade-in" dir="rtl">
+                  <div
+                    className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+                    style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                  >
+                    <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+                  </div>
+                  <div
+                    className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1"
+                    style={{
+                      background: "white",
+                      border: "1px solid hsl(230, 20%, 92%)",
+                      boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0s" }} />
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.2s" }} />
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.4s" }} />
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <div key={msg.id} className="flex items-end gap-2 mb-3 animate-fade-in" dir="rtl">
+                <div
+                  className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0"
+                  style={{ boxShadow: "0 2px 6px hsla(290, 70%, 55%, 0.25)" }}
+                >
+                  <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+                </div>
+                <div className="max-w-[85%]">
+                  <div
+                    className="rounded-2xl rounded-br-md px-3.5 py-2.5"
+                    style={{
+                      background: "white",
+                      border: "1px solid hsl(230, 20%, 92%)",
+                      boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                    }}
+                  >
+                    <p className="text-xs leading-relaxed text-right" style={{ color: "hsl(250, 35%, 25%)" }}>
+                      {msg.text}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Input bar */}
