@@ -419,7 +419,8 @@ const IndexB = () => {
                 {/* Bottom-left chevron pointing into the card */}
                 <ChevronLeft className="absolute bottom-3 left-3 h-3.5 w-3.5" style={{ color: card.accent }} />
               </button>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
