@@ -141,53 +141,50 @@ export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
     <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/30 animate-fade-in"
+        className="absolute inset-0 bg-black/30"
+        style={{ animation: "backdrop-in 0.45s ease-out 0.05s both" }}
         onClick={() => onOpenChange(false)}
       />
 
       {/* Sheet */}
       <div
-        className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl animate-fade-in flex flex-col"
-        style={{ maxHeight: "85vh", animation: "slide-up 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)" }}
+        className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
+        style={{
+          maxHeight: "85vh",
+          marginTop: "32px",
+          animation: "slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both",
+          transition: "max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), height 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+        }}
       >
+        {/* Floating avatar — half over the top of the sheet */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full overflow-hidden"
+          style={{
+            top: "-32px",
+            boxShadow:
+              "0 0 0 3px white, 0 0 0 5px hsla(290, 70%, 55%, 0.35), 0 8px 24px hsla(290, 70%, 55%, 0.25)",
+          }}
+        >
+          <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+        </div>
+
         {/* Drag handle */}
-        <div className="flex justify-center pt-3 pb-3">
+        <div className="flex justify-center pt-3 pb-2">
           <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 88%)" }} />
         </div>
 
-        {/* Header — avatar centered on top like reference */}
-        <div className="relative flex flex-col items-center px-5 pb-4">
+        {/* Header */}
+        <div className="relative flex flex-col items-center px-5 pt-7 pb-3">
           <button
             onClick={() => onOpenChange(false)}
-            className="absolute top-0 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+            className="absolute top-2 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
           >
             <X className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </button>
-
-          <div
-            className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 mb-2"
-            style={{
-              boxShadow:
-                "0 0 0 3px white, 0 0 0 5px hsla(290, 70%, 55%, 0.35), 0 8px 24px hsla(290, 70%, 55%, 0.25)",
-            }}
-          >
-            <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
-          </div>
           <p className="text-sm font-bold" style={{ color: "hsl(250, 45%, 15%)" }}>
             דנה — Finansee AI
           </p>
-          <p
-            className="text-[11px] flex items-center gap-1 mt-0.5"
-            style={{ color: "hsl(150, 60%, 40%)" }}
-          >
-            <span
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "hsl(150, 60%, 45%)" }}
-            />
-            זמין עכשיו
-          </p>
         </div>
-
         {/* Scrollable content */}
         <div className="overflow-y-auto px-5 pb-4 flex-1">
           {/* Chat-style greeting bubble */}
