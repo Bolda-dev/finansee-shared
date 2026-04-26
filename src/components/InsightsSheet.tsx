@@ -69,7 +69,7 @@ type ChatMessage =
   | { id: string; role: "ai-typing" };
 
 export const InsightsSheet = ({ open, onOpenChange }: InsightsSheetProps) => {
-  const [activeTab, setActiveTab] = useState<TabKey>("assets");
+  const [activeTab, setActiveTab] = useState<TabKey>("investments");
   const [input, setInput] = useState("");
   const [stage, setStage] = useState<"typing-greeting" | "greeting" | "typing-insights" | "insights">("typing-greeting");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
