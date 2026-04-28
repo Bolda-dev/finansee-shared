@@ -98,7 +98,7 @@ const IndexD = () => {
             <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(220, 40%, 18%, 0.55)", backdropFilter: "blur(14px)", border: "1px solid hsla(210, 90%, 70%, 0.18)" }}>
               <Menu className="h-5 w-5" style={{ color: "hsl(210, 30%, 92%)" }} />
             </button>
-            <img src={finanseeLogo} alt="finansee" className="h-5 w-auto absolute left-1/2 -translate-x-1/2" />
+            <img src={finanseeLogo} alt="finansee" className="h-5 w-auto absolute left-1/2 -translate-x-1/2" style={{ filter: "invert(1) brightness(1.15)" }} />
           </div>
           <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(210, 30%, 96%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
@@ -145,36 +145,36 @@ const IndexD = () => {
                 label: "נכסים",
                 value: "₪8.4M",
                 Icon: TrendingUp,
-                gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
-                shadow: "0 2px 6px hsla(222, 80%, 45%, 0.15)",
-                glow: "hsla(222, 80%, 45%, 0.08)",
-                outline: "hsla(222, 80%, 45%, 0.08)",
-                iconColor: "hsl(222, 85%, 45%)",
-                ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
+                // Bright cyan/electric blue — Revolut-style metallic
+                gradient: "linear-gradient(135deg, hsl(210, 100%, 55%) 0%, hsl(195, 100%, 60%) 55%, hsl(185, 100%, 70%) 100%)",
+                iconBg: "linear-gradient(135deg, hsla(200, 100%, 55%, 0.28) 0%, hsla(195, 100%, 60%, 0.18) 100%)",
+                iconBorder: "1px solid hsla(195, 100%, 70%, 0.45)",
+                iconColor: "hsl(195, 100%, 75%)",
+                glowColor: "hsla(200, 100%, 55%, 1)",
                 onClick: () => navigate("/d/assets"),
               },
               {
                 label: "התחייבויות",
                 value: "₪1.37M",
                 Icon: TrendingDown,
-                gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
-                shadow: "0 2px 6px hsla(176, 70%, 28%, 0.15)",
-                glow: "hsla(176, 70%, 28%, 0.09)",
-                outline: "hsla(176, 70%, 28%, 0.18)",
-                iconColor: "hsl(178, 70%, 30%)",
-                ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
+                // Bright teal/mint — punchy on dark
+                gradient: "linear-gradient(135deg, hsl(168, 95%, 45%) 0%, hsl(162, 90%, 55%) 55%, hsl(156, 90%, 65%) 100%)",
+                iconBg: "linear-gradient(135deg, hsla(168, 95%, 50%, 0.28) 0%, hsla(162, 90%, 55%, 0.18) 100%)",
+                iconBorder: "1px solid hsla(162, 95%, 65%, 0.45)",
+                iconColor: "hsl(162, 95%, 70%)",
+                glowColor: "hsla(168, 95%, 50%, 1)",
                 onClick: () => navigate("/d/liabilities"),
               },
               {
                 label: "ביטוח",
                 value: "5 פוליסות",
                 Icon: ShieldCheck,
-                gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
-                shadow: "0 2px 6px hsla(262, 72%, 50%, 0.15)",
-                glow: "hsla(262, 72%, 50%, 0.08)",
-                outline: "hsla(262, 72%, 50%, 0.08)",
-                iconColor: "hsl(262, 75%, 52%)",
-                ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
+                // Vibrant violet/magenta
+                gradient: "linear-gradient(135deg, hsl(275, 95%, 60%) 0%, hsl(285, 95%, 68%) 55%, hsl(300, 95%, 75%) 100%)",
+                iconBg: "linear-gradient(135deg, hsla(280, 95%, 60%, 0.28) 0%, hsla(290, 95%, 68%, 0.18) 100%)",
+                iconBorder: "1px solid hsla(285, 95%, 75%, 0.45)",
+                iconColor: "hsl(285, 95%, 78%)",
+                glowColor: "hsla(280, 95%, 60%, 1)",
                 onClick: () => navigate("/d/insurance"),
               },
             ].map((card) => (
@@ -186,27 +186,47 @@ const IndexD = () => {
                   boldCards
                     ? {
                         background: card.gradient,
-                        boxShadow: `0 12px 36px ${card.glow.replace(/0\.0?\d+\)$/, "0.65)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.25)`,
+                        boxShadow: `0 14px 40px ${card.glowColor.replace(", 1)", ", 0.7)")}, 0 0 28px ${card.glowColor.replace(", 1)", ", 0.55)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.3)`,
                         minHeight: "140px",
                       }
                     : {
-                        background: "linear-gradient(160deg, hsla(220, 35%, 15%, 0.85) 0%, hsla(220, 40%, 9%, 0.9) 100%)",
-                        boxShadow: `0 8px 28px hsla(0, 0%, 0%, 0.45), inset 0 1px 0 hsla(210, 100%, 80%, 0.12), 0 0 24px ${card.glow.replace(/0\.0?\d+\)$/, "0.35)")}`,
-                        border: `1px solid hsla(210, 90%, 70%, 0.12)`,
+                        background: "linear-gradient(160deg, hsla(220, 35%, 15%, 0.88) 0%, hsla(220, 42%, 8%, 0.94) 100%)",
+                        boxShadow: `0 10px 28px hsla(0, 0%, 0%, 0.5), inset 0 1px 0 hsla(210, 100%, 80%, 0.14), 0 0 32px ${card.glowColor.replace(", 1)", ", 0.45)")}, 0 0 60px ${card.glowColor.replace(", 1)", ", 0.22)")}`,
+                        border: `1px solid ${card.glowColor.replace(", 1)", ", 0.35)")}`,
                         minHeight: "140px",
                       }
                 }
               >
+                {/* Inner colored aura blob */}
+                {!boldCards && (
+                  <span
+                    className="absolute pointer-events-none"
+                    style={{
+                      top: "-30%",
+                      right: "-20%",
+                      width: "120px",
+                      height: "120px",
+                      borderRadius: "9999px",
+                      background: `radial-gradient(circle, ${card.glowColor.replace(", 1)", ", 0.45)")} 0%, transparent 70%)`,
+                      filter: "blur(18px)",
+                    }}
+                    aria-hidden
+                  />
+                )}
 
 
                 <div
                   className={`${boldCards ? "w-9 h-9 mb-4" : "w-12 h-12 mb-3"} rounded-full flex items-center justify-center relative z-10`}
                   style={{
-                    background: boldCards ? "hsla(0, 0%, 100%, 0.95)" : card.gradient,
-                    boxShadow: boldCards ? "0 2px 8px hsla(0, 0%, 0%, 0.1)" : card.shadow,
+                    background: boldCards ? "hsla(0, 0%, 100%, 0.95)" : card.iconBg,
+                    border: boldCards ? "none" : card.iconBorder,
+                    boxShadow: boldCards
+                      ? "0 2px 8px hsla(0, 0%, 0%, 0.2)"
+                      : `0 0 18px ${card.glowColor.replace(", 1)", ", 0.45)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.18)`,
+                    backdropFilter: "blur(6px)",
                   }}
                 >
-                  <card.Icon className={boldCards ? "h-4 w-4" : "h-5 w-5"} style={{ color: boldCards ? card.iconColor : "white" }} />
+                  <card.Icon className={boldCards ? "h-4 w-4" : "h-5 w-5"} style={{ color: boldCards ? "hsl(222, 60%, 25%)" : card.iconColor }} />
                 </div>
                 <div className="relative z-10">
                   <p
@@ -311,21 +331,27 @@ const IndexD = () => {
           <div className="grid grid-cols-2 gap-3 pb-32">
             {(() => {
               type Category = "assets" | "liabilities" | "insurance";
-              const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
+              const categoryColors: Record<Category, { accent: string; accentBg: string; accentBorder: string; bar: string; glow: string }> = {
                 assets: {
-                  accent: "hsl(222, 85%, 45%)",
-                  accentBg: "hsl(220, 85%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(220, 85%, 48%) 0%, hsla(225, 90%, 60%, 0.7) 100%)",
+                  accent: "hsl(195, 100%, 75%)",
+                  accentBg: "linear-gradient(135deg, hsla(200, 100%, 55%, 0.22) 0%, hsla(195, 100%, 60%, 0.12) 100%)",
+                  accentBorder: "1px solid hsla(195, 100%, 70%, 0.4)",
+                  bar: "linear-gradient(90deg, hsl(210, 100%, 55%) 0%, hsla(195, 100%, 65%, 0.85) 100%)",
+                  glow: "hsla(200, 100%, 55%, 0.5)",
                 },
                 liabilities: {
-                  accent: "hsl(178, 70%, 30%)",
-                  accentBg: "hsl(176, 55%, 91%)",
-                  bar: "linear-gradient(90deg, hsl(178, 70%, 32%) 0%, hsla(174, 65%, 42%, 0.7) 100%)",
+                  accent: "hsl(162, 95%, 70%)",
+                  accentBg: "linear-gradient(135deg, hsla(168, 95%, 50%, 0.22) 0%, hsla(162, 90%, 55%, 0.12) 100%)",
+                  accentBorder: "1px solid hsla(162, 95%, 65%, 0.4)",
+                  bar: "linear-gradient(90deg, hsl(168, 95%, 50%) 0%, hsla(162, 95%, 60%, 0.85) 100%)",
+                  glow: "hsla(168, 95%, 50%, 0.5)",
                 },
                 insurance: {
-                  accent: "hsl(262, 75%, 52%)",
-                  accentBg: "hsl(260, 75%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(258, 72%, 55%) 0%, hsla(265, 78%, 65%, 0.7) 100%)",
+                  accent: "hsl(285, 95%, 78%)",
+                  accentBg: "linear-gradient(135deg, hsla(280, 95%, 60%, 0.22) 0%, hsla(290, 95%, 68%, 0.12) 100%)",
+                  accentBorder: "1px solid hsla(285, 95%, 75%, 0.4)",
+                  bar: "linear-gradient(90deg, hsl(275, 95%, 60%) 0%, hsla(290, 95%, 70%, 0.85) 100%)",
+                  glow: "hsla(280, 95%, 60%, 0.5)",
                 },
               };
 
@@ -375,11 +401,16 @@ const IndexD = () => {
                       <span className="relative">
                         <span
                           className="w-9 h-9 rounded-full flex items-center justify-center"
-                          style={{ background: centerBar ? "hsla(210, 30%, 25%, 0.5)" : colors.accentBg }}
+                          style={{
+                            background: centerBar ? "hsla(210, 30%, 25%, 0.5)" : colors.accentBg,
+                            border: centerBar ? "1px solid hsla(210, 90%, 70%, 0.18)" : colors.accentBorder,
+                            boxShadow: centerBar ? "none" : `0 0 14px ${colors.glow}, inset 0 1px 0 hsla(0, 0%, 100%, 0.15)`,
+                            backdropFilter: "blur(6px)",
+                          }}
                         >
                           <card.Icon
                             className="h-4 w-4"
-                            style={{ color: centerBar ? "hsl(230, 12%, 45%)" : colors.accent }}
+                            style={{ color: centerBar ? "hsl(215, 25%, 75%)" : colors.accent }}
                             strokeWidth={2}
                           />
                         </span>
