@@ -1,5 +1,5 @@
-import { Settings, User, LogOut, FileText, Bell } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Settings, User, LogOut, FileText, Bell, Sparkles } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -24,7 +24,9 @@ const menuItems = [
 
 export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
+  const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
   const { boldCards, centerBar, innerGrid, setBoldCards, setCenterBar, setInnerGrid } = useVersionCSettings();
 
   return (
