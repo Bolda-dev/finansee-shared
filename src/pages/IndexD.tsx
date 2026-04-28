@@ -300,7 +300,9 @@ const IndexD = () => {
                 <span
                   className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
                   style={{
-                    background: "hsl(0, 78%, 55%)",
+                    background: "hsl(0, 90%, 60%)",
+                    border: "2px solid hsl(222, 35%, 5%)",
+                    boxShadow: "0 0 0 1.5px hsl(0, 0%, 100%), 0 0 14px hsla(0, 90%, 60%, 0.7)",
                   }}
                 >
                   3
@@ -417,7 +419,7 @@ const IndexD = () => {
                         {card.badge && (
                           <span
                             className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
-                            style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+                            style={{ background: "hsl(0, 90%, 60%)", border: "2px solid hsl(222, 35%, 5%)", boxShadow: "0 0 0 1.5px hsl(0, 0%, 100%), 0 0 12px hsla(0, 90%, 60%, 0.6)" }}
                           >
                             {card.badge}
                           </span>
