@@ -381,7 +381,7 @@ export const CategoryPageC = ({
                 key={i}
                 className="w-full flex items-start gap-3 px-4 py-4 transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
                 style={{
-                  borderBottom: isLast ? "none" : "1px solid hsl(230, 20%, 88%)",
+                  borderBottom: isLast ? "none" : "1px solid hsl(230, 20%, 94%)",
                 }}
                 dir="rtl"
               >
