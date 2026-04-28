@@ -504,7 +504,7 @@ const IndexD = () => {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-xs" style={{ color: "hsl(215, 20%, 65%)" }}>{item.coverage}</span>
-                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ background: item.status === "פעיל" ? "hsl(150,50%,93%)" : "hsl(30,70%,93%)", color: item.status === "פעיל" ? "hsl(150,50%,35%)" : "hsl(30,60%,40%)" }}>
+                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ background: item.status === "פעיל" ? "hsla(150,80%,45%,0.18)" : "hsla(30,90%,55%,0.18)", color: item.status === "פעיל" ? "hsl(150,80%,70%)" : "hsl(30,95%,72%)", border: item.status === "פעיל" ? "1px solid hsla(150,80%,55%,0.4)" : "1px solid hsla(30,90%,60%,0.4)" }}>
                     {item.status}
                   </span>
                 </div>
