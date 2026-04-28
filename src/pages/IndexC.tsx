@@ -123,7 +123,7 @@ const IndexB = () => {
                 style={{
                   background: "hsla(250, 50%, 99%, 0.7)",
                   border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(275, 65%, 45%)",
+                  color: "hsl(220, 75%, 45%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
@@ -445,7 +445,7 @@ const IndexB = () => {
             {incomeItems.map((item, i) => (
               <div key={i} className="rounded-xl p-4 flex justify-between items-center" style={{ background: "white", boxShadow: "0 2px 8px rgba(100,80,180,0.05)" }}>
                 <span className="text-sm" style={{ color: "hsl(250,40%,20%)" }}>{item.label}</span>
-                <span className="text-sm font-bold" style={{ color: "hsl(250,60%,55%)" }}>₪{item.amount.toLocaleString("he-IL")}</span>
+                <span className="text-sm font-bold" style={{ color: "hsl(220, 75%, 45%)" }}>₪{item.amount.toLocaleString("he-IL")}</span>
               </div>
             ))}
           </div>
