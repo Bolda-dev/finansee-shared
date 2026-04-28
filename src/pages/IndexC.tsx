@@ -5,7 +5,7 @@ import finanseeLogo from "@/assets/finansee-logo.png";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
-import { InsightsSheet } from "@/components/InsightsSheet";
+import { InsightsSheetC as InsightsSheet } from "@/components/InsightsSheetC";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 import { useVersionCSettings } from "@/contexts/VersionCSettings";
