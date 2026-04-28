@@ -182,36 +182,51 @@ const IndexB = () => {
                 key={card.label}
                 onClick={card.onClick}
                 className="relative rounded-2xl p-4 text-start overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  background: "white",
-                  boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-                  border: `1px solid ${card.outline}`,
-                  minHeight: "140px",
-                }}
+                style={
+                  boldCards
+                    ? {
+                        background: card.gradient,
+                        boxShadow: `0 8px 24px ${card.glow.replace(/0\.0?\d+\)$/, "0.4)")}`,
+                        minHeight: "140px",
+                      }
+                    : {
+                        background: "white",
+                        boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+                        border: `1px solid ${card.outline}`,
+                        minHeight: "140px",
+                      }
+                }
               >
-                {/* Subtle bottom color glow */}
-                <span
-                  className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
-                  style={{
-                    background: `linear-gradient(to top, ${card.glow} 0%, transparent 100%)`,
-                  }}
-                  aria-hidden
-                />
+                {!boldCards && (
+                  <span
+                    className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
+                    style={{
+                      background: `linear-gradient(to top, ${card.glow} 0%, transparent 100%)`,
+                    }}
+                    aria-hidden
+                  />
+                )}
 
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center mb-3 relative z-10"
                   style={{
-                    background: card.gradient,
-                    boxShadow: card.shadow,
+                    background: boldCards ? "hsla(0, 0%, 100%, 0.95)" : card.gradient,
+                    boxShadow: boldCards ? "0 2px 8px hsla(0, 0%, 0%, 0.1)" : card.shadow,
                   }}
                 >
-                  <card.Icon className="h-5 w-5" style={{ color: "white" }} />
+                  <card.Icon className="h-5 w-5" style={{ color: boldCards ? card.iconColor : "white" }} />
                 </div>
                 <div className="relative z-10">
-                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 12%, 58%)" }}>
+                  <p
+                    className="text-[11px] font-medium mb-1"
+                    style={{ color: boldCards ? "hsla(0, 0%, 100%, 0.9)" : "hsl(230, 12%, 58%)" }}
+                  >
                     {card.label}
                   </p>
-                  <p className="font-extrabold text-base" style={{ color: "hsl(250, 50%, 12%)" }}>
+                  <p
+                    className="font-extrabold text-base"
+                    style={{ color: boldCards ? "white" : "hsl(250, 50%, 12%)" }}
+                  >
                     {card.value}
                   </p>
                 </div>
