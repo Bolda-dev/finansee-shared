@@ -371,13 +371,25 @@ const IndexB = () => {
                       minHeight: "150px",
                     }}
                   >
+                    {centerBar && (
+                      <span
+                        className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
+                        style={{ background: colors.bar }}
+                        aria-hidden
+                      />
+                    )}
+
                     <div className="flex items-center justify-start gap-2 mb-1">
                       <span className="relative">
                         <span
                           className="w-9 h-9 rounded-full flex items-center justify-center"
-                          style={{ background: colors.accentBg }}
+                          style={{ background: centerBar ? "hsl(230, 20%, 95%)" : colors.accentBg }}
                         >
-                          <card.Icon className="h-4 w-4" style={{ color: colors.accent }} strokeWidth={2} />
+                          <card.Icon
+                            className="h-4 w-4"
+                            style={{ color: centerBar ? "hsl(230, 12%, 45%)" : colors.accent }}
+                            strokeWidth={2}
+                          />
                         </span>
                         {card.badge && (
                           <span
