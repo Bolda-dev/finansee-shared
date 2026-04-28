@@ -326,13 +326,13 @@ export const CategoryPageD = ({
                   onClick={() => setActiveFilter(chip.key)}
                   className="inline-flex items-center text-[11px] font-medium px-3 py-1.5 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98] flex-shrink-0"
                   style={{
-                    background: isActive ? "linear-gradient(135deg, hsl(195, 90%, 55%) 0%, hsl(220, 95%, 55%) 100%)" : "hsla(220, 35%, 14%, 0.85)",
+                    background: isActive ? "white" : "hsla(220, 35%, 14%, 0.85)",
                     border: isActive
-                      ? "1px solid hsla(195, 90%, 70%, 0.5)"
+                      ? "1px solid hsla(0, 0%, 100%, 0.9)"
                       : "1px solid hsla(210, 80%, 65%, 0.14)",
-                    color: isActive ? "white" : "hsl(215, 25%, 75%)",
+                    color: isActive ? "hsl(222, 47%, 8%)" : "hsl(215, 25%, 75%)",
                     boxShadow: isActive
-                      ? "0 6px 18px hsla(200, 95%, 50%, 0.45), inset 0 1px 0 hsla(0, 0%, 100%, 0.25)"
+                      ? "0 6px 20px hsla(0, 0%, 100%, 0.25), 0 0 16px hsla(0, 0%, 100%, 0.18)"
                       : "0 2px 6px hsla(0, 0%, 0%, 0.3), inset 0 1px 0 hsla(210, 100%, 80%, 0.06)",
                   }}
                 >
