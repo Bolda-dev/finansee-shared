@@ -191,13 +191,13 @@ const IndexD = () => {
                   boldCards
                     ? {
                         background: card.gradient,
-                        boxShadow: `0 14px 40px ${card.glowColor.replace(", 1)", ", 0.7)")}, 0 0 28px ${card.glowColor.replace(", 1)", ", 0.55)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.3)`,
+                        boxShadow: `0 10px 28px hsla(0, 0%, 0%, 0.45), 0 0 10px ${card.glowColor.replace(", 1)", ", 0.08)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.3)`,
                         minHeight: "140px",
                       }
                     : {
                         background: "linear-gradient(160deg, hsla(220, 35%, 15%, 0.88) 0%, hsla(220, 42%, 8%, 0.94) 100%)",
-                        boxShadow: `0 10px 28px hsla(0, 0%, 0%, 0.5), inset 0 1px 0 hsla(210, 100%, 80%, 0.14), 0 0 32px ${card.glowColor.replace(", 1)", ", 0.45)")}, 0 0 60px ${card.glowColor.replace(", 1)", ", 0.22)")}`,
-                        border: `1px solid ${card.glowColor.replace(", 1)", ", 0.35)")}`,
+                        boxShadow: `0 10px 28px hsla(0, 0%, 0%, 0.5), inset 0 1px 0 hsla(210, 100%, 80%, 0.14), 0 0 8px ${card.glowColor.replace(", 1)", ", 0.06)")}`,
+                        border: `1px solid ${card.glowColor.replace(", 1)", ", 0.18)")}`,
                         minHeight: "140px",
                       }
                 }
@@ -212,7 +212,7 @@ const IndexD = () => {
                       width: "120px",
                       height: "120px",
                       borderRadius: "9999px",
-                      background: `radial-gradient(circle, ${card.glowColor.replace(", 1)", ", 0.45)")} 0%, transparent 70%)`,
+                      background: `radial-gradient(circle, ${card.glowColor.replace(", 1)", ", 0.08)")} 0%, transparent 70%)`,
                       filter: "blur(18px)",
                     }}
                     aria-hidden
@@ -227,7 +227,7 @@ const IndexD = () => {
                     border: boldCards ? "none" : card.iconBorder,
                     boxShadow: boldCards
                       ? "0 2px 8px hsla(0, 0%, 0%, 0.2)"
-                      : `0 0 18px ${card.glowColor.replace(", 1)", ", 0.45)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.18)`,
+                      : `0 0 6px ${card.glowColor.replace(", 1)", ", 0.1)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.18)`,
                     backdropFilter: "blur(6px)",
                   }}
                 >
