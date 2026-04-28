@@ -186,7 +186,7 @@ export const CategoryPage = ({
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          <h2 className="text-[14px] font-bold text-primary">{title}</h2>
+          <h2 className="text-[14px] font-bold text-secondary">{title}</h2>
           <span className="w-12" aria-hidden />
         </div>
       </div>
