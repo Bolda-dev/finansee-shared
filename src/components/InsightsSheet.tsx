@@ -260,7 +260,7 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
   const suggestedHeader = mode === "actions" ? "שאל אותי על הפעולות שלך" : `שאל אותי על ${tab.label}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl">
+    <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl" style={{ height: "100dvh" }}>
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/30"
