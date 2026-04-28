@@ -62,9 +62,9 @@ const IndexB = () => {
   ];
 
   const recIcons: Record<string, React.ReactNode> = {
-    Home: <Home className="h-4 w-4" style={{ color: "hsl(275, 65%, 50%)" }} />,
-    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(275, 65%, 50%)" }} />,
-    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(275, 65%, 50%)" }} />,
+    Home: <Home className="h-4 w-4" style={{ color: "hsl(262, 75%, 52%)" }} />,
+    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(262, 75%, 52%)" }} />,
+    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(262, 75%, 52%)" }} />,
   };
 
   const extendedRecs = [
@@ -123,7 +123,7 @@ const IndexB = () => {
                 style={{
                   background: "hsla(250, 50%, 99%, 0.7)",
                   border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(275, 65%, 45%)",
+                  color: "hsl(262, 75%, 48%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
