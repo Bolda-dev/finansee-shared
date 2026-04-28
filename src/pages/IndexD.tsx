@@ -218,11 +218,15 @@ const IndexD = () => {
                 <div
                   className={`${boldCards ? "w-9 h-9 mb-4" : "w-12 h-12 mb-3"} rounded-full flex items-center justify-center relative z-10`}
                   style={{
-                    background: boldCards ? "hsla(0, 0%, 100%, 0.95)" : card.gradient,
-                    boxShadow: boldCards ? "0 2px 8px hsla(0, 0%, 0%, 0.1)" : card.shadow,
+                    background: boldCards ? "hsla(0, 0%, 100%, 0.95)" : card.iconBg,
+                    border: boldCards ? "none" : card.iconBorder,
+                    boxShadow: boldCards
+                      ? "0 2px 8px hsla(0, 0%, 0%, 0.2)"
+                      : `0 0 18px ${card.glowColor.replace(", 1)", ", 0.45)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.18)`,
+                    backdropFilter: "blur(6px)",
                   }}
                 >
-                  <card.Icon className={boldCards ? "h-4 w-4" : "h-5 w-5"} style={{ color: boldCards ? card.iconColor : "white" }} />
+                  <card.Icon className={boldCards ? "h-4 w-4" : "h-5 w-5"} style={{ color: boldCards ? "hsl(222, 60%, 25%)" : card.iconColor }} />
                 </div>
                 <div className="relative z-10">
                   <p
