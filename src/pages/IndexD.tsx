@@ -151,19 +151,6 @@ const IndexD = () => {
                 label: "נכסים",
                 value: "₪8.4M",
                 Icon: TrendingUp,
-                // Bright cyan/electric blue — Revolut-style metallic
-                gradient: "linear-gradient(135deg, hsl(210, 100%, 55%) 0%, hsl(195, 100%, 60%) 55%, hsl(185, 100%, 70%) 100%)",
-                iconGradient: "linear-gradient(135deg, hsl(212, 95%, 38%) 0%, hsl(202, 95%, 42%) 55%, hsl(195, 90%, 48%) 100%)",
-                iconBg: "linear-gradient(135deg, hsla(200, 100%, 55%, 0.28) 0%, hsla(195, 100%, 60%, 0.18) 100%)",
-                iconBorder: "1px solid hsla(195, 100%, 70%, 0.45)",
-                iconColor: "hsl(195, 100%, 75%)",
-                glowColor: "hsla(200, 100%, 55%, 1)",
-                onClick: () => navigate("/d/assets"),
-              },
-              {
-                label: "התחייבויות",
-                value: "₪1.37M",
-                Icon: TrendingDown,
                 // Bright teal/mint — punchy on dark
                 gradient: "linear-gradient(135deg, hsl(168, 95%, 45%) 0%, hsl(162, 90%, 55%) 55%, hsl(156, 90%, 65%) 100%)",
                 iconGradient: "linear-gradient(135deg, hsl(170, 95%, 28%) 0%, hsl(164, 90%, 32%) 55%, hsl(158, 88%, 38%) 100%)",
@@ -171,6 +158,19 @@ const IndexD = () => {
                 iconBorder: "1px solid hsla(162, 95%, 65%, 0.45)",
                 iconColor: "hsl(162, 95%, 70%)",
                 glowColor: "hsla(168, 95%, 50%, 1)",
+                onClick: () => navigate("/d/assets"),
+              },
+              {
+                label: "התחייבויות",
+                value: "₪1.37M",
+                Icon: TrendingDown,
+                // Bright cyan/electric blue — Revolut-style metallic
+                gradient: "linear-gradient(135deg, hsl(210, 100%, 55%) 0%, hsl(195, 100%, 60%) 55%, hsl(185, 100%, 70%) 100%)",
+                iconGradient: "linear-gradient(135deg, hsl(212, 95%, 38%) 0%, hsl(202, 95%, 42%) 55%, hsl(195, 90%, 48%) 100%)",
+                iconBg: "linear-gradient(135deg, hsla(200, 100%, 55%, 0.28) 0%, hsla(195, 100%, 60%, 0.18) 100%)",
+                iconBorder: "1px solid hsla(195, 100%, 70%, 0.45)",
+                iconColor: "hsl(195, 100%, 75%)",
+                glowColor: "hsla(200, 100%, 55%, 1)",
                 onClick: () => navigate("/d/liabilities"),
               },
               {
