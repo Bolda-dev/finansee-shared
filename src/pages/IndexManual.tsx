@@ -42,12 +42,14 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
   );
 };
 
-const IndexB = () => {
+const IndexManual = () => {
   const navigate = useNavigate();
   const { boldCards, centerBar, logoLeft } = useVersionCSettings();
+  const { colors: paletteColors } = useManualPalette();
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
@@ -580,4 +582,4 @@ const IndexB = () => {
   );
 };
 
-export default IndexB;
+export default IndexManual;
