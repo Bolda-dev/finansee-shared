@@ -593,7 +593,7 @@ export const CategoryPageD = ({
             }}
           >
             <div
-              className="relative rounded-2xl rounded-br-sm p-3.5 pr-4"
+              className="relative rounded-2xl rounded-br-sm pt-6 pb-3.5 px-3.5 pr-4"
               style={{
                 background: "linear-gradient(160deg, hsla(220, 35%, 18%, 0.96) 0%, hsla(220, 42%, 10%, 0.98) 100%)",
                 border: "1px solid hsla(210, 90%, 70%, 0.18)",
@@ -605,7 +605,7 @@ export const CategoryPageD = ({
                   setDanaBubbleOpen(false);
                   setDanaBubbleDismissed(true);
                 }}
-                className="absolute top-1.5 left-1.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+                className="absolute top-2 left-2 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
                 aria-label="סגור"
               >
                 <X className="h-3 w-3" style={{ color: "hsl(215, 20%, 65%)" }} />
