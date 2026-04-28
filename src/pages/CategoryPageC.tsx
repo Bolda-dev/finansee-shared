@@ -283,7 +283,7 @@ export const CategoryPageC = ({
             aria-label={danaCtaText}
           >
             <span
-              className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
+              className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
               style={{ marginTop: "-10px", marginBottom: "-10px", marginRight: "-8px" }}
             >
               <span
@@ -615,7 +615,7 @@ export const CategoryPageC = ({
                   setDanaBubbleDismissed(true);
                   setChatOpen(true);
                 }}
-                className="cta-tri mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                className="cta-tri-c mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]"
               >
                 {danaBubbleCta}
                 <ChevronLeft className="h-3.5 w-3.5" />
@@ -639,7 +639,7 @@ export const CategoryPageC = ({
           aria-label="פתח צ׳אט עם Finansee AI"
         >
           <span
-            className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
+            className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
             style={{ transform: "translateY(-2px)" }}
           >
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
@@ -658,8 +658,8 @@ export const CategoryPageC = ({
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
 
-          <span className="tri-ring relative w-9 h-9 rounded-full flex-shrink-0">
-            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri">
+          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
+            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
               <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
             </span>
           </span>
