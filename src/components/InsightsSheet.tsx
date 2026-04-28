@@ -260,7 +260,7 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
   const suggestedHeader = mode === "actions" ? "שאל אותי על הפעולות שלך" : `שאל אותי על ${tab.label}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl">
+    <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl" style={{ height: "100dvh" }}>
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/30"
@@ -272,8 +272,8 @@ export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: Insights
       <div
         className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
         style={{
-          height: "calc(100vh - 48px)",
-          maxHeight: "calc(100vh - 48px)",
+          height: "calc(100dvh - 48px)",
+          maxHeight: "calc(100dvh - 48px)",
           marginTop: "48px",
           animation: "sheet-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both",
         }}
