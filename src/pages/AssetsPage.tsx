@@ -48,7 +48,7 @@ const AssetsPage = () => {
       renderItemTrailing={(item) => (
         <span className="text-end leading-tight">
           <span
-            className="block text-[13px] font-bold tracking-tight"
+            className="block text-[13px] font-bold text-primary tracking-tight"
             style={{ color: "hsl(250, 50%, 12%)" }}
           >
             {formatNIS(item.amount ?? 0)}
