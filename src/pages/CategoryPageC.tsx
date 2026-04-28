@@ -467,7 +467,7 @@ export const CategoryPageC = ({
               return (
                 <button
                   key={i}
-                  className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                  className="relative rounded-2xl p-3.5 pt-4 flex flex-col gap-1 transition-transform hover:scale-[1.02] active:scale-[0.98] text-right"
                   style={{
                     background: "white",
                     boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
@@ -476,7 +476,7 @@ export const CategoryPageC = ({
                   }}
                   dir="rtl"
                 >
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center justify-start gap-2 mb-1">
                     <span className="relative">
                       <span
                         className="w-9 h-9 rounded-full flex items-center justify-center"
@@ -508,16 +508,30 @@ export const CategoryPageC = ({
                     </span>
                   </div>
 
-                  <div className="mt-1">
-                    {renderItemTrailing(item, theme)}
-                  </div>
-                  <p className="text-[10px] mt-1" style={{ color: "hsl(230, 12%, 58%)" }}>
+                  {isMissing ? (
+                    <p
+                      className="text-[18px] font-extrabold tracking-tight leading-none text-right"
+                      style={{ color: "hsl(0, 65%, 50%)" }}
+                    >
+                      חסר
+                    </p>
+                  ) : (
+                    <p
+                      className="text-[20px] font-extrabold tracking-tight leading-none text-right"
+                      style={{ color: "hsl(250, 50%, 12%)" }}
+                    >
+                      {typeof item.amount === "number"
+                        ? `₪${item.amount.toLocaleString("he-IL")}`
+                        : "—"}
+                    </p>
+                  )}
+                  <p className="text-[10px] mt-1 text-right" style={{ color: "hsl(230, 12%, 58%)" }}>
                     {renderItemSubtitle(item)}
                   </p>
 
                   {isExpanded && item.details && item.details.length > 0 && (
                     <div
-                      className="mt-auto pt-2 border-t space-y-0.5"
+                      className="mt-auto pt-2 border-t space-y-0.5 text-right"
                       style={{ borderColor: "hsl(230, 20%, 94%)" }}
                     >
                       {item.details.map((d) => (
