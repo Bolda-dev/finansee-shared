@@ -5,10 +5,12 @@ interface VersionCSettings {
   centerBar: boolean; // מרכז פיננסי — top color bar + grayscale icons
   innerGrid: boolean; // עמודים פנימיים — תצוגת גריד במקום ליסט
   logoLeft: boolean; // לוגו בצד שמאל במקום מרכז
+  filledIconsD: boolean; // דארק — אייקוני קטגוריות עם רקע מלא צבעוני ואייקון לבן
   setBoldCards: (v: boolean) => void;
   setCenterBar: (v: boolean) => void;
   setInnerGrid: (v: boolean) => void;
   setLogoLeft: (v: boolean) => void;
+  setFilledIconsD: (v: boolean) => void;
 }
 
 const Ctx = createContext<VersionCSettings | null>(null);
