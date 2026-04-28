@@ -664,10 +664,14 @@ export const CategoryPageD = ({
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
 
-          <span className="tri-ring relative w-9 h-9 rounded-full flex-shrink-0">
-            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri">
-              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
-            </span>
+          <span
+            className="flex w-9 h-9 rounded-full items-center justify-center flex-shrink-0"
+            style={{
+              background: "white",
+              boxShadow: "0 4px 14px hsla(0, 0%, 100%, 0.25), 0 0 14px hsla(0, 0%, 100%, 0.18)",
+            }}
+          >
+            <Send className="h-4 w-4 -rotate-90" style={{ color: "hsl(222, 47%, 8%)" }} />
           </span>
         </button>
       </div>
