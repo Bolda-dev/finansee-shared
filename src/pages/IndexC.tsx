@@ -144,7 +144,8 @@ const IndexB = () => {
                 value: "₪8.4M",
                 Icon: TrendingUp,
                 gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
-                shadow: "0 8px 24px hsla(222, 80%, 45%, 0.4)",
+                shadow: "0 2px 6px hsla(222, 80%, 45%, 0.15)",
+                outline: "hsla(222, 80%, 45%, 0.18)",
                 iconColor: "hsl(222, 85%, 45%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
                 onClick: () => navigate("/c/assets"),
@@ -154,7 +155,8 @@ const IndexB = () => {
                 value: "₪1.37M",
                 Icon: TrendingDown,
                 gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
-                shadow: "0 8px 24px hsla(176, 70%, 28%, 0.4)",
+                shadow: "0 2px 6px hsla(176, 70%, 28%, 0.15)",
+                outline: "hsla(176, 70%, 28%, 0.18)",
                 iconColor: "hsl(178, 70%, 30%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
                 onClick: () => navigate("/c/liabilities"),
@@ -164,7 +166,8 @@ const IndexB = () => {
                 value: "5 פוליסות",
                 Icon: ShieldCheck,
                 gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
-                shadow: "0 8px 24px hsla(262, 72%, 50%, 0.4)",
+                shadow: "0 2px 6px hsla(262, 72%, 50%, 0.15)",
+                outline: "hsla(262, 72%, 50%, 0.18)",
                 iconColor: "hsl(262, 75%, 52%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
                 onClick: () => navigate("/c/insurance"),
@@ -177,7 +180,7 @@ const IndexB = () => {
                 style={{
                   background: "white",
                   boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-                  border: "1px solid hsl(230, 20%, 94%)",
+                  border: `1px solid ${card.outline}`,
                   minHeight: "130px",
                 }}
               >
