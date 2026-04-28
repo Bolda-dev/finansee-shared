@@ -34,15 +34,15 @@ const contextTabs: Record<
 > = {
   assets: {
     label: "נכסים",
-    accent: "hsl(222, 85%, 45%)",
-    gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+    accent: "hsl(178, 70%, 30%)",
+    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
     items: incomeItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט מקורות הכנסה חודשיים",
   },
   liabilities: {
     label: "התחייבויות",
-    accent: "hsl(178, 70%, 30%)",
-    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+    accent: "hsl(222, 85%, 45%)",
+    gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
     items: expenseItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט הוצאות חודשיות",
   },
@@ -71,9 +71,9 @@ const actionsConfig: Record<
 > = {
   investments: {
     label: "השקעות",
-    accent: "hsl(222, 85%, 45%)",
-    accentBg: "hsl(220, 85%, 95%)",
-    gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+    accent: "hsl(178, 70%, 30%)",
+    accentBg: "hsl(176, 55%, 91%)",
+    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
     Icon: TrendingUp,
     title: "איזון תיק השקעות",
     description: "הקצאת המניות שלך גבוהה כרגע ב-15% מפרופיל הסיכון היעד שלך.",
@@ -91,9 +91,9 @@ const actionsConfig: Record<
   },
   liabilities: {
     label: "התחייבויות",
-    accent: "hsl(178, 70%, 30%)",
-    accentBg: "hsl(176, 55%, 91%)",
-    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+    accent: "hsl(222, 85%, 45%)",
+    accentBg: "hsl(220, 85%, 95%)",
+    gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
     Icon: Landmark,
     title: "אופטימיזציה של משכנתא",
     description: "ריבית המשכנתא ירדה — תוכל לחסוך ₪500 בחודש על ידי מיחזור התוכנית הנוכחית.",

@@ -586,7 +586,7 @@ export const CategoryPageC = ({
             }}
           >
             <div
-              className="relative rounded-2xl rounded-br-sm p-3.5 pr-4"
+              className="relative rounded-2xl rounded-br-sm pt-6 pb-3.5 px-3.5 pr-4"
               style={{
                 background: "white",
                 border: "1px solid hsl(230, 20%, 92%)",
@@ -598,7 +598,7 @@ export const CategoryPageC = ({
                   setDanaBubbleOpen(false);
                   setDanaBubbleDismissed(true);
                 }}
-                className="absolute top-1.5 left-1.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+                className="absolute top-2 left-2 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
                 aria-label="סגור"
               >
                 <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 55%)" }} />
