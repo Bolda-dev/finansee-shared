@@ -28,6 +28,7 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const isVersionB = pathname === "/b" || pathname.startsWith("/b/");
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
+  const isVersionManual = pathname === "/manual" || pathname.startsWith("/manual/");
   const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
 
   return (
@@ -96,6 +97,20 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">לוגו — צמוד לשמאל</span>
                 <Switch dir="ltr" checked={logoLeft} onCheckedChange={setLogoLeft} />
+              </div>
+            </div>
+          )}
+
+          {isVersionManual && (
+            <div className="border-t border-border mt-4 pt-4">
+              <p className="px-4 text-xs font-bold text-muted-foreground mb-2">צבעוניות ידנית</p>
+              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
+                <span className="text-sm font-medium text-foreground">כרטיסיות — צבעוני נועז</span>
+                <Switch dir="ltr" checked={boldCards} onCheckedChange={setBoldCards} />
+              </div>
+              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
+                <span className="text-sm font-medium text-foreground">מרכז פיננסי — פס צבעוני (אחרת אייקונים צבעוניים)</span>
+                <Switch dir="ltr" checked={centerBar} onCheckedChange={setCenterBar} />
               </div>
             </div>
           )}
