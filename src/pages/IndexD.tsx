@@ -101,7 +101,7 @@ const IndexD = () => {
             <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(220, 40%, 18%, 0.55)", backdropFilter: "blur(14px)", border: "1px solid hsla(210, 90%, 70%, 0.18)" }}>
               <Menu className="h-5 w-5" style={{ color: "hsl(210, 30%, 92%)" }} />
             </button>
-            <img src={finanseeLogo} alt="finansee" className="h-5 w-auto absolute left-1/2 -translate-x-1/2" style={{ filter: "invert(1) brightness(1.15)" }} />
+            <img src={finanseeLogo} alt="finansee" className={`h-5 w-auto absolute ${logoLeft ? "left-0" : "left-1/2 -translate-x-1/2"}`} style={{ filter: "invert(1) brightness(1.15)" }} />
           </div>
           <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(210, 30%, 96%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
