@@ -12,11 +12,11 @@ const AssetsPageC = () => {
       title="נכסים"
       theme={{
         gradient:
-          "linear-gradient(160deg, hsl(190, 85%, 42%) 0%, hsl(195, 90%, 55%) 55%, hsl(190, 95%, 70%) 100%)",
-        accent: "hsl(195, 85%, 42%)",
-        accentBg: "hsl(190, 80%, 94%)",
-        accentText: "hsl(195, 80%, 28%)",
-        sheetShadow: "hsla(195, 80%, 25%, 0.35)",
+          "linear-gradient(160deg, hsl(220, 85%, 45%) 0%, hsl(225, 90%, 58%) 55%, hsl(215, 95%, 72%) 100%)",
+        accent: "hsl(222, 85%, 45%)",
+        accentBg: "hsl(220, 85%, 95%)",
+        accentText: "hsl(222, 80%, 28%)",
+        sheetShadow: "hsla(222, 80%, 25%, 0.35)",
       }}
       items={items}
       filters={[

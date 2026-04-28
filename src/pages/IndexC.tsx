@@ -62,9 +62,9 @@ const IndexB = () => {
   ];
 
   const recIcons: Record<string, React.ReactNode> = {
-    Home: <Home className="h-4 w-4" style={{ color: "hsl(275, 65%, 50%)" }} />,
-    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(275, 65%, 50%)" }} />,
-    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(275, 65%, 50%)" }} />,
+    Home: <Home className="h-4 w-4" style={{ color: "hsl(262, 75%, 52%)" }} />,
+    Plus: <Plus className="h-4 w-4" style={{ color: "hsl(262, 75%, 52%)" }} />,
+    Calendar: <Calendar className="h-4 w-4" style={{ color: "hsl(262, 75%, 52%)" }} />,
   };
 
   const extendedRecs = [
@@ -123,7 +123,7 @@ const IndexB = () => {
                 style={{
                   background: "hsla(250, 50%, 99%, 0.7)",
                   border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(275, 65%, 45%)",
+                  color: "hsl(262, 75%, 48%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
@@ -143,9 +143,9 @@ const IndexB = () => {
                 label: "נכסים",
                 value: "₪8.4M",
                 Icon: TrendingUp,
-                gradient: "linear-gradient(135deg, hsl(190, 85%, 50%) 0%, hsl(195, 90%, 62%) 55%, hsl(190, 95%, 75%) 100%)",
-                shadow: "0 8px 24px hsla(195, 80%, 45%, 0.38)",
-                iconColor: "hsl(195, 85%, 42%)",
+                gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+                shadow: "0 8px 24px hsla(222, 80%, 45%, 0.4)",
+                iconColor: "hsl(222, 85%, 45%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
                 onClick: () => navigate("/c/assets"),
               },
@@ -153,9 +153,9 @@ const IndexB = () => {
                 label: "התחייבויות",
                 value: "₪1.37M",
                 Icon: TrendingDown,
-                gradient: "linear-gradient(135deg, hsl(18, 90%, 55%) 0%, hsl(28, 95%, 62%) 55%, hsl(38, 100%, 72%) 100%)",
-                shadow: "0 8px 24px hsla(28, 90%, 50%, 0.38)",
-                iconColor: "hsl(22, 90%, 48%)",
+                gradient: "linear-gradient(135deg, hsl(170, 80%, 38%) 0%, hsl(175, 75%, 50%) 55%, hsl(180, 80%, 68%) 100%)",
+                shadow: "0 8px 24px hsla(172, 75%, 40%, 0.38)",
+                iconColor: "hsl(172, 80%, 35%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
                 onClick: () => navigate("/c/liabilities"),
               },
@@ -163,9 +163,9 @@ const IndexB = () => {
                 label: "ביטוח",
                 value: "5 פוליסות",
                 Icon: ShieldCheck,
-                gradient: "linear-gradient(135deg, hsl(270, 75%, 55%) 0%, hsl(282, 80%, 65%) 55%, hsl(295, 90%, 78%) 100%)",
-                shadow: "0 8px 24px hsla(280, 75%, 50%, 0.4)",
-                iconColor: "hsl(280, 75%, 50%)",
+                gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
+                shadow: "0 8px 24px hsla(262, 72%, 50%, 0.4)",
+                iconColor: "hsl(262, 75%, 52%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
                 onClick: () => navigate("/c/insurance"),
               },
@@ -307,19 +307,19 @@ const IndexB = () => {
               type Category = "assets" | "liabilities" | "insurance";
               const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
                 assets: {
-                  accent: "hsl(195, 85%, 42%)",
-                  accentBg: "hsl(190, 80%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(190, 85%, 50%) 0%, hsla(195, 90%, 62%, 0.7) 100%)",
+                  accent: "hsl(222, 85%, 45%)",
+                  accentBg: "hsl(220, 85%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(220, 85%, 48%) 0%, hsla(225, 90%, 60%, 0.7) 100%)",
                 },
                 liabilities: {
-                  accent: "hsl(22, 90%, 48%)",
-                  accentBg: "hsl(28, 90%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(18, 90%, 55%) 0%, hsla(28, 95%, 62%, 0.7) 100%)",
+                  accent: "hsl(172, 80%, 35%)",
+                  accentBg: "hsl(170, 70%, 93%)",
+                  bar: "linear-gradient(90deg, hsl(170, 80%, 38%) 0%, hsla(175, 75%, 50%, 0.7) 100%)",
                 },
                 insurance: {
-                  accent: "hsl(280, 75%, 50%)",
-                  accentBg: "hsl(280, 70%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(270, 75%, 55%) 0%, hsla(282, 80%, 65%, 0.7) 100%)",
+                  accent: "hsl(262, 75%, 52%)",
+                  accentBg: "hsl(260, 75%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(258, 72%, 55%) 0%, hsla(265, 78%, 65%, 0.7) 100%)",
                 },
               };
 
