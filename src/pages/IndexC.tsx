@@ -41,7 +41,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 
 const IndexB = () => {
   const navigate = useNavigate();
-  const { boldCards, centerBar } = useVersionCSettings();
+  const { boldCards, centerBar, logoLeft } = useVersionCSettings();
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -98,7 +98,11 @@ const IndexB = () => {
             <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
               <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
             </button>
-            <img src={finanseeLogo} alt="finansee" className="h-5 w-auto absolute left-1/2 -translate-x-1/2" />
+            <img
+              src={finanseeLogo}
+              alt="finansee"
+              className={`h-5 w-auto absolute ${logoLeft ? "left-0" : "left-1/2 -translate-x-1/2"}`}
+            />
           </div>
           <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
