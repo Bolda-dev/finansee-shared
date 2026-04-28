@@ -39,7 +39,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
   );
 };
 
-const IndexB = () => {
+const IndexD = () => {
   const navigate = useNavigate();
   const { boldCards, centerBar } = useVersionCSettings();
   const [chatOpen, setChatOpen] = useState(false);
@@ -79,14 +79,14 @@ const IndexB = () => {
   const rightNav = navItems.slice(2, 4);
 
   return (
-    <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: "hsl(235, 30%, 97%)" }}>
+    <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: "hsl(222, 35%, 5%)" }}>
       {/* Soft gradient background */}
       <div className="absolute inset-x-0 top-0 h-[520px] z-0 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, hsl(0, 0%, 100%) 0%, hsl(230, 20%, 96%) 60%, hsl(235, 30%, 97%) 100%)",
+              "radial-gradient(ellipse 90% 60% at 50% 0%, hsl(218, 90%, 22%) 0%, hsl(222, 60%, 10%) 50%, hsl(222, 40%, 5%) 100%)",
           }}
         />
       </div>
@@ -95,12 +95,12 @@ const IndexB = () => {
       <div className="relative z-10 px-5 pt-6 pb-0" dir="rtl">
         <div className="flex flex-col items-start gap-4 text-start">
           <div className="relative flex items-center w-full">
-            <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
-              <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
+            <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(220, 40%, 18%, 0.55)", backdropFilter: "blur(14px)", border: "1px solid hsla(210, 90%, 70%, 0.18)" }}>
+              <Menu className="h-5 w-5" style={{ color: "hsl(210, 30%, 92%)" }} />
             </button>
             <img src={finanseeLogo} alt="finansee" className="h-5 w-auto absolute left-1/2 -translate-x-1/2" />
           </div>
-          <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
+          <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(210, 30%, 96%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
       </div>
 
@@ -110,22 +110,22 @@ const IndexB = () => {
           {/* Net worth header block */}
           <div className="mb-6">
             <div className="flex items-center justify-start gap-1.5 mb-2">
-              <p className="text-sm font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>שווי נטו</p>
-              <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 30%, 55%)" }} />
+              <p className="text-sm font-medium" style={{ color: "hsl(215, 30%, 75%)" }}>שווי נטו</p>
+              <Info className="h-3.5 w-3.5" style={{ color: "hsl(215, 25%, 60%)" }} />
             </div>
             <div className="flex items-center justify-start gap-3 mb-1">
               <p
                 className="font-extrabold tracking-tight text-4xl"
-                style={{ color: "hsl(250, 50%, 12%)" }}
+                style={{ color: "hsl(0, 0%, 100%)" }}
               >
                 {formatCurrency(userData.currentPotential)}
               </p>
               <span
                 className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
                 style={{
-                  background: "hsla(250, 50%, 99%, 0.7)",
-                  border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                  color: "hsl(262, 75%, 48%)",
+                  background: "hsla(195, 90%, 50%, 0.12)",
+                  border: "1px solid hsla(195, 90%, 60%, 0.35)",
+                  color: "hsl(195, 90%, 75%)",
                   backdropFilter: "blur(8px)",
                 }}
               >
@@ -133,7 +133,7 @@ const IndexB = () => {
                 1.8%+
               </span>
             </div>
-            <p className="text-[11px] text-start" style={{ color: "hsl(230, 15%, 55%)" }}>
+            <p className="text-[11px] text-start" style={{ color: "hsl(215, 20%, 60%)" }}>
               עודכן היום בשעה 09:41
             </p>
           </div>
@@ -151,7 +151,7 @@ const IndexB = () => {
                 outline: "hsla(222, 80%, 45%, 0.08)",
                 iconColor: "hsl(222, 85%, 45%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
-                onClick: () => navigate("/c/assets"),
+                onClick: () => navigate("/d/assets"),
               },
               {
                 label: "התחייבויות",
@@ -163,7 +163,7 @@ const IndexB = () => {
                 outline: "hsla(176, 70%, 28%, 0.18)",
                 iconColor: "hsl(178, 70%, 30%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
-                onClick: () => navigate("/c/liabilities"),
+                onClick: () => navigate("/d/liabilities"),
               },
               {
                 label: "ביטוח",
@@ -175,7 +175,7 @@ const IndexB = () => {
                 outline: "hsla(262, 72%, 50%, 0.08)",
                 iconColor: "hsl(262, 75%, 52%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
-                onClick: () => navigate("/c/insurance"),
+                onClick: () => navigate("/d/insurance"),
               },
             ].map((card) => (
               <button
@@ -186,13 +186,13 @@ const IndexB = () => {
                   boldCards
                     ? {
                         background: card.gradient,
-                        boxShadow: `0 8px 24px ${card.glow.replace(/0\.0?\d+\)$/, "0.4)")}`,
+                        boxShadow: `0 12px 36px ${card.glow.replace(/0\.0?\d+\)$/, "0.65)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.25)`,
                         minHeight: "140px",
                       }
                     : {
-                        background: "white",
-                        boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-                        border: `1px solid ${card.outline}`,
+                        background: "linear-gradient(160deg, hsla(220, 35%, 15%, 0.85) 0%, hsla(220, 40%, 9%, 0.9) 100%)",
+                        boxShadow: `0 8px 28px hsla(0, 0%, 0%, 0.45), inset 0 1px 0 hsla(210, 100%, 80%, 0.12), 0 0 24px ${card.glow.replace(/0\.0?\d+\)$/, "0.35)")}`,
+                        border: `1px solid hsla(210, 90%, 70%, 0.12)`,
                         minHeight: "140px",
                       }
                 }
@@ -211,13 +211,13 @@ const IndexB = () => {
                 <div className="relative z-10">
                   <p
                     className="text-[11px] font-medium mb-1"
-                    style={{ color: boldCards ? "hsla(0, 0%, 100%, 0.9)" : "hsl(230, 12%, 58%)" }}
+                    style={{ color: boldCards ? "hsla(0, 0%, 100%, 0.9)" : "hsl(215, 25%, 70%)" }}
                   >
                     {card.label}
                   </p>
                   <p
                     className="font-extrabold text-base"
-                    style={{ color: boldCards ? "white" : "hsl(250, 50%, 12%)" }}
+                    style={{ color: "white" }}
                   >
                     {card.value}
                   </p>
@@ -244,16 +244,16 @@ const IndexB = () => {
                   }}
                   className="text-right rounded-2xl rounded-br-sm px-3.5 py-2.5 flex items-start gap-2"
                   style={{
-                    background: "white",
-                    border: "1px solid hsl(230, 20%, 92%)",
-                    boxShadow: "0 10px 28px hsla(250, 30%, 25%, 0.18), 0 2px 6px hsla(250, 30%, 25%, 0.08)",
+                    background: "linear-gradient(160deg, hsla(220, 35%, 18%, 0.95) 0%, hsla(220, 40%, 11%, 0.97) 100%)",
+                    border: "1px solid hsla(210, 90%, 70%, 0.18)",
+                    boxShadow: "0 14px 36px hsla(0, 0%, 0%, 0.6), inset 0 1px 0 hsla(210, 100%, 80%, 0.14)",
                     animation: "bubble-pop 0.55s cubic-bezier(0.22, 1.4, 0.36, 1) both",
                     transformOrigin: "bottom right",
                     whiteSpace: "nowrap",
                   }}
                   aria-label="פתח את דנה"
                 >
-                  <span className="text-xs leading-snug" style={{ color: "hsl(250, 35%, 20%)" }}>
+                  <span className="text-xs leading-snug" style={{ color: "hsl(210, 30%, 92%)" }}>
                     יש לך 3 פעולות חדשות להעלות את השווי נטו שלך :)
                   </span>
                 </button>
@@ -264,9 +264,9 @@ const IndexB = () => {
               onClick={() => setActionsOpen(true)}
               className="relative w-full rounded-2xl p-4 text-start flex items-center gap-3 overflow-hidden transition-transform hover:scale-[1.01] active:scale-[0.99]"
               style={{
-                background: "white",
-                boxShadow: "0 4px 18px hsla(250, 30%, 25%, 0.08)",
-                border: "1px solid hsl(230, 20%, 93%)",
+                background: "linear-gradient(160deg, hsla(220, 35%, 15%, 0.85) 0%, hsla(220, 40%, 9%, 0.9) 100%)",
+                boxShadow: "0 10px 32px hsla(0, 0%, 0%, 0.5), inset 0 1px 0 hsla(210, 100%, 80%, 0.12), 0 0 28px hsla(195, 90%, 50%, 0.18)",
+                border: "1px solid hsla(210, 90%, 70%, 0.14)",
               }}
             >
               {/* Avatar with rotating tri-color ring + badge */}
@@ -289,7 +289,7 @@ const IndexB = () => {
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <p className="text-sm font-bold text-primary" style={{ color: "hsl(250, 40%, 18%)" }}>
+                  <p className="text-sm font-bold text-primary" style={{ color: "hsl(210, 30%, 95%)" }}>
                     התובנות של דנה
                   </p>
                   <span
@@ -297,17 +297,17 @@ const IndexB = () => {
                     style={{ background: "hsl(150, 65%, 48%)", boxShadow: "0 0 0 3px hsla(150, 65%, 48%, 0.18)" }}
                   />
                 </div>
-                <p className="text-[11px] mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>
+                <p className="text-[11px] mt-0.5" style={{ color: "hsl(215, 20%, 65%)" }}>
                   פעולות לשיפור מחכות לך
                 </p>
               </div>
 
-              <ChevronLeft className="h-4 w-4 flex-shrink-0" style={{ color: "hsl(230, 15%, 55%)" }} />
+              <ChevronLeft className="h-4 w-4 flex-shrink-0" style={{ color: "hsl(215, 20%, 60%)" }} />
             </button>
           </div>
 
           {/* Financial Center */}
-          <h2 className="text-sm font-bold text-primary mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>מרכז פיננסי</h2>
+          <h2 className="text-sm font-bold text-primary mb-3" style={{ color: "hsl(210, 30%, 92%)" }}>מרכז פיננסי</h2>
           <div className="grid grid-cols-2 gap-3 pb-32">
             {(() => {
               type Category = "assets" | "liabilities" | "insurance";
@@ -346,7 +346,7 @@ const IndexB = () => {
                 { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
                 { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
                 { label: "משכנתא", Icon: Building2, value: "₪1,110,000", subLabel: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי", extraSuffix: "/חודש", badge: 1, category: "liabilities" },
-                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/c/insurance") },
+                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/d/insurance") },
               ];
 
               return cards.map((card) => {
@@ -357,9 +357,9 @@ const IndexB = () => {
                     onClick={card.onClick}
                     className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     style={{
-                      background: "white",
-                      boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-                      border: "1px solid hsl(230, 20%, 94%)",
+                      background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.92) 100%)",
+                      boxShadow: "0 8px 24px hsla(0, 0%, 0%, 0.45), inset 0 1px 0 hsla(210, 100%, 80%, 0.1)",
+                      border: "1px solid hsla(210, 80%, 65%, 0.12)",
                       minHeight: "150px",
                     }}
                   >
@@ -375,7 +375,7 @@ const IndexB = () => {
                       <span className="relative">
                         <span
                           className="w-9 h-9 rounded-full flex items-center justify-center"
-                          style={{ background: centerBar ? "hsl(230, 20%, 95%)" : colors.accentBg }}
+                          style={{ background: centerBar ? "hsla(210, 30%, 25%, 0.5)" : colors.accentBg }}
                         >
                           <card.Icon
                             className="h-4 w-4"
@@ -394,7 +394,7 @@ const IndexB = () => {
                       </span>
                       <span
                         className="text-[12px] font-bold tracking-tight"
-                        style={{ color: "hsl(250, 50%, 12%)" }}
+                        style={{ color: "hsl(0, 0%, 100%)" }}
                       >
                         {card.label}
                       </span>
@@ -403,30 +403,30 @@ const IndexB = () => {
                     <div className="flex items-baseline gap-1 flex-wrap">
                       <p
                         className="text-[22px] font-extrabold tracking-tight leading-none"
-                        style={{ color: "hsl(250, 50%, 12%)" }}
+                        style={{ color: "hsl(0, 0%, 100%)" }}
                       >
                         {card.value}
                       </p>
                       {!card.extra && card.extraSuffix && (
-                        <span className="text-[10px]" style={{ color: "hsl(230, 12%, 58%)" }}>
+                        <span className="text-[10px]" style={{ color: "hsl(215, 20%, 60%)" }}>
                           {card.extraSuffix}
                         </span>
                       )}
                     </div>
                     {card.subLabel && (
-                      <p className="text-[10px] mt-1" style={{ color: "hsl(230, 12%, 58%)" }}>
+                      <p className="text-[10px] mt-1" style={{ color: "hsl(215, 20%, 60%)" }}>
                         {card.subLabel}
                       </p>
                     )}
 
                     {card.extra && (
-                      <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
+                      <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsla(210, 80%, 65%, 0.12)" }}>
                         <p className="text-[11px] leading-none whitespace-nowrap">
-                          <span className="font-bold" style={{ color: "hsl(250, 50%, 12%)" }}>
+                          <span className="font-bold" style={{ color: "hsl(0, 0%, 100%)" }}>
                             {card.extra}
                           </span>
-                          <span className="mx-1" style={{ color: "hsl(250, 50%, 12%)" }}>·</span>
-                          <span style={{ color: "hsl(250, 50%, 12%)" }}>
+                          <span className="mx-1" style={{ color: "hsl(0, 0%, 100%)" }}>·</span>
+                          <span style={{ color: "hsl(0, 0%, 100%)" }}>
                             {card.extraSub}
                           </span>
                         </p>
@@ -443,9 +443,9 @@ const IndexB = () => {
       {activeTab === "income" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-between mb-4">
-            <div className="rounded-2xl p-4 flex-1" style={{ background: "white", boxShadow: "0 4px 24px rgba(100,80,180,0.08)" }}>
-              <p className="text-xs" style={{ color: "hsl(230,15%,55%)" }}>סה״כ הכנסות חודשיות</p>
-              <p className="text-2xl font-extrabold mt-1" style={{ color: "hsl(250,40%,20%)" }}>
+            <div className="rounded-2xl p-4 flex-1" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.92) 100%)", boxShadow: "0 8px 24px hsla(0, 0%, 0%, 0.45), inset 0 1px 0 hsla(210, 100%, 80%, 0.1)", border: "1px solid hsla(210, 80%, 65%, 0.12)" }}>
+              <p className="text-xs" style={{ color: "hsl(215, 20%, 65%)" }}>סה״כ הכנסות חודשיות</p>
+              <p className="text-2xl font-extrabold mt-1" style={{ color: "hsl(210, 30%, 92%)" }}>
                 ₪{incomeItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
@@ -455,9 +455,9 @@ const IndexB = () => {
           </div>
           <div className="space-y-2">
             {incomeItems.map((item, i) => (
-              <div key={i} className="rounded-xl p-4 flex justify-between items-center" style={{ background: "white", boxShadow: "0 2px 8px rgba(100,80,180,0.05)" }}>
-                <span className="text-sm" style={{ color: "hsl(250,40%,20%)" }}>{item.label}</span>
-                <span className="text-sm font-bold" style={{ color: "hsl(250,60%,55%)" }}>₪{item.amount.toLocaleString("he-IL")}</span>
+              <div key={i} className="rounded-xl p-4 flex justify-between items-center" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.85) 0%, hsla(220, 42%, 8%, 0.9) 100%)", boxShadow: "0 4px 16px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)", border: "1px solid hsla(210, 80%, 65%, 0.1)" }}>
+                <span className="text-sm" style={{ color: "hsl(210, 30%, 92%)" }}>{item.label}</span>
+                <span className="text-sm font-bold" style={{ color: "hsl(195, 90%, 70%)" }}>₪{item.amount.toLocaleString("he-IL")}</span>
               </div>
             ))}
           </div>
@@ -467,9 +467,9 @@ const IndexB = () => {
       {activeTab === "expenses" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-between mb-4">
-            <div className="rounded-2xl p-4 flex-1" style={{ background: "white", boxShadow: "0 4px 24px rgba(100,80,180,0.08)" }}>
-              <p className="text-xs" style={{ color: "hsl(230,15%,55%)" }}>סה״כ הוצאות חודשיות</p>
-              <p className="text-2xl font-extrabold mt-1" style={{ color: "hsl(250,40%,20%)" }}>
+            <div className="rounded-2xl p-4 flex-1" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.92) 100%)", boxShadow: "0 8px 24px hsla(0, 0%, 0%, 0.45), inset 0 1px 0 hsla(210, 100%, 80%, 0.1)", border: "1px solid hsla(210, 80%, 65%, 0.12)" }}>
+              <p className="text-xs" style={{ color: "hsl(215, 20%, 65%)" }}>סה״כ הוצאות חודשיות</p>
+              <p className="text-2xl font-extrabold mt-1" style={{ color: "hsl(210, 30%, 92%)" }}>
                 ₪{expenseItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
@@ -479,8 +479,8 @@ const IndexB = () => {
           </div>
           <div className="space-y-2">
             {expenseItems.map((item, i) => (
-              <div key={i} className="rounded-xl p-4 flex justify-between items-center" style={{ background: "white", boxShadow: "0 2px 8px rgba(100,80,180,0.05)" }}>
-                <span className="text-sm" style={{ color: "hsl(250,40%,20%)" }}>{item.label}</span>
+              <div key={i} className="rounded-xl p-4 flex justify-between items-center" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.85) 0%, hsla(220, 42%, 8%, 0.9) 100%)", boxShadow: "0 4px 16px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)", border: "1px solid hsla(210, 80%, 65%, 0.1)" }}>
+                <span className="text-sm" style={{ color: "hsl(210, 30%, 92%)" }}>{item.label}</span>
                 <span className="text-sm font-bold" style={{ color: "hsl(0,60%,50%)" }}>₪{item.amount.toLocaleString("he-IL")}</span>
               </div>
             ))}
@@ -497,13 +497,13 @@ const IndexB = () => {
           </div>
           <div className="space-y-2">
             {insuranceItems.map((item, i) => (
-              <div key={i} className="rounded-xl p-4 flex justify-between items-center" style={{ background: "white", boxShadow: "0 2px 8px rgba(100,80,180,0.05)" }}>
+              <div key={i} className="rounded-xl p-4 flex justify-between items-center" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.85) 0%, hsla(220, 42%, 8%, 0.9) 100%)", boxShadow: "0 4px 16px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)", border: "1px solid hsla(210, 80%, 65%, 0.1)" }}>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full" style={{ background: item.status === "פעיל" ? "hsl(150,60%,45%)" : "hsl(30,80%,55%)" }} />
-                  <span className="text-sm" style={{ color: "hsl(250,40%,20%)" }}>{item.label}</span>
+                  <span className="text-sm" style={{ color: "hsl(210, 30%, 92%)" }}>{item.label}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs" style={{ color: "hsl(230,15%,55%)" }}>{item.coverage}</span>
+                  <span className="text-xs" style={{ color: "hsl(215, 20%, 65%)" }}>{item.coverage}</span>
                   <span className="text-[10px] font-medium px-2 py-0.5 rounded-full" style={{ background: item.status === "פעיל" ? "hsl(150,50%,93%)" : "hsl(30,70%,93%)", color: item.status === "פעיל" ? "hsl(150,50%,35%)" : "hsl(30,60%,40%)" }}>
                     {item.status}
                   </span>
@@ -521,9 +521,9 @@ const IndexB = () => {
           dir="rtl"
           className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
           style={{
-            background: "white",
-            boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
-            border: "1px solid hsl(230, 20%, 92%)",
+            background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 8%, 0.96) 100%)",
+            boxShadow: "0 14px 40px hsla(0, 0%, 0%, 0.55), inset 0 1px 0 hsla(210, 100%, 80%, 0.14), 0 0 30px hsla(195, 90%, 50%, 0.18)",
+            border: "1px solid hsla(210, 90%, 70%, 0.18)",
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
@@ -538,16 +538,16 @@ const IndexB = () => {
           </span>
 
           {/* Placeholder text — right-aligned */}
-          <span className="flex-1 text-start text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
+          <span className="flex-1 text-start text-sm" style={{ color: "hsl(215, 20%, 60%)" }}>
             שאל את Finansee AI
           </span>
 
           {/* Mic button */}
           <span
             className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: "hsl(230, 25%, 96%)", border: "1px solid hsl(230, 20%, 90%)" }}
+            style={{ background: "hsla(210, 40%, 22%, 0.6)", border: "1px solid hsla(210, 90%, 70%, 0.18)" }}
           >
-            <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
+            <Mic className="h-4 w-4" style={{ color: "hsl(215, 20%, 70%)" }} />
           </span>
 
           {/* Send button — left edge, with rotating tri-color ring */}
@@ -570,4 +570,4 @@ const IndexB = () => {
   );
 };
 
-export default IndexB;
+export default IndexD;
