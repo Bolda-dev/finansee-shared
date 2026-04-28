@@ -156,7 +156,7 @@ const Donut = ({
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>{centerLabel}</p>
-        <p className="text-base font-extrabold" style={{ color: "hsl(250, 45%, 15%)" }}>{centerValue}</p>
+        <p className="font-extrabold text-base text-primary-foreground" style={{ color: "hsl(250, 45%, 15%)" }}>{centerValue}</p>
       </div>
     </div>
   );

@@ -109,7 +109,7 @@ const IndexB = () => {
             </div>
             <div className="flex items-center justify-start gap-3 mb-1">
               <p
-                className="text-5xl font-extrabold tracking-tight"
+                className="font-extrabold tracking-tight text-4xl"
                 style={{ color: "hsl(250, 50%, 12%)" }}
               >
                 {formatCurrency(userData.currentPotential)}
@@ -208,7 +208,7 @@ const IndexB = () => {
                   <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(0, 0%, 100%, 0.9)" }}>
                     {card.label}
                   </p>
-                  <p className="text-lg font-extrabold" style={{ color: "white" }}>
+                  <p className="font-extrabold text-base text-primary-foreground" style={{ color: "white" }}>
                     {card.value}
                   </p>
                 </div>
