@@ -277,8 +277,8 @@ export const CategoryPageD = ({
             className="inline-flex items-center gap-2 pr-2 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
             style={{
               background: "white",
-              color: theme.accentText,
-              boxShadow: `0 8px 24px ${theme.sheetShadow}`,
+              color: "hsl(222, 47%, 8%)",
+              boxShadow: `0 8px 28px ${theme.sheetShadow}, 0 0 24px hsla(0, 0%, 100%, 0.25)`,
             }}
             aria-label={danaCtaText}
           >
