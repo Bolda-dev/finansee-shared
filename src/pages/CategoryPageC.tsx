@@ -355,16 +355,15 @@ export const CategoryPageC = ({
 
         {/* Item list */}
         {!innerGrid && (
-        <div
-          className="mx-4 mt-2 rounded-2xl overflow-hidden"
-          style={{
-            background: "white",
-            boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.05)",
-            border: "1px solid hsl(230, 20%, 94%)",
-          }}
-        >
+        <div className="mx-4 mt-2 flex flex-col gap-2.5">
           {filteredItems.length === 0 && (
-            <div className="px-4 py-8 text-center">
+            <div
+              className="px-4 py-8 text-center rounded-2xl"
+              style={{
+                background: "white",
+                border: "1px solid hsl(230, 20%, 94%)",
+              }}
+            >
               <p className="text-[12px]" style={{ color: "hsl(230, 15%, 55%)" }}>
                 {emptyText}
               </p>
@@ -373,15 +372,16 @@ export const CategoryPageC = ({
           {filteredItems.map((item, i) => {
             const Icon = iconMap[item.icon] || ShieldCheck;
             const isMissing = item.status === "חסר";
-            const isLast = i === filteredItems.length - 1;
             const isExpanded = !!item.expanded;
 
             return (
               <button
                 key={i}
-                className="w-full flex items-start gap-3 px-4 py-4 transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
+                className="w-full flex items-start gap-3 px-4 py-4 rounded-2xl transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
                 style={{
-                  borderBottom: isLast ? "none" : "1px solid hsl(230, 20%, 94%)",
+                  background: "white",
+                  boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.05)",
+                  border: "1px solid hsl(230, 20%, 94%)",
                 }}
                 dir="rtl"
               >
