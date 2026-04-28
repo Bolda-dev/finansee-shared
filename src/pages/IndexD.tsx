@@ -405,17 +405,13 @@ const IndexD = () => {
                     <div className="flex items-center justify-start gap-2 mb-1">
                       <span className="relative">
                         <span
-                          className="w-9 h-9 rounded-full flex items-center justify-center"
+                          className="w-11 h-11 rounded-xl flex items-center justify-center"
                           style={{
-                            background: centerBar ? "hsla(210, 30%, 25%, 0.5)" : colors.accentBg,
-                            border: centerBar ? "1px solid hsla(210, 90%, 70%, 0.18)" : colors.accentBorder,
-                            boxShadow: centerBar ? "none" : `0 0 14px ${colors.glow}, inset 0 1px 0 hsla(0, 0%, 100%, 0.15)`,
-                            backdropFilter: "blur(6px)",
+                            background: colors.accentBg,
                           }}
                         >
                           <card.Icon
-                            className="h-4 w-4"
-                            style={{ color: centerBar ? "hsl(215, 25%, 75%)" : colors.accent }}
+                            style={{ color: colors.accent, width: "20px", height: "20px" }}
                             strokeWidth={2}
                           />
                         </span>
