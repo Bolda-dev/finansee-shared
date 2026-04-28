@@ -20,11 +20,11 @@ const InsurancePageC = () => {
       title="ביטוח"
       theme={{
         gradient:
-          "linear-gradient(160deg, hsl(270, 78%, 52%) 0%, hsl(278, 82%, 60%) 55%, hsl(288, 88%, 70%) 100%)",
-        accent: "hsl(280, 75%, 50%)",
-        accentBg: "hsl(280, 70%, 95%)",
-        accentText: "hsl(280, 60%, 30%)",
-        sheetShadow: "hsla(280, 60%, 25%, 0.35)",
+          "linear-gradient(160deg, hsl(258, 72%, 52%) 0%, hsl(265, 78%, 62%) 55%, hsl(275, 85%, 75%) 100%)",
+        accent: "hsl(262, 75%, 52%)",
+        accentBg: "hsl(260, 75%, 95%)",
+        accentText: "hsl(262, 65%, 28%)",
+        sheetShadow: "hsla(262, 65%, 25%, 0.35)",
       }}
       items={items}
       filters={[

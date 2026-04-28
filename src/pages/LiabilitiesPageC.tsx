@@ -12,11 +12,11 @@ const LiabilitiesPageC = () => {
       title="התחייבויות"
       theme={{
         gradient:
-          "linear-gradient(160deg, hsl(18, 90%, 50%) 0%, hsl(28, 95%, 58%) 55%, hsl(38, 100%, 68%) 100%)",
-        accent: "hsl(22, 90%, 48%)",
-        accentBg: "hsl(28, 90%, 95%)",
-        accentText: "hsl(22, 80%, 32%)",
-        sheetShadow: "hsla(22, 80%, 25%, 0.35)",
+          "linear-gradient(160deg, hsl(170, 80%, 35%) 0%, hsl(175, 75%, 48%) 55%, hsl(180, 80%, 65%) 100%)",
+        accent: "hsl(172, 80%, 35%)",
+        accentBg: "hsl(170, 70%, 93%)",
+        accentText: "hsl(172, 70%, 22%)",
+        sheetShadow: "hsla(172, 75%, 22%, 0.35)",
       }}
       items={items}
       filters={[
@@ -55,7 +55,7 @@ const LiabilitiesPageC = () => {
           {item.monthly ? (
             <span
               className="block text-[10px] font-medium"
-              style={{ color: "hsl(22, 80%, 45%)" }}
+              style={{ color: "hsl(172, 70%, 30%)" }}
             >
               -{formatNIS(item.monthly)}/חודש
             </span>
