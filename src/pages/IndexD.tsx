@@ -5,7 +5,7 @@ import finanseeLogo from "@/assets/finansee-logo.png";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
-import { InsightsSheet } from "@/components/InsightsSheet";
+import { InsightsSheetD as InsightsSheet } from "@/components/InsightsSheetD";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 import { useVersionCSettings } from "@/contexts/VersionCSettings";
@@ -583,13 +583,15 @@ const IndexD = () => {
             <Mic className="h-4 w-4" style={{ color: "hsl(215, 20%, 70%)" }} />
           </span>
 
-          {/* Send button — left edge, with rotating tri-color ring */}
-          <span className="tri-ring relative w-9 h-9 rounded-full flex-shrink-0">
-            <span
-              className="flex w-full h-full rounded-full items-center justify-center cta-tri"
-            >
-              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
-            </span>
+          {/* Send button — white with black icon */}
+          <span
+            className="flex w-9 h-9 rounded-full items-center justify-center flex-shrink-0"
+            style={{
+              background: "white",
+              boxShadow: "0 4px 14px hsla(0, 0%, 100%, 0.25), 0 0 14px hsla(0, 0%, 100%, 0.18)",
+            }}
+          >
+            <Send className="h-4 w-4 -rotate-90" style={{ color: "hsl(222, 47%, 8%)" }} />
           </span>
         </button>
       </div>
