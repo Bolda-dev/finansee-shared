@@ -331,21 +331,27 @@ const IndexD = () => {
           <div className="grid grid-cols-2 gap-3 pb-32">
             {(() => {
               type Category = "assets" | "liabilities" | "insurance";
-              const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
+              const categoryColors: Record<Category, { accent: string; accentBg: string; accentBorder: string; bar: string; glow: string }> = {
                 assets: {
-                  accent: "hsl(222, 85%, 45%)",
-                  accentBg: "hsl(220, 85%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(220, 85%, 48%) 0%, hsla(225, 90%, 60%, 0.7) 100%)",
+                  accent: "hsl(195, 100%, 75%)",
+                  accentBg: "linear-gradient(135deg, hsla(200, 100%, 55%, 0.22) 0%, hsla(195, 100%, 60%, 0.12) 100%)",
+                  accentBorder: "1px solid hsla(195, 100%, 70%, 0.4)",
+                  bar: "linear-gradient(90deg, hsl(210, 100%, 55%) 0%, hsla(195, 100%, 65%, 0.85) 100%)",
+                  glow: "hsla(200, 100%, 55%, 0.5)",
                 },
                 liabilities: {
-                  accent: "hsl(178, 70%, 30%)",
-                  accentBg: "hsl(176, 55%, 91%)",
-                  bar: "linear-gradient(90deg, hsl(178, 70%, 32%) 0%, hsla(174, 65%, 42%, 0.7) 100%)",
+                  accent: "hsl(162, 95%, 70%)",
+                  accentBg: "linear-gradient(135deg, hsla(168, 95%, 50%, 0.22) 0%, hsla(162, 90%, 55%, 0.12) 100%)",
+                  accentBorder: "1px solid hsla(162, 95%, 65%, 0.4)",
+                  bar: "linear-gradient(90deg, hsl(168, 95%, 50%) 0%, hsla(162, 95%, 60%, 0.85) 100%)",
+                  glow: "hsla(168, 95%, 50%, 0.5)",
                 },
                 insurance: {
-                  accent: "hsl(262, 75%, 52%)",
-                  accentBg: "hsl(260, 75%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(258, 72%, 55%) 0%, hsla(265, 78%, 65%, 0.7) 100%)",
+                  accent: "hsl(285, 95%, 78%)",
+                  accentBg: "linear-gradient(135deg, hsla(280, 95%, 60%, 0.22) 0%, hsla(290, 95%, 68%, 0.12) 100%)",
+                  accentBorder: "1px solid hsla(285, 95%, 75%, 0.4)",
+                  bar: "linear-gradient(90deg, hsl(275, 95%, 60%) 0%, hsla(290, 95%, 70%, 0.85) 100%)",
+                  glow: "hsla(280, 95%, 60%, 0.5)",
                 },
               };
 
@@ -395,11 +401,16 @@ const IndexD = () => {
                       <span className="relative">
                         <span
                           className="w-9 h-9 rounded-full flex items-center justify-center"
-                          style={{ background: centerBar ? "hsla(210, 30%, 25%, 0.5)" : colors.accentBg }}
+                          style={{
+                            background: centerBar ? "hsla(210, 30%, 25%, 0.5)" : colors.accentBg,
+                            border: centerBar ? "1px solid hsla(210, 90%, 70%, 0.18)" : colors.accentBorder,
+                            boxShadow: centerBar ? "none" : `0 0 14px ${colors.glow}, inset 0 1px 0 hsla(0, 0%, 100%, 0.15)`,
+                            backdropFilter: "blur(6px)",
+                          }}
                         >
                           <card.Icon
                             className="h-4 w-4"
-                            style={{ color: centerBar ? "hsl(230, 12%, 45%)" : colors.accent }}
+                            style={{ color: centerBar ? "hsl(215, 25%, 75%)" : colors.accent }}
                             strokeWidth={2}
                           />
                         </span>
