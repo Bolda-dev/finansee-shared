@@ -42,7 +42,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 
 const IndexD = () => {
   const navigate = useNavigate();
-  const { logoLeft } = useVersionCSettings();
+  const { logoLeft, filledIconsD } = useVersionCSettings();
   // Version D always renders in glassy/dark mode without bold colors or decorative bar.
   // Only `innerGrid` (list/card view) is exposed via the menu toggle.
   const boldCards = false;
