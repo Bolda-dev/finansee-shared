@@ -27,7 +27,7 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const navigate = useNavigate();
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
-  const { boldCards, centerBar, innerGrid, setBoldCards, setCenterBar, setInnerGrid } = useVersionCSettings();
+  const { boldCards, centerBar, innerGrid, logoLeft, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft } = useVersionCSettings();
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -63,6 +63,10 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
                 <Switch dir="ltr" checked={innerGrid} onCheckedChange={setInnerGrid} />
+              </div>
+              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
+                <span className="text-sm font-medium text-foreground">לוגו — צמוד לשמאל</span>
+                <Switch dir="ltr" checked={logoLeft} onCheckedChange={setLogoLeft} />
               </div>
             </div>
           )}
