@@ -290,7 +290,7 @@ const IndexD = () => {
               className="relative w-full rounded-2xl p-4 text-start flex items-center gap-3 overflow-hidden transition-transform hover:scale-[1.01] active:scale-[0.99]"
               style={{
                 background: "linear-gradient(160deg, hsla(220, 35%, 15%, 0.85) 0%, hsla(220, 40%, 9%, 0.9) 100%)",
-                boxShadow: "0 10px 32px hsla(0, 0%, 0%, 0.5), inset 0 1px 0 hsla(210, 100%, 80%, 0.12), 0 0 28px hsla(195, 90%, 50%, 0.18)",
+                boxShadow: "0 10px 32px hsla(0, 0%, 0%, 0.5), inset 0 1px 0 hsla(210, 100%, 80%, 0.12), 0 0 8px hsla(195, 90%, 50%, 0.05)",
                 border: "1px solid hsla(210, 90%, 70%, 0.14)",
               }}
             >
@@ -307,7 +307,7 @@ const IndexD = () => {
                   style={{
                     background: "hsl(0, 90%, 60%)",
                     border: "2px solid hsl(222, 35%, 5%)",
-                    boxShadow: "0 0 14px hsla(0, 90%, 60%, 0.7)",
+                    boxShadow: "0 0 4px hsla(0, 90%, 60%, 0.25)",
                   }}
                 >
                   3
@@ -420,7 +420,7 @@ const IndexD = () => {
                         {card.badge && (
                           <span
                             className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
-                            style={{ background: "hsl(0, 90%, 60%)", border: "2px solid hsl(222, 35%, 5%)", boxShadow: "0 0 14px hsla(0, 90%, 60%, 0.7)" }}
+                            style={{ background: "hsl(0, 90%, 60%)", border: "2px solid hsl(222, 35%, 5%)", boxShadow: "0 0 4px hsla(0, 90%, 60%, 0.25)" }}
                           >
                             {card.badge}
                           </span>
@@ -556,7 +556,7 @@ const IndexD = () => {
           className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
           style={{
             background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 8%, 0.96) 100%)",
-            boxShadow: "0 14px 40px hsla(0, 0%, 0%, 0.55), inset 0 1px 0 hsla(210, 100%, 80%, 0.14), 0 0 30px hsla(195, 90%, 50%, 0.18)",
+            boxShadow: "0 14px 40px hsla(0, 0%, 0%, 0.55), inset 0 1px 0 hsla(210, 100%, 80%, 0.14), 0 0 8px hsla(195, 90%, 50%, 0.05)",
             border: "1px solid hsla(210, 90%, 70%, 0.18)",
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
@@ -589,7 +589,7 @@ const IndexD = () => {
             className="flex w-9 h-9 rounded-full items-center justify-center flex-shrink-0"
             style={{
               background: "white",
-              boxShadow: "0 4px 14px hsla(0, 0%, 100%, 0.25), 0 0 14px hsla(0, 0%, 100%, 0.18)",
+              boxShadow: "0 4px 14px hsla(0, 0%, 100%, 0.25), 0 0 4px hsla(0, 0%, 100%, 0.06)",
             }}
           >
             <Send className="h-4 w-4 -rotate-90" style={{ color: "hsl(222, 47%, 8%)" }} />
