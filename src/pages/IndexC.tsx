@@ -26,8 +26,8 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
         <circle cx="100" cy="100" r={radius} fill="none" stroke="url(#gaugeGradient)" strokeWidth={stroke} strokeLinecap="round" strokeDasharray={`${arcLength} ${circumference}`} strokeDashoffset={offset} transform="rotate(135 100 100)" style={{ transition: "stroke-dashoffset 1.5s ease-out" }} />
         <defs>
           <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(265, 60%, 35%)" />
-            <stop offset="100%" stopColor="hsl(290, 70%, 60%)" />
+            <stop offset="0%" stopColor="hsl(225, 75%, 38%)" />
+            <stop offset="100%" stopColor="hsl(215, 85%, 60%)" />
           </linearGradient>
         </defs>
         <text x="100" y="88" textAnchor="middle" className="text-[11px]" fill="hsl(230, 20%, 55%)" fontFamily="inherit">המצב הנוכחי שלך</text>
@@ -307,19 +307,19 @@ const IndexB = () => {
               type Category = "assets" | "liabilities" | "insurance";
               const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
                 assets: {
-                  accent: "hsl(195, 85%, 42%)",
-                  accentBg: "hsl(190, 80%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(190, 85%, 50%) 0%, hsla(195, 90%, 62%, 0.7) 100%)",
+                  accent: "hsl(220, 85%, 42%)",
+                  accentBg: "hsl(215, 80%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(222, 85%, 48%) 0%, hsla(215, 90%, 60%, 0.7) 100%)",
                 },
                 liabilities: {
-                  accent: "hsl(22, 90%, 48%)",
-                  accentBg: "hsl(28, 90%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(18, 90%, 55%) 0%, hsla(28, 95%, 62%, 0.7) 100%)",
+                  accent: "hsl(245, 60%, 48%)",
+                  accentBg: "hsl(240, 70%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(245, 65%, 52%) 0%, hsla(240, 70%, 62%, 0.7) 100%)",
                 },
                 insurance: {
-                  accent: "hsl(280, 75%, 50%)",
-                  accentBg: "hsl(280, 70%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(270, 75%, 55%) 0%, hsla(282, 80%, 65%, 0.7) 100%)",
+                  accent: "hsl(260, 70%, 50%)",
+                  accentBg: "hsl(258, 70%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(260, 70%, 52%) 0%, hsla(255, 75%, 64%, 0.7) 100%)",
                 },
               };
 
