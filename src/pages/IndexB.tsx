@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info, Send, Mic, ChevronLeft, PiggyBank, Landmark, Briefcase, CreditCard, Building2, LineChart, Sparkles, MessageCircle } from "lucide-react";
+import finanseeLogo from "@/assets/finansee-logo.png";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
@@ -91,9 +92,12 @@ const IndexB = () => {
       {/* Header */}
       <div className="relative z-10 px-5 pt-6 pb-0" dir="rtl">
         <div className="flex flex-col items-start gap-4 text-start">
-          <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
-            <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
-          </button>
+          <div className="flex items-center gap-3 w-full">
+            <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
+              <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
+            </button>
+            <img src={finanseeLogo} alt="finansee" className="h-5 w-auto" />
+          </div>
           <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
       </div>
