@@ -421,141 +421,49 @@ export const InsightsSheetD = ({ open, onOpenChange, mode = "context" }: Insight
           {/* === ACTIONS MODE: 3 compact cards in a 2-col grid + selection + single CTA, no surrounding bubble === */}
           {stage === "insights" && mode === "actions" && (
             <div className="mb-3 animate-fade-in" dir="rtl">
-              {/* Toggle between two display modes */}
-              <div
-                className="flex p-1 rounded-full mb-3 mx-auto"
-                style={{
-                  background: "hsla(220, 35%, 14%, 0.85)",
-                  border: "1px solid hsla(210, 80%, 65%, 0.18)",
-                  width: "fit-content",
-                }}
-              >
-                {([
-                  { key: "radio" as const, label: "מומלץ" },
-                  { key: "list" as const, label: "כל הפעולות" },
-                ]).map((opt) => {
-                  const isActive = actionsView === opt.key;
+              <div className="space-y-2">
+                {(Object.keys(actionsConfig) as ActionKey[]).map((key) => {
+                  const t = actionsConfig[key];
+                  const Icon = t.Icon;
                   return (
-                    <button
-                      key={opt.key}
-                      onClick={() => setActionsView(opt.key)}
-                      className="px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all"
+                    <div
+                      key={key}
+                      className="rounded-xl p-3 flex items-start gap-3 text-right"
                       style={{
-                        background: isActive
-                          ? "white"
-                          : "transparent",
-                        color: isActive ? "hsl(222, 47%, 8%)" : "hsl(215, 25%, 75%)",
-                        boxShadow: isActive ? "0 4px 14px hsla(0, 0%, 100%, 0.25)" : "none",
+                        background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.94) 100%)",
+                        border: "1px solid hsla(210, 80%, 65%, 0.14)",
+                        boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)",
                       }}
                     >
-                      {opt.label}
-                    </button>
+                      <div
+                        className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ background: t.accentBg }}
+                      >
+                        <Icon className="h-4 w-4" style={{ color: t.accent }} strokeWidth={2.5} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-[9px] font-bold tracking-wide" style={{ color: t.accent }}>
+                            {t.label}
+                          </span>
+                        </div>
+                        <p className="text-[12px] font-extrabold tracking-tight leading-tight mb-1" style={{ color: "hsl(0, 0%, 100%)" }}>
+                          {t.title}
+                        </p>
+                        <p className="text-[10px] leading-snug mb-2" style={{ color: "hsl(215, 25%, 75%)" }}>
+                          {t.description}
+                        </p>
+                        <div className="flex justify-start" dir="ltr">
+                          <button className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]" style={{ background: "white", color: "hsl(222, 47%, 8%)", boxShadow: "0 4px 14px hsla(0, 0%, 100%, 0.22)" }}>
+                            {t.cta}
+                            <ArrowLeft className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   );
                 })}
               </div>
-
-              {actionsView === "radio" && (
-                <>
-                  <p className="text-[11px] mb-2.5 px-1 text-right" style={{ color: "hsl(210, 30%, 92%)" }}>
-                    הנה 3 פעולות לשיפור שהכנתי לך 👇
-                  </p>
-
-                  {/* Compact cards — 2 per row, no outer bubble */}
-                  <div className="grid grid-cols-2 gap-2">
-                    {(Object.keys(actionsConfig) as ActionKey[]).map((key) => {
-                      const t = actionsConfig[key];
-                      const Icon = t.Icon;
-                      const isSelected = selectedAction === key;
-                      return (
-                        <button
-                          key={key}
-                          onClick={() => setSelectedAction(key)}
-                          className="relative rounded-xl p-2.5 flex flex-col gap-1.5 overflow-hidden text-right transition-all hover:scale-[1.02] active:scale-[0.98]"
-                          style={{
-                            background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.94) 100%)",
-                            boxShadow: isSelected
-                              ? `0 6px 20px hsla(0, 0%, 0%, 0.5), 0 0 0 2px ${t.accent}, 0 0 24px ${t.accent.replace("hsl", "hsla").replace(")", ", 0.4)")}`
-                              : "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)",
-                            border: isSelected ? "1px solid transparent" : "1px solid hsla(210, 80%, 65%, 0.14)",
-                          }}
-                        >
-                          <div className="flex items-center gap-1.5">
-                            <Icon className="h-3 w-3 flex-shrink-0" style={{ color: t.accent }} strokeWidth={2.5} />
-                            <span className="text-[10px] font-bold tracking-wide" style={{ color: t.accent }}>
-                              {t.label}
-                            </span>
-                          </div>
-                          <p className="text-[12px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(0, 0%, 100%)" }}>
-                            {t.title}
-                          </p>
-                          <p className="text-[10px] leading-snug" style={{ color: "hsl(215, 25%, 75%)" }}>
-                            {t.description}
-                          </p>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Single CTA for the selected card */}
-                  {(() => {
-                    const sel = actionsConfig[selectedAction];
-                    return (
-                      <div className="mt-3 flex justify-start" dir="ltr">
-                        <button className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]" style={{ background: "white", color: "hsl(222, 47%, 8%)", boxShadow: "0 6px 20px hsla(0, 0%, 100%, 0.25), 0 0 18px hsla(0, 0%, 100%, 0.15)" }}>
-                          {sel.cta}
-                          <ArrowLeft className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    );
-                  })()}
-                </>
-              )}
-
-              {actionsView === "list" && (
-                <div className="space-y-2">
-                  {(Object.keys(actionsConfig) as ActionKey[]).map((key) => {
-                    const t = actionsConfig[key];
-                    const Icon = t.Icon;
-                    return (
-                      <div
-                        key={key}
-                        className="rounded-xl p-3 flex items-start gap-3 text-right"
-                        style={{
-                          background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.94) 100%)",
-                          border: "1px solid hsla(210, 80%, 65%, 0.14)",
-                          boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)",
-                        }}
-                      >
-                        <div
-                          className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                          style={{ background: t.accentBg }}
-                        >
-                          <Icon className="h-4 w-4" style={{ color: t.accent }} strokeWidth={2.5} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5 mb-0.5">
-                            <span className="text-[9px] font-bold tracking-wide" style={{ color: t.accent }}>
-                              {t.label}
-                            </span>
-                          </div>
-                          <p className="text-[12px] font-extrabold tracking-tight leading-tight mb-1" style={{ color: "hsl(0, 0%, 100%)" }}>
-                            {t.title}
-                          </p>
-                          <p className="text-[10px] leading-snug mb-2" style={{ color: "hsl(215, 25%, 75%)" }}>
-                            {t.description}
-                          </p>
-                          <div className="flex justify-start" dir="ltr">
-                            <button className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]" style={{ background: "white", color: "hsl(222, 47%, 8%)", boxShadow: "0 4px 14px hsla(0, 0%, 100%, 0.22)" }}>
-                              {t.cta}
-                              <ArrowLeft className="w-3 h-3" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
             </div>
           )}
 
