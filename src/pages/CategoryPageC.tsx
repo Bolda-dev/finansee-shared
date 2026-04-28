@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { InsightsSheetC as InsightsSheet } from "@/components/InsightsSheetC";
+import { useVersionCSettings } from "@/contexts/VersionCSettings";
 
 const iconMap: Record<string, typeof Heart> = {
   Heart,
@@ -139,6 +140,7 @@ export const CategoryPageC = ({
   renderItemSubtitle,
 }: CategoryPageProps) => {
   const navigate = useNavigate();
+  const { innerGrid } = useVersionCSettings();
   const [activeFilter, setActiveFilter] = useState<string>(filters[0]?.key ?? "all");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const [danaBubbleDismissed, setDanaBubbleDismissed] = useState(false);
