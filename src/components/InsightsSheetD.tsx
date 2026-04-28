@@ -71,9 +71,9 @@ const actionsConfig: Record<
 > = {
   investments: {
     label: "השקעות",
-    accent: "hsl(222, 85%, 45%)",
-    accentBg: "hsl(220, 85%, 95%)",
-    gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+    accent: "hsl(190, 100%, 65%)",
+    accentBg: "linear-gradient(135deg, hsla(190, 100%, 60%, 0.18), hsla(195, 100%, 55%, 0.10))",
+    gradient: "linear-gradient(135deg, hsl(190, 100%, 50%) 0%, hsl(200, 100%, 60%) 100%)",
     Icon: TrendingUp,
     title: "איזון תיק השקעות",
     description: "הקצאת המניות שלך גבוהה כרגע ב-15% מפרופיל הסיכון היעד שלך.",
@@ -81,9 +81,9 @@ const actionsConfig: Record<
   },
   insurance: {
     label: "ביטוח",
-    accent: "hsl(262, 75%, 52%)",
-    accentBg: "hsl(260, 75%, 95%)",
-    gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
+    accent: "hsl(310, 90%, 70%)",
+    accentBg: "linear-gradient(135deg, hsla(310, 90%, 62%, 0.18), hsla(290, 85%, 60%, 0.10))",
+    gradient: "linear-gradient(135deg, hsl(310, 90%, 60%) 0%, hsl(290, 85%, 65%) 100%)",
     Icon: Shield,
     title: "ביטוח כפול",
     description: "ייתכן שאתה משלם פעמיים על כיסוי בריאות דרך מקום העבודה ופוליסה פרטית.",
@@ -91,9 +91,9 @@ const actionsConfig: Record<
   },
   liabilities: {
     label: "התחייבויות",
-    accent: "hsl(178, 70%, 30%)",
-    accentBg: "hsl(176, 55%, 91%)",
-    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+    accent: "hsl(160, 85%, 62%)",
+    accentBg: "linear-gradient(135deg, hsla(160, 85%, 55%, 0.18), hsla(170, 80%, 50%, 0.10))",
+    gradient: "linear-gradient(135deg, hsl(160, 85%, 50%) 0%, hsl(170, 80%, 55%) 100%)",
     Icon: Landmark,
     title: "אופטימיזציה של משכנתא",
     description: "ריבית המשכנתא ירדה — תוכל לחסוך ₪500 בחודש על ידי מיחזור התוכנית הנוכחית.",
@@ -437,7 +437,13 @@ export const InsightsSheetD = ({ open, onOpenChange, mode = "context" }: Insight
                     >
                       <div
                         className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{ background: t.accentBg }}
+                        style={{
+                          background: t.accentBg,
+                          border: `1px solid ${t.accent.replace("hsl", "hsla").replace(")", ", 0.45)")}`,
+                          boxShadow: `0 0 14px ${t.accent.replace("hsl", "hsla").replace(")", ", 0.35)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.08)`,
+                          backdropFilter: "blur(6px)",
+                          WebkitBackdropFilter: "blur(6px)",
+                        }}
                       >
                         <Icon className="h-4 w-4" style={{ color: t.accent }} strokeWidth={2.5} />
                       </div>
