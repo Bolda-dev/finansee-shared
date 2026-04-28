@@ -305,7 +305,7 @@ const IndexD = () => {
                   style={{
                     background: "hsl(0, 90%, 60%)",
                     border: "2px solid hsl(222, 35%, 5%)",
-                    boxShadow: "0 0 0 1.5px hsl(0, 0%, 100%), 0 0 14px hsla(0, 90%, 60%, 0.7)",
+                    boxShadow: "0 0 14px hsla(0, 90%, 60%, 0.7)",
                   }}
                 >
                   3
