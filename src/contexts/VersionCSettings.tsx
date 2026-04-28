@@ -5,10 +5,12 @@ interface VersionCSettings {
   centerBar: boolean; // מרכז פיננסי — top color bar + grayscale icons
   innerGrid: boolean; // עמודים פנימיים — תצוגת גריד במקום ליסט
   logoLeft: boolean; // לוגו בצד שמאל במקום מרכז
+  filledIconsD: boolean; // דארק — אייקוני קטגוריות עם רקע מלא צבעוני ואייקון לבן
   setBoldCards: (v: boolean) => void;
   setCenterBar: (v: boolean) => void;
   setInnerGrid: (v: boolean) => void;
   setLogoLeft: (v: boolean) => void;
+  setFilledIconsD: (v: boolean) => void;
 }
 
 const Ctx = createContext<VersionCSettings | null>(null);
@@ -18,9 +20,10 @@ export const VersionCSettingsProvider = ({ children }: { children: ReactNode }) 
   const [centerBar, setCenterBar] = useState(false);
   const [innerGrid, setInnerGrid] = useState(false);
   const [logoLeft, setLogoLeft] = useState(false);
+  const [filledIconsD, setFilledIconsD] = useState(false);
   return (
     <Ctx.Provider
-      value={{ boldCards, centerBar, innerGrid, logoLeft, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft }}
+      value={{ boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD }}
     >
       {children}
     </Ctx.Provider>
@@ -35,10 +38,12 @@ export const useVersionCSettings = () => {
       centerBar: false,
       innerGrid: false,
       logoLeft: false,
+      filledIconsD: false,
       setBoldCards: () => {},
       setCenterBar: () => {},
       setInnerGrid: () => {},
       setLogoLeft: () => {},
+      setFilledIconsD: () => {},
     } as VersionCSettings;
   }
   return ctx;
