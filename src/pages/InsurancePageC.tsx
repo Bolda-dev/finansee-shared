@@ -2,7 +2,23 @@ import { CategoryPageC, formatNIS, type CategoryItem } from "./CategoryPageC";
 import { insuranceItems } from "@/lib/data";
 
 const InsurancePageC = () => {
-  const items: CategoryItem[] = insuranceItems.map((i) => ({ ...i }));
+  const items: CategoryItem[] = insuranceItems.map((i) => {
+    const next: CategoryItem = { ...i };
+    if (i.label.includes("רכב")) {
+      next.expanded = true;
+      next.details = [
+        { label: "סוג רכב", value: "טויוטה קורולה היברידית 2022" },
+        { label: "מס׳ לוחית רישוי", value: "742-91-302" },
+      ];
+    } else if (i.label.includes("דירה")) {
+      next.expanded = true;
+      next.details = [
+        { label: "כתובת", value: "רח׳ הרצל 14, רמת גן" },
+        { label: "תכולה", value: "₪250,000" },
+      ];
+    }
+    return next;
+  });
 
   const activePolicies = items.filter((i) => i.status === "פעיל");
   const monthlyFromMonthly = activePolicies
