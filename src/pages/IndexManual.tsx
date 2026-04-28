@@ -165,7 +165,7 @@ const IndexManual = () => {
                 glow: buildGlow(paletteColors.assets),
                 outline: buildOutline(paletteColors.assets),
                 iconColor: hslToString(paletteColors.assets),
-                onClick: () => navigate("/c/assets"),
+                onClick: () => navigate("/manual/assets"),
               },
               {
                 label: "התחייבויות",
@@ -176,7 +176,7 @@ const IndexManual = () => {
                 glow: buildGlow(paletteColors.liabilities),
                 outline: buildOutline(paletteColors.liabilities),
                 iconColor: hslToString(paletteColors.liabilities),
-                onClick: () => navigate("/c/liabilities"),
+                onClick: () => navigate("/manual/liabilities"),
               },
               {
                 label: "ביטוח",
@@ -187,7 +187,7 @@ const IndexManual = () => {
                 glow: buildGlow(paletteColors.insurance),
                 outline: buildOutline(paletteColors.insurance),
                 iconColor: hslToString(paletteColors.insurance),
-                onClick: () => navigate("/c/insurance"),
+                onClick: () => navigate("/manual/insurance"),
               },
             ].map((card) => (
               <button
@@ -360,7 +360,7 @@ const IndexManual = () => {
                 { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
                 { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
                 { label: "משכנתא", Icon: Building2, value: "₪1,110,000", subLabel: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי", extraSuffix: "/חודש", badge: 1, category: "liabilities" },
-                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/c/insurance") },
+                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/manual/insurance") },
               ];
 
               return cards.map((card) => {
