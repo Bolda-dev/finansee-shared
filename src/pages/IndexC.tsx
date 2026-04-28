@@ -320,14 +320,14 @@ const IndexB = () => {
               type Category = "assets" | "liabilities" | "insurance";
               const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
                 assets: {
-                  accent: "hsl(222, 85%, 45%)",
-                  accentBg: "hsl(220, 85%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(220, 85%, 48%) 0%, hsla(225, 90%, 60%, 0.7) 100%)",
-                },
-                liabilities: {
                   accent: "hsl(178, 70%, 30%)",
                   accentBg: "hsl(176, 55%, 91%)",
                   bar: "linear-gradient(90deg, hsl(178, 70%, 32%) 0%, hsla(174, 65%, 42%, 0.7) 100%)",
+                },
+                liabilities: {
+                  accent: "hsl(222, 85%, 45%)",
+                  accentBg: "hsl(220, 85%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(220, 85%, 48%) 0%, hsla(225, 90%, 60%, 0.7) 100%)",
                 },
                 insurance: {
                   accent: "hsl(262, 75%, 52%)",
