@@ -8,7 +8,7 @@ import { MenuDrawer } from "@/components/MenuDrawer";
 import { InsightsSheetD as InsightsSheet } from "@/components/InsightsSheetD";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
-import { useVersionCSettings } from "@/contexts/VersionCSettings";
+
 
 const formatCurrency = (n: number) =>
   "₪" + n.toLocaleString("he-IL");
