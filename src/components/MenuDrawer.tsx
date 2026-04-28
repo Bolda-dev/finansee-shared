@@ -102,10 +102,6 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
 
           <div className="border-t border-border mt-4 pt-4">
             <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסאות</p>
-            <button onClick={() => { onOpenChange(false); navigate("/"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-              <Sparkles className="h-4 w-4 text-muted-foreground" />
-              גרסה A
-            </button>
             <button onClick={() => { onOpenChange(false); navigate("/b"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
               <Sparkles className="h-4 w-4 text-muted-foreground" />
               גרסה B
@@ -117,6 +113,14 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
             <button onClick={() => { onOpenChange(false); navigate("/d"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
               <Sparkles className="h-4 w-4 text-muted-foreground" />
               גרסה D — Dark Metallic
+            </button>
+            <button onClick={() => { onOpenChange(false); navigate("/manual"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4 text-muted-foreground" />
+              צבעוניות ידנית
+            </button>
+            <button onClick={() => { onOpenChange(false); navigate("/palettes"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4 text-muted-foreground" />
+              פלטות שנשלחו
             </button>
           </div>
 

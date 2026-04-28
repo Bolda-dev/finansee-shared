@@ -12,6 +12,8 @@ import LiabilitiesPage from "./pages/LiabilitiesPage";
 import IndexB from "./pages/IndexB";
 import IndexC from "./pages/IndexC";
 import IndexD from "./pages/IndexD";
+import IndexManual from "./pages/IndexManual";
+import PalettesPage from "./pages/PalettesPage";
 import InsurancePageC from "./pages/InsurancePageC";
 import AssetsPageC from "./pages/AssetsPageC";
 import LiabilitiesPageC from "./pages/LiabilitiesPageC";
@@ -20,6 +22,7 @@ import AssetsPageD from "./pages/AssetsPageD";
 import LiabilitiesPageD from "./pages/LiabilitiesPageD";
 import NotFound from "./pages/NotFound";
 import { VersionCSettingsProvider } from "./contexts/VersionCSettings";
+import { ManualPaletteProvider } from "./contexts/ManualPaletteContext";
 
 const queryClient = new QueryClient();
 
@@ -30,28 +33,32 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <VersionCSettingsProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/b" element={<IndexB />} />
-            <Route path="/c" element={<IndexC />} />
-            <Route path="/d" element={<IndexD />} />
-            <Route path="/income" element={<IncomePage />} />
-            <Route path="/expenses" element={<ExpensesPage />} />
-            <Route path="/insurance" element={<InsurancePage />} />
-            <Route path="/assets" element={<AssetsPage />} />
-            <Route path="/liabilities" element={<LiabilitiesPage />} />
-            <Route path="/c/insurance" element={<InsurancePageC />} />
-            <Route path="/c/assets" element={<AssetsPageC />} />
-            <Route path="/c/liabilities" element={<LiabilitiesPageC />} />
-            <Route path="/c/income" element={<IncomePage />} />
-            <Route path="/c/expenses" element={<ExpensesPage />} />
-            <Route path="/d/insurance" element={<InsurancePageD />} />
-            <Route path="/d/assets" element={<AssetsPageD />} />
-            <Route path="/d/liabilities" element={<LiabilitiesPageD />} />
-            <Route path="/d/income" element={<IncomePage />} />
-            <Route path="/d/expenses" element={<ExpensesPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <ManualPaletteProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/b" element={<IndexB />} />
+              <Route path="/c" element={<IndexC />} />
+              <Route path="/d" element={<IndexD />} />
+              <Route path="/manual" element={<IndexManual />} />
+              <Route path="/palettes" element={<PalettesPage />} />
+              <Route path="/income" element={<IncomePage />} />
+              <Route path="/expenses" element={<ExpensesPage />} />
+              <Route path="/insurance" element={<InsurancePage />} />
+              <Route path="/assets" element={<AssetsPage />} />
+              <Route path="/liabilities" element={<LiabilitiesPage />} />
+              <Route path="/c/insurance" element={<InsurancePageC />} />
+              <Route path="/c/assets" element={<AssetsPageC />} />
+              <Route path="/c/liabilities" element={<LiabilitiesPageC />} />
+              <Route path="/c/income" element={<IncomePage />} />
+              <Route path="/c/expenses" element={<ExpensesPage />} />
+              <Route path="/d/insurance" element={<InsurancePageD />} />
+              <Route path="/d/assets" element={<AssetsPageD />} />
+              <Route path="/d/liabilities" element={<LiabilitiesPageD />} />
+              <Route path="/d/income" element={<IncomePage />} />
+              <Route path="/d/expenses" element={<ExpensesPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </ManualPaletteProvider>
         </VersionCSettingsProvider>
       </BrowserRouter>
     </TooltipProvider>

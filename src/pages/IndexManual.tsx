@@ -160,36 +160,33 @@ const IndexManual = () => {
                 label: "נכסים",
                 value: "₪8.4M",
                 Icon: TrendingUp,
-                gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
-                shadow: "0 2px 6px hsla(176, 70%, 28%, 0.15)",
-                glow: "hsla(176, 70%, 28%, 0.09)",
-                outline: "hsla(176, 70%, 28%, 0.18)",
-                iconColor: "hsl(178, 70%, 30%)",
-                ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
+                gradient: buildGradient(paletteColors.assets),
+                shadow: buildShadow(paletteColors.assets),
+                glow: buildGlow(paletteColors.assets),
+                outline: buildOutline(paletteColors.assets),
+                iconColor: hslToString(paletteColors.assets),
                 onClick: () => navigate("/c/assets"),
               },
               {
                 label: "התחייבויות",
                 value: "₪1.37M",
                 Icon: TrendingDown,
-                gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
-                shadow: "0 2px 6px hsla(222, 80%, 45%, 0.15)",
-                glow: "hsla(222, 80%, 45%, 0.08)",
-                outline: "hsla(222, 80%, 45%, 0.08)",
-                iconColor: "hsl(222, 85%, 45%)",
-                ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
+                gradient: buildGradient(paletteColors.liabilities),
+                shadow: buildShadow(paletteColors.liabilities),
+                glow: buildGlow(paletteColors.liabilities),
+                outline: buildOutline(paletteColors.liabilities),
+                iconColor: hslToString(paletteColors.liabilities),
                 onClick: () => navigate("/c/liabilities"),
               },
               {
                 label: "ביטוח",
                 value: "5 פוליסות",
                 Icon: ShieldCheck,
-                gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
-                shadow: "0 2px 6px hsla(262, 72%, 50%, 0.15)",
-                glow: "hsla(262, 72%, 50%, 0.08)",
-                outline: "hsla(262, 72%, 50%, 0.08)",
-                iconColor: "hsl(262, 75%, 52%)",
-                ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
+                gradient: buildGradient(paletteColors.insurance),
+                shadow: buildShadow(paletteColors.insurance),
+                glow: buildGlow(paletteColors.insurance),
+                outline: buildOutline(paletteColors.insurance),
+                iconColor: hslToString(paletteColors.insurance),
                 onClick: () => navigate("/c/insurance"),
               },
             ].map((card) => (
@@ -326,21 +323,23 @@ const IndexManual = () => {
           <div className="grid grid-cols-2 gap-3 pb-32">
             {(() => {
               type Category = "assets" | "liabilities" | "insurance";
+              const mkBar = (c: typeof paletteColors.assets) =>
+                `linear-gradient(90deg, ${hslToString(c)} 0%, ${hslaToString({ h: c.h, s: Math.max(c.s - 5, 40), l: Math.min(c.l + 12, 75) }, 0.7)} 100%)`;
               const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
                 assets: {
-                  accent: "hsl(178, 70%, 30%)",
-                  accentBg: "hsl(176, 55%, 91%)",
-                  bar: "linear-gradient(90deg, hsl(178, 70%, 32%) 0%, hsla(174, 65%, 42%, 0.7) 100%)",
+                  accent: hslToString(paletteColors.assets),
+                  accentBg: buildAccentBg(paletteColors.assets),
+                  bar: mkBar(paletteColors.assets),
                 },
                 liabilities: {
-                  accent: "hsl(222, 85%, 45%)",
-                  accentBg: "hsl(220, 85%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(220, 85%, 48%) 0%, hsla(225, 90%, 60%, 0.7) 100%)",
+                  accent: hslToString(paletteColors.liabilities),
+                  accentBg: buildAccentBg(paletteColors.liabilities),
+                  bar: mkBar(paletteColors.liabilities),
                 },
                 insurance: {
-                  accent: "hsl(262, 75%, 52%)",
-                  accentBg: "hsl(260, 75%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(258, 72%, 55%) 0%, hsla(265, 78%, 65%, 0.7) 100%)",
+                  accent: hslToString(paletteColors.insurance),
+                  accentBg: buildAccentBg(paletteColors.insurance),
+                  bar: mkBar(paletteColors.insurance),
                 },
               };
 
@@ -581,6 +580,7 @@ const IndexManual = () => {
       {/* Insights Sheet — actions mode (from "התובנות של דנה" card) */}
       <InsightsSheet open={actionsOpen} onOpenChange={setActionsOpen} mode="actions" />
       <MenuDrawer open={menuOpen} onOpenChange={setMenuOpen} />
+      <ColorPickerSheet open={pickerOpen} onOpenChange={setPickerOpen} />
     </div>
   );
 };
