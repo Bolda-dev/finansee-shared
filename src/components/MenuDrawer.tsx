@@ -83,6 +83,10 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
                 <span className="text-sm font-medium text-foreground">לוגו — צמוד לשמאל</span>
                 <Switch dir="ltr" checked={logoLeft} onCheckedChange={setLogoLeft} />
               </div>
+              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
+                <span className="text-sm font-medium text-foreground">אייקוני קטגוריות — רקע צבעוני מלא</span>
+                <Switch dir="ltr" checked={filledIconsD} onCheckedChange={setFilledIconsD} />
+              </div>
             </div>
           )}
 
