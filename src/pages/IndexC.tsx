@@ -145,6 +145,7 @@ const IndexB = () => {
                 Icon: TrendingUp,
                 gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
                 shadow: "0 2px 6px hsla(222, 80%, 45%, 0.15)",
+                glow: "hsla(222, 80%, 45%, 0.18)",
                 outline: "hsla(222, 80%, 45%, 0.18)",
                 iconColor: "hsl(222, 85%, 45%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
@@ -156,6 +157,7 @@ const IndexB = () => {
                 Icon: TrendingDown,
                 gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
                 shadow: "0 2px 6px hsla(176, 70%, 28%, 0.15)",
+                glow: "hsla(176, 70%, 28%, 0.2)",
                 outline: "hsla(176, 70%, 28%, 0.18)",
                 iconColor: "hsl(178, 70%, 30%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
@@ -167,6 +169,7 @@ const IndexB = () => {
                 Icon: ShieldCheck,
                 gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
                 shadow: "0 2px 6px hsla(262, 72%, 50%, 0.15)",
+                glow: "hsla(262, 72%, 50%, 0.18)",
                 outline: "hsla(262, 72%, 50%, 0.18)",
                 iconColor: "hsl(262, 75%, 52%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
@@ -181,17 +184,26 @@ const IndexB = () => {
                   background: "white",
                   boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
                   border: `1px solid ${card.outline}`,
-                  minHeight: "130px",
+                  minHeight: "140px",
                 }}
               >
+                {/* Subtle bottom color glow */}
+                <span
+                  className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(to top, ${card.glow} 0%, transparent 100%)`,
+                  }}
+                  aria-hidden
+                />
+
                 <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center mb-4 relative z-10"
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-3 relative z-10"
                   style={{
                     background: card.gradient,
                     boxShadow: card.shadow,
                   }}
                 >
-                  <card.Icon className="h-4 w-4" style={{ color: "white" }} />
+                  <card.Icon className="h-5 w-5" style={{ color: "white" }} />
                 </div>
                 <div className="relative z-10">
                   <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 12%, 58%)" }}>
