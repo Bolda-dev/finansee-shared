@@ -8,6 +8,7 @@ import { MenuDrawer } from "@/components/MenuDrawer";
 import { InsightsSheetD as InsightsSheet } from "@/components/InsightsSheetD";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
+import { useVersionCSettings } from "@/contexts/VersionCSettings";
 
 
 const formatCurrency = (n: number) =>
@@ -41,6 +42,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 
 const IndexD = () => {
   const navigate = useNavigate();
+  const { logoLeft } = useVersionCSettings();
   // Version D always renders in glassy/dark mode without bold colors or decorative bar.
   // Only `innerGrid` (list/card view) is exposed via the menu toggle.
   const boldCards = false;
