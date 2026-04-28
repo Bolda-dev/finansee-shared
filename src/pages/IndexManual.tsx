@@ -99,18 +99,21 @@ const IndexManual = () => {
       {/* Header */}
       <div className="relative z-10 px-5 pt-6 pb-0" dir="rtl">
         <div className="flex flex-col items-start gap-4 text-start">
-          <div className="relative flex items-center w-full">
+          <div className="relative flex items-center w-full gap-2">
             <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
               <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
             </button>
-            {/* Logo hidden for now — will be reused later */}
-            {false && (
-              <img
-                src={finanseeLogo}
-                alt="finansee"
-                className={`h-5 w-auto absolute ${logoLeft ? "left-0" : "left-1/2 -translate-x-1/2"}`}
-              />
-            )}
+            <button
+              onClick={() => setPickerOpen(true)}
+              className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0 mr-auto"
+              style={{
+                background: `linear-gradient(135deg, ${hslToString(paletteColors.assets)}, ${hslToString(paletteColors.liabilities)}, ${hslToString(paletteColors.insurance)})`,
+                boxShadow: "0 4px 14px hsla(250, 30%, 25%, 0.18)",
+              }}
+              aria-label="פתח עורך צבעים"
+            >
+              <Palette className="h-5 w-5 text-white" />
+            </button>
           </div>
           <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
