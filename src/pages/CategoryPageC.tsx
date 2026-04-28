@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { InsightsSheetC as InsightsSheet } from "@/components/InsightsSheetC";
+import { useVersionCSettings } from "@/contexts/VersionCSettings";
 
 const iconMap: Record<string, typeof Heart> = {
   Heart,
@@ -139,6 +140,7 @@ export const CategoryPageC = ({
   renderItemSubtitle,
 }: CategoryPageProps) => {
   const navigate = useNavigate();
+  const { innerGrid } = useVersionCSettings();
   const [activeFilter, setActiveFilter] = useState<string>(filters[0]?.key ?? "all");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const [danaBubbleDismissed, setDanaBubbleDismissed] = useState(false);
@@ -344,6 +346,7 @@ export const CategoryPageC = ({
         </div>
 
         {/* Item list */}
+        {!innerGrid && (
         <div
           className="mx-4 mt-2 rounded-2xl overflow-hidden"
           style={{
@@ -448,6 +451,90 @@ export const CategoryPageC = ({
             );
           })}
         </div>
+        )}
+
+        {innerGrid && (
+          <div className="mx-4 mt-2 grid grid-cols-2 gap-3">
+            {filteredItems.length === 0 && (
+              <div className="col-span-2 py-8 text-center rounded-2xl bg-white border" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
+                <p className="text-[12px]" style={{ color: "hsl(230, 15%, 55%)" }}>{emptyText}</p>
+              </div>
+            )}
+            {filteredItems.map((item, i) => {
+              const Icon = iconMap[item.icon] || ShieldCheck;
+              const isMissing = item.status === "חסר";
+              const isExpanded = !!item.expanded;
+              return (
+                <button
+                  key={i}
+                  className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                  style={{
+                    background: "white",
+                    boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+                    border: "1px solid hsl(230, 20%, 94%)",
+                    minHeight: isExpanded ? "160px" : "130px",
+                  }}
+                  dir="rtl"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="relative">
+                      <span
+                        className="w-9 h-9 rounded-full flex items-center justify-center"
+                        style={{ background: isMissing ? "hsl(0, 80%, 95%)" : theme.accentBg }}
+                      >
+                        <Icon
+                          style={{
+                            color: isMissing ? "hsl(0, 65%, 50%)" : theme.accent,
+                            width: "16px",
+                            height: "16px",
+                          }}
+                          strokeWidth={2}
+                        />
+                      </span>
+                      {item.alert && (
+                        <span
+                          className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
+                          style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+                        >
+                          1
+                        </span>
+                      )}
+                    </span>
+                    <span
+                      className="text-[12px] font-bold tracking-tight"
+                      style={{ color: "hsl(250, 50%, 12%)" }}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+
+                  <div className="mt-1">
+                    {renderItemTrailing(item, theme)}
+                  </div>
+                  <p className="text-[10px] mt-1" style={{ color: "hsl(230, 12%, 58%)" }}>
+                    {renderItemSubtitle(item)}
+                  </p>
+
+                  {isExpanded && item.details && item.details.length > 0 && (
+                    <div
+                      className="mt-auto pt-2 border-t space-y-0.5"
+                      style={{ borderColor: "hsl(230, 20%, 94%)" }}
+                    >
+                      {item.details.map((d) => (
+                        <p key={d.label} className="text-[10px] leading-snug">
+                          <span style={{ color: "hsl(230, 15%, 60%)" }}>{d.label}:</span>{" "}
+                          <span className="font-medium" style={{ color: "hsl(250, 40%, 22%)" }}>
+                            {d.value}
+                          </span>
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         <p
           className="text-[10.5px] text-center mt-3 px-6"
