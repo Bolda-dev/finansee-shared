@@ -155,8 +155,8 @@ const Donut = ({
         })}
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>{centerLabel}</p>
-        <p className="font-extrabold text-base text-primary-foreground" style={{ color: "hsl(250, 45%, 15%)" }}>{centerValue}</p>
+        <p className="text-[10px]" style={{ color: "hsl(215, 20%, 65%)" }}>{centerLabel}</p>
+        <p className="font-extrabold text-base text-primary-foreground" style={{ color: "hsl(0, 0%, 100%)" }}>{centerValue}</p>
       </div>
     </div>
   );
@@ -167,7 +167,7 @@ type ChatMessage =
   | { id: string; role: "ai"; text: string }
   | { id: string; role: "ai-typing" };
 
-export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
+export const InsightsSheetD = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<ContextTabKey>("assets");
   const [selectedAction, setSelectedAction] = useState<ActionKey>("investments");
   const [actionsView, setActionsView] = useState<"radio" | "list">("radio");
@@ -270,11 +270,14 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
 
       {/* Sheet */}
       <div
-        className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
+        className="relative w-full max-w-[430px] rounded-t-3xl shadow-2xl flex flex-col"
         style={{
           height: "calc(100dvh - 48px)",
           maxHeight: "calc(100dvh - 48px)",
           marginTop: "48px",
+          background: "linear-gradient(180deg, hsl(222, 45%, 7%) 0%, hsl(222, 40%, 5%) 100%)",
+          border: "1px solid hsla(210, 90%, 70%, 0.18)",
+          borderBottom: "none",
           animation: "sheet-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both",
         }}
       >
@@ -287,7 +290,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
 
         {/* Drag handle */}
         <div className="flex justify-center pt-3 pb-2">
-          <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 88%)" }} />
+          <div className="w-10 h-1.5 rounded-full" style={{ background: "hsla(210, 40%, 60%, 0.4)" }} />
         </div>
 
         {/* Header */}
@@ -296,9 +299,9 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
             onClick={() => onOpenChange(false)}
             className="absolute top-2 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
           >
-            <X className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
+            <X className="h-4 w-4" style={{ color: "hsl(215, 25%, 75%)" }} />
           </button>
-          <p className="text-sm font-bold" style={{ color: "hsl(250, 45%, 15%)" }}>
+          <p className="text-sm font-bold" style={{ color: "hsl(0, 0%, 100%)" }}>
             {mode === "actions" ? "התובנות של דנה" : "דנה — Finansee AI"}
           </p>
         </div>
@@ -311,7 +314,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
               <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0" style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}>
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
-              <div className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1" style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)", boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)" }}>
+              <div className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 9%, 0.96) 100%)", border: "1px solid hsla(210, 80%, 65%, 0.18)", boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)" }}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0s" }} />
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.2s" }} />
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.4s" }} />
@@ -326,12 +329,12 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col items-start max-w-[85%]">
-                <div className="rounded-2xl rounded-br-md px-3.5 py-2.5" style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)", boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)" }}>
-                  <p className="text-xs leading-relaxed text-right" style={{ color: "hsl(250, 35%, 25%)" }}>
+                <div className="rounded-2xl rounded-br-md px-3.5 py-2.5" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 9%, 0.96) 100%)", border: "1px solid hsla(210, 80%, 65%, 0.18)", boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)" }}>
+                  <p className="text-xs leading-relaxed text-right" style={{ color: "hsl(210, 30%, 92%)" }}>
                     {greetingText}
                   </p>
                 </div>
-                <p className="text-[9px] mt-1 mr-1" style={{ color: "hsl(230, 15%, 60%)" }}>עכשיו</p>
+                <p className="text-[9px] mt-1 mr-1" style={{ color: "hsl(215, 20%, 60%)" }}>עכשיו</p>
               </div>
             </div>
           )}
@@ -342,7 +345,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
               <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0" style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}>
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
-              <div className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1" style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)", boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)" }}>
+              <div className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 9%, 0.96) 100%)", border: "1px solid hsla(210, 80%, 65%, 0.18)", boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)" }}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0s" }} />
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.2s" }} />
                 <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.4s" }} />
@@ -357,7 +360,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col items-end max-w-[92%] flex-1 min-w-0">
-                <div className="rounded-2xl rounded-br-md p-3.5 w-full" style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)", boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)" }}>
+                <div className="rounded-2xl rounded-br-md p-3.5 w-full" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 9%, 0.96) 100%)", border: "1px solid hsla(210, 80%, 65%, 0.18)", boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)" }}>
                   {/* Tabs */}
                   <div className="flex gap-1.5 mb-3">
                     {(Object.keys(contextTabs) as ContextTabKey[]).map((key) => {
@@ -369,8 +372,8 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                           onClick={() => setActiveTab(key)}
                           className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold transition-all"
                           style={{
-                            background: isActive ? t.gradient : "hsl(230, 20%, 96%)",
-                            color: isActive ? "white" : "hsl(230, 15%, 45%)",
+                            background: isActive ? t.gradient : "hsla(220, 35%, 18%, 0.85)",
+                            color: isActive ? "white" : "hsl(215, 25%, 75%)",
                             boxShadow: isActive ? `0 3px 10px hsla(${t.accent.match(/\d+/)?.[0] || 280}, 60%, 50%, 0.3)` : "none",
                           }}
                         >
@@ -380,7 +383,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                     })}
                   </div>
 
-                  <p className="text-[10px] mb-2.5" style={{ color: "hsl(230, 15%, 55%)" }}>{tab.headline}</p>
+                  <p className="text-[10px] mb-2.5" style={{ color: "hsl(215, 20%, 65%)" }}>{tab.headline}</p>
 
                   <div className="flex items-center gap-3">
                     <Donut
@@ -402,15 +405,15 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                         return (
                           <div key={i} className="flex items-center gap-2 text-[11px]">
                             <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: `hsl(${h}, ${s}%, ${lightness}%)` }} />
-                            <span className="truncate flex-1" style={{ color: "hsl(250, 35%, 25%)" }}>{item.label}</span>
-                            <span className="font-bold flex-shrink-0" style={{ color: "hsl(250, 40%, 20%)" }}>{pct}</span>
+                            <span className="truncate flex-1" style={{ color: "hsl(210, 30%, 92%)" }}>{item.label}</span>
+                            <span className="font-bold flex-shrink-0" style={{ color: "hsl(210, 30%, 92%)" }}>{pct}</span>
                           </div>
                         );
                       })}
                     </div>
                   </div>
                 </div>
-                <p className="text-[9px] mt-1 mr-1" style={{ color: "hsl(230, 15%, 60%)" }}>עכשיו</p>
+                <p className="text-[9px] mt-1 mr-1" style={{ color: "hsl(215, 20%, 60%)" }}>עכשיו</p>
               </div>
             </div>
           )}
@@ -422,8 +425,8 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
               <div
                 className="flex p-1 rounded-full mb-3 mx-auto"
                 style={{
-                  background: "hsl(230, 25%, 95%)",
-                  border: "1px solid hsl(230, 20%, 92%)",
+                  background: "hsla(220, 35%, 14%, 0.85)",
+                  border: "1px solid hsla(210, 80%, 65%, 0.18)",
                   width: "fit-content",
                 }}
               >
@@ -439,10 +442,10 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                       className="px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all"
                       style={{
                         background: isActive
-                          ? "linear-gradient(135deg, hsl(265, 60%, 35%), hsl(290, 70%, 60%))"
+                          ? "white"
                           : "transparent",
-                        color: isActive ? "white" : "hsl(230, 20%, 45%)",
-                        boxShadow: isActive ? "0 2px 8px hsla(280, 60%, 40%, 0.3)" : "none",
+                        color: isActive ? "hsl(222, 47%, 8%)" : "hsl(215, 25%, 75%)",
+                        boxShadow: isActive ? "0 4px 14px hsla(0, 0%, 100%, 0.25)" : "none",
                       }}
                     >
                       {opt.label}
@@ -453,7 +456,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
 
               {actionsView === "radio" && (
                 <>
-                  <p className="text-[11px] mb-2.5 px-1 text-right" style={{ color: "hsl(250, 30%, 25%)" }}>
+                  <p className="text-[11px] mb-2.5 px-1 text-right" style={{ color: "hsl(210, 30%, 92%)" }}>
                     הנה 3 פעולות לשיפור שהכנתי לך 👇
                   </p>
 
@@ -469,11 +472,11 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                           onClick={() => setSelectedAction(key)}
                           className="relative rounded-xl p-2.5 flex flex-col gap-1.5 overflow-hidden text-right transition-all hover:scale-[1.02] active:scale-[0.98]"
                           style={{
-                            background: "white",
+                            background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.94) 100%)",
                             boxShadow: isSelected
-                              ? `0 4px 14px hsla(250, 30%, 25%, 0.10), 0 0 0 2px ${t.accent}`
-                              : "0 2px 8px hsla(250, 30%, 25%, 0.05)",
-                            border: isSelected ? "1px solid transparent" : "1px solid hsl(230, 20%, 94%)",
+                              ? `0 6px 20px hsla(0, 0%, 0%, 0.5), 0 0 0 2px ${t.accent}, 0 0 24px ${t.accent.replace("hsl", "hsla").replace(")", ", 0.4)")}`
+                              : "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)",
+                            border: isSelected ? "1px solid transparent" : "1px solid hsla(210, 80%, 65%, 0.14)",
                           }}
                         >
                           <div className="flex items-center gap-1.5">
@@ -482,10 +485,10 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                               {t.label}
                             </span>
                           </div>
-                          <p className="text-[12px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(250, 50%, 12%)" }}>
+                          <p className="text-[12px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(0, 0%, 100%)" }}>
                             {t.title}
                           </p>
-                          <p className="text-[10px] leading-snug" style={{ color: "hsl(230, 15%, 45%)" }}>
+                          <p className="text-[10px] leading-snug" style={{ color: "hsl(215, 25%, 75%)" }}>
                             {t.description}
                           </p>
                         </button>
@@ -498,7 +501,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                     const sel = actionsConfig[selectedAction];
                     return (
                       <div className="mt-3 flex justify-start" dir="ltr">
-                        <button className="cta-tri inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]">
+                        <button className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]" style={{ background: "white", color: "hsl(222, 47%, 8%)", boxShadow: "0 6px 20px hsla(0, 0%, 100%, 0.25), 0 0 18px hsla(0, 0%, 100%, 0.15)" }}>
                           {sel.cta}
                           <ArrowLeft className="w-3.5 h-3.5" />
                         </button>
@@ -518,9 +521,9 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                         key={key}
                         className="rounded-xl p-3 flex items-start gap-3 text-right"
                         style={{
-                          background: "white",
-                          border: "1px solid hsl(230, 20%, 94%)",
-                          boxShadow: "0 2px 8px hsla(250, 30%, 25%, 0.05)",
+                          background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.88) 0%, hsla(220, 42%, 8%, 0.94) 100%)",
+                          border: "1px solid hsla(210, 80%, 65%, 0.14)",
+                          boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)",
                         }}
                       >
                         <div
@@ -535,14 +538,14 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                               {t.label}
                             </span>
                           </div>
-                          <p className="text-[12px] font-extrabold tracking-tight leading-tight mb-1" style={{ color: "hsl(250, 50%, 12%)" }}>
+                          <p className="text-[12px] font-extrabold tracking-tight leading-tight mb-1" style={{ color: "hsl(0, 0%, 100%)" }}>
                             {t.title}
                           </p>
-                          <p className="text-[10px] leading-snug mb-2" style={{ color: "hsl(230, 15%, 45%)" }}>
+                          <p className="text-[10px] leading-snug mb-2" style={{ color: "hsl(215, 25%, 75%)" }}>
                             {t.description}
                           </p>
                           <div className="flex justify-start" dir="ltr">
-                            <button className="cta-tri inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                            <button className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]" style={{ background: "white", color: "hsl(222, 47%, 8%)", boxShadow: "0 4px 14px hsla(0, 0%, 100%, 0.22)" }}>
                               {t.cta}
                               <ArrowLeft className="w-3 h-3" />
                             </button>
@@ -560,8 +563,8 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
           {stage === "insights" && mode !== "actions" && (
             <>
               <div className="flex items-center gap-1.5 mb-2.5 justify-center" dir="rtl">
-                <Sparkles className="w-3 h-3" style={{ color: "hsl(230, 15%, 55%)" }} />
-                <p className="text-[11px] font-semibold" style={{ color: "hsl(230, 20%, 40%)" }}>{suggestedHeader}</p>
+                <Sparkles className="w-3 h-3" style={{ color: "hsl(215, 20%, 65%)" }} />
+                <p className="text-[11px] font-semibold" style={{ color: "hsl(215, 25%, 75%)" }}>{suggestedHeader}</p>
               </div>
               <div className="flex flex-wrap gap-1.5 mb-2 justify-center" dir="rtl">
                 {suggestedQuestions.map((q) => (
@@ -575,7 +578,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                     style={{
                       background: "white",
                       border: "1px solid hsl(230, 20%, 90%)",
-                      color: "hsl(230, 20%, 35%)",
+                      color: "hsl(215, 25%, 80%)",
                       boxShadow: "0 1px 2px hsla(230, 20%, 40%, 0.04)",
                     }}
                   >
@@ -591,7 +594,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
             if (msg.role === "user") {
               return (
                 <div key={msg.id} className="flex justify-end mb-3 animate-fade-in" dir="rtl">
-                  <div className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5" style={{ background: "hsl(250, 30%, 8%)", boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)" }}>
+                  <div className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5" style={{ background: "linear-gradient(135deg, hsl(195, 90%, 50%) 0%, hsl(220, 95%, 55%) 100%)", boxShadow: "0 4px 14px hsla(200, 95%, 50%, 0.35)" }}>
                     <p className="text-xs leading-relaxed text-right" style={{ color: "white" }}>{msg.text}</p>
                   </div>
                 </div>
@@ -603,7 +606,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                   <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0" style={{ boxShadow: "0 2px 6px hsla(275, 65%, 25%, 0.35)" }}>
                     <img src={advisorImg} alt="" className="w-full h-full object-cover" />
                   </div>
-                  <div className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1" style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)", boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)" }}>
+                  <div className="rounded-2xl rounded-br-md px-3.5 py-3 flex items-center gap-1" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 9%, 0.96) 100%)", border: "1px solid hsla(210, 80%, 65%, 0.18)", boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)" }}>
                     <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0s" }} />
                     <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.2s" }} />
                     <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 65%)", animation: "typing-dot 1.2s infinite", animationDelay: "0.4s" }} />
@@ -617,8 +620,8 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                   <img src={advisorImg} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div className="max-w-[85%]">
-                  <div className="rounded-2xl rounded-br-md px-3.5 py-2.5" style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)", boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)" }}>
-                    <p className="text-xs leading-relaxed text-right" style={{ color: "hsl(250, 35%, 25%)" }}>{msg.text}</p>
+                  <div className="rounded-2xl rounded-br-md px-3.5 py-2.5" style={{ background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 9%, 0.96) 100%)", border: "1px solid hsla(210, 80%, 65%, 0.18)", boxShadow: "0 4px 14px hsla(0, 0%, 0%, 0.4), inset 0 1px 0 hsla(210, 100%, 80%, 0.08)" }}>
+                    <p className="text-xs leading-relaxed text-right" style={{ color: "hsl(210, 30%, 92%)" }}>{msg.text}</p>
                   </div>
                 </div>
               </div>
@@ -627,13 +630,13 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
         </div>
 
         {/* Input bar */}
-        <div className="px-5 py-3 border-t" style={{ borderColor: "hsl(230, 20%, 93%)", background: "white" }} dir="rtl">
+        <div className="px-5 py-3 border-t" style={{ borderColor: "hsla(210, 80%, 65%, 0.18)", background: "linear-gradient(180deg, hsla(222, 45%, 7%, 0.5) 0%, hsl(222, 45%, 6%) 100%)" }} dir="rtl">
           <div
             className="flex items-center gap-2 rounded-full px-4 py-2 transition-all"
             style={{
-              background: input ? "white" : "hsl(230, 25%, 96%)",
-              border: input ? "1px solid hsla(280, 60%, 38%, 0.55)" : "1px solid hsl(230, 20%, 90%)",
-              boxShadow: input ? "0 0 0 3px hsla(280, 60%, 38%, 0.14)" : "none",
+              background: "hsla(220, 35%, 14%, 0.85)",
+              border: input ? "1px solid hsla(195, 90%, 60%, 0.6)" : "1px solid hsla(210, 80%, 65%, 0.18)",
+              boxShadow: input ? "0 0 0 3px hsla(195, 90%, 50%, 0.18)" : "none",
             }}
           >
             <input
@@ -649,24 +652,24 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
               }}
               placeholder="שאל את Finansee AI..."
               className="flex-1 bg-transparent text-sm outline-none text-right placeholder:text-xs"
-              style={{ color: "hsl(250, 40%, 20%)" }}
+              style={{ color: "hsl(210, 30%, 92%)" }}
               dir="rtl"
             />
             {!input && (
-              <button className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 active:scale-95" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
-                <Mic className="h-3.5 w-3.5" style={{ color: "hsl(230, 15%, 45%)" }} />
+              <button className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 active:scale-95" style={{ background: "hsla(210, 40%, 22%, 0.7)", border: "1px solid hsla(210, 90%, 70%, 0.22)" }}>
+                <Mic className="h-3.5 w-3.5" style={{ color: "hsl(215, 25%, 75%)" }} />
               </button>
             )}
             <button
               onClick={handleSend}
               disabled={!input.trim()}
-              className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${input ? "cta-tri" : ""}`}
+              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
-                background: input ? undefined : "hsl(230, 20%, 88%)",
-                boxShadow: input ? "0 4px 12px hsla(250, 30%, 15%, 0.4)" : "none",
+                background: input ? "white" : "hsla(210, 40%, 30%, 0.6)",
+                boxShadow: input ? "0 4px 14px hsla(0, 0%, 100%, 0.28), 0 0 14px hsla(0, 0%, 100%, 0.18)" : "none",
               }}
             >
-              <Send className="h-3.5 w-3.5 rotate-180" style={{ color: "white" }} />
+              <Send className="h-3.5 w-3.5 rotate-180" style={{ color: input ? "hsl(222, 47%, 8%)" : "hsl(215, 25%, 70%)" }} />
             </button>
           </div>
         </div>
