@@ -437,7 +437,13 @@ export const InsightsSheetD = ({ open, onOpenChange, mode = "context" }: Insight
                     >
                       <div
                         className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{ background: t.accentBg }}
+                        style={{
+                          background: t.accentBg,
+                          border: `1px solid ${t.accent.replace("hsl", "hsla").replace(")", ", 0.45)")}`,
+                          boxShadow: `0 0 14px ${t.accent.replace("hsl", "hsla").replace(")", ", 0.35)")}, inset 0 1px 0 hsla(0, 0%, 100%, 0.08)`,
+                          backdropFilter: "blur(6px)",
+                          WebkitBackdropFilter: "blur(6px)",
+                        }}
                       >
                         <Icon className="h-4 w-4" style={{ color: t.accent }} strokeWidth={2.5} />
                       </div>
