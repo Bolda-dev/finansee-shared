@@ -282,7 +282,7 @@ export const InsightsSheetD = ({ open, onOpenChange, mode = "context" }: Insight
         }}
       >
         {/* Floating avatar with rotating tri-color ring */}
-        <div className="tri-ring absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full" style={{ top: "-32px" }}>
+        <div className="tri-ring-d absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full" style={{ top: "-32px" }}>
           <div className="w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 8px 24px hsla(250, 30%, 20%, 0.3)" }}>
             <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
           </div>
