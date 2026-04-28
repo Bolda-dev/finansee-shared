@@ -167,7 +167,7 @@ type ChatMessage =
   | { id: string; role: "ai"; text: string }
   | { id: string; role: "ai-typing" };
 
-export const InsightsSheet = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
+export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<ContextTabKey>("assets");
   const [selectedAction, setSelectedAction] = useState<ActionKey>("investments");
   const [actionsView, setActionsView] = useState<"radio" | "list">("radio");

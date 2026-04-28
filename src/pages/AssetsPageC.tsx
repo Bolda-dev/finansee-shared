@@ -1,14 +1,14 @@
-import { CategoryPage, formatNIS, formatCompact, type CategoryItem } from "./CategoryPage";
+import { CategoryPageC, formatNIS, formatCompact, type CategoryItem } from "./CategoryPageC";
 import { assetItems } from "@/lib/data";
 
-const AssetsPage = () => {
+const AssetsPageC = () => {
   const items: CategoryItem[] = assetItems.map((a) => ({ ...a }));
 
   const totalValue = items.reduce((s, i) => s + (i.amount ?? 0), 0);
   const monthlyIncome = items.reduce((s, i) => s + (i.monthly ?? 0), 0);
 
   return (
-    <CategoryPage
+    <CategoryPageC
       title="נכסים"
       theme={{
         gradient:
@@ -74,4 +74,4 @@ const AssetsPage = () => {
   );
 };
 
-export default AssetsPage;
+export default AssetsPageC;

@@ -22,7 +22,7 @@ import {
   Wallet,
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
-import { InsightsSheet } from "@/components/InsightsSheet";
+import { InsightsSheetC as InsightsSheet } from "@/components/InsightsSheetC";
 
 const iconMap: Record<string, typeof Heart> = {
   Heart,
@@ -115,7 +115,7 @@ export type CategoryPageProps = {
   renderItemSubtitle: (item: CategoryItem) => string;
 };
 
-export const CategoryPage = ({
+export const CategoryPageC = ({
   title,
   theme,
   items,

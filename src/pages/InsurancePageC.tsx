@@ -1,7 +1,7 @@
-import { CategoryPage, formatNIS, type CategoryItem } from "./CategoryPage";
+import { CategoryPageC, formatNIS, type CategoryItem } from "./CategoryPageC";
 import { insuranceItems } from "@/lib/data";
 
-const InsurancePage = () => {
+const InsurancePageC = () => {
   const items: CategoryItem[] = insuranceItems.map((i) => ({ ...i }));
 
   const activePolicies = items.filter((i) => i.status === "פעיל");
@@ -16,7 +16,7 @@ const InsurancePage = () => {
   const totalYearly = Math.round(monthlyFromMonthly * 12 + yearlyFromYearly);
 
   return (
-    <CategoryPage
+    <CategoryPageC
       title="ביטוח"
       theme={{
         gradient:
@@ -106,4 +106,4 @@ const InsurancePage = () => {
   );
 };
 
-export default InsurancePage;
+export default InsurancePageC;

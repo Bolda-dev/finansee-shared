@@ -1,14 +1,14 @@
-import { CategoryPage, formatNIS, formatCompact, type CategoryItem } from "./CategoryPage";
+import { CategoryPageC, formatNIS, formatCompact, type CategoryItem } from "./CategoryPageC";
 import { liabilityItems } from "@/lib/data";
 
-const LiabilitiesPage = () => {
+const LiabilitiesPageC = () => {
   const items: CategoryItem[] = liabilityItems.map((a) => ({ ...a }));
 
   const totalBalance = items.reduce((s, i) => s + (i.balance ?? 0), 0);
   const monthlyPayment = items.reduce((s, i) => s + (i.monthly ?? 0), 0);
 
   return (
-    <CategoryPage
+    <CategoryPageC
       title="התחייבויות"
       theme={{
         gradient:
@@ -66,4 +66,4 @@ const LiabilitiesPage = () => {
   );
 };
 
-export default LiabilitiesPage;
+export default LiabilitiesPageC;
