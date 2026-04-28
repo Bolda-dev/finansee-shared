@@ -8,6 +8,7 @@ import { MenuDrawer } from "@/components/MenuDrawer";
 import { InsightsSheet } from "@/components/InsightsSheet";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
+import { useVersionCSettings } from "@/contexts/VersionCSettings";
 
 const formatCurrency = (n: number) =>
   "₪" + n.toLocaleString("he-IL");
@@ -40,6 +41,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 
 const IndexB = () => {
   const navigate = useNavigate();
+  const { boldCards, centerBar } = useVersionCSettings();
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
