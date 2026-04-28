@@ -52,11 +52,11 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
               <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסה C</p>
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">כרטיסיות — צבעוני נועז</span>
-                <Switch checked={boldCards} onCheckedChange={setBoldCards} />
+                <Switch dir="ltr" checked={boldCards} onCheckedChange={setBoldCards} />
               </div>
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">מרכז פיננסי — פס צבעוני</span>
-                <Switch checked={centerBar} onCheckedChange={setCenterBar} />
+                <Switch dir="ltr" checked={centerBar} onCheckedChange={setCenterBar} />
               </div>
             </div>
           )}
