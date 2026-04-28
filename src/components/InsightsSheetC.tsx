@@ -41,8 +41,8 @@ const contextTabs: Record<
   },
   liabilities: {
     label: "התחייבויות",
-    accent: "hsl(172, 80%, 35%)",
-    gradient: "linear-gradient(135deg, hsl(170, 80%, 38%) 0%, hsl(175, 75%, 50%) 55%, hsl(180, 80%, 68%) 100%)",
+    accent: "hsl(174, 85%, 24%)",
+    gradient: "linear-gradient(135deg, hsl(172, 85%, 26%) 0%, hsl(176, 80%, 36%) 55%, hsl(180, 75%, 52%) 100%)",
     items: expenseItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט הוצאות חודשיות",
   },
@@ -91,9 +91,9 @@ const actionsConfig: Record<
   },
   liabilities: {
     label: "התחייבויות",
-    accent: "hsl(172, 80%, 35%)",
-    accentBg: "hsl(170, 70%, 93%)",
-    gradient: "linear-gradient(135deg, hsl(170, 80%, 38%) 0%, hsl(175, 75%, 50%) 55%, hsl(180, 80%, 68%) 100%)",
+    accent: "hsl(174, 85%, 24%)",
+    accentBg: "hsl(172, 60%, 90%)",
+    gradient: "linear-gradient(135deg, hsl(172, 85%, 26%) 0%, hsl(176, 80%, 36%) 55%, hsl(180, 75%, 52%) 100%)",
     Icon: Landmark,
     title: "אופטימיזציה של משכנתא",
     description: "ריבית המשכנתא ירדה — תוכל לחסוך ₪500 בחודש על ידי מיחזור התוכנית הנוכחית.",
