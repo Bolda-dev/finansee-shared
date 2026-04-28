@@ -175,44 +175,26 @@ const IndexB = () => {
                 onClick={card.onClick}
                 className="relative rounded-2xl p-4 text-start overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={{
-                  background: card.gradient,
-                  boxShadow: card.shadow,
+                  background: "white",
+                  boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+                  border: "1px solid hsl(230, 20%, 94%)",
                   minHeight: "130px",
                 }}
               >
-                {/* Static ripples — unique placement per card */}
-                <svg
-                  className="absolute inset-0 w-full h-full pointer-events-none"
-                  viewBox="0 0 140 140"
-                  preserveAspectRatio="xMidYMid slice"
-                >
-                  {card.ripple.radii.map((r, idx) => (
-                    <circle
-                      key={`${r}-${idx}`}
-                      cx={card.ripple.cx}
-                      cy={card.ripple.cy}
-                      r={r}
-                      fill="none"
-                      stroke="hsla(0, 0%, 100%, 0.06)"
-                      strokeWidth="1"
-                    />
-                  ))}
-                </svg>
-
                 <div
                   className="w-9 h-9 rounded-full flex items-center justify-center mb-4 relative z-10"
                   style={{
-                    background: "hsla(0, 0%, 100%, 0.95)",
-                    boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.1)",
+                    background: card.gradient,
+                    boxShadow: card.shadow,
                   }}
                 >
-                  <card.Icon className="h-4 w-4" style={{ color: card.iconColor }} />
+                  <card.Icon className="h-4 w-4" style={{ color: "white" }} />
                 </div>
                 <div className="relative z-10">
-                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(0, 0%, 100%, 0.9)" }}>
+                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 12%, 58%)" }}>
                     {card.label}
                   </p>
-                  <p className="font-extrabold text-base text-primary-foreground" style={{ color: "white" }}>
+                  <p className="font-extrabold text-base" style={{ color: "hsl(250, 50%, 12%)" }}>
                     {card.value}
                   </p>
                 </div>
