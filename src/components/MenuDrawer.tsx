@@ -1,5 +1,5 @@
-import { Settings, User, LogOut, FileText, Bell } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Settings, User, LogOut, FileText, Bell, Sparkles } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -24,7 +24,9 @@ const menuItems = [
 
 export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
+  const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
   const { boldCards, centerBar, innerGrid, setBoldCards, setCenterBar, setInnerGrid } = useVersionCSettings();
 
   return (
@@ -64,6 +66,26 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
               </div>
             </div>
           )}
+
+          <div className="border-t border-border mt-4 pt-4">
+            <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסאות</p>
+            <button onClick={() => { onOpenChange(false); navigate("/"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4 text-muted-foreground" />
+              גרסה A
+            </button>
+            <button onClick={() => { onOpenChange(false); navigate("/b"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4 text-muted-foreground" />
+              גרסה B
+            </button>
+            <button onClick={() => { onOpenChange(false); navigate("/c"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4 text-muted-foreground" />
+              גרסה C
+            </button>
+            <button onClick={() => { onOpenChange(false); navigate("/d"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4 text-muted-foreground" />
+              גרסה D — Dark Metallic
+            </button>
+          </div>
 
           <div className="border-t border-border mt-4 pt-4">
             <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium hover:bg-destructive/10 transition-colors" style={{ color: "hsl(0, 60%, 50%)" }}>

@@ -11,9 +11,13 @@ import AssetsPage from "./pages/AssetsPage";
 import LiabilitiesPage from "./pages/LiabilitiesPage";
 import IndexB from "./pages/IndexB";
 import IndexC from "./pages/IndexC";
+import IndexD from "./pages/IndexD";
 import InsurancePageC from "./pages/InsurancePageC";
 import AssetsPageC from "./pages/AssetsPageC";
 import LiabilitiesPageC from "./pages/LiabilitiesPageC";
+import InsurancePageD from "./pages/InsurancePageD";
+import AssetsPageD from "./pages/AssetsPageD";
+import LiabilitiesPageD from "./pages/LiabilitiesPageD";
 import NotFound from "./pages/NotFound";
 import { VersionCSettingsProvider } from "./contexts/VersionCSettings";
 
@@ -30,6 +34,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/b" element={<IndexB />} />
             <Route path="/c" element={<IndexC />} />
+            <Route path="/d" element={<IndexD />} />
             <Route path="/income" element={<IncomePage />} />
             <Route path="/expenses" element={<ExpensesPage />} />
             <Route path="/insurance" element={<InsurancePage />} />
@@ -40,6 +45,11 @@ const App = () => (
             <Route path="/c/liabilities" element={<LiabilitiesPageC />} />
             <Route path="/c/income" element={<IncomePage />} />
             <Route path="/c/expenses" element={<ExpensesPage />} />
+            <Route path="/d/insurance" element={<InsurancePageD />} />
+            <Route path="/d/assets" element={<AssetsPageD />} />
+            <Route path="/d/liabilities" element={<LiabilitiesPageD />} />
+            <Route path="/d/income" element={<IncomePage />} />
+            <Route path="/d/expenses" element={<ExpensesPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </VersionCSettingsProvider>
