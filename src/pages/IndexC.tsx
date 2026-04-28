@@ -271,7 +271,7 @@ const IndexB = () => {
             >
               {/* Avatar with rotating tri-color ring + badge */}
               <span className="relative flex-shrink-0">
-                <span className="tri-ring relative w-12 h-12 rounded-full block">
+                <span className="tri-ring-c relative w-12 h-12 rounded-full block">
                   <span className="block w-full h-full rounded-full overflow-hidden">
                     <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
                   </span>
@@ -449,7 +449,7 @@ const IndexB = () => {
                 ₪{incomeItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="cta-tri w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
+            <button className="cta-tri-c w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -473,7 +473,7 @@ const IndexB = () => {
                 ₪{expenseItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="cta-tri w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
+            <button className="cta-tri-c w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -491,7 +491,7 @@ const IndexB = () => {
       {activeTab === "insurance" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
-            <button className="cta-tri w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
+            <button className="cta-tri-c w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -529,7 +529,7 @@ const IndexB = () => {
         >
           {/* Avatar — pinned to right (start in RTL), floating, with rotating tri-color ring */}
           <span
-            className="tri-ring relative w-11 h-11 rounded-full flex-shrink-0"
+            className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
             style={{ transform: "translateY(-2px)" }}
           >
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
@@ -551,9 +551,9 @@ const IndexB = () => {
           </span>
 
           {/* Send button — left edge, with rotating tri-color ring */}
-          <span className="tri-ring relative w-9 h-9 rounded-full flex-shrink-0">
+          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
             <span
-              className="flex w-full h-full rounded-full items-center justify-center cta-tri"
+              className="flex w-full h-full rounded-full items-center justify-center cta-tri-c"
             >
               <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
             </span>
