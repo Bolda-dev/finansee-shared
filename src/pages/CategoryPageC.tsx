@@ -515,16 +515,21 @@ export const CategoryPageC = ({
                     >
                       חסר
                     </p>
-                  ) : (
-                    <p
-                      className="text-[20px] font-extrabold tracking-tight leading-none text-right"
-                      style={{ color: "hsl(250, 50%, 12%)" }}
-                    >
-                      {typeof item.amount === "number"
-                        ? `₪${item.amount.toLocaleString("he-IL")}`
-                        : "—"}
-                    </p>
-                  )}
+                  ) : (() => {
+                    const numeric = [item.amount, (item as any).balance, (item as any).cost, (item as any).value]
+                      .find((v) => typeof v === "number") as number | undefined;
+                    const display = typeof numeric === "number"
+                      ? `₪${numeric.toLocaleString("he-IL")}`
+                      : (item.label ?? "—");
+                    return (
+                      <p
+                        className="text-[20px] font-extrabold tracking-tight leading-none text-right"
+                        style={{ color: "hsl(250, 50%, 12%)" }}
+                      >
+                        {display}
+                      </p>
+                    );
+                  })()}
                   <p className="text-[10px] mt-1 text-right" style={{ color: "hsl(230, 12%, 58%)" }}>
                     {renderItemSubtitle(item)}
                   </p>
