@@ -363,13 +363,7 @@ const IndexB = () => {
                       aria-hidden
                     />
 
-                    <div className="flex items-start justify-between mb-1">
-                      <span
-                        className="text-[10px] font-semibold tracking-wide"
-                        style={{ color: "hsl(250, 20%, 50%)" }}
-                      >
-                        {card.label}
-                      </span>
+                    <div className="flex items-center justify-start gap-2 mb-1">
                       <span className="relative">
                         <span
                           className="w-9 h-9 rounded-full flex items-center justify-center"
@@ -385,6 +379,12 @@ const IndexB = () => {
                             {card.badge}
                           </span>
                         )}
+                      </span>
+                      <span
+                        className="text-[12px] font-bold tracking-tight"
+                        style={{ color: "hsl(250, 50%, 12%)" }}
+                      >
+                        {card.label}
                       </span>
                     </div>
 
@@ -410,11 +410,11 @@ const IndexB = () => {
                     {card.extra && (
                       <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
                         <p className="text-[11px] leading-none whitespace-nowrap">
-                          <span className="font-bold" style={{ color: colors.accent }}>
+                          <span className="font-bold" style={{ color: "hsl(250, 50%, 12%)" }}>
                             {card.extra}
                           </span>
-                          <span className="mx-1" style={{ color: "hsl(230, 12%, 70%)" }}>·</span>
-                          <span style={{ color: "hsl(230, 12%, 55%)" }}>
+                          <span className="mx-1" style={{ color: "hsl(250, 50%, 12%)" }}>·</span>
+                          <span style={{ color: "hsl(250, 50%, 12%)" }}>
                             {card.extraSub}
                           </span>
                         </p>
