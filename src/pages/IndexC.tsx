@@ -200,13 +200,13 @@ const IndexB = () => {
 
 
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center mb-3 relative z-10"
+                  className={`${boldCards ? "w-9 h-9 mb-4" : "w-12 h-12 mb-3"} rounded-full flex items-center justify-center relative z-10`}
                   style={{
                     background: boldCards ? "hsla(0, 0%, 100%, 0.95)" : card.gradient,
                     boxShadow: boldCards ? "0 2px 8px hsla(0, 0%, 0%, 0.1)" : card.shadow,
                   }}
                 >
-                  <card.Icon className="h-5 w-5" style={{ color: boldCards ? card.iconColor : "white" }} />
+                  <card.Icon className={boldCards ? "h-4 w-4" : "h-5 w-5"} style={{ color: boldCards ? card.iconColor : "white" }} />
                 </div>
                 <div className="relative z-10">
                   <p
