@@ -197,15 +197,7 @@ const IndexB = () => {
                       }
                 }
               >
-                {!boldCards && (
-                  <span
-                    className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
-                    style={{
-                      background: `linear-gradient(to top, ${card.glow} 0%, transparent 100%)`,
-                    }}
-                    aria-hidden
-                  />
-                )}
+
 
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center mb-3 relative z-10"
