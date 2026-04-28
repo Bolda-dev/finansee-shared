@@ -67,6 +67,16 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
             </div>
           )}
 
+          {isVersionD && (
+            <div className="border-t border-border mt-4 pt-4">
+              <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסה D</p>
+              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
+                <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
+                <Switch dir="ltr" checked={innerGrid} onCheckedChange={setInnerGrid} />
+              </div>
+            </div>
+          )}
+
           <div className="border-t border-border mt-4 pt-4">
             <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסאות</p>
             <button onClick={() => { onOpenChange(false); navigate("/"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
