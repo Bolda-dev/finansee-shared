@@ -180,7 +180,7 @@ const IndexB = () => {
                 style={{
                   background: "white",
                   boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-                  border: "1px solid hsl(230, 20%, 94%)",
+                  border: `1px solid ${card.outline}`,
                   minHeight: "130px",
                 }}
               >
