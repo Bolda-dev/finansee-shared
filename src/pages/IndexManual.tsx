@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info, Send, Mic, ChevronLeft, PiggyBank, Landmark, Briefcase, CreditCard, Building2, LineChart, Sparkles, MessageCircle } from "lucide-react";
+import { TrendingUp, TrendingDown, Shield, Home, Plus, Calendar, BarChart3, Wallet, ShieldCheck, Menu, Info, Send, Mic, ChevronLeft, PiggyBank, Landmark, Briefcase, CreditCard, Building2, LineChart, Sparkles, MessageCircle, Palette } from "lucide-react";
 import finanseeLogo from "@/assets/finansee-logo.png";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
 import { InsightsSheetC as InsightsSheet } from "@/components/InsightsSheetC";
+import { ColorPickerSheet } from "@/components/ColorPickerSheet";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 import { useVersionCSettings } from "@/contexts/VersionCSettings";
+import { useManualPalette } from "@/contexts/ManualPaletteContext";
+import { hslToString, hslaToString, buildGradient, buildAccentBg, buildShadow, buildGlow, buildOutline } from "@/lib/paletteUtils";
 
 const formatCurrency = (n: number) =>
   "₪" + n.toLocaleString("he-IL");
