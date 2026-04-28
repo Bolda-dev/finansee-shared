@@ -482,12 +482,14 @@ export const InsightsSheetD = ({ open, onOpenChange, mode = "context" }: Insight
                       setInput(q);
                       inputRef.current?.focus();
                     }}
-                    className="inline-flex items-center text-[11px] font-medium px-3 py-1.5 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98]"
+                    className="inline-flex items-center text-[11px] font-semibold px-3 py-1.5 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98]"
                     style={{
-                      background: "white",
-                      border: "1px solid hsl(230, 20%, 90%)",
+                      background: "hsla(220, 35%, 14%, 0.85)",
+                      border: "1px solid hsla(210, 80%, 65%, 0.18)",
                       color: "hsl(215, 25%, 80%)",
-                      boxShadow: "0 1px 2px hsla(230, 20%, 40%, 0.04)",
+                      boxShadow: "inset 0 1px 0 hsla(210, 100%, 80%, 0.06), 0 2px 8px hsla(0, 0%, 0%, 0.35)",
+                      backdropFilter: "blur(8px)",
+                      WebkitBackdropFilter: "blur(8px)",
                     }}
                   >
                     {q}
