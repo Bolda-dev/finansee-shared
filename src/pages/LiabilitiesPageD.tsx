@@ -53,7 +53,7 @@ const LiabilitiesPageD = () => {
           {item.monthly ? (
             <span
               className="block text-[10px] font-medium"
-              style={{ color: "hsl(170, 95%, 70%)" }}
+              style={{ color: "hsl(200, 100%, 75%)" }}
             >
               -{formatNIS(item.monthly)}/חודש
             </span>
