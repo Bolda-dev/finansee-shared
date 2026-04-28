@@ -202,17 +202,25 @@ export const CategoryPageC = ({
         className="sticky top-0 z-0 px-5 pt-10 pb-12"
         style={{ background: theme.gradient }}
       >
-        {/* Decorative blobs */}
-        <div
-          className="absolute -top-10 -left-12 w-44 h-44 rounded-full pointer-events-none"
-          style={{ background: "hsla(0, 0%, 100%, 0.10)" }}
+        {/* Decorative ripples — same style as category cards */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 140 140"
+          preserveAspectRatio="xMidYMid slice"
           aria-hidden
-        />
-        <div
-          className="absolute -bottom-20 -right-10 w-56 h-56 rounded-full pointer-events-none"
-          style={{ background: "hsla(0, 0%, 100%, 0.07)" }}
-          aria-hidden
-        />
+        >
+          {[28, 56, 86, 118, 150, 184].map((r) => (
+            <circle
+              key={r}
+              cx={125}
+              cy={18}
+              r={r}
+              fill="none"
+              stroke="hsla(0, 0%, 100%, 0.09)"
+              strokeWidth="1"
+            />
+          ))}
+        </svg>
 
         {/* Top bar: back + title */}
         <div className="relative flex items-center justify-between mb-5 text-white">
