@@ -354,12 +354,6 @@ const IndexB = () => {
                       minHeight: "150px",
                     }}
                   >
-                    <span
-                      className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
-                      style={{ background: colors.bar }}
-                      aria-hidden
-                    />
-
                     <div className="flex items-center justify-start gap-2 mb-1">
                       <span className="relative">
                         <span
