@@ -65,6 +65,10 @@ export type CategoryItem = {
   icon: string;
   provider?: string;
   alert?: boolean;
+  /** When true, render this item with expanded layout (more details, larger card) */
+  expanded?: boolean;
+  /** Extra detail rows (label → value) shown under the title in expanded mode */
+  details?: Array<{ label: string; value: string }>;
 };
 
 export type CategoryTheme = {
@@ -359,11 +363,12 @@ export const CategoryPageC = ({
             const Icon = iconMap[item.icon] || ShieldCheck;
             const isMissing = item.status === "חסר";
             const isLast = i === filteredItems.length - 1;
+            const isExpanded = !!item.expanded;
 
             return (
               <button
                 key={i}
-                className="w-full flex items-center gap-3 px-4 py-3.5 transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
+                className={`w-full flex items-start gap-3 px-4 transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)] ${isExpanded ? "py-5" : "py-4"}`}
                 style={{
                   borderBottom: isLast ? "none" : "1px solid hsl(230, 20%, 94%)",
                 }}
@@ -372,7 +377,7 @@ export const CategoryPageC = ({
                 {/* Icon (right in RTL) */}
                 <span className="relative flex-shrink-0">
                   <span
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    className={`${isExpanded ? "w-12 h-12" : "w-11 h-11"} rounded-xl flex items-center justify-center`}
                     style={{
                       background: isMissing ? "hsl(0, 80%, 95%)" : theme.accentBg,
                     }}
@@ -380,8 +385,8 @@ export const CategoryPageC = ({
                     <Icon
                       style={{
                         color: isMissing ? "hsl(0, 65%, 50%)" : theme.accent,
-                        width: "18px",
-                        height: "18px",
+                        width: isExpanded ? "22px" : "20px",
+                        height: isExpanded ? "22px" : "20px",
                       }}
                       strokeWidth={2}
                     />
@@ -399,30 +404,80 @@ export const CategoryPageC = ({
                   )}
                 </span>
 
-                {/* Title + subtitle */}
+                {/* Title + subtitle (+ details when expanded) */}
                 <div className="flex-1 min-w-0 text-right">
                   <p
-                    className="text-[13.5px] font-bold text-primary tracking-tight"
+                    className={`${isExpanded ? "text-[15px]" : "text-[14px]"} font-bold tracking-tight`}
                     style={{ color: "hsl(250, 50%, 12%)" }}
                   >
                     {item.label}
                   </p>
                   <p
-                    className="text-[10.5px] mt-0.5 truncate"
+                    className="text-[11.5px] mt-0.5 truncate"
                     style={{ color: "hsl(230, 15%, 55%)" }}
                   >
                     {renderItemSubtitle(item)}
                   </p>
+
+                  {isExpanded && item.details && item.details.length > 0 && (
+                    <div className="mt-2 space-y-0.5">
+                      {item.details.map((d) => (
+                        <p
+                          key={d.label}
+                          className="text-[11.5px] leading-snug"
+                          style={{ color: "hsl(230, 15%, 45%)" }}
+                        >
+                          <span style={{ color: "hsl(230, 15%, 60%)" }}>{d.label}:</span>{" "}
+                          <span className="font-medium" style={{ color: "hsl(250, 40%, 22%)" }}>
+                            {d.value}
+                          </span>
+                        </p>
+                      ))}
+                    </div>
+                  )}
+
+                  {isExpanded && item.status === "פעיל" && item.cost ? (
+                    <div className="mt-2.5 flex items-center justify-between gap-2 flex-wrap">
+                      <span
+                        className="inline-flex items-baseline gap-1 text-[12px] font-bold px-2.5 py-1 rounded-full"
+                        style={{
+                          background: theme.accentBg,
+                          color: theme.accentText,
+                        }}
+                      >
+                        {formatNIS(item.cost)}
+                        <span className="text-[10px] font-medium opacity-80">
+                          /{item.billing === "yearly" ? "שנה" : "חודש"}
+                        </span>
+                      </span>
+                      {item.billing === "yearly" && (
+                        <span className="text-[11px]" style={{ color: "hsl(230, 15%, 55%)" }}>
+                          שווה ערך חודשי{" "}
+                          <span className="font-bold" style={{ color: "hsl(250, 50%, 12%)" }}>
+                            {formatNIS(Math.round(item.cost / 12))}/חודש
+                          </span>
+                        </span>
+                      )}
+                    </div>
+                  ) : null}
                 </div>
 
-                {/* Trailing: amount or status */}
-                <div className="flex items-center gap-1.5 flex-shrink-0">
-                  {renderItemTrailing(item, theme)}
+                {/* Trailing: amount or status (hidden when expanded — chip is inside title col) */}
+                {!isExpanded && (
+                  <div className="flex items-center gap-1.5 flex-shrink-0 self-center">
+                    {renderItemTrailing(item, theme)}
+                    <ChevronLeft
+                      className="h-4 w-4 flex-shrink-0"
+                      style={{ color: "hsl(230, 15%, 60%)" }}
+                    />
+                  </div>
+                )}
+                {isExpanded && (
                   <ChevronLeft
-                    className="h-4 w-4 flex-shrink-0"
+                    className="h-4 w-4 flex-shrink-0 self-center"
                     style={{ color: "hsl(230, 15%, 60%)" }}
                   />
-                </div>
+                )}
               </button>
             );
           })}
