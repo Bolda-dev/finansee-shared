@@ -276,9 +276,10 @@ export const CategoryPageD = ({
             onClick={() => setChatOpen(true)}
             className="inline-flex items-center gap-2 pr-2 pl-4 py-1.5 rounded-full text-[12px] font-semibold transition-all hover:scale-[1.03] active:scale-[0.98] shadow-lg"
             style={{
-              background: "white",
-              color: "hsl(222, 47%, 8%)",
-              boxShadow: `0 8px 28px ${theme.sheetShadow}, 0 0 24px hsla(0, 0%, 100%, 0.25)`,
+              background: "linear-gradient(160deg, hsla(220, 35%, 14%, 0.92) 0%, hsla(220, 42%, 8%, 0.96) 100%)",
+              color: "hsl(0, 0%, 100%)",
+              border: "1px solid hsla(210, 90%, 70%, 0.25)",
+              boxShadow: `0 8px 28px hsla(0, 0%, 0%, 0.5), inset 0 1px 0 hsla(210, 100%, 80%, 0.14)`,
             }}
             aria-label={danaCtaText}
           >
@@ -615,7 +616,12 @@ export const CategoryPageD = ({
                   setDanaBubbleDismissed(true);
                   setChatOpen(true);
                 }}
-                className="cta-tri mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                className="mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                style={{
+                  background: "white",
+                  color: "hsl(222, 47%, 8%)",
+                  boxShadow: "0 6px 20px hsla(0, 0%, 100%, 0.25), 0 0 18px hsla(0, 0%, 100%, 0.15)",
+                }}
               >
                 {danaBubbleCta}
                 <ChevronLeft className="h-3.5 w-3.5" />
