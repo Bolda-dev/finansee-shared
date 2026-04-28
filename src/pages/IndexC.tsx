@@ -307,19 +307,19 @@ const IndexB = () => {
               type Category = "assets" | "liabilities" | "insurance";
               const categoryColors: Record<Category, { accent: string; accentBg: string; bar: string }> = {
                 assets: {
-                  accent: "hsl(195, 85%, 42%)",
-                  accentBg: "hsl(190, 80%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(190, 85%, 50%) 0%, hsla(195, 90%, 62%, 0.7) 100%)",
+                  accent: "hsl(222, 85%, 45%)",
+                  accentBg: "hsl(220, 85%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(220, 85%, 48%) 0%, hsla(225, 90%, 60%, 0.7) 100%)",
                 },
                 liabilities: {
-                  accent: "hsl(22, 90%, 48%)",
-                  accentBg: "hsl(28, 90%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(18, 90%, 55%) 0%, hsla(28, 95%, 62%, 0.7) 100%)",
+                  accent: "hsl(172, 80%, 35%)",
+                  accentBg: "hsl(170, 70%, 93%)",
+                  bar: "linear-gradient(90deg, hsl(170, 80%, 38%) 0%, hsla(175, 75%, 50%, 0.7) 100%)",
                 },
                 insurance: {
-                  accent: "hsl(280, 75%, 50%)",
-                  accentBg: "hsl(280, 70%, 95%)",
-                  bar: "linear-gradient(90deg, hsl(270, 75%, 55%) 0%, hsla(282, 80%, 65%, 0.7) 100%)",
+                  accent: "hsl(262, 75%, 52%)",
+                  accentBg: "hsl(260, 75%, 95%)",
+                  bar: "linear-gradient(90deg, hsl(258, 72%, 55%) 0%, hsla(265, 78%, 65%, 0.7) 100%)",
                 },
               };
 
