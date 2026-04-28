@@ -38,10 +38,12 @@ export const useVersionCSettings = () => {
       centerBar: false,
       innerGrid: false,
       logoLeft: false,
+      filledIconsD: false,
       setBoldCards: () => {},
       setCenterBar: () => {},
       setInnerGrid: () => {},
       setLogoLeft: () => {},
+      setFilledIconsD: () => {},
     } as VersionCSettings;
   }
   return ctx;
