@@ -65,6 +65,10 @@ export type CategoryItem = {
   icon: string;
   provider?: string;
   alert?: boolean;
+  /** When true, render this item with expanded layout (more details, larger card) */
+  expanded?: boolean;
+  /** Extra detail rows (label → value) shown under the title in expanded mode */
+  details?: Array<{ label: string; value: string }>;
 };
 
 export type CategoryTheme = {
