@@ -13,6 +13,9 @@ import IndexB from "./pages/IndexB";
 import IndexC from "./pages/IndexC";
 import IndexD from "./pages/IndexD";
 import IndexManual from "./pages/IndexManual";
+import AssetsPageManual from "./pages/AssetsPageManual";
+import LiabilitiesPageManual from "./pages/LiabilitiesPageManual";
+import InsurancePageManual from "./pages/InsurancePageManual";
 import PalettesPage from "./pages/PalettesPage";
 import InsurancePageC from "./pages/InsurancePageC";
 import AssetsPageC from "./pages/AssetsPageC";
@@ -40,6 +43,9 @@ const App = () => (
               <Route path="/c" element={<IndexC />} />
               <Route path="/d" element={<IndexD />} />
               <Route path="/manual" element={<IndexManual />} />
+              <Route path="/manual/assets" element={<AssetsPageManual />} />
+              <Route path="/manual/liabilities" element={<LiabilitiesPageManual />} />
+              <Route path="/manual/insurance" element={<InsurancePageManual />} />
               <Route path="/palettes" element={<PalettesPage />} />
               <Route path="/income" element={<IncomePage />} />
               <Route path="/expenses" element={<ExpensesPage />} />
