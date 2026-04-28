@@ -218,7 +218,7 @@ export const CategoryPageC = ({
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          <h2 className="text-base font-bold text-primary">{title}</h2>
+          <h2 className="text-base font-bold text-secondary">{title}</h2>
           <span className="w-7" aria-hidden />
         </div>
 
