@@ -338,22 +338,22 @@ const IndexD = () => {
               type Category = "assets" | "liabilities" | "insurance";
               const categoryColors: Record<Category, { accent: string; accentBg: string; accentBorder: string; bar: string; glow: string }> = {
                 assets: {
-                  accent: "hsl(195, 100%, 75%)",
-                  accentBg: "linear-gradient(135deg, hsla(200, 100%, 55%, 0.22) 0%, hsla(195, 100%, 60%, 0.12) 100%)",
+                  accent: "hsl(200, 100%, 70%)",
+                  accentBg: "hsla(212, 90%, 35%, 0.35)",
                   accentBorder: "1px solid hsla(195, 100%, 70%, 0.4)",
                   bar: "linear-gradient(90deg, hsl(210, 100%, 55%) 0%, hsla(195, 100%, 65%, 0.85) 100%)",
                   glow: "hsla(200, 100%, 55%, 0.5)",
                 },
                 liabilities: {
-                  accent: "hsl(162, 95%, 70%)",
-                  accentBg: "linear-gradient(135deg, hsla(168, 95%, 50%, 0.22) 0%, hsla(162, 90%, 55%, 0.12) 100%)",
+                  accent: "hsl(170, 95%, 65%)",
+                  accentBg: "hsla(174, 80%, 28%, 0.35)",
                   accentBorder: "1px solid hsla(162, 95%, 65%, 0.4)",
                   bar: "linear-gradient(90deg, hsl(168, 95%, 50%) 0%, hsla(162, 95%, 60%, 0.85) 100%)",
                   glow: "hsla(168, 95%, 50%, 0.5)",
                 },
                 insurance: {
-                  accent: "hsl(285, 95%, 78%)",
-                  accentBg: "linear-gradient(135deg, hsla(280, 95%, 60%, 0.22) 0%, hsla(290, 95%, 68%, 0.12) 100%)",
+                  accent: "hsl(280, 90%, 70%)",
+                  accentBg: "hsla(275, 70%, 30%, 0.35)",
                   accentBorder: "1px solid hsla(285, 95%, 75%, 0.4)",
                   bar: "linear-gradient(90deg, hsl(275, 95%, 60%) 0%, hsla(290, 95%, 70%, 0.85) 100%)",
                   glow: "hsla(280, 95%, 60%, 0.5)",
