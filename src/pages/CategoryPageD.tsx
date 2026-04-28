@@ -391,12 +391,14 @@ export const CategoryPageD = ({
                   <span
                     className="w-11 h-11 rounded-xl flex items-center justify-center"
                     style={{
-                      background: isMissing ? "hsl(0, 80%, 95%)" : theme.accentBg,
+                      background: isMissing ? "hsla(0, 75%, 50%, 0.18)" : theme.accentBg,
+                      border: isMissing ? "1px solid hsla(0, 80%, 60%, 0.35)" : undefined,
+                      boxShadow: isMissing ? "0 0 14px hsla(0, 80%, 55%, 0.25)" : undefined,
                     }}
                   >
                     <Icon
                       style={{
-                        color: isMissing ? "hsl(0, 65%, 50%)" : theme.accent,
+                        color: isMissing ? "hsl(0, 90%, 70%)" : theme.accent,
                         width: "20px",
                         height: "20px",
                       }}
@@ -489,11 +491,15 @@ export const CategoryPageD = ({
                     <span className="relative">
                       <span
                         className="w-9 h-9 rounded-full flex items-center justify-center"
-                        style={{ background: isMissing ? "hsl(0, 80%, 95%)" : theme.accentBg }}
+                        style={{
+                          background: isMissing ? "hsla(0, 75%, 50%, 0.18)" : theme.accentBg,
+                          border: isMissing ? "1px solid hsla(0, 80%, 60%, 0.35)" : undefined,
+                          boxShadow: isMissing ? "0 0 12px hsla(0, 80%, 55%, 0.25)" : undefined,
+                        }}
                       >
                         <Icon
                           style={{
-                            color: isMissing ? "hsl(0, 65%, 50%)" : theme.accent,
+                            color: isMissing ? "hsl(0, 90%, 70%)" : theme.accent,
                             width: "16px",
                             height: "16px",
                           }}
@@ -520,7 +526,7 @@ export const CategoryPageD = ({
                   {isMissing ? (
                     <p
                       className="text-[18px] font-extrabold tracking-tight leading-none text-right"
-                      style={{ color: "hsl(0, 65%, 50%)" }}
+                      style={{ color: "hsl(0, 90%, 70%)" }}
                     >
                       חסר
                     </p>
