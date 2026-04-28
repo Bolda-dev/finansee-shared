@@ -20,9 +20,10 @@ export const VersionCSettingsProvider = ({ children }: { children: ReactNode }) 
   const [centerBar, setCenterBar] = useState(false);
   const [innerGrid, setInnerGrid] = useState(false);
   const [logoLeft, setLogoLeft] = useState(false);
+  const [filledIconsD, setFilledIconsD] = useState(false);
   return (
     <Ctx.Provider
-      value={{ boldCards, centerBar, innerGrid, logoLeft, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft }}
+      value={{ boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD }}
     >
       {children}
     </Ctx.Provider>
