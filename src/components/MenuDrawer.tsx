@@ -28,7 +28,7 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const isVersionB = pathname === "/b" || pathname.startsWith("/b/");
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
-  const { boldCards, centerBar, innerGrid, logoLeft, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft } = useVersionCSettings();
+  const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
