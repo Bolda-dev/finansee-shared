@@ -15,7 +15,7 @@ const ExpensesPage = () => {
         <button onClick={() => navigate("/")} className="flex items-center gap-1 text-sm opacity-80 mb-4">
           <ArrowRight className="h-4 w-4" /> חזרה
         </button>
-        <h1 className="text-2xl font-bold">הוצאות</h1>
+        <h1 className="text-2xl font-bold text-primary">הוצאות</h1>
         <p className="text-3xl font-extrabold mt-2">₪{total.toLocaleString("he-IL")}<span className="text-sm font-normal opacity-80"> /חודש</span></p>
       </div>
       <div className="px-5 py-4 space-y-3">

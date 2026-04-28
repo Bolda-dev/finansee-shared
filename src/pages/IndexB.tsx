@@ -94,7 +94,7 @@ const IndexB = () => {
           <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
             <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
           </button>
-          <h1 className="text-lg font-bold text-start mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
+          <h1 className="text-lg font-bold text-primary text-start mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>בוקר טוב, {userData.name}</h1>
         </div>
       </div>
 
@@ -279,7 +279,7 @@ const IndexB = () => {
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <p className="text-sm font-bold" style={{ color: "hsl(250, 40%, 18%)" }}>
+                  <p className="text-sm font-bold text-primary" style={{ color: "hsl(250, 40%, 18%)" }}>
                     התובנות של דנה
                   </p>
                   <span
@@ -297,7 +297,7 @@ const IndexB = () => {
           </div>
 
           {/* Financial Center */}
-          <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>מרכז פיננסי</h2>
+          <h2 className="text-sm font-bold text-primary mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>מרכז פיננסי</h2>
           <div className="grid grid-cols-2 gap-3 pb-32">
             {(() => {
               type Category = "assets" | "liabilities" | "insurance";
