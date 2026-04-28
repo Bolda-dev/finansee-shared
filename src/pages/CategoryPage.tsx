@@ -402,7 +402,7 @@ export const CategoryPage = ({
                 {/* Title + subtitle */}
                 <div className="flex-1 min-w-0 text-right">
                   <p
-                    className="text-[13.5px] font-bold tracking-tight"
+                    className="text-[13.5px] font-bold text-primary tracking-tight"
                     style={{ color: "hsl(250, 50%, 12%)" }}
                   >
                     {item.label}
@@ -480,7 +480,7 @@ export const CategoryPage = ({
                   setDanaBubbleDismissed(true);
                   setChatOpen(true);
                 }}
-                className="cta-tri mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                className="cta-tri mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]"
               >
                 {danaBubbleCta}
                 <ChevronLeft className="h-3.5 w-3.5" />

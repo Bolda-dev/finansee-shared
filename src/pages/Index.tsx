@@ -64,7 +64,7 @@ const Index = () => {
             <Menu className="h-5 w-5 text-white" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold">היי {userData.name}! 👋</h1>
+            <h1 className="text-2xl font-bold text-primary">היי {userData.name}! 👋</h1>
             <p className="text-sm opacity-80 mt-1">
               {new Date().toLocaleDateString("he-IL", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
             </p>
@@ -150,7 +150,7 @@ const Index = () => {
       {/* Bottom Section */}
       <div className="px-5 mt-6">
         {/* Recommendations */}
-        <h2 className="text-base font-bold text-foreground mb-3">המלצות לשיפור</h2>
+        <h2 className="text-base font-bold text-primary text-foreground mb-3">המלצות לשיפור</h2>
         <div className="flex gap-3 overflow-x-auto pb-6 -mx-5 px-5 scrollbar-hide">
           {recommendations.map((rec) => (
             <div
