@@ -71,9 +71,9 @@ const actionsConfig: Record<
 > = {
   investments: {
     label: "השקעות",
-    accent: "hsl(178, 70%, 30%)",
-    accentBg: "hsl(176, 55%, 91%)",
-    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+    accent: "hsl(75, 70%, 35%)",
+    accentBg: "hsl(70, 90%, 88%)",
+    gradient: "linear-gradient(135deg, hsl(75, 80%, 50%) 0%, hsl(75, 93%, 62%) 55%, hsl(70, 95%, 80%) 100%)",
     Icon: TrendingUp,
     title: "איזון תיק השקעות",
     description: "הקצאת המניות שלך גבוהה כרגע ב-15% מפרופיל הסיכון היעד שלך.",
@@ -81,9 +81,9 @@ const actionsConfig: Record<
   },
   insurance: {
     label: "ביטוח",
-    accent: "hsl(262, 75%, 52%)",
-    accentBg: "hsl(260, 75%, 95%)",
-    gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
+    accent: "hsl(245, 76%, 50%)",
+    accentBg: "hsl(245, 90%, 95%)",
+    gradient: "linear-gradient(135deg, hsl(245, 70%, 45%) 0%, hsl(245, 76%, 59%) 55%, hsl(248, 90%, 78%) 100%)",
     Icon: Shield,
     title: "ביטוח כפול",
     description: "ייתכן שאתה משלם פעמיים על כיסוי בריאות דרך מקום העבודה ופוליסה פרטית.",
@@ -91,9 +91,9 @@ const actionsConfig: Record<
   },
   liabilities: {
     label: "התחייבויות",
-    accent: "hsl(222, 85%, 45%)",
-    accentBg: "hsl(220, 85%, 95%)",
-    gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+    accent: "hsl(0, 0%, 12%)",
+    accentBg: "hsl(0, 0%, 92%)",
+    gradient: "linear-gradient(135deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 18%) 55%, hsl(0, 0%, 35%) 100%)",
     Icon: Landmark,
     title: "אופטימיזציה של משכנתא",
     description: "ריבית המשכנתא ירדה — תוכל לחסוך ₪500 בחודש על ידי מיחזור התוכנית הנוכחית.",
