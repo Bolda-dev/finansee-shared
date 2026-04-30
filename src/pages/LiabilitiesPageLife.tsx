@@ -16,7 +16,7 @@ const LiabilitiesPageLife = () => {
           "linear-gradient(160deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 18%) 55%, hsl(0, 0%, 35%) 100%)",
         accent: "hsl(0, 0%, 12%)",
         accentBg: "hsl(0, 0%, 92%)",
-        accentText: "hsl(0, 0%, 95%)",
+        accentText: "hsl(0, 0%, 8%)",
         sheetShadow: "hsla(0, 0%, 0%, 0.45)",
         ctaClass: "cta-tri-life",
         ringClass: "tri-ring-life",
