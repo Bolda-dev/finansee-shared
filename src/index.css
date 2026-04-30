@@ -390,6 +390,68 @@ All colors MUST be HSL.
   background: hsl(222, 47%, 6%);
 }
 
+/* === Variant Life — Lime / Black / Purple ===
+   Lime CTA with black text. Used in /life version. */
+.cta-tri-life {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 25% 30%, hsla(75, 95%, 75%, 0.6) 0%, transparent 55%),
+    radial-gradient(circle at 75% 70%, hsla(70, 90%, 60%, 0.5) 0%, transparent 55%),
+    hsl(75, 93%, 67%);
+  color: hsl(0, 0%, 8%);
+  overflow: hidden;
+  border: none;
+}
+.cta-tri-life::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 25% 35%, hsla(75, 93%, 75%, 0.6) 0%, transparent 38%),
+    radial-gradient(circle at 75% 65%, hsla(70, 95%, 60%, 0.5) 0%, transparent 40%);
+  animation: cta-drift 9s ease-in-out infinite;
+  filter: blur(10px);
+  pointer-events: none;
+}
+.cta-tri-life::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 50%, hsla(60, 95%, 80%, 0.45) 0%, transparent 35%);
+  animation: cta-drift-2 11s ease-in-out infinite;
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.tri-ring-life { isolation: isolate; }
+.tri-ring-life::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    hsl(75, 93%, 60%) 0deg,
+    hsl(0, 0%, 8%) 130deg,
+    hsl(245, 76%, 59%) 240deg,
+    hsl(75, 93%, 60%) 360deg
+  );
+  animation: cta-rotate 5s linear infinite;
+}
+.tri-ring-life::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  z-index: -1;
+  background: white;
+}
+
 @keyframes bubble-pop {
   0%   { transform: scale(0.6) translateY(6px); opacity: 0; }
   60%  { transform: scale(1.04) translateY(-2px); opacity: 1; }
