@@ -1,4 +1,5 @@
-import { Settings, User, LogOut, FileText, Bell, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Settings, User, LogOut, FileText, Bell, Sparkles, ChevronDown, Archive } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Sheet,
@@ -30,6 +31,7 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
   const isVersionManual = pathname === "/manual" || pathname.startsWith("/manual/");
   const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
+  const [archiveOpen, setArchiveOpen] = useState(false);
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -116,23 +118,36 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
           )}
 
           <div className="border-t border-border mt-4 pt-4">
-            <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסאות</p>
-            <button onClick={() => { onOpenChange(false); navigate("/b"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-              <Sparkles className="h-4 w-4 text-muted-foreground" />
-              גרסה B
-            </button>
+            <p className="px-4 text-xs font-bold text-muted-foreground mb-2">סגנונות</p>
             <button onClick={() => { onOpenChange(false); navigate("/c"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
               <Sparkles className="h-4 w-4 text-muted-foreground" />
-              גרסה C
+              סגנון סולידי
             </button>
-            <button onClick={() => { onOpenChange(false); navigate("/d"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-              <Sparkles className="h-4 w-4 text-muted-foreground" />
-              גרסה D — Dark Metallic
+          </div>
+
+          <div className="border-t border-border mt-4 pt-4">
+            <button
+              onClick={() => setArchiveOpen((v) => !v)}
+              className="w-full flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-muted-foreground hover:bg-accent transition-colors"
+            >
+              <span className="flex items-center gap-2">
+                <Archive className="h-3.5 w-3.5" />
+                סגנונות בארכיון
+              </span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${archiveOpen ? "rotate-180" : ""}`} />
             </button>
-            <button onClick={() => { onOpenChange(false); navigate("/manual"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-              <Sparkles className="h-4 w-4 text-muted-foreground" />
-              צבעוניות ידנית
-            </button>
+            {archiveOpen && (
+              <div className="mt-1 space-y-1">
+                <button onClick={() => { onOpenChange(false); navigate("/b"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+                  <Sparkles className="h-4 w-4 text-muted-foreground" />
+                  גרסה B
+                </button>
+                <button onClick={() => { onOpenChange(false); navigate("/d"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+                  <Sparkles className="h-4 w-4 text-muted-foreground" />
+                  גרסה D — Dark Metallic
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="border-t border-border mt-4 pt-4">
