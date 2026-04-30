@@ -574,7 +574,7 @@ export const InsightsSheetLife = ({ open, onOpenChange, mode = "context" }: Insi
                 boxShadow: input ? "0 4px 12px hsla(250, 30%, 15%, 0.4)" : "none",
               }}
             >
-              <Send className="h-3.5 w-3.5 rotate-180" style={{ color: "white" }} />
+              <Send className="h-3.5 w-3.5 rotate-180" style={{ color: input ? "hsl(0, 0%, 8%)" : "white" }} />
             </button>
           </div>
         </div>
