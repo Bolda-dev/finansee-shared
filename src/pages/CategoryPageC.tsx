@@ -149,6 +149,7 @@ export const CategoryPageC = ({
   emptyText,
   renderItemTrailing,
   renderItemSubtitle,
+  insightsVariant = "c",
 }: CategoryPageProps) => {
   const navigate = useNavigate();
   const { innerGrid } = useVersionCSettings();
