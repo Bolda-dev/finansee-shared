@@ -1,7 +1,7 @@
 import { CategoryPageC, formatNIS, formatCompact, type CategoryItem } from "./CategoryPageC";
 import { assetItems } from "@/lib/data";
 
-const AssetsPageC = () => {
+const AssetsPageLife = () => {
   const items: CategoryItem[] = assetItems.map((a) => ({ ...a }));
 
   const totalValue = items.reduce((s, i) => s + (i.amount ?? 0), 0);
@@ -74,4 +74,4 @@ const AssetsPageC = () => {
   );
 };
 
-export default AssetsPageC;
+export default AssetsPageLife;

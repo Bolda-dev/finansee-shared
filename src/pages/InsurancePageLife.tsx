@@ -1,7 +1,7 @@
 import { CategoryPageC, formatNIS, type CategoryItem } from "./CategoryPageC";
 import { insuranceItems } from "@/lib/data";
 
-const InsurancePageC = () => {
+const InsurancePageLife = () => {
   const items: CategoryItem[] = insuranceItems.map((i) => {
     const next: CategoryItem = { ...i };
     if (i.label.includes("רכב")) {
@@ -122,4 +122,4 @@ const InsurancePageC = () => {
   );
 };
 
-export default InsurancePageC;
+export default InsurancePageLife;

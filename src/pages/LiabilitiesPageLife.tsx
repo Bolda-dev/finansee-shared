@@ -1,7 +1,7 @@
 import { CategoryPageC, formatNIS, formatCompact, type CategoryItem } from "./CategoryPageC";
 import { liabilityItems } from "@/lib/data";
 
-const LiabilitiesPageC = () => {
+const LiabilitiesPageLife = () => {
   const items: CategoryItem[] = liabilityItems.map((a) => ({ ...a }));
 
   const totalBalance = items.reduce((s, i) => s + (i.balance ?? 0), 0);
@@ -66,4 +66,4 @@ const LiabilitiesPageC = () => {
   );
 };
 
-export default LiabilitiesPageC;
+export default LiabilitiesPageLife;
