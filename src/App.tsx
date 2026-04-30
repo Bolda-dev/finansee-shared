@@ -23,6 +23,10 @@ import LiabilitiesPageC from "./pages/LiabilitiesPageC";
 import InsurancePageD from "./pages/InsurancePageD";
 import AssetsPageD from "./pages/AssetsPageD";
 import LiabilitiesPageD from "./pages/LiabilitiesPageD";
+import IndexLife from "./pages/IndexLife";
+import AssetsPageLife from "./pages/AssetsPageLife";
+import LiabilitiesPageLife from "./pages/LiabilitiesPageLife";
+import InsurancePageLife from "./pages/InsurancePageLife";
 import NotFound from "./pages/NotFound";
 import { VersionCSettingsProvider } from "./contexts/VersionCSettings";
 import { ManualPaletteProvider } from "./contexts/ManualPaletteContext";
@@ -62,6 +66,12 @@ const App = () => (
               <Route path="/d/liabilities" element={<LiabilitiesPageD />} />
               <Route path="/d/income" element={<IncomePage />} />
               <Route path="/d/expenses" element={<ExpensesPage />} />
+              <Route path="/life" element={<IndexLife />} />
+              <Route path="/life/assets" element={<AssetsPageLife />} />
+              <Route path="/life/liabilities" element={<LiabilitiesPageLife />} />
+              <Route path="/life/insurance" element={<InsurancePageLife />} />
+              <Route path="/life/income" element={<IncomePage />} />
+              <Route path="/life/expenses" element={<ExpensesPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </ManualPaletteProvider>

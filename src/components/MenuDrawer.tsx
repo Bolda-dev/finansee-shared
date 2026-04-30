@@ -29,6 +29,7 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const isVersionB = pathname === "/b" || pathname.startsWith("/b/");
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
+  const isVersionLife = pathname === "/life" || pathname.startsWith("/life/");
   const isVersionManual = pathname === "/manual" || pathname.startsWith("/manual/");
   const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
   const [archiveOpen, setArchiveOpen] = useState(false);
@@ -53,7 +54,7 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
             ))}
           </div>
 
-          {isVersionC && (
+          {(isVersionC || isVersionLife) && (
             <div className="border-t border-border mt-4 pt-4">
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">כרטיסיות — צבעוני נועז</span>
@@ -117,6 +118,10 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
             <button onClick={() => { onOpenChange(false); navigate("/c"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
               <Sparkles className="h-4 w-4 text-muted-foreground" />
               סגנון סולידי
+            </button>
+            <button onClick={() => { onOpenChange(false); navigate("/life"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4" style={{ color: "hsl(75, 70%, 40%)" }} />
+              סגנון חיים
             </button>
           </div>
 
