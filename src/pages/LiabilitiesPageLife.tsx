@@ -12,11 +12,11 @@ const LiabilitiesPageLife = () => {
       title="התחייבויות"
       theme={{
         gradient:
-          "linear-gradient(160deg, hsl(220, 85%, 45%) 0%, hsl(225, 90%, 58%) 55%, hsl(215, 95%, 72%) 100%)",
-        accent: "hsl(222, 85%, 45%)",
-        accentBg: "hsl(220, 85%, 95%)",
-        accentText: "hsl(222, 80%, 28%)",
-        sheetShadow: "hsla(222, 80%, 25%, 0.35)",
+          "linear-gradient(160deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 18%) 55%, hsl(0, 0%, 35%) 100%)",
+        accent: "hsl(0, 0%, 12%)",
+        accentBg: "hsl(0, 0%, 92%)",
+        accentText: "hsl(0, 0%, 95%)",
+        sheetShadow: "hsla(0, 0%, 0%, 0.45)",
       }}
       items={items}
       filters={[
