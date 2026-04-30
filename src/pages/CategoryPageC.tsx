@@ -127,6 +127,8 @@ export type CategoryPageProps = {
   renderItemTrailing: (item: CategoryItem, theme: CategoryTheme) => ReactNode;
   /** Per item: subtitle line (e.g. coverage / subLabel) */
   renderItemSubtitle: (item: CategoryItem) => string;
+  /** Optional: which insights sheet variant to use ("c" default or "life") */
+  insightsVariant?: "c" | "life";
 };
 
 export const CategoryPageC = ({
