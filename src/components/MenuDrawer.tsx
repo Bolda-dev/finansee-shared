@@ -55,7 +55,6 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
 
           {isVersionC && (
             <div className="border-t border-border mt-4 pt-4">
-              <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסה C</p>
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">כרטיסיות — צבעוני נועז</span>
                 <Switch dir="ltr" checked={boldCards} onCheckedChange={setBoldCards} />
@@ -67,10 +66,6 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
                 <Switch dir="ltr" checked={innerGrid} onCheckedChange={setInnerGrid} />
-              </div>
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">לוגו — צמוד לשמאל</span>
-                <Switch dir="ltr" checked={logoLeft} onCheckedChange={setLogoLeft} />
               </div>
             </div>
           )}
