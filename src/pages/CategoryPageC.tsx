@@ -22,7 +22,8 @@ import {
   Wallet,
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
-import { InsightsSheetC as InsightsSheet } from "@/components/InsightsSheetC";
+import { InsightsSheetC } from "@/components/InsightsSheetC";
+import { InsightsSheetLife } from "@/components/InsightsSheetLife";
 import { useVersionCSettings } from "@/contexts/VersionCSettings";
 
 const iconMap: Record<string, typeof Heart> = {
@@ -83,6 +84,14 @@ export type CategoryTheme = {
   accentText: string;
   /** Sheet shadow tint */
   sheetShadow: string;
+  /** Optional: text color for hero (defaults to white) */
+  heroTextColor?: string;
+  /** Optional: CSS class for primary CTA buttons (e.g. "cta-tri-life") */
+  ctaClass?: string;
+  /** Optional: CSS class for tri-color avatar ring (e.g. "tri-ring-life") */
+  ringClass?: string;
+  /** Optional: color for the send icon inside chat bar */
+  sendIconColor?: string;
 };
 
 export type CategoryFilter = {
@@ -118,6 +127,8 @@ export type CategoryPageProps = {
   renderItemTrailing: (item: CategoryItem, theme: CategoryTheme) => ReactNode;
   /** Per item: subtitle line (e.g. coverage / subLabel) */
   renderItemSubtitle: (item: CategoryItem) => string;
+  /** Optional: which insights sheet variant to use ("c" default or "life") */
+  insightsVariant?: "c" | "life";
 };
 
 export const CategoryPageC = ({
@@ -138,6 +149,7 @@ export const CategoryPageC = ({
   emptyText,
   renderItemTrailing,
   renderItemSubtitle,
+  insightsVariant = "c",
 }: CategoryPageProps) => {
   const navigate = useNavigate();
   const { innerGrid } = useVersionCSettings();
@@ -163,6 +175,11 @@ export const CategoryPageC = ({
   const activeFilterConfig = filters.find((f) => f.key === activeFilter) ?? filters[0];
   const filteredItems = items.filter((i) => activeFilterConfig.test(i));
 
+  const heroText = theme.heroTextColor ?? "white";
+  const ctaCls = theme.ctaClass ?? "cta-tri-c";
+  const ringCls = theme.ringClass ?? "tri-ring-c";
+  const sendColor = theme.sendIconColor ?? "white";
+
   return (
     <div
       className="min-h-screen max-w-[430px] mx-auto relative"
@@ -183,7 +200,7 @@ export const CategoryPageC = ({
         }}
         dir="rtl"
       >
-        <div className="flex items-center justify-between px-4 py-3 text-white">
+        <div className="flex items-center justify-between px-4 py-3" style={{ color: heroText }}>
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
@@ -192,7 +209,7 @@ export const CategoryPageC = ({
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          <h2 className="text-[14px] font-bold text-secondary">{title}</h2>
+          <h2 className="text-[14px] font-bold" style={{ color: heroText }}>{title}</h2>
           <span className="w-12" aria-hidden />
         </div>
       </div>
@@ -223,7 +240,7 @@ export const CategoryPageC = ({
         </svg>
 
         {/* Top bar: back + title */}
-        <div className="relative flex items-center justify-between mb-5 text-white">
+        <div className="relative flex items-center justify-between mb-5" style={{ color: heroText }}>
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
@@ -232,12 +249,12 @@ export const CategoryPageC = ({
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          <h2 className="text-base font-bold text-secondary">{title}</h2>
+          <h2 className="text-base font-bold" style={{ color: heroText }}>{title}</h2>
           <span className="w-7" aria-hidden />
         </div>
 
         {/* Hero KPI */}
-        <div className="relative flex flex-col items-center text-white text-center">
+        <div className="relative flex flex-col items-center text-center" style={{ color: heroText }}>
           <p className="text-[12px] font-medium opacity-85 mb-1.5">{primaryKpiLabel}</p>
           <p className="text-[40px] font-extrabold tracking-tight leading-none mb-2">
             {primaryKpiValue}
@@ -248,10 +265,10 @@ export const CategoryPageC = ({
             <span
               className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-full"
               style={{
-                background: "hsla(0, 0%, 100%, 0.18)",
-                color: "white",
+                background: heroText === "white" ? "hsla(0, 0%, 100%, 0.18)" : "hsla(0, 0%, 0%, 0.10)",
+                color: heroText,
                 backdropFilter: "blur(8px)",
-                border: "1px solid hsla(0, 0%, 100%, 0.18)",
+                border: heroText === "white" ? "1px solid hsla(0, 0%, 100%, 0.18)" : "1px solid hsla(0, 0%, 0%, 0.10)",
               }}
             >
               {secondaryLeft}
@@ -260,10 +277,10 @@ export const CategoryPageC = ({
               <span
                 className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-full"
                 style={{
-                  background: "hsla(0, 0%, 100%, 0.18)",
-                  color: "white",
+                  background: heroText === "white" ? "hsla(0, 0%, 100%, 0.18)" : "hsla(0, 0%, 0%, 0.10)",
+                  color: heroText,
                   backdropFilter: "blur(8px)",
-                  border: "1px solid hsla(0, 0%, 100%, 0.18)",
+                  border: heroText === "white" ? "1px solid hsla(0, 0%, 100%, 0.18)" : "1px solid hsla(0, 0%, 0%, 0.10)",
                 }}
               >
                 {secondaryRight}
@@ -283,7 +300,7 @@ export const CategoryPageC = ({
             aria-label={danaCtaText}
           >
             <span
-              className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
+              className={`${ringCls} relative w-11 h-11 rounded-full flex-shrink-0`}
               style={{ marginTop: "-10px", marginBottom: "-10px", marginRight: "-8px" }}
             >
               <span
@@ -615,7 +632,7 @@ export const CategoryPageC = ({
                   setDanaBubbleDismissed(true);
                   setChatOpen(true);
                 }}
-                className="cta-tri-c mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                className={`${ctaCls} mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]`}
               >
                 {danaBubbleCta}
                 <ChevronLeft className="h-3.5 w-3.5" />
@@ -639,7 +656,7 @@ export const CategoryPageC = ({
           aria-label="פתח צ׳אט עם Finansee AI"
         >
           <span
-            className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
+            className={`${ringCls} relative w-11 h-11 rounded-full flex-shrink-0`}
             style={{ transform: "translateY(-2px)" }}
           >
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
@@ -658,15 +675,19 @@ export const CategoryPageC = ({
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
 
-          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
-            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
-              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+          <span className={`${ringCls} relative w-9 h-9 rounded-full flex-shrink-0`}>
+            <span className={`flex w-full h-full rounded-full items-center justify-center ${ctaCls}`}>
+              <Send className="h-4 w-4 -rotate-90" style={{ color: sendColor }} />
             </span>
           </span>
         </button>
       </div>
 
-      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      {insightsVariant === "life" ? (
+        <InsightsSheetLife open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      ) : (
+        <InsightsSheetC open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      )}
     </div>
   );
 };

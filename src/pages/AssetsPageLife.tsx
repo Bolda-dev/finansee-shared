@@ -10,6 +10,7 @@ const AssetsPageLife = () => {
   return (
     <CategoryPageC
       title="נכסים"
+      insightsVariant="life"
       theme={{
         gradient:
           "linear-gradient(160deg, hsl(75, 80%, 50%) 0%, hsl(75, 93%, 62%) 55%, hsl(70, 95%, 80%) 100%)",
@@ -17,6 +18,10 @@ const AssetsPageLife = () => {
         accentBg: "hsl(70, 90%, 88%)",
         accentText: "hsl(0, 0%, 8%)",
         sheetShadow: "hsla(75, 70%, 30%, 0.30)",
+        heroTextColor: "hsl(0, 0%, 8%)",
+        ctaClass: "cta-tri-life",
+        ringClass: "tri-ring-life",
+        sendIconColor: "hsl(0, 0%, 8%)",
       }}
       items={items}
       filters={[

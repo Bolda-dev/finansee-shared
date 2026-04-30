@@ -41,13 +41,19 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 
 const IndexLife = () => {
   const navigate = useNavigate();
-  const { boldCards, centerBar, logoLeft } = useVersionCSettings();
+  const { boldCards, centerBar, logoLeft, setBoldCards, setCenterBar } = useVersionCSettings();
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"status" | "income" | "expenses" | "insurance">("status");
   const [danaBubbleOpen, setDanaBubbleOpen] = useState(false);
   const progressPercent = (userData.currentPotential / userData.maxPotential) * 100;
+
+  // Default Life style: bold colorful cards + colored top bar in financial center
+  useEffect(() => {
+    setBoldCards(true);
+    setCenterBar(true);
+  }, [setBoldCards, setCenterBar]);
 
   // Proactive Dana bubble — currently disabled
   // useEffect(() => {
