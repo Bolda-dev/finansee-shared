@@ -83,6 +83,14 @@ export type CategoryTheme = {
   accentText: string;
   /** Sheet shadow tint */
   sheetShadow: string;
+  /** Optional: text color for hero (defaults to white) */
+  heroTextColor?: string;
+  /** Optional: CSS class for primary CTA buttons (e.g. "cta-tri-life") */
+  ctaClass?: string;
+  /** Optional: CSS class for tri-color avatar ring (e.g. "tri-ring-life") */
+  ringClass?: string;
+  /** Optional: color for the send icon inside chat bar */
+  sendIconColor?: string;
 };
 
 export type CategoryFilter = {
