@@ -221,13 +221,13 @@ const IndexLife = () => {
                 <div className="relative z-10">
                   <p
                     className="text-[11px] font-medium mb-1"
-                    style={{ color: boldCards ? "hsla(0, 0%, 100%, 0.9)" : "hsl(230, 12%, 58%)" }}
+                    style={{ color: boldCards ? (card.textOnBold === "hsl(0, 0%, 8%)" ? "hsla(0, 0%, 8%, 0.75)" : "hsla(0, 0%, 100%, 0.9)") : "hsl(230, 12%, 58%)" }}
                   >
                     {card.label}
                   </p>
                   <p
                     className="font-extrabold text-base"
-                    style={{ color: boldCards ? "white" : "hsl(250, 50%, 12%)" }}
+                    style={{ color: boldCards ? card.textOnBold : "hsl(250, 50%, 12%)" }}
                   >
                     {card.value}
                   </p>
