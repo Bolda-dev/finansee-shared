@@ -31,6 +31,7 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
   const isVersionManual = pathname === "/manual" || pathname.startsWith("/manual/");
   const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
+  const [archiveOpen, setArchiveOpen] = useState(false);
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
