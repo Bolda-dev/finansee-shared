@@ -236,7 +236,7 @@ export const CategoryPageC = ({
         </svg>
 
         {/* Top bar: back + title */}
-        <div className="relative flex items-center justify-between mb-5 text-white">
+        <div className="relative flex items-center justify-between mb-5" style={{ color: heroText }}>
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
@@ -245,12 +245,12 @@ export const CategoryPageC = ({
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          <h2 className="text-base font-bold text-secondary">{title}</h2>
+          <h2 className="text-base font-bold" style={{ color: heroText }}>{title}</h2>
           <span className="w-7" aria-hidden />
         </div>
 
         {/* Hero KPI */}
-        <div className="relative flex flex-col items-center text-white text-center">
+        <div className="relative flex flex-col items-center text-center" style={{ color: heroText }}>
           <p className="text-[12px] font-medium opacity-85 mb-1.5">{primaryKpiLabel}</p>
           <p className="text-[40px] font-extrabold tracking-tight leading-none mb-2">
             {primaryKpiValue}
@@ -261,10 +261,10 @@ export const CategoryPageC = ({
             <span
               className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-full"
               style={{
-                background: "hsla(0, 0%, 100%, 0.18)",
-                color: "white",
+                background: heroText === "white" ? "hsla(0, 0%, 100%, 0.18)" : "hsla(0, 0%, 0%, 0.10)",
+                color: heroText,
                 backdropFilter: "blur(8px)",
-                border: "1px solid hsla(0, 0%, 100%, 0.18)",
+                border: heroText === "white" ? "1px solid hsla(0, 0%, 100%, 0.18)" : "1px solid hsla(0, 0%, 0%, 0.10)",
               }}
             >
               {secondaryLeft}
@@ -273,10 +273,10 @@ export const CategoryPageC = ({
               <span
                 className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-full"
                 style={{
-                  background: "hsla(0, 0%, 100%, 0.18)",
-                  color: "white",
+                  background: heroText === "white" ? "hsla(0, 0%, 100%, 0.18)" : "hsla(0, 0%, 0%, 0.10)",
+                  color: heroText,
                   backdropFilter: "blur(8px)",
-                  border: "1px solid hsla(0, 0%, 100%, 0.18)",
+                  border: heroText === "white" ? "1px solid hsla(0, 0%, 100%, 0.18)" : "1px solid hsla(0, 0%, 0%, 0.10)",
                 }}
               >
                 {secondaryRight}
@@ -296,7 +296,7 @@ export const CategoryPageC = ({
             aria-label={danaCtaText}
           >
             <span
-              className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
+              className={`${ringCls} relative w-11 h-11 rounded-full flex-shrink-0`}
               style={{ marginTop: "-10px", marginBottom: "-10px", marginRight: "-8px" }}
             >
               <span
