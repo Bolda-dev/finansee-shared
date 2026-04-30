@@ -565,7 +565,7 @@ const IndexLife = () => {
             <span
               className="flex w-full h-full rounded-full items-center justify-center cta-tri-life"
             >
-              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+              <Send className="h-4 w-4 -rotate-90" style={{ color: "hsl(0, 0%, 8%)" }} />
             </span>
           </span>
         </button>
