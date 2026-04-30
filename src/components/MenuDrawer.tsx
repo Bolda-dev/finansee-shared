@@ -1,4 +1,5 @@
-import { Settings, User, LogOut, FileText, Bell, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Settings, User, LogOut, FileText, Bell, Sparkles, ChevronDown, Archive } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Sheet,
