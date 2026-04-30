@@ -171,6 +171,11 @@ export const CategoryPageC = ({
   const activeFilterConfig = filters.find((f) => f.key === activeFilter) ?? filters[0];
   const filteredItems = items.filter((i) => activeFilterConfig.test(i));
 
+  const heroText = theme.heroTextColor ?? "white";
+  const ctaCls = theme.ctaClass ?? "cta-tri-c";
+  const ringCls = theme.ringClass ?? "tri-ring-c";
+  const sendColor = theme.sendIconColor ?? "white";
+
   return (
     <div
       className="min-h-screen max-w-[430px] mx-auto relative"
