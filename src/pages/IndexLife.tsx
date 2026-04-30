@@ -5,7 +5,7 @@ import finanseeLogo from "@/assets/finansee-logo.png";
 import { userData, recommendations, incomeItems, expenseItems, insuranceItems, criticalityConfig } from "@/lib/data";
 import { ChatBot } from "@/components/ChatBot";
 import { MenuDrawer } from "@/components/MenuDrawer";
-import { InsightsSheetC as InsightsSheet } from "@/components/InsightsSheetC";
+import { InsightsSheetLife as InsightsSheet } from "@/components/InsightsSheetLife";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import natureBg from "@/assets/nature-bg.jpg";
 import { useVersionCSettings } from "@/contexts/VersionCSettings";
@@ -39,7 +39,7 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
   );
 };
 
-const IndexB = () => {
+const IndexLife = () => {
   const navigate = useNavigate();
   const { boldCards, centerBar, logoLeft } = useVersionCSettings();
   const [chatOpen, setChatOpen] = useState(false);
@@ -158,7 +158,7 @@ const IndexB = () => {
                 outline: "hsla(176, 70%, 28%, 0.18)",
                 iconColor: "hsl(178, 70%, 30%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
-                onClick: () => navigate("/c/assets"),
+                onClick: () => navigate("/life/assets"),
               },
               {
                 label: "התחייבויות",
@@ -170,7 +170,7 @@ const IndexB = () => {
                 outline: "hsla(222, 80%, 45%, 0.08)",
                 iconColor: "hsl(222, 85%, 45%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
-                onClick: () => navigate("/c/liabilities"),
+                onClick: () => navigate("/life/liabilities"),
               },
               {
                 label: "ביטוח",
@@ -182,7 +182,7 @@ const IndexB = () => {
                 outline: "hsla(262, 72%, 50%, 0.08)",
                 iconColor: "hsl(262, 75%, 52%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
-                onClick: () => navigate("/c/insurance"),
+                onClick: () => navigate("/life/insurance"),
               },
             ].map((card) => (
               <button
@@ -278,7 +278,7 @@ const IndexB = () => {
             >
               {/* Avatar with rotating tri-color ring + badge */}
               <span className="relative flex-shrink-0">
-                <span className="tri-ring-c relative w-12 h-12 rounded-full block">
+                <span className="tri-ring-life relative w-12 h-12 rounded-full block">
                   <span className="block w-full h-full rounded-full overflow-hidden">
                     <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
                   </span>
@@ -353,7 +353,7 @@ const IndexB = () => {
                 { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
                 { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
                 { label: "משכנתא", Icon: Building2, value: "₪1,110,000", subLabel: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי", extraSuffix: "/חודש", badge: 1, category: "liabilities" },
-                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/c/insurance") },
+                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/life/insurance") },
               ];
 
               return cards.map((card) => {
@@ -456,7 +456,7 @@ const IndexB = () => {
                 ₪{incomeItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="cta-tri-c w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
+            <button className="cta-tri-life w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -480,7 +480,7 @@ const IndexB = () => {
                 ₪{expenseItems.reduce((s, i) => s + i.amount, 0).toLocaleString("he-IL")}
               </p>
             </div>
-            <button className="cta-tri-c w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
+            <button className="cta-tri-life w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -498,7 +498,7 @@ const IndexB = () => {
       {activeTab === "insurance" && (
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
-            <button className="cta-tri-c w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
+            <button className="cta-tri-life w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
             </button>
           </div>
@@ -536,7 +536,7 @@ const IndexB = () => {
         >
           {/* Avatar — pinned to right (start in RTL), floating, with rotating tri-color ring */}
           <span
-            className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
+            className="tri-ring-life relative w-11 h-11 rounded-full flex-shrink-0"
             style={{ transform: "translateY(-2px)" }}
           >
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
@@ -558,9 +558,9 @@ const IndexB = () => {
           </span>
 
           {/* Send button — left edge, with rotating tri-color ring */}
-          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
+          <span className="tri-ring-life relative w-9 h-9 rounded-full flex-shrink-0">
             <span
-              className="flex w-full h-full rounded-full items-center justify-center cta-tri-c"
+              className="flex w-full h-full rounded-full items-center justify-center cta-tri-life"
             >
               <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
             </span>
@@ -577,4 +577,4 @@ const IndexB = () => {
   );
 };
 
-export default IndexB;
+export default IndexLife;
