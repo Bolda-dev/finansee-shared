@@ -12,11 +12,11 @@ const AssetsPageLife = () => {
       title="נכסים"
       theme={{
         gradient:
-          "linear-gradient(160deg, hsl(170, 80%, 35%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
-        accent: "hsl(178, 70%, 30%)",
-        accentBg: "hsl(176, 55%, 91%)",
-        accentText: "hsl(178, 70%, 18%)",
-        sheetShadow: "hsla(176, 70%, 22%, 0.35)",
+          "linear-gradient(160deg, hsl(75, 80%, 50%) 0%, hsl(75, 93%, 62%) 55%, hsl(70, 95%, 80%) 100%)",
+        accent: "hsl(75, 70%, 35%)",
+        accentBg: "hsl(70, 90%, 88%)",
+        accentText: "hsl(0, 0%, 8%)",
+        sheetShadow: "hsla(75, 70%, 30%, 0.30)",
       }}
       items={items}
       filters={[
