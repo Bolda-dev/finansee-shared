@@ -34,22 +34,22 @@ const contextTabs: Record<
 > = {
   assets: {
     label: "נכסים",
-    accent: "hsl(178, 70%, 30%)",
-    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+    accent: "hsl(75, 70%, 35%)",
+    gradient: "linear-gradient(135deg, hsl(75, 80%, 50%) 0%, hsl(75, 93%, 62%) 55%, hsl(70, 95%, 80%) 100%)",
     items: incomeItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט מקורות הכנסה חודשיים",
   },
   liabilities: {
     label: "התחייבויות",
-    accent: "hsl(222, 85%, 45%)",
-    gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+    accent: "hsl(0, 0%, 12%)",
+    gradient: "linear-gradient(135deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 18%) 55%, hsl(0, 0%, 35%) 100%)",
     items: expenseItems.map((i) => ({ label: i.label, value: i.amount })),
     headline: "פירוט הוצאות חודשיות",
   },
   insurance: {
     label: "ביטוח",
-    accent: "hsl(262, 75%, 52%)",
-    gradient: "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
+    accent: "hsl(245, 76%, 50%)",
+    gradient: "linear-gradient(135deg, hsl(245, 70%, 45%) 0%, hsl(245, 76%, 59%) 55%, hsl(248, 90%, 78%) 100%)",
     items: insuranceItems.map((i) => ({ label: i.label, value: i.status === "פעיל" ? 1 : 0 })),
     headline: "סטטוס פוליסות הביטוח",
   },
