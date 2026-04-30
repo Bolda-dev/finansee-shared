@@ -460,7 +460,7 @@ const IndexLife = () => {
               </p>
             </div>
             <button className="cta-tri-life w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
-              <Plus className="h-5 w-5" style={{ color: "white" }} />
+              <Plus className="h-5 w-5" style={{ color: "hsl(0, 0%, 8%)" }} />
             </button>
           </div>
           <div className="space-y-2">
@@ -484,7 +484,7 @@ const IndexLife = () => {
               </p>
             </div>
             <button className="cta-tri-life w-10 h-10 rounded-xl flex items-center justify-center mr-3 flex-shrink-0 transition-all hover:scale-105 active:scale-95">
-              <Plus className="h-5 w-5" style={{ color: "white" }} />
+              <Plus className="h-5 w-5" style={{ color: "hsl(0, 0%, 8%)" }} />
             </button>
           </div>
           <div className="space-y-2">
@@ -502,7 +502,7 @@ const IndexLife = () => {
         <div className="relative z-10 px-5 pb-32">
           <div className="flex items-center justify-end mb-4">
             <button className="cta-tri-life w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
-              <Plus className="h-5 w-5" style={{ color: "white" }} />
+              <Plus className="h-5 w-5" style={{ color: "hsl(0, 0%, 8%)" }} />
             </button>
           </div>
           <div className="space-y-2">
