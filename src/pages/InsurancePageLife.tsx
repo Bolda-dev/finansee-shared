@@ -36,11 +36,11 @@ const InsurancePageLife = () => {
       title="ביטוח"
       theme={{
         gradient:
-          "linear-gradient(160deg, hsl(258, 72%, 52%) 0%, hsl(265, 78%, 62%) 55%, hsl(275, 85%, 75%) 100%)",
-        accent: "hsl(262, 75%, 52%)",
-        accentBg: "hsl(260, 75%, 95%)",
-        accentText: "hsl(262, 65%, 28%)",
-        sheetShadow: "hsla(262, 65%, 25%, 0.35)",
+          "linear-gradient(160deg, hsl(245, 70%, 45%) 0%, hsl(245, 76%, 59%) 55%, hsl(248, 90%, 78%) 100%)",
+        accent: "hsl(245, 76%, 50%)",
+        accentBg: "hsl(245, 90%, 95%)",
+        accentText: "hsl(0, 0%, 100%)",
+        sheetShadow: "hsla(245, 70%, 35%, 0.40)",
       }}
       items={items}
       filters={[
