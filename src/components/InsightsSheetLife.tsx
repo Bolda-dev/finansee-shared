@@ -167,7 +167,7 @@ type ChatMessage =
   | { id: string; role: "ai"; text: string }
   | { id: string; role: "ai-typing" };
 
-export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
+export const InsightsSheetLife = ({ open, onOpenChange, mode = "context" }: InsightsSheetProps) => {
   const [activeTab, setActiveTab] = useState<ContextTabKey>("assets");
   const [selectedAction, setSelectedAction] = useState<ActionKey>("investments");
   const [actionsView, setActionsView] = useState<"radio" | "list">("radio");
@@ -279,7 +279,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
         }}
       >
         {/* Floating avatar with rotating tri-color ring */}
-        <div className="tri-ring-c absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full" style={{ top: "-32px" }}>
+        <div className="tri-ring-life absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full" style={{ top: "-32px" }}>
           <div className="w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 8px 24px hsla(250, 30%, 20%, 0.3)" }}>
             <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
           </div>
@@ -451,7 +451,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                           {t.description}
                         </p>
                         <div className="flex justify-start" dir="ltr">
-                          <button className="cta-tri-c inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                          <button className="cta-tri-life inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-transform hover:scale-[1.02] active:scale-[0.98]">
                             {t.cta}
                             <ArrowLeft className="w-3 h-3" />
                           </button>
@@ -568,7 +568,7 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
             <button
               onClick={handleSend}
               disabled={!input.trim()}
-              className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${input ? "cta-tri-c" : ""}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed ${input ? "cta-tri-life" : ""}`}
               style={{
                 background: input ? undefined : "hsl(230, 20%, 88%)",
                 boxShadow: input ? "0 4px 12px hsla(250, 30%, 15%, 0.4)" : "none",
