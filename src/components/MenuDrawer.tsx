@@ -119,6 +119,10 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
               <Sparkles className="h-4 w-4 text-muted-foreground" />
               סגנון סולידי
             </button>
+            <button onClick={() => { onOpenChange(false); navigate("/life"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
+              <Sparkles className="h-4 w-4" style={{ color: "hsl(75, 70%, 40%)" }} />
+              סגנון חיים
+            </button>
           </div>
 
           <div className="border-t border-border mt-4 pt-4">
