@@ -683,7 +683,11 @@ export const CategoryPageC = ({
         </button>
       </div>
 
-      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      {insightsVariant === "life" ? (
+        <InsightsSheetLife open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      ) : (
+        <InsightsSheetC open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      )}
     </div>
   );
 };
