@@ -196,7 +196,7 @@ export const CategoryPageC = ({
         }}
         dir="rtl"
       >
-        <div className="flex items-center justify-between px-4 py-3 text-white">
+        <div className="flex items-center justify-between px-4 py-3" style={{ color: heroText }}>
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
@@ -205,7 +205,7 @@ export const CategoryPageC = ({
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          <h2 className="text-[14px] font-bold text-secondary">{title}</h2>
+          <h2 className="text-[14px] font-bold" style={{ color: heroText }}>{title}</h2>
           <span className="w-12" aria-hidden />
         </div>
       </div>
