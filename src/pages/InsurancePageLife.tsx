@@ -34,13 +34,17 @@ const InsurancePageLife = () => {
   return (
     <CategoryPageC
       title="ביטוח"
+      insightsVariant="life"
       theme={{
         gradient:
           "linear-gradient(160deg, hsl(245, 70%, 45%) 0%, hsl(245, 76%, 59%) 55%, hsl(248, 90%, 78%) 100%)",
         accent: "hsl(245, 76%, 50%)",
         accentBg: "hsl(245, 90%, 95%)",
-        accentText: "hsl(0, 0%, 100%)",
+        accentText: "hsl(245, 76%, 30%)",
         sheetShadow: "hsla(245, 70%, 35%, 0.40)",
+        ctaClass: "cta-tri-life",
+        ringClass: "tri-ring-life",
+        sendIconColor: "hsl(0, 0%, 8%)",
       }}
       items={items}
       filters={[
