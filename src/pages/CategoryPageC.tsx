@@ -652,7 +652,7 @@ export const CategoryPageC = ({
           aria-label="פתח צ׳אט עם Finansee AI"
         >
           <span
-            className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0"
+            className={`${ringCls} relative w-11 h-11 rounded-full flex-shrink-0`}
             style={{ transform: "translateY(-2px)" }}
           >
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
@@ -671,9 +671,9 @@ export const CategoryPageC = ({
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
 
-          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
-            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
-              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+          <span className={`${ringCls} relative w-9 h-9 rounded-full flex-shrink-0`}>
+            <span className={`flex w-full h-full rounded-full items-center justify-center ${ctaCls}`}>
+              <Send className="h-4 w-4 -rotate-90" style={{ color: sendColor }} />
             </span>
           </span>
         </button>
