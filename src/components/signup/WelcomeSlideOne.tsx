@@ -1,109 +1,188 @@
-import { TrendingUp, TrendingDown, ShieldCheck, Wallet, Info } from "lucide-react";
+import { TrendingUp, TrendingDown, ShieldCheck, Info, Menu } from "lucide-react";
 
 export const WelcomeSlideOne = () => {
   return (
-    <div className="px-5 pt-4 pb-6 flex flex-col">
-      {/* Mock hero card — clean, no glow */}
-      <div className="mt-4 mb-10 flex justify-center">
-        <div
-          className="w-[290px] rounded-3xl px-5 py-5 bg-white"
+    <div className="px-5 pt-2 pb-4 flex flex-col items-center">
+      {/* Phone mockup with the actual dashboard top */}
+      <PhoneMockup />
+
+      {/* Marketing headline */}
+      <h1
+        className="text-[28px] font-extrabold tracking-tight text-center mt-7 mb-3 leading-[1.15]"
+        style={{ color: "hsl(250, 50%, 10%)" }}
+      >
+        כל ההון שלך.
+        <br />
+        <span
           style={{
-            border: "1px solid hsl(250, 30%, 92%)",
-            boxShadow:
-              "0 12px 32px -16px hsla(250, 40%, 30%, 0.18), 0 2px 6px hsla(250, 30%, 40%, 0.05)",
+            background:
+              "linear-gradient(110deg, hsl(262, 75%, 45%) 0%, hsl(220, 85%, 50%) 50%, hsl(178, 70%, 38%) 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
           }}
         >
-          <div className="flex items-center gap-1.5 mb-2">
-            <p className="text-sm font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>
+          תמונה אחת. בלי הפתעות.
+        </span>
+      </h1>
+      <p
+        className="text-[14px] text-center leading-relaxed px-3"
+        style={{ color: "hsl(250, 22%, 42%)" }}
+      >
+        נכסים, התחייבויות וביטוחים — מתעדכנים אוטומטית, כל יום
+      </p>
+    </div>
+  );
+};
+
+const PhoneMockup = () => {
+  return (
+    <div
+      className="relative w-[260px] rounded-[42px] p-3"
+      style={{
+        background:
+          "linear-gradient(155deg, hsl(250, 25%, 18%) 0%, hsl(240, 20%, 8%) 100%)",
+        boxShadow:
+          "0 30px 60px -20px hsla(250, 50%, 20%, 0.45), 0 12px 24px -12px hsla(250, 40%, 25%, 0.25), inset 0 1px 0 hsla(0, 0%, 100%, 0.08)",
+      }}
+    >
+      {/* Notch */}
+      <div
+        className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 rounded-b-2xl z-10"
+        style={{ background: "hsl(240, 20%, 5%)" }}
+      />
+      {/* Screen */}
+      <div
+        className="rounded-[32px] overflow-hidden relative"
+        style={{
+          background: "hsl(235, 30%, 97%)",
+          aspectRatio: "9 / 13",
+        }}
+        dir="rtl"
+      >
+        {/* Subtle top gradient like real home */}
+        <div
+          className="absolute inset-x-0 top-0 h-[60%] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(0, 0%, 100%) 0%, hsl(230, 20%, 96%) 60%, hsl(235, 30%, 97%) 100%)",
+          }}
+        />
+        <div className="relative px-3 pt-7 pb-2">
+          {/* Top bar */}
+          <div className="flex items-center justify-between mb-3">
+            <div
+              className="w-7 h-7 rounded-lg flex items-center justify-center"
+              style={{
+                background: "hsla(250, 40%, 99%, 0.7)",
+                border: "1px solid hsla(250, 50%, 92%, 0.6)",
+              }}
+            >
+              <Menu className="h-3.5 w-3.5" style={{ color: "hsl(250, 40%, 20%)" }} />
+            </div>
+            <div className="text-[8px] font-medium" style={{ color: "hsl(250, 40%, 20%)" }}>
+              09:41
+            </div>
+          </div>
+          <p className="text-[10px] font-bold mb-2" style={{ color: "hsl(250, 40%, 15%)" }}>
+            בוקר טוב, יוסי
+          </p>
+
+          {/* Net worth */}
+          <div className="flex items-center gap-1 mb-1">
+            <p className="text-[9px] font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>
               שווי נטו
             </p>
-            <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 30%, 55%)" }} />
+            <Info className="h-2 w-2" style={{ color: "hsl(250, 30%, 55%)" }} />
           </div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-1.5 mb-0.5">
             <p
-              className="font-extrabold tracking-tight text-3xl"
+              className="font-extrabold tracking-tight text-[20px] leading-none"
               style={{ color: "hsl(250, 50%, 12%)" }}
             >
               ₪10,200,000
             </p>
             <span
-              className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
+              className="inline-flex items-center gap-0.5 text-[7px] font-semibold px-1.5 py-0.5 rounded-full"
               style={{
-                background: "hsl(250, 50%, 99%)",
-                border: "1px solid hsl(250, 30%, 90%)",
+                background: "hsla(250, 50%, 99%, 0.7)",
+                border: "1px solid hsla(250, 50%, 88%, 0.6)",
                 color: "hsl(262, 75%, 48%)",
               }}
             >
-              <TrendingUp className="h-2.5 w-2.5" />
-              1.8%+
+              <TrendingUp className="h-2 w-2" />
+              1.8%
             </span>
           </div>
-          <p className="text-[10px]" style={{ color: "hsl(230, 15%, 55%)" }}>
+          <p className="text-[7px] mb-3" style={{ color: "hsl(230, 15%, 55%)" }}>
             עודכן היום בשעה 09:41
           </p>
+
+          {/* Category cards */}
+          <div className="grid grid-cols-3 gap-1.5">
+            {[
+              {
+                label: "נכסים",
+                value: "₪8.4M",
+                Icon: TrendingUp,
+                gradient:
+                  "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+                glow: "hsla(176, 70%, 28%, 0.4)",
+                iconColor: "hsl(178, 70%, 30%)",
+              },
+              {
+                label: "התחייבויות",
+                value: "₪1.37M",
+                Icon: TrendingDown,
+                gradient:
+                  "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+                glow: "hsla(222, 80%, 45%, 0.4)",
+                iconColor: "hsl(222, 85%, 45%)",
+              },
+              {
+                label: "ביטוח",
+                value: "5 פוליסות",
+                Icon: ShieldCheck,
+                gradient:
+                  "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
+                glow: "hsla(262, 72%, 50%, 0.4)",
+                iconColor: "hsl(262, 75%, 52%)",
+              },
+            ].map((c) => (
+              <div
+                key={c.label}
+                className="rounded-xl px-1.5 py-2 text-start"
+                style={{
+                  background: c.gradient,
+                  boxShadow: `0 4px 10px ${c.glow}`,
+                  minHeight: 70,
+                }}
+              >
+                <div
+                  className="w-5 h-5 rounded-full flex items-center justify-center mb-2"
+                  style={{
+                    background: "hsla(0, 0%, 100%, 0.95)",
+                    boxShadow: "0 1px 3px hsla(0, 0%, 0%, 0.1)",
+                  }}
+                >
+                  <c.Icon className="h-2.5 w-2.5" style={{ color: c.iconColor }} />
+                </div>
+                <p
+                  className="text-[6.5px] font-medium leading-tight"
+                  style={{ color: "hsla(0, 0%, 100%, 0.9)" }}
+                >
+                  {c.label}
+                </p>
+                <p
+                  className="font-extrabold text-[9px] leading-tight"
+                  style={{ color: "white" }}
+                >
+                  {c.value}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Headline */}
-      <h1
-        className="text-3xl font-extrabold tracking-tight text-center mb-3 leading-tight"
-        style={{ color: "hsl(250, 40%, 15%)" }}
-      >
-        דע בדיוק כמה אתה שווה
-      </h1>
-      <p
-        className="text-[15px] text-center leading-relaxed mb-10 px-2"
-        style={{ color: "hsl(250, 25%, 38%)" }}
-      >
-        Finansee אוסף את כל הנכסים, ההתחייבויות והביטוחים שלך למקום אחד —
-        ומראה לך את שווי הנטו האמיתי, מתעדכן כל יום
-      </p>
-
-      {/* Icon equation row */}
-      <div className="flex items-center justify-center gap-2 px-2">
-        <IconChip Icon={TrendingUp} label="נכסים" color="hsl(178, 70%, 32%)" bg="hsl(178, 60%, 95%)" />
-        <Plus />
-        <IconChip Icon={TrendingDown} label="התחייבויות" color="hsl(220, 75%, 45%)" bg="hsl(220, 60%, 96%)" />
-        <Plus />
-        <IconChip Icon={ShieldCheck} label="ביטוחים" color="hsl(262, 75%, 52%)" bg="hsl(262, 60%, 96%)" />
-        <Equals />
-        <IconChip Icon={Wallet} label="שווי נטו" color="hsl(250, 50%, 20%)" bg="hsl(250, 30%, 95%)" />
       </div>
     </div>
   );
 };
-
-const IconChip = ({
-  Icon,
-  label,
-  color,
-  bg,
-}: {
-  Icon: typeof TrendingUp;
-  label: string;
-  color: string;
-  bg: string;
-}) => (
-  <div className="flex flex-col items-center gap-1.5 flex-1">
-    <div
-      className="h-10 w-10 rounded-2xl flex items-center justify-center"
-      style={{ background: bg }}
-    >
-      <Icon className="h-5 w-5" style={{ color }} />
-    </div>
-    <span className="text-[10px] font-medium text-center leading-tight" style={{ color: "hsl(250, 30%, 35%)" }}>
-      {label}
-    </span>
-  </div>
-);
-
-const Plus = () => (
-  <span className="text-base font-bold mt-[-14px]" style={{ color: "hsl(250, 25%, 60%)" }}>
-    +
-  </span>
-);
-const Equals = () => (
-  <span className="text-base font-bold mt-[-14px]" style={{ color: "hsl(250, 25%, 60%)" }}>
-    =
-  </span>
-);
