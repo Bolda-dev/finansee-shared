@@ -1,6 +1,7 @@
 import advisorImg from "@/assets/advisor-avatar.jpg";
+import type { CSSProperties } from "react";
 
-const Check = ({ className, style, strokeWidth = 2 }: { className?: string; style?: React.CSSProperties; strokeWidth?: number }) => (
+const Check = ({ className, style, strokeWidth = 2 }: { className?: string; style?: CSSProperties; strokeWidth?: number }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
     <path d="M20 6 9 17l-5-5" />
   </svg>
