@@ -1,102 +1,55 @@
-## סגנון חיים — גרסה חדשה
+## Stage 1 — מסכי פתיחה (Welcome carousel)
 
-יצירת ורסיה חדשה /life שהיא קלון מלא של "סגנון סולידי" (גרסה C), עם פלטה חדשה בלבד. סגנון C נשאר ללא שינוי.
+מסך כניסה לפלואו ההרשמה. שני מסכים בקרוסלה Swipe-able, RTL, מובייל בלבד (390px). בלי שום שדה הרשמה עדיין — רק ערך לפני בקשה.
 
-## פלטת הצבעים החדשה
+### Route
+- `/signup` — נקודת הכניסה לכל הפלואו. בשלב 1 מציגה רק את הקרוסלה.
+- אחרי שלב 5 נחבר ל-`/c` (הדאשבורד הקיים) בתור "real dashboard".
 
-מהתמונה שצורפה:
-- **Lime** `#D4F95F` → נכסים + CTA ראשי
-- **Black** `#0A0A0A` → התחייבויות
-- **Royal Purple** `#5747E5` → ביטוח
-- **Off-white** `#FAFAFA` → רקע
+### עיצוב — תואם לסגנון הקיים (Version C)
+- רקע: לבן רך + שכבת `nature-bg.jpg` עדינה (אותו רקע של IndexC) עם opacity נמוך, גרדיאנט עליון סגול-עדין, blobs blurred.
+- טיפוגרפיה ו-tokens מ-`index.css`: `text-primary` עם `hsl(250, 40%, 15%)` לכותרות, `hsl(250, 35%, 30%)` ל-subhead, `hsl(230, 15%, 55%)` למיקרו-טקסט.
+- כפתורים: עיגולים גדולים (rounded-2xl/full), צל רך, גרדיאנט סגול-תכלת כמו ה-CTA הקיים.
+- אייקונים: `lucide-react` בלבד.
 
-ייצוג HSL:
-- Lime: `hsl(75, 93%, 67%)` (אקסנט) · darker `hsl(75, 80%, 50%)` · lighter `hsl(70, 95%, 80%)` — **טקסט שחור על רקע ליים תמיד**
-- Black: `hsl(0, 0%, 4%)` · graphite `hsl(0, 0%, 18%)` · soft `hsl(0, 0%, 35%)` — טקסט לבן
-- Purple: `hsl(245, 76%, 59%)` · darker `hsl(245, 70%, 45%)` · lighter `hsl(248, 90%, 78%)` — טקסט לבן
+### מסך 1 — "מה אתה מקבל"
+- Top bar: לינק "דלג" משמאל-עליון (RTL → פיזית בפינת המסך הרחוקה מהאגודל), ו-2 נקודות pagination בתחתית.
+- כותרת H1: **"דע בדיוק כמה אתה שווה"**.
+- Subhead: "Finansee אוסף את כל הנכסים, ההתחייבויות והביטוחים שלך למקום אחד — ומראה לך את שווי הנטו האמיתי שלך, מתעדכן כל יום".
+- ויזואל: מיני-mockup של ה-Hero מהדאשבורד — כרטיס עם "שווי נטו", המספר `₪10,200,000` ב-`text-4xl font-extrabold`, ו-chip ה-`+1.8%` בדיוק כמו ב-IndexC. הכרטיס מוטה קלות (`rotate(-3deg)`), עם צל רך, ומאחוריו glow סגול.
+- שורת אייקונים מתחת: `TrendingUp` נכסים · `TrendingDown` התחייבויות · `ShieldCheck` ביטוחים · `=` · `Wallet` שווי נטו. כל אחד עם תווית קטנה.
 
-גרדיינטים יבנו על אותה תבנית של Version C (135deg/160deg, dark→base→light), כמו B/C כיום.
+### מסך 2 — "איך זה עובד"
+- Top bar: "דלג", 2 נקודות pagination (השנייה פעילה).
+- כותרת H1: **"60 שניות. בלי טפסים."**
+- Subhead: "מתחברים פעם אחת להר הביטוח ומסלקת הפנסיה — ואנחנו מושכים את הנתונים בעצמנו. דנה, היועצת ה-AI שלך, מנחה אותך צעד-צעד".
+- 3 שורות checkmark (`Check` בעיגול ירוק רך):
+  - מאובטח ברמה בנקאית
+  - אנחנו לא רואים סיסמאות
+  - אפשר לעצור בכל שלב
+- כרטיס דנה: אווטאר עגול (`advisor-avatar.jpg`) + בועת צ'אט קטנה ("היי, אני דנה 👋 מוכנה?") בסגנון ה-Dana callout מ-IndexC.
+- CTA ראשי בתחתית (sticky): **"בוא נתחיל"** — בשלב הזה ה-CTA לא מנווט לשום מקום (`onClick` ריק / `console.log`), כי שלב 2 עדיין לא קיים. "דלג" גם כן ללא ניווט.
 
-## מה ייווצר
+### אינטראקציה
+- Swipe אופקי בין שני המסכים (RTL — swipe ימינה = הקודם, שמאלה = הבא).
+- מימוש פנימי: state `[index, setIndex]` + `translate-x` עם `transition`. תמיכה ב-touch drag עם threshold ~50px. אין צורך בספרייה חיצונית.
+- לחיצה על נקודת pagination = קפיצה למסך.
+- כפתור "דלג" קופץ למסך 2 (שם נמצא ה-CTA הראשי).
 
-### קבצים חדשים
-1. `src/pages/IndexLife.tsx` — קלון של `IndexC.tsx`, רק עם החלפת הגרדיינטים והאקסנטים של 3 הקטגוריות + שינויי כפתור צ'אט (Send button) ל-CTA לימוני.
-2. `src/pages/AssetsPageLife.tsx` — קלון של `AssetsPageC.tsx`, theme בליים + `accentText` שחור.
-3. `src/pages/LiabilitiesPageLife.tsx` — קלון של `LiabilitiesPageC.tsx`, theme בשחור.
-4. `src/pages/InsurancePageLife.tsx` — קלון של `InsurancePageC.tsx`, theme בסגול.
-5. `src/components/InsightsSheetLife.tsx` — קלון של `InsightsSheetC.tsx` עם:
-   - הצבעים של 3 הטאבים (assets/liabilities/insurance) → ליים/שחור/סגול
-   - Send button + שליחה צ'יפסים → CTA לימוני עם טקסט שחור
-   - כל מה ש"דנה" מציגה כצבע אקסנט יותאם
+### קבצים
+**חדשים**
+- `src/pages/Signup.tsx` — דף ה-route, מחזיק את ה-state של הקרוסלה ומרנדר את שני המסכים.
+- `src/components/signup/WelcomeSlideOne.tsx` — מסך 1.
+- `src/components/signup/WelcomeSlideTwo.tsx` — מסך 2.
+- `src/components/signup/SignupShell.tsx` — wrapper משותף (רקע, top bar עם "דלג", pagination dots, sticky bottom area).
 
-### עדכונים לקבצים קיימים
-6. `src/index.css` — להוסיף `.cta-tri-life` ו-`.tri-ring-life`:
-   - **CTA**: רקע מלא `hsl(75, 93%, 67%)` (Lime) + טקסט שחור (`hsl(0,0%,8%)`). הילה רכה בליים סביב.
-   - **Tri-ring**: conic-gradient lime → black → purple → lime, מסתובב.
-   - שונה במפורש מ-`cta-tri-c` כדי שהאייקון של ה-Send יהיה שחור על ליים, לא לבן.
-7. `src/App.tsx` — רישום הראוטים: `/life`, `/life/assets`, `/life/liabilities`, `/life/insurance`, `/life/income`, `/life/expenses` (האחרונים יוכלו להשתמש בקומפוננטות הקיימות; אם רוצים CTA לימוני שם — נשתמש ב-`cta-tri-life` במקום הליבה הקיימת — אעשה את זה כקלון קצר).
-8. `src/components/MenuDrawer.tsx`:
-   - הוספת `isVersionLife` (`/life` prefix).
-   - הוספת קישור "סגנון חיים" באזור "סגנונות" (מתחת ל"סגנון סולידי").
-   - אותם 3 טוגלים שיש בסולידי (boldCards / centerBar / innerGrid) יוצגו גם כש-isVersionLife.
-   - הסרת "גרסה C" מהכותרת כבר נעשתה — נמשיך באותו סגנון.
+**עריכה**
+- `src/App.tsx` — להוסיף `<Route path="/signup" element={<Signup />} />`.
 
-## פרטים טכניים — איך הצבעים מתחלפים
+### מה לא נכלל בשלב הזה
+- שום authentication, שום שמירה ל-state גלובלי, שום שדות הרשמה.
+- אין שינוי ב-IndexC או בכל מסך קיים אחר.
+- לא משנים את ה-route ההתחלתי (`/`) — הגישה ל-`/signup` ידנית כרגע.
 
-### Index (כרטיסי קטגוריה)
-ב-`IndexLife.tsx`, הבלוק של 3 הכרטיסים יחליף:
-
-```ts
-// נכסים — Lime (טקסט שחור!)
-gradient: "linear-gradient(135deg, hsl(75, 80%, 50%) 0%, hsl(75, 93%, 62%) 55%, hsl(70, 95%, 80%) 100%)"
-iconColor: "hsl(0, 0%, 8%)"     // אייקון שחור על ליים
-textColorBold: "hsl(0, 0%, 8%)"  // override של הטקסט הלבן הרגיל
-
-// התחייבויות — Black
-gradient: "linear-gradient(135deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 18%) 55%, hsl(0, 0%, 35%) 100%)"
-iconColor: "hsl(0, 0%, 8%)"     // עיגול לבן עם אייקון שחור
-// טקסט לבן (default)
-
-// ביטוח — Purple
-gradient: "linear-gradient(135deg, hsl(245, 70%, 45%) 0%, hsl(245, 76%, 59%) 55%, hsl(248, 90%, 78%) 100%)"
-iconColor: "hsl(245, 76%, 50%)"
-```
-
-הלוגיקה הנוכחית של `boldCards` נשענת על `color: white` קבוע — נוסיף `textOnBold` לכל card object ונשתמש בו.
-
-### CategoryPage themes (עמודים פנימיים)
-- **AssetsPageLife**: `accentText: "hsl(0, 0%, 8%)"` כדי שהטקסט בכותרות שחור על רקע ליים.
-- **LiabilitiesPageLife**: `accentText: "hsl(0, 0%, 95%)"` (לבן).
-- **InsurancePageLife**: `accentText: "hsl(0, 0%, 100%)"` (לבן).
-
-נצטרך לוודא ש-`CategoryPageC` משתמש ב-`theme.accentText` בכל המקומות הקריטיים על הגרדיינט. אם יש מקומות עם `color: white` קשיח שיוצר בעיה על ליים — נחליף ל-`theme.accentText`. (אבדוק במהלך מימוש; אם נדרש אעדכן `CategoryPageC` להוסיף תמיכה — אך מבלי לשבור את C/Manual הקיימים, ע"י default = white.)
-
-### CTA לימוני (כפתורי שליחה / צ'יפסים / כפתורי עם בדנה)
-- כפתור Send בצ'אט הראשי: `cta-tri-life` עם אייקון `Send` בצבע `hsl(0, 0%, 8%)`.
-- כפתור Plus (income/expenses/insurance): `cta-tri-life` + אייקון שחור.
-- צ'יפסים מוצעים ב-`InsightsSheetLife`: רקע ליים + טקסט שחור (`hsl(75, 93%, 67%)` / `hsl(0,0%,8%)`).
-- כפתורי "פעולה" שדנה מציגה (CTA buttons בכרטיסים): רקע ליים + טקסט שחור.
-
-### Tri-ring סביב אווטאר דנה
-`tri-ring-life` עם conic gradient: lime → black → purple → lime. מסתובב באותה אנימציית `cta-rotate` קיימת.
-
-## דברים שלא משתנים
-- כל הלוגיקה / state / data / routes הקיימים של C ו-Manual.
-- Index, IndexB, IndexC, IndexD, IndexManual ללא שינוי.
-- CategoryPageC נשאר משותף — רק נוודא שהוא מכבד `theme.accentText` במקומות הנכונים (תיקון תואם לאחור אם יידרש).
-
-## תפריט
-ב-`MenuDrawer`, באזור "סגנונות":
-```
-סגנון סולידי         → /c
-סגנון חיים           → /life      (חדש)
-─────────────────────
-סגנונות בארכיון ▾
-   גרסה B            → /b
-   גרסה D            → /d
-```
-
-## QA אחרי המימוש
-- לוודא קונטרסט שחור-על-ליים בכרטיס נכסים (גם בכותרת bold וגם ב-subLabel).
-- לוודא שלכפתור Send לימוני יש אייקון Send שחור (לא לבן).
-- לוודא שב-InsightsSheetLife הטאב "נכסים" כשפעיל מציג טקסט שחור על ליים, לא לבן.
+### QA אחרי מימוש
+- בדיקה ב-390×844, RTL, swipe עובד לשני הכיוונים, נקודות pagination נכונות, CTA נראה לחיץ אבל לא מנווט.

@@ -27,6 +27,7 @@ import IndexLife from "./pages/IndexLife";
 import AssetsPageLife from "./pages/AssetsPageLife";
 import LiabilitiesPageLife from "./pages/LiabilitiesPageLife";
 import InsurancePageLife from "./pages/InsurancePageLife";
+import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import { VersionCSettingsProvider } from "./contexts/VersionCSettings";
 import { ManualPaletteProvider } from "./contexts/ManualPaletteContext";
@@ -72,6 +73,7 @@ const App = () => (
               <Route path="/life/insurance" element={<InsurancePageLife />} />
               <Route path="/life/income" element={<IncomePage />} />
               <Route path="/life/expenses" element={<ExpensesPage />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </ManualPaletteProvider>
