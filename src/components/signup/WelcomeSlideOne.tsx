@@ -50,31 +50,45 @@ export const WelcomeSlideOne = () => {
 
 const PhoneMockup = () => {
   return (
-    <div
-      className="relative"
-      style={{ width: 340, height: 400, overflow: "hidden" }}
-    >
-      {/* Tilted phone — only top half visible */}
+    <div className="relative w-full" style={{ height: 380 }}>
+      {/* Ambient shadow blob — sits in the background, not clipped */}
       <div
-        className="absolute"
+        className="absolute pointer-events-none"
         style={{
-          left: 20,
-          top: 8,
-          transform: "rotate(-2deg)",
-          transformOrigin: "center top",
-          width: 280,
-          height: 520,
+          left: "50%",
+          top: 80,
+          transform: "translateX(-50%)",
+          width: 320,
+          height: 300,
+          background:
+            "radial-gradient(closest-side, hsla(250, 50%, 25%, 0.32), hsla(250, 50%, 25%, 0) 70%)",
+          filter: "blur(10px)",
         }}
+      />
+      {/* Clipping window — full width so side gradients are never cut off */}
+      <div
+        className="absolute inset-x-0 top-0"
+        style={{ height: 380, overflow: "hidden" }}
       >
         <div
-          className="rounded-[42px] p-3 w-full h-full"
+          className="absolute"
           style={{
-            background:
-              "linear-gradient(155deg, hsl(250, 25%, 18%) 0%, hsl(240, 20%, 8%) 100%)",
-            boxShadow:
-              "0 40px 80px -20px hsla(250, 50%, 20%, 0.5), 0 18px 30px -14px hsla(250, 40%, 25%, 0.3), inset 0 1px 0 hsla(0, 0%, 100%, 0.08)",
+            left: "50%",
+            marginLeft: -140,
+            top: 8,
+            transform: "rotate(-2deg)",
+            transformOrigin: "center top",
+            width: 280,
+            height: 520,
           }}
         >
+          <div
+            className="rounded-[42px] p-3 w-full h-full relative"
+            style={{
+              background:
+                "linear-gradient(155deg, hsl(250, 25%, 18%) 0%, hsl(240, 20%, 8%) 100%)",
+            }}
+          >
           {/* Notch */}
           <div
             className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 rounded-b-2xl z-10"
@@ -206,16 +220,17 @@ const PhoneMockup = () => {
               </div>
             </div>
           </div>
+          </div>
         </div>
+        {/* Bottom fade overlay inside the clipping window */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-[160px] pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsla(235, 30%, 97%, 0) 0%, hsl(235, 30%, 97%) 78%)",
+          }}
+        />
       </div>
-      {/* Bottom fade overlay — replaces mask-image for perf */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-[140px] pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom, hsla(235, 30%, 97%, 0) 0%, hsl(235, 30%, 97%) 75%)",
-        }}
-      />
     </div>
   );
 };
