@@ -189,7 +189,7 @@ const IndexB = () => {
               <button
                 key={card.label}
                 onClick={card.onClick}
-                className="relative rounded-2xl p-4 text-start overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="relative rounded-2xl px-2.5 py-3 text-start overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 style={
                   boldCards
                     ? {
