@@ -41,7 +41,8 @@ const RadialGauge = ({ percent, current, max }: { percent: number; current: numb
 
 const IndexB = () => {
   const navigate = useNavigate();
-  const { boldCards, centerBar, logoLeft } = useVersionCSettings();
+  const { boldCards, centerBar, logoLeft, setBoldCards, setCenterBar } = useVersionCSettings();
+  useEffect(() => { setBoldCards(true); setCenterBar(true); }, [setBoldCards, setCenterBar]);
   const [chatOpen, setChatOpen] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
