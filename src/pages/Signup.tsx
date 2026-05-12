@@ -38,7 +38,7 @@ const Signup = () => {
               if (index < total - 1) setIndex(index + 1);
               else console.log("Start signup flow");
             }}
-            className="btn-black-drift rounded-full px-10 py-3 text-sm font-semibold text-white transition-transform active:scale-[0.97]"
+            className="btn-black-deep rounded-full px-10 py-3 text-sm font-semibold text-white transition-transform active:scale-[0.97]"
             style={{
               boxShadow:
                 "0 10px 24px -10px hsla(0, 0%, 0%, 0.55), 0 2px 6px hsla(0, 0%, 0%, 0.2), inset 0 1px 0 hsla(0, 0%, 100%, 0.12)",
