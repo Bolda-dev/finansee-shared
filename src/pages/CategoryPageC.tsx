@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
-import { InsightsSheetLife } from "@/components/InsightsSheetLife";
 import { useVersionCSettings } from "@/contexts/VersionCSettings";
 
 const iconMap: Record<string, typeof Heart> = {
@@ -683,11 +682,7 @@ export const CategoryPageC = ({
         </button>
       </div>
 
-      {insightsVariant === "life" ? (
-        <InsightsSheetLife open={chatOpen} onOpenChange={setChatOpen} mode="context" />
-      ) : (
-        <InsightsSheetC open={chatOpen} onOpenChange={setChatOpen} mode="context" />
-      )}
+      <InsightsSheetC open={chatOpen} onOpenChange={setChatOpen} mode="context" />
     </div>
   );
 };
