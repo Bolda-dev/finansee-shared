@@ -1,8 +1,8 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 type IconProps = { className?: string; style?: CSSProperties };
 
-const SvgIcon = ({ className, style, children }: IconProps & { children: React.ReactNode }) => (
+const SvgIcon = ({ className, style, children }: IconProps & { children: ReactNode }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     {children}
   </svg>
