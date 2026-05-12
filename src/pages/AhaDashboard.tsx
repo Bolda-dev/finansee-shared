@@ -121,41 +121,35 @@ const AhaDashboard = () => {
               onClick={scrollToCta}
               className="relative rounded-2xl px-2.5 py-3 text-start overflow-hidden transition-transform active:scale-[0.98]"
               style={{
-                background: card.gradient,
-                boxShadow: `0 8px 24px ${card.glow}`,
+                background: disabledGradient,
+                boxShadow: `0 4px 14px ${disabledGlow}`,
                 minHeight: "140px",
+                opacity: 0.92,
               }}
             >
-              {/* Lock badge */}
               <span
                 className="absolute top-2 left-2 w-6 h-6 rounded-full flex items-center justify-center"
-                style={{ background: "hsla(0, 0%, 100%, 0.95)" }}
+                style={{ background: "hsla(0, 0%, 100%, 0.9)" }}
               >
-                <Lock className="h-3 w-3" style={{ color: card.iconColor }} />
+                <Lock className="h-3 w-3" style={{ color: disabledIconColor }} />
               </span>
 
               <div
-                className="w-9 h-9 mb-4 rounded-full flex items-center justify-center relative z-10"
-                style={{
-                  background: "hsla(0, 0%, 100%, 0.95)",
-                  boxShadow: "0 2px 8px hsla(0, 0%, 0%, 0.1)",
-                }}
+                className="w-9 h-9 mb-3 rounded-full flex items-center justify-center relative z-10"
+                style={{ background: "hsla(0, 0%, 100%, 0.85)" }}
               >
-                <card.Icon className="h-4 w-4" style={{ color: card.iconColor }} />
+                <card.Icon className="h-4 w-4" style={{ color: disabledIconColor }} />
               </div>
               <div className="relative z-10">
-                <p
-                  className="text-[11px] font-medium mb-1"
-                  style={{ color: "hsla(0, 0%, 100%, 0.9)" }}
-                >
+                <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(230, 20%, 25%, 0.75)" }}>
                   {card.label}
                 </p>
-                <p className="font-extrabold text-base flex items-center gap-1" style={{ color: "white" }}>
+                <p className="font-extrabold text-base flex items-center gap-1 mb-1.5" style={{ color: "hsla(230, 20%, 20%, 0.55)" }}>
                   <span>₪</span>
                   <span
                     className="inline-block tracking-[2px]"
                     style={{
-                      background: "hsla(0, 0%, 100%, 0.45)",
+                      background: "hsla(230, 15%, 35%, 0.25)",
                       borderRadius: "3px",
                       padding: "0 6px",
                       color: "transparent",
@@ -163,6 +157,9 @@ const AhaDashboard = () => {
                   >
                     ███
                   </span>
+                </p>
+                <p className="text-[9.5px] leading-tight" style={{ color: "hsla(230, 20%, 25%, 0.6)" }}>
+                  הערכה: {card.estimate}
                 </p>
               </div>
             </button>
