@@ -22,6 +22,7 @@ const InsurancePageD = lazy(() => import("./pages/InsurancePageD"));
 const AssetsPageD = lazy(() => import("./pages/AssetsPageD"));
 const LiabilitiesPageD = lazy(() => import("./pages/LiabilitiesPageD"));
 const Signup = lazy(() => import("./pages/Signup"));
+const AhaDashboard = lazy(() => import("./pages/AhaDashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
