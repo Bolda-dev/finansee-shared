@@ -35,14 +35,12 @@ const Signup = () => {
         index === total - 1 ? (
           <button
             onClick={() => {
-              // Stage 2 not built yet
               console.log("Start signup flow");
             }}
             className="w-full rounded-2xl py-4 text-base font-bold text-white transition-transform active:scale-[0.98]"
             style={{
-              background:
-                "linear-gradient(135deg, hsl(262, 75%, 52%) 0%, hsl(290, 70%, 60%) 100%)",
-              boxShadow: "0 12px 32px -8px hsla(262, 75%, 45%, 0.55)",
+              background: "hsl(262, 75%, 52%)",
+              boxShadow: "0 8px 20px -8px hsla(262, 75%, 45%, 0.45)",
             }}
           >
             בוא נתחיל

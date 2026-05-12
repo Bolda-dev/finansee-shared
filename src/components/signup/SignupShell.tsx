@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import natureBg from "@/assets/nature-bg.jpg";
 
 interface SignupShellProps {
   children: ReactNode;
@@ -11,78 +10,64 @@ interface SignupShellProps {
 
 export const SignupShell = ({ children, onSkip, showSkip = true, pagination, bottom }: SignupShellProps) => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden" dir="rtl" style={{ background: "hsl(0, 0%, 99%)" }}>
-      {/* Nature bg layer */}
-      <div
-        className="absolute inset-0 opacity-[0.18]"
-        style={{
-          backgroundImage: `url(${natureBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      {/* Soft purple gradient top */}
-      <div
-        className="absolute inset-x-0 top-0 h-[60%] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(120% 80% at 50% 0%, hsla(262, 75%, 70%, 0.18) 0%, transparent 60%)",
-        }}
-      />
-      {/* Blur blobs */}
-      <div
-        className="absolute -top-20 -right-20 h-64 w-64 rounded-full blur-3xl pointer-events-none"
-        style={{ background: "hsla(262, 75%, 60%, 0.18)" }}
-      />
-      <div
-        className="absolute top-40 -left-24 h-72 w-72 rounded-full blur-3xl pointer-events-none"
-        style={{ background: "hsla(178, 70%, 50%, 0.14)" }}
-      />
+    <div
+      className="min-h-screen max-w-[430px] mx-auto relative flex flex-col"
+      dir="rtl"
+      style={{ background: "hsl(235, 30%, 97%)" }}
+    >
+      {/* Soft gradient top — matches Version C */}
+      <div className="absolute inset-x-0 top-0 h-[520px] z-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(0, 0%, 100%) 0%, hsl(230, 20%, 96%) 60%, hsl(235, 30%, 97%) 100%)",
+          }}
+        />
+      </div>
 
       {/* Top bar */}
-      <div className="relative z-10 flex items-center justify-between px-5 pt-5 h-12">
-        <div className="w-12">
+      <div className="relative z-10 flex items-center justify-between px-5 pt-5 h-12 shrink-0">
+        <div className="w-12" />
+        <div className="w-12 text-end">
           {showSkip && (
             <button
               onClick={onSkip}
               className="text-sm font-medium"
-              style={{ color: "hsl(230, 15%, 45%)" }}
+              style={{ color: "hsl(230, 15%, 50%)" }}
             >
               דלג
             </button>
           )}
         </div>
-        <div className="w-12" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col" style={{ minHeight: "calc(100vh - 3rem)" }}>
-        <div className="flex-1 flex flex-col">{children}</div>
+      <div className="relative z-10 flex-1 flex flex-col">{children}</div>
 
-        {/* Pagination + bottom CTA */}
-        <div className="relative z-10 px-5 pb-8 pt-4">
-          {pagination && (
-            <div className="flex items-center justify-center gap-2 mb-5">
-              {Array.from({ length: pagination.total }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => pagination.onDotClick?.(i)}
-                  aria-label={`עבור למסך ${i + 1}`}
-                  className="rounded-full transition-all"
-                  style={{
-                    width: i === pagination.current ? 24 : 8,
-                    height: 8,
-                    background:
-                      i === pagination.current
-                        ? "hsl(262, 75%, 52%)"
-                        : "hsl(250, 30%, 85%)",
-                  }}
-                />
-              ))}
-            </div>
-          )}
-          {bottom}
-        </div>
+      {/* Pagination + bottom CTA */}
+      <div className="relative z-10 px-5 pb-8 pt-4 shrink-0">
+        {pagination && (
+          <div className="flex items-center justify-center gap-2 mb-5">
+            {Array.from({ length: pagination.total }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => pagination.onDotClick?.(i)}
+                aria-label={`עבור למסך ${i + 1}`}
+                className="rounded-full transition-all"
+                style={{
+                  width: i === pagination.current ? 24 : 8,
+                  height: 8,
+                  background:
+                    i === pagination.current
+                      ? "hsl(262, 75%, 52%)"
+                      : "hsl(250, 20%, 88%)",
+                }}
+              />
+            ))}
+          </div>
+        )}
+        {bottom}
       </div>
     </div>
   );
