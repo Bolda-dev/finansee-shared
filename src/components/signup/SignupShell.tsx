@@ -15,49 +15,13 @@ export const SignupShell = ({ children, onSkip, showSkip = true, pagination, bot
       dir="rtl"
       style={{ background: "hsl(235, 30%, 97%)" }}
     >
-      {/* Soft gradient top + drifting blobs */}
+      {/* Soft static gradient top */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div
           className="absolute inset-x-0 top-0 h-[620px]"
           style={{
             background:
               "linear-gradient(to bottom, hsl(0, 0%, 100%) 0%, hsl(230, 20%, 96%) 60%, hsl(235, 30%, 97%) 100%)",
-          }}
-        />
-        <div
-          className="signup-blob-1 absolute"
-          style={{
-            top: "-80px",
-            right: "-60px",
-            width: "320px",
-            height: "320px",
-            background:
-              "radial-gradient(circle, hsla(262, 75%, 65%, 0.22) 0%, hsla(262, 75%, 65%, 0) 70%)",
-            willChange: "transform",
-          }}
-        />
-        <div
-          className="signup-blob-2 absolute"
-          style={{
-            top: "120px",
-            left: "-80px",
-            width: "300px",
-            height: "300px",
-            background:
-              "radial-gradient(circle, hsla(220, 85%, 65%, 0.20) 0%, hsla(220, 85%, 65%, 0) 70%)",
-            willChange: "transform",
-          }}
-        />
-        <div
-          className="signup-blob-3 absolute"
-          style={{
-            top: "320px",
-            right: "-50px",
-            width: "260px",
-            height: "260px",
-            background:
-              "radial-gradient(circle, hsla(178, 70%, 55%, 0.18) 0%, hsla(178, 70%, 55%, 0) 70%)",
-            willChange: "transform",
           }}
         />
       </div>

@@ -3,24 +3,26 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import IncomePage from "./pages/IncomePage";
-import ExpensesPage from "./pages/ExpensesPage";
-import InsurancePage from "./pages/InsurancePage";
-import AssetsPage from "./pages/AssetsPage";
-import LiabilitiesPage from "./pages/LiabilitiesPage";
-import IndexB from "./pages/IndexB";
-import IndexC from "./pages/IndexC";
-import IndexD from "./pages/IndexD";
-import InsurancePageC from "./pages/InsurancePageC";
-import AssetsPageC from "./pages/AssetsPageC";
-import LiabilitiesPageC from "./pages/LiabilitiesPageC";
-import InsurancePageD from "./pages/InsurancePageD";
-import AssetsPageD from "./pages/AssetsPageD";
-import LiabilitiesPageD from "./pages/LiabilitiesPageD";
-import Signup from "./pages/Signup";
-import NotFound from "./pages/NotFound";
+import { lazy, Suspense } from "react";
 import { VersionCSettingsProvider } from "./contexts/VersionCSettings";
+
+const Index = lazy(() => import("./pages/Index"));
+const IncomePage = lazy(() => import("./pages/IncomePage"));
+const ExpensesPage = lazy(() => import("./pages/ExpensesPage"));
+const InsurancePage = lazy(() => import("./pages/InsurancePage"));
+const AssetsPage = lazy(() => import("./pages/AssetsPage"));
+const LiabilitiesPage = lazy(() => import("./pages/LiabilitiesPage"));
+const IndexB = lazy(() => import("./pages/IndexB"));
+const IndexC = lazy(() => import("./pages/IndexC"));
+const IndexD = lazy(() => import("./pages/IndexD"));
+const InsurancePageC = lazy(() => import("./pages/InsurancePageC"));
+const AssetsPageC = lazy(() => import("./pages/AssetsPageC"));
+const LiabilitiesPageC = lazy(() => import("./pages/LiabilitiesPageC"));
+const InsurancePageD = lazy(() => import("./pages/InsurancePageD"));
+const AssetsPageD = lazy(() => import("./pages/AssetsPageD"));
+const LiabilitiesPageD = lazy(() => import("./pages/LiabilitiesPageD"));
+const Signup = lazy(() => import("./pages/Signup"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -31,29 +33,31 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <VersionCSettingsProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/b" element={<IndexB />} />
-            <Route path="/c" element={<IndexC />} />
-            <Route path="/d" element={<IndexD />} />
-            <Route path="/income" element={<IncomePage />} />
-            <Route path="/expenses" element={<ExpensesPage />} />
-            <Route path="/insurance" element={<InsurancePage />} />
-            <Route path="/assets" element={<AssetsPage />} />
-            <Route path="/liabilities" element={<LiabilitiesPage />} />
-            <Route path="/c/insurance" element={<InsurancePageC />} />
-            <Route path="/c/assets" element={<AssetsPageC />} />
-            <Route path="/c/liabilities" element={<LiabilitiesPageC />} />
-            <Route path="/c/income" element={<IncomePage />} />
-            <Route path="/c/expenses" element={<ExpensesPage />} />
-            <Route path="/d/insurance" element={<InsurancePageD />} />
-            <Route path="/d/assets" element={<AssetsPageD />} />
-            <Route path="/d/liabilities" element={<LiabilitiesPageD />} />
-            <Route path="/d/income" element={<IncomePage />} />
-            <Route path="/d/expenses" element={<ExpensesPage />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/b" element={<IndexB />} />
+              <Route path="/c" element={<IndexC />} />
+              <Route path="/d" element={<IndexD />} />
+              <Route path="/income" element={<IncomePage />} />
+              <Route path="/expenses" element={<ExpensesPage />} />
+              <Route path="/insurance" element={<InsurancePage />} />
+              <Route path="/assets" element={<AssetsPage />} />
+              <Route path="/liabilities" element={<LiabilitiesPage />} />
+              <Route path="/c/insurance" element={<InsurancePageC />} />
+              <Route path="/c/assets" element={<AssetsPageC />} />
+              <Route path="/c/liabilities" element={<LiabilitiesPageC />} />
+              <Route path="/c/income" element={<IncomePage />} />
+              <Route path="/c/expenses" element={<ExpensesPage />} />
+              <Route path="/d/insurance" element={<InsurancePageD />} />
+              <Route path="/d/assets" element={<AssetsPageD />} />
+              <Route path="/d/liabilities" element={<LiabilitiesPageD />} />
+              <Route path="/d/income" element={<IncomePage />} />
+              <Route path="/d/expenses" element={<ExpensesPage />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </VersionCSettingsProvider>
       </BrowserRouter>
     </TooltipProvider>
