@@ -1,4 +1,6 @@
-import { TrendingUp, TrendingDown, ShieldCheck, Info, Menu } from "lucide-react";
+import type { CSSProperties } from "react";
+
+type IconProps = { className?: string; style?: CSSProperties };
 
 export const WelcomeSlideOne = () => {
   return (
