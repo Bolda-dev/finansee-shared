@@ -15,31 +15,15 @@ const AhaDashboard = () => {
   };
 
   const cards = [
-    {
-      label: "נכסים",
-      Icon: TrendingUp,
-      gradient:
-        "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
-      glow: "hsla(176, 70%, 28%, 0.4)",
-      iconColor: "hsl(178, 70%, 30%)",
-    },
-    {
-      label: "התחייבויות",
-      Icon: TrendingDown,
-      gradient:
-        "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
-      glow: "hsla(222, 80%, 45%, 0.4)",
-      iconColor: "hsl(222, 85%, 45%)",
-    },
-    {
-      label: "ביטוח",
-      Icon: ShieldCheck,
-      gradient:
-        "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
-      glow: "hsla(262, 72%, 50%, 0.4)",
-      iconColor: "hsl(262, 75%, 52%)",
-    },
+    { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M" },
+    { label: "התחייבויות", Icon: TrendingDown, estimate: "₪150K - ₪400K" },
+    { label: "ביטוח", Icon: ShieldCheck, estimate: "חלקי" },
   ];
+
+  const disabledGradient =
+    "linear-gradient(135deg, hsl(230, 12%, 86%) 0%, hsl(230, 10%, 78%) 55%, hsl(230, 12%, 70%) 100%)";
+  const disabledGlow = "hsla(230, 15%, 60%, 0.2)";
+  const disabledIconColor = "hsl(230, 12%, 45%)";
 
   return (
     <div
