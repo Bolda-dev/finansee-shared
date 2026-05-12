@@ -2,6 +2,18 @@ import type { CSSProperties } from "react";
 
 type IconProps = { className?: string; style?: CSSProperties };
 
+const SvgIcon = ({ className, style, children }: IconProps & { children: React.ReactNode }) => (
+  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    {children}
+  </svg>
+);
+
+const Menu = (props: IconProps) => <SvgIcon {...props}><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></SvgIcon>;
+const Info = (props: IconProps) => <SvgIcon {...props}><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></SvgIcon>;
+const TrendingUp = (props: IconProps) => <SvgIcon {...props}><path d="m3 17 6-6 4 4 8-8" /><path d="M14 7h7v7" /></SvgIcon>;
+const TrendingDown = (props: IconProps) => <SvgIcon {...props}><path d="m3 7 6 6 4-4 8 8" /><path d="M14 17h7v-7" /></SvgIcon>;
+const ShieldCheck = (props: IconProps) => <SvgIcon {...props}><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.25-2.4a1.4 1.4 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></SvgIcon>;
+
 export const WelcomeSlideOne = () => {
   return (
     <div className="px-5 pt-2 pb-4 flex flex-col items-center">
