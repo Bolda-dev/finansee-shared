@@ -192,6 +192,14 @@ const PhoneMockup = () => {
           </div>
         </div>
       </div>
+      {/* Bottom fade overlay — replaces mask-image for perf */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[140px] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, hsla(235, 30%, 97%, 0) 0%, hsl(235, 30%, 97%) 75%)",
+        }}
+      />
     </div>
   );
 };
