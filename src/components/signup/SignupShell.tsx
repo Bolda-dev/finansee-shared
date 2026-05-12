@@ -33,7 +33,7 @@ export const SignupShell = ({ children, onSkip, showSkip = true, pagination, bot
             height: "320px",
             background:
               "radial-gradient(circle, hsla(262, 75%, 65%, 0.22) 0%, hsla(262, 75%, 65%, 0) 70%)",
-            filter: "blur(20px)",
+            willChange: "transform",
           }}
         />
         <div
@@ -45,7 +45,7 @@ export const SignupShell = ({ children, onSkip, showSkip = true, pagination, bot
             height: "300px",
             background:
               "radial-gradient(circle, hsla(220, 85%, 65%, 0.20) 0%, hsla(220, 85%, 65%, 0) 70%)",
-            filter: "blur(20px)",
+            willChange: "transform",
           }}
         />
         <div
@@ -57,7 +57,7 @@ export const SignupShell = ({ children, onSkip, showSkip = true, pagination, bot
             height: "260px",
             background:
               "radial-gradient(circle, hsla(178, 70%, 55%, 0.18) 0%, hsla(178, 70%, 55%, 0) 70%)",
-            filter: "blur(20px)",
+            willChange: "transform",
           }}
         />
       </div>
