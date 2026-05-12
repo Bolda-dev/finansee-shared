@@ -1,8 +1,8 @@
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import type { CSSProperties, ReactNode } from "react";
 
-type IconProps = { className?: string; style?: CSSProperties };
-const SvgIcon = ({ className, style, children, strokeWidth = 2 }: IconProps & { children: ReactNode; strokeWidth?: number }) => (
+type IconProps = { className?: string; style?: CSSProperties; strokeWidth?: number };
+const SvgIcon = ({ className, style, children, strokeWidth = 2 }: IconProps & { children: ReactNode }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
     {children}
   </svg>
