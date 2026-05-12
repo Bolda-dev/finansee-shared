@@ -499,3 +499,20 @@ All colors MUST be HSL.
   animation: sheen-sweep 3.5s ease-in-out infinite;
   pointer-events: none;
 }
+
+/* Signup background — drifting gradient blobs */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(30px, -20px) scale(1.1); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-25px, 25px) scale(1.08); }
+}
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(20px, 15px) scale(1.05); }
+}
+.signup-blob-1 { animation: blob-drift-1 14s ease-in-out infinite; }
+.signup-blob-2 { animation: blob-drift-2 18s ease-in-out infinite; }
+.signup-blob-3 { animation: blob-drift-3 16s ease-in-out infinite; }
