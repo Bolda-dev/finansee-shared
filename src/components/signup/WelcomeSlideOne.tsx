@@ -37,149 +37,163 @@ export const WelcomeSlideOne = () => {
 const PhoneMockup = () => {
   return (
     <div
-      className="relative w-[260px] rounded-[42px] p-3"
-      style={{
-        background:
-          "linear-gradient(155deg, hsl(250, 25%, 18%) 0%, hsl(240, 20%, 8%) 100%)",
-        boxShadow:
-          "0 30px 60px -20px hsla(250, 50%, 20%, 0.45), 0 12px 24px -12px hsla(250, 40%, 25%, 0.25), inset 0 1px 0 hsla(0, 0%, 100%, 0.08)",
-      }}
+      className="relative"
+      style={{ perspective: "1400px", width: 280, height: 290 }}
     >
-      {/* Notch */}
+      {/* Tilted phone — only top half visible, fades out at bottom */}
       <div
-        className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 rounded-b-2xl z-10"
-        style={{ background: "hsl(240, 20%, 5%)" }}
-      />
-      {/* Screen */}
-      <div
-        className="rounded-[32px] overflow-hidden relative"
+        className="absolute inset-x-0 top-0"
         style={{
-          background: "hsl(235, 30%, 97%)",
-          aspectRatio: "9 / 13",
+          transform: "rotateX(8deg) rotateY(-10deg) rotateZ(-2deg)",
+          transformOrigin: "center top",
+          transformStyle: "preserve-3d",
+          width: 280,
+          height: 520,
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
         }}
-        dir="rtl"
       >
-        {/* Subtle top gradient like real home */}
         <div
-          className="absolute inset-x-0 top-0 h-[60%] pointer-events-none"
+          className="rounded-[42px] p-3 w-full h-full"
           style={{
             background:
-              "linear-gradient(to bottom, hsl(0, 0%, 100%) 0%, hsl(230, 20%, 96%) 60%, hsl(235, 30%, 97%) 100%)",
+              "linear-gradient(155deg, hsl(250, 25%, 18%) 0%, hsl(240, 20%, 8%) 100%)",
+            boxShadow:
+              "0 40px 80px -20px hsla(250, 50%, 20%, 0.5), 0 18px 30px -14px hsla(250, 40%, 25%, 0.3), inset 0 1px 0 hsla(0, 0%, 100%, 0.08)",
           }}
-        />
-        <div className="relative px-3 pt-7 pb-2">
-          {/* Top bar */}
-          <div className="flex items-center justify-between mb-3">
+        >
+          {/* Notch */}
+          <div
+            className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 rounded-b-2xl z-10"
+            style={{ background: "hsl(240, 20%, 5%)" }}
+          />
+          {/* Screen */}
+          <div
+            className="rounded-[32px] overflow-hidden relative w-full h-full"
+            style={{ background: "hsl(235, 30%, 97%)" }}
+            dir="rtl"
+          >
             <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center"
+              className="absolute inset-x-0 top-0 h-[60%] pointer-events-none"
               style={{
-                background: "hsla(250, 40%, 99%, 0.7)",
-                border: "1px solid hsla(250, 50%, 92%, 0.6)",
+                background:
+                  "linear-gradient(to bottom, hsl(0, 0%, 100%) 0%, hsl(230, 20%, 96%) 60%, hsl(235, 30%, 97%) 100%)",
               }}
-            >
-              <Menu className="h-3.5 w-3.5" style={{ color: "hsl(250, 40%, 20%)" }} />
-            </div>
-            <div className="text-[8px] font-medium" style={{ color: "hsl(250, 40%, 20%)" }}>
-              09:41
-            </div>
-          </div>
-          <p className="text-[10px] font-bold mb-2" style={{ color: "hsl(250, 40%, 15%)" }}>
-            בוקר טוב, יוסי
-          </p>
-
-          {/* Net worth */}
-          <div className="flex items-center gap-1 mb-1">
-            <p className="text-[9px] font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>
-              שווי נטו
-            </p>
-            <Info className="h-2 w-2" style={{ color: "hsl(250, 30%, 55%)" }} />
-          </div>
-          <div className="flex items-center gap-1.5 mb-0.5">
-            <p
-              className="font-extrabold tracking-tight text-[20px] leading-none"
-              style={{ color: "hsl(250, 50%, 12%)" }}
-            >
-              ₪10,200,000
-            </p>
-            <span
-              className="inline-flex items-center gap-0.5 text-[7px] font-semibold px-1.5 py-0.5 rounded-full"
-              style={{
-                background: "hsla(250, 50%, 99%, 0.7)",
-                border: "1px solid hsla(250, 50%, 88%, 0.6)",
-                color: "hsl(262, 75%, 48%)",
-              }}
-            >
-              <TrendingUp className="h-2 w-2" />
-              1.8%
-            </span>
-          </div>
-          <p className="text-[7px] mb-3" style={{ color: "hsl(230, 15%, 55%)" }}>
-            עודכן היום בשעה 09:41
-          </p>
-
-          {/* Category cards */}
-          <div className="grid grid-cols-3 gap-1.5">
-            {[
-              {
-                label: "נכסים",
-                value: "₪8.4M",
-                Icon: TrendingUp,
-                gradient:
-                  "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
-                glow: "hsla(176, 70%, 28%, 0.4)",
-                iconColor: "hsl(178, 70%, 30%)",
-              },
-              {
-                label: "התחייבויות",
-                value: "₪1.37M",
-                Icon: TrendingDown,
-                gradient:
-                  "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
-                glow: "hsla(222, 80%, 45%, 0.4)",
-                iconColor: "hsl(222, 85%, 45%)",
-              },
-              {
-                label: "ביטוח",
-                value: "5 פוליסות",
-                Icon: ShieldCheck,
-                gradient:
-                  "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
-                glow: "hsla(262, 72%, 50%, 0.4)",
-                iconColor: "hsl(262, 75%, 52%)",
-              },
-            ].map((c) => (
-              <div
-                key={c.label}
-                className="rounded-xl px-1.5 py-2 text-start"
-                style={{
-                  background: c.gradient,
-                  boxShadow: `0 4px 10px ${c.glow}`,
-                  minHeight: 70,
-                }}
-              >
+            />
+            <div className="relative px-3 pt-7 pb-2">
+              <div className="flex items-center justify-between mb-3">
                 <div
-                  className="w-5 h-5 rounded-full flex items-center justify-center mb-2"
+                  className="w-7 h-7 rounded-lg flex items-center justify-center"
                   style={{
-                    background: "hsla(0, 0%, 100%, 0.95)",
-                    boxShadow: "0 1px 3px hsla(0, 0%, 0%, 0.1)",
+                    background: "hsla(250, 40%, 99%, 0.7)",
+                    border: "1px solid hsla(250, 50%, 92%, 0.6)",
                   }}
                 >
-                  <c.Icon className="h-2.5 w-2.5" style={{ color: c.iconColor }} />
+                  <Menu className="h-3.5 w-3.5" style={{ color: "hsl(250, 40%, 20%)" }} />
                 </div>
-                <p
-                  className="text-[6.5px] font-medium leading-tight"
-                  style={{ color: "hsla(0, 0%, 100%, 0.9)" }}
-                >
-                  {c.label}
-                </p>
-                <p
-                  className="font-extrabold text-[9px] leading-tight"
-                  style={{ color: "white" }}
-                >
-                  {c.value}
-                </p>
+                <div className="text-[8px] font-medium" style={{ color: "hsl(250, 40%, 20%)" }}>
+                  09:41
+                </div>
               </div>
-            ))}
+              <p className="text-[10px] font-bold mb-2" style={{ color: "hsl(250, 40%, 15%)" }}>
+                בוקר טוב, יוסי
+              </p>
+
+              <div className="flex items-center gap-1 mb-1">
+                <p className="text-[9px] font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>
+                  שווי נטו
+                </p>
+                <Info className="h-2 w-2" style={{ color: "hsl(250, 30%, 55%)" }} />
+              </div>
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <p
+                  className="font-extrabold tracking-tight text-[20px] leading-none"
+                  style={{ color: "hsl(250, 50%, 12%)" }}
+                >
+                  ₪10,200,000
+                </p>
+                <span
+                  className="inline-flex items-center gap-0.5 text-[7px] font-semibold px-1.5 py-0.5 rounded-full"
+                  style={{
+                    background: "hsla(250, 50%, 99%, 0.7)",
+                    border: "1px solid hsla(250, 50%, 88%, 0.6)",
+                    color: "hsl(262, 75%, 48%)",
+                  }}
+                >
+                  <TrendingUp className="h-2 w-2" />
+                  1.8%
+                </span>
+              </div>
+              <p className="text-[7px] mb-3" style={{ color: "hsl(230, 15%, 55%)" }}>
+                עודכן היום בשעה 09:41
+              </p>
+
+              <div className="grid grid-cols-3 gap-1.5">
+                {[
+                  {
+                    label: "נכסים",
+                    value: "₪8.4M",
+                    Icon: TrendingUp,
+                    gradient:
+                      "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+                    glow: "hsla(176, 70%, 28%, 0.4)",
+                    iconColor: "hsl(178, 70%, 30%)",
+                  },
+                  {
+                    label: "התחייבויות",
+                    value: "₪1.37M",
+                    Icon: TrendingDown,
+                    gradient:
+                      "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+                    glow: "hsla(222, 80%, 45%, 0.4)",
+                    iconColor: "hsl(222, 85%, 45%)",
+                  },
+                  {
+                    label: "ביטוח",
+                    value: "5 פוליסות",
+                    Icon: ShieldCheck,
+                    gradient:
+                      "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
+                    glow: "hsla(262, 72%, 50%, 0.4)",
+                    iconColor: "hsl(262, 75%, 52%)",
+                  },
+                ].map((c) => (
+                  <div
+                    key={c.label}
+                    className="rounded-xl px-1.5 py-2 text-start"
+                    style={{
+                      background: c.gradient,
+                      boxShadow: `0 4px 10px ${c.glow}`,
+                      minHeight: 70,
+                    }}
+                  >
+                    <div
+                      className="w-5 h-5 rounded-full flex items-center justify-center mb-2"
+                      style={{
+                        background: "hsla(0, 0%, 100%, 0.95)",
+                        boxShadow: "0 1px 3px hsla(0, 0%, 0%, 0.1)",
+                      }}
+                    >
+                      <c.Icon className="h-2.5 w-2.5" style={{ color: c.iconColor }} />
+                    </div>
+                    <p
+                      className="text-[6.5px] font-medium leading-tight"
+                      style={{ color: "hsla(0, 0%, 100%, 0.9)" }}
+                    >
+                      {c.label}
+                    </p>
+                    <p
+                      className="font-extrabold text-[9px] leading-tight"
+                      style={{ color: "white" }}
+                    >
+                      {c.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
