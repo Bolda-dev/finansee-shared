@@ -38,21 +38,16 @@ const PhoneMockup = () => {
   return (
     <div
       className="relative"
-      style={{ perspective: "1400px", width: 280, height: 290 }}
+      style={{ width: 280, height: 290, overflow: "hidden" }}
     >
-      {/* Tilted phone — only top half visible, fades out at bottom */}
+      {/* Tilted phone — only top half visible */}
       <div
         className="absolute inset-x-0 top-0"
         style={{
-          transform: "rotateX(8deg) rotateY(-10deg) rotateZ(-2deg)",
+          transform: "rotate(-2deg)",
           transformOrigin: "center top",
-          transformStyle: "preserve-3d",
           width: 280,
           height: 520,
-          maskImage:
-            "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, black 0%, black 60%, transparent 92%)",
         }}
       >
         <div
@@ -197,6 +192,14 @@ const PhoneMockup = () => {
           </div>
         </div>
       </div>
+      {/* Bottom fade overlay — replaces mask-image for perf */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[140px] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, hsla(235, 30%, 97%, 0) 0%, hsl(235, 30%, 97%) 75%)",
+        }}
+      />
     </div>
   );
 };
