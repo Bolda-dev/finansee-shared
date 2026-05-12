@@ -1,4 +1,5 @@
 import { useState, useRef, TouchEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { SignupShell } from "@/components/signup/SignupShell";
 import { WelcomeSlideOne } from "@/components/signup/WelcomeSlideOne";
 import { WelcomeSlideTwo } from "@/components/signup/WelcomeSlideTwo";
@@ -9,12 +10,15 @@ import { AgeStep } from "@/components/signup/AgeStep";
 import { FamilyStep } from "@/components/signup/FamilyStep";
 import { EmploymentStep } from "@/components/signup/EmploymentStep";
 import { GoalsStep } from "@/components/signup/GoalsStep";
+import { LoadingStep } from "@/components/signup/LoadingStep";
 
-// Steps: 0,1 welcome | 2 phone | 3 sms | 4 name | 5 age | 6 family | 7 employment | 8 goals
-const TOTAL = 9;
+// Steps: 0,1 welcome | 2 phone | 3 sms | 4 name | 5 age | 6 family | 7 employment | 8 goals | 9 loading
+const TOTAL = 10;
 const WELCOME_COUNT = 2;
+const LOADING_INDEX = 9;
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [phone, setPhone] = useState("");
   const [name, setName] = useState({ firstName: "", lastName: "" });
@@ -27,6 +31,7 @@ const Signup = () => {
   const deltaX = useRef(0);
 
   const inWelcome = index < WELCOME_COUNT;
+  const inLoading = index === LOADING_INDEX;
 
   const onTouchStart = (e: TouchEvent) => {
     if (!inWelcome) return;
@@ -58,7 +63,13 @@ const Signup = () => {
     (index === 7 && !!employment) ||
     (index === 8 && goals.length > 0);
 
-  const ctaLabel = inWelcome ? (index < WELCOME_COUNT - 1 ? "המשך" : "בוא נתחיל") : "המשך";
+  const ctaLabel = inWelcome
+    ? index < WELCOME_COUNT - 1
+      ? "המשך"
+      : "בוא נתחיל"
+    : index === 8
+    ? "סיום"
+    : "המשך";
 
   const renderStep = () => {
     switch (index) {
@@ -87,28 +98,35 @@ const Signup = () => {
         return <EmploymentStep value={employment} onChange={setEmployment} />;
       case 8:
         return <GoalsStep value={goals} onChange={setGoals} />;
+      case 9:
+        return (
+          <LoadingStep
+            onDone={() => navigate("/aha", { state: { firstName: name.firstName } })}
+          />
+        );
       default:
         return null;
     }
   };
 
-  // Continuous progress bar across steps 2..8 (total 7)
-  const progress = !inWelcome ? { current: index - 1, total: 7 } : undefined;
+  // Continuous progress bar across steps 2..8 (total 7); hidden on welcome and loading
+  const progress = !inWelcome && !inLoading ? { current: index - 1, total: 7 } : undefined;
+
+  const showCta = index !== 3 && !inLoading;
 
   return (
     <SignupShell
       onSkip={inWelcome ? () => setIndex(WELCOME_COUNT - 1) : undefined}
       showSkip={inWelcome && index < WELCOME_COUNT - 1}
-      onBack={!inWelcome ? back : undefined}
+      onBack={!inWelcome && !inLoading ? back : undefined}
       pagination={inWelcome ? { total: WELCOME_COUNT, current: index, onDotClick: setIndex } : undefined}
       progress={progress}
       bottom={
-        index === 3 ? null : (
+        showCta ? (
           <div className="flex justify-center">
             <button
               onClick={() => {
                 if (index < TOTAL - 1) next();
-                else console.log("Signup complete", { phone, ...name, age, family, employment, goals });
               }}
               disabled={!canContinue}
               className="btn-black-deep rounded-full px-10 py-3 text-sm font-semibold text-white transition-all active:scale-[0.97] disabled:opacity-40"
@@ -117,10 +135,10 @@ const Signup = () => {
                   "0 10px 24px -10px hsla(0, 0%, 0%, 0.55), 0 2px 6px hsla(0, 0%, 0%, 0.2), inset 0 1px 0 hsla(0, 0%, 100%, 0.12)",
               }}
             >
-              <span className="relative z-10">{index === TOTAL - 1 ? "סיום" : ctaLabel}</span>
+              <span className="relative z-10">{ctaLabel}</span>
             </button>
           </div>
-        )
+        ) : null
       }
     >
       <div
@@ -131,7 +149,7 @@ const Signup = () => {
       >
         <div
           key={index}
-          className="h-full animate-in fade-in slide-in-from-bottom-2 duration-300"
+          className="h-full animate-in fade-in slide-in-from-bottom-2 duration-300 flex flex-col"
         >
           {renderStep()}
         </div>
