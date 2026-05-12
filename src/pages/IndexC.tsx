@@ -93,7 +93,7 @@ const IndexB = () => {
       </div>
 
       {/* Header */}
-      <div className="relative z-10 px-5 pt-6 pb-0" dir="rtl">
+      <div className="relative z-10 px-3 pt-6 pb-0" dir="rtl">
         <div className="flex flex-col items-start gap-4 text-start">
           <div className="relative flex items-center w-full">
             <button onClick={() => setMenuOpen(true)} className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 flex-shrink-0" style={{ background: "hsla(250, 40%, 99%, 0.55)", backdropFilter: "blur(12px)", border: "1px solid hsla(250, 50%, 92%, 0.5)" }}>
@@ -114,7 +114,7 @@ const IndexB = () => {
 
       {/* Tab Content */}
       {activeTab === "status" && (
-        <div className="relative z-10 px-5">
+        <div className="relative z-10 px-3">
           {/* Net worth header block */}
           <div className="mb-6">
             <div className="flex items-center justify-start gap-1.5 mb-2">
@@ -449,7 +449,7 @@ const IndexB = () => {
       )}
 
       {activeTab === "income" && (
-        <div className="relative z-10 px-5 pb-32">
+        <div className="relative z-10 px-3 pb-32">
           <div className="flex items-center justify-between mb-4">
             <div className="rounded-2xl p-4 flex-1" style={{ background: "white", boxShadow: "0 4px 24px rgba(100,80,180,0.08)" }}>
               <p className="text-xs" style={{ color: "hsl(230,15%,55%)" }}>סה״כ הכנסות חודשיות</p>
@@ -473,7 +473,7 @@ const IndexB = () => {
       )}
 
       {activeTab === "expenses" && (
-        <div className="relative z-10 px-5 pb-32">
+        <div className="relative z-10 px-3 pb-32">
           <div className="flex items-center justify-between mb-4">
             <div className="rounded-2xl p-4 flex-1" style={{ background: "white", boxShadow: "0 4px 24px rgba(100,80,180,0.08)" }}>
               <p className="text-xs" style={{ color: "hsl(230,15%,55%)" }}>סה״כ הוצאות חודשיות</p>
@@ -497,7 +497,7 @@ const IndexB = () => {
       )}
 
       {activeTab === "insurance" && (
-        <div className="relative z-10 px-5 pb-32">
+        <div className="relative z-10 px-3 pb-32">
           <div className="flex items-center justify-end mb-4">
             <button className="cta-tri-c w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all hover:scale-105 active:scale-95">
               <Plus className="h-5 w-5" style={{ color: "white" }} />
