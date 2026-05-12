@@ -29,8 +29,6 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const isVersionB = pathname === "/b" || pathname.startsWith("/b/");
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
-  const isVersionLife = pathname === "/life" || pathname.startsWith("/life/");
-  const isVersionManual = pathname === "/manual" || pathname.startsWith("/manual/");
   const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
   const [archiveOpen, setArchiveOpen] = useState(false);
 
