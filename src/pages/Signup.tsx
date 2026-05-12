@@ -5,15 +5,23 @@ import { WelcomeSlideTwo } from "@/components/signup/WelcomeSlideTwo";
 import { PhoneStep } from "@/components/signup/PhoneStep";
 import { SmsCodeStep } from "@/components/signup/SmsCodeStep";
 import { NameStep } from "@/components/signup/NameStep";
+import { AgeStep } from "@/components/signup/AgeStep";
+import { FamilyStep } from "@/components/signup/FamilyStep";
+import { EmploymentStep } from "@/components/signup/EmploymentStep";
+import { GoalsStep } from "@/components/signup/GoalsStep";
 
-// Steps: 0,1 = welcome slides | 2 = phone | 3 = sms | 4 = name
-const TOTAL = 5;
+// Steps: 0,1 welcome | 2 phone | 3 sms | 4 name | 5 age | 6 family | 7 employment | 8 goals
+const TOTAL = 9;
 const WELCOME_COUNT = 2;
 
 const Signup = () => {
   const [index, setIndex] = useState(0);
   const [phone, setPhone] = useState("");
   const [name, setName] = useState({ firstName: "", lastName: "" });
+  const [age, setAge] = useState("");
+  const [family, setFamily] = useState("");
+  const [employment, setEmployment] = useState("");
+  const [goals, setGoals] = useState<string[]>([]);
 
   const startX = useRef<number | null>(null);
   const deltaX = useRef(0);
@@ -42,9 +50,13 @@ const Signup = () => {
   const back = () => setIndex((i) => Math.max(i - 1, 0));
 
   const canContinue =
+    inWelcome ||
     (index === 2 && phone.length >= 9) ||
-    (index === 4 && name.firstName.trim() && name.lastName.trim()) ||
-    inWelcome;
+    (index === 4 && !!name.firstName.trim() && !!name.lastName.trim()) ||
+    (index === 5 && !!age) ||
+    (index === 6 && !!family) ||
+    (index === 7 && !!employment) ||
+    (index === 8 && goals.length > 0);
 
   const ctaLabel = inWelcome ? (index < WELCOME_COUNT - 1 ? "המשך" : "בוא נתחיל") : "המשך";
 
@@ -61,20 +73,27 @@ const Signup = () => {
           <SmsCodeStep
             phone={phone}
             onComplete={() => {
-              // auto-advance after 6 digits
               setTimeout(() => setIndex(4), 250);
             }}
           />
         );
       case 4:
         return <NameStep firstName={name.firstName} lastName={name.lastName} onChange={setName} />;
+      case 5:
+        return <AgeStep value={age} onChange={setAge} />;
+      case 6:
+        return <FamilyStep value={family} onChange={setFamily} />;
+      case 7:
+        return <EmploymentStep value={employment} onChange={setEmployment} />;
+      case 8:
+        return <GoalsStep value={goals} onChange={setGoals} />;
       default:
         return null;
     }
   };
 
-  // Stage-2 progress (1..3 across steps 2,3,4)
-  const progress = !inWelcome ? { current: index - 1, total: 3 } : undefined;
+  // Continuous progress bar across steps 2..8 (total 7)
+  const progress = !inWelcome ? { current: index - 1, total: 7 } : undefined;
 
   return (
     <SignupShell
@@ -89,7 +108,7 @@ const Signup = () => {
             <button
               onClick={() => {
                 if (index < TOTAL - 1) next();
-                else console.log("Signup complete", { phone, ...name });
+                else console.log("Signup complete", { phone, ...name, age, family, employment, goals });
               }}
               disabled={!canContinue}
               className="btn-black-deep rounded-full px-10 py-3 text-sm font-semibold text-white transition-all active:scale-[0.97] disabled:opacity-40"
