@@ -52,13 +52,14 @@ const PhoneMockup = () => {
   return (
     <div
       className="relative"
-      style={{ width: 320, height: 320, overflow: "hidden" }}
+      style={{ width: 340, height: 400, overflow: "hidden" }}
     >
       {/* Tilted phone — only top half visible */}
       <div
-        className="absolute top-5"
+        className="absolute"
         style={{
           left: 20,
+          top: 8,
           transform: "rotate(-2deg)",
           transformOrigin: "center top",
           width: 280,
