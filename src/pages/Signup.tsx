@@ -32,20 +32,23 @@ const Signup = () => {
       showSkip={index < total - 1}
       pagination={{ total, current: index, onDotClick: setIndex }}
       bottom={
-        index === total - 1 ? (
+        <div className="flex justify-center">
           <button
             onClick={() => {
-              console.log("Start signup flow");
+              if (index < total - 1) setIndex(index + 1);
+              else console.log("Start signup flow");
             }}
-            className="w-full rounded-2xl py-4 text-base font-bold text-white transition-transform active:scale-[0.98]"
+            className="btn-black-drift rounded-full px-10 py-3 text-sm font-semibold text-white transition-transform active:scale-[0.97]"
             style={{
-              background: "hsl(262, 75%, 52%)",
-              boxShadow: "0 8px 20px -8px hsla(262, 75%, 45%, 0.45)",
+              boxShadow:
+                "0 10px 24px -10px hsla(0, 0%, 0%, 0.55), 0 2px 6px hsla(0, 0%, 0%, 0.2), inset 0 1px 0 hsla(0, 0%, 100%, 0.12)",
             }}
           >
-            בוא נתחיל
+            <span className="relative z-10">
+              {index < total - 1 ? "המשך" : "בוא נתחיל"}
+            </span>
           </button>
-        ) : null
+        </div>
       }
     >
       <div

@@ -60,8 +60,8 @@ export const SignupShell = ({ children, onSkip, showSkip = true, pagination, bot
                   height: 8,
                   background:
                     i === pagination.current
-                      ? "hsl(262, 75%, 52%)"
-                      : "hsl(250, 20%, 88%)",
+                      ? "hsl(240, 20%, 8%)"
+                      : "hsl(250, 20%, 85%)",
                 }}
               />
             ))}
