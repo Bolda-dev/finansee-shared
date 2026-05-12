@@ -463,18 +463,8 @@ All colors MUST be HSL.
   50%      { transform: scale(1.08); box-shadow: 0 0 0 6px hsla(0, 80%, 55%, 0); }
 }
 
-/* Signup CTA — traveling black gradient */
-@keyframes black-drift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes sheen-sweep {
-  0%   { transform: translateX(-120%) skewX(-20deg); }
-  60%  { transform: translateX(220%) skewX(-20deg); }
-  100% { transform: translateX(220%) skewX(-20deg); }
-}
-.btn-black-drift {
+/* Signup CTA — static premium black gradient */
+.btn-black-deep {
   position: relative;
   background: linear-gradient(110deg,
     hsl(0, 0%, 4%) 0%,
@@ -482,37 +472,17 @@ All colors MUST be HSL.
     hsl(220, 25%, 10%) 50%,
     hsl(280, 35%, 16%) 75%,
     hsl(0, 0%, 4%) 100%);
-  background-size: 280% 280%;
-  animation: black-drift 6s ease-in-out infinite;
   overflow: hidden;
   isolation: isolate;
 }
-.btn-black-drift::before {
+.btn-black-deep::before {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg,
     transparent 0%,
-    hsla(0, 0%, 100%, 0.18) 50%,
+    hsla(0, 0%, 100%, 0.10) 46%,
+    hsla(0, 0%, 100%, 0.03) 58%,
     transparent 100%);
-  width: 40%;
-  animation: sheen-sweep 3.5s ease-in-out infinite;
   pointer-events: none;
 }
-
-/* Signup background — drifting gradient blobs */
-@keyframes blob-drift-1 {
-  0%, 100% { transform: translate3d(0,0,0) scale(1); }
-  50%      { transform: translate3d(30px, -20px, 0) scale(1.1); }
-}
-@keyframes blob-drift-2 {
-  0%, 100% { transform: translate3d(0,0,0) scale(1); }
-  50%      { transform: translate3d(-25px, 25px, 0) scale(1.08); }
-}
-@keyframes blob-drift-3 {
-  0%, 100% { transform: translate3d(0,0,0) scale(1); }
-  50%      { transform: translate3d(20px, 15px, 0) scale(1.05); }
-}
-.signup-blob-1 { animation: blob-drift-1 14s ease-in-out infinite; }
-.signup-blob-2 { animation: blob-drift-2 18s ease-in-out infinite; }
-.signup-blob-3 { animation: blob-drift-3 16s ease-in-out infinite; }
