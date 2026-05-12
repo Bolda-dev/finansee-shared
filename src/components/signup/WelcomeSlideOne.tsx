@@ -2,26 +2,15 @@ import { TrendingUp, TrendingDown, ShieldCheck, Wallet, Info } from "lucide-reac
 
 export const WelcomeSlideOne = () => {
   return (
-    <div className="px-6 pt-2 pb-6 flex flex-col">
-      {/* Mock hero card */}
-      <div className="relative mt-2 mb-10 flex justify-center">
-        {/* Glow */}
+    <div className="px-5 pt-4 pb-6 flex flex-col">
+      {/* Mock hero card — clean, no glow */}
+      <div className="mt-4 mb-10 flex justify-center">
         <div
-          className="absolute inset-0 blur-3xl"
+          className="w-[290px] rounded-3xl px-5 py-5 bg-white"
           style={{
-            background:
-              "radial-gradient(60% 60% at 50% 50%, hsla(262, 75%, 60%, 0.35) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="relative w-[290px] rounded-3xl px-5 py-5"
-          style={{
-            background: "hsla(0, 0%, 100%, 0.85)",
-            backdropFilter: "blur(12px)",
-            border: "1px solid hsla(250, 50%, 88%, 0.7)",
+            border: "1px solid hsl(250, 30%, 92%)",
             boxShadow:
-              "0 20px 50px -20px hsla(262, 60%, 30%, 0.35), 0 4px 12px hsla(262, 30%, 40%, 0.08)",
-            transform: "rotate(-3deg)",
+              "0 12px 32px -16px hsla(250, 40%, 30%, 0.18), 0 2px 6px hsla(250, 30%, 40%, 0.05)",
           }}
         >
           <div className="flex items-center gap-1.5 mb-2">
@@ -40,8 +29,8 @@ export const WelcomeSlideOne = () => {
             <span
               className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full"
               style={{
-                background: "hsla(250, 50%, 99%, 0.7)",
-                border: "1px solid hsla(250, 50%, 88%, 0.6)",
+                background: "hsl(250, 50%, 99%)",
+                border: "1px solid hsl(250, 30%, 90%)",
                 color: "hsl(262, 75%, 48%)",
               }}
             >
@@ -63,22 +52,22 @@ export const WelcomeSlideOne = () => {
         דע בדיוק כמה אתה שווה
       </h1>
       <p
-        className="text-[15px] text-center leading-relaxed mb-8 px-2"
+        className="text-[15px] text-center leading-relaxed mb-10 px-2"
         style={{ color: "hsl(250, 25%, 38%)" }}
       >
         Finansee אוסף את כל הנכסים, ההתחייבויות והביטוחים שלך למקום אחד —
-        ומראה לך את שווי הנטו האמיתי שלך, מתעדכן כל יום
+        ומראה לך את שווי הנטו האמיתי, מתעדכן כל יום
       </p>
 
       {/* Icon equation row */}
       <div className="flex items-center justify-center gap-2 px-2">
-        <IconChip Icon={TrendingUp} label="נכסים" color="hsl(178, 70%, 32%)" bg="hsla(178, 70%, 32%, 0.1)" />
+        <IconChip Icon={TrendingUp} label="נכסים" color="hsl(178, 70%, 32%)" bg="hsl(178, 60%, 95%)" />
         <Plus />
-        <IconChip Icon={TrendingDown} label="התחייבויות" color="hsl(220, 75%, 45%)" bg="hsla(220, 75%, 45%, 0.1)" />
+        <IconChip Icon={TrendingDown} label="התחייבויות" color="hsl(220, 75%, 45%)" bg="hsl(220, 60%, 96%)" />
         <Plus />
-        <IconChip Icon={ShieldCheck} label="ביטוחים" color="hsl(262, 75%, 52%)" bg="hsla(262, 75%, 52%, 0.1)" />
+        <IconChip Icon={ShieldCheck} label="ביטוחים" color="hsl(262, 75%, 52%)" bg="hsl(262, 60%, 96%)" />
         <Equals />
-        <IconChip Icon={Wallet} label="שווי נטו" color="hsl(250, 50%, 20%)" bg="hsla(250, 50%, 20%, 0.08)" />
+        <IconChip Icon={Wallet} label="שווי נטו" color="hsl(250, 50%, 20%)" bg="hsl(250, 30%, 95%)" />
       </div>
     </div>
   );

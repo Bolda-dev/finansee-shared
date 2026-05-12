@@ -29,8 +29,6 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
   const isVersionB = pathname === "/b" || pathname.startsWith("/b/");
   const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
   const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
-  const isVersionLife = pathname === "/life" || pathname.startsWith("/life/");
-  const isVersionManual = pathname === "/manual" || pathname.startsWith("/manual/");
   const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
   const [archiveOpen, setArchiveOpen] = useState(false);
 
@@ -55,15 +53,6 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
           </div>
 
           {isVersionC && (
-            <div className="border-t border-border mt-4 pt-4">
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
-                <Switch dir="ltr" checked={innerGrid} onCheckedChange={setInnerGrid} />
-              </div>
-            </div>
-          )}
-
-          {isVersionLife && (
             <div className="border-t border-border mt-4 pt-4">
               <div className="px-4 py-2.5 flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
@@ -100,29 +89,11 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
             </div>
           )}
 
-          {isVersionManual && (
-            <div className="border-t border-border mt-4 pt-4">
-              <p className="px-4 text-xs font-bold text-muted-foreground mb-2">צבעוניות ידנית</p>
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">כרטיסיות — צבעוני נועז</span>
-                <Switch dir="ltr" checked={boldCards} onCheckedChange={setBoldCards} />
-              </div>
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">מרכז פיננסי — פס צבעוני (אחרת אייקונים צבעוניים)</span>
-                <Switch dir="ltr" checked={centerBar} onCheckedChange={setCenterBar} />
-              </div>
-            </div>
-          )}
-
           <div className="border-t border-border mt-4 pt-4">
             <p className="px-4 text-xs font-bold text-muted-foreground mb-2">סגנונות</p>
             <button onClick={() => { onOpenChange(false); navigate("/c"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
               <Sparkles className="h-4 w-4 text-muted-foreground" />
               סגנון סולידי
-            </button>
-            <button onClick={() => { onOpenChange(false); navigate("/life"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-              <Sparkles className="h-4 w-4" style={{ color: "hsl(75, 70%, 40%)" }} />
-              סגנון חיים
             </button>
           </div>
 
