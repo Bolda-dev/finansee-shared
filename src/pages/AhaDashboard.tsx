@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock } from "lucide-react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus } from "lucide-react";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 
@@ -20,10 +20,8 @@ const AhaDashboard = () => {
     { label: "ביטוח", Icon: ShieldCheck, estimate: "חלקי" },
   ];
 
-  const disabledGradient =
-    "linear-gradient(135deg, hsl(230, 12%, 86%) 0%, hsl(230, 10%, 78%) 55%, hsl(230, 12%, 70%) 100%)";
-  const disabledGlow = "hsla(230, 15%, 60%, 0.2)";
-  const disabledIconColor = "hsl(230, 12%, 45%)";
+  const dashedBorder = "hsl(230, 18%, 70%)";
+  const mutedIconColor = "hsl(230, 14%, 50%)";
 
   return (
     <div
@@ -116,53 +114,49 @@ const AhaDashboard = () => {
       <div className="relative z-10 px-3">
         <div className="grid grid-cols-3 gap-3 mb-6">
           {cards.map((card) => (
-            <button
+            <div
               key={card.label}
-              onClick={scrollToCta}
-              className="relative rounded-2xl px-2.5 py-3 text-start overflow-hidden transition-transform active:scale-[0.98]"
+              className="relative rounded-2xl px-2.5 py-3 text-start flex flex-col"
               style={{
-                background: disabledGradient,
-                boxShadow: `0 4px 14px ${disabledGlow}`,
-                minHeight: "140px",
-                opacity: 0.92,
+                background: "hsla(0, 0%, 100%, 0.4)",
+                border: `1.5px dashed ${dashedBorder}`,
+                minHeight: "168px",
               }}
             >
               <span
                 className="absolute top-2 left-2 w-6 h-6 rounded-full flex items-center justify-center"
-                style={{ background: "hsla(0, 0%, 100%, 0.9)" }}
+                style={{ background: "hsl(230, 25%, 95%)" }}
               >
-                <Lock className="h-3 w-3" style={{ color: disabledIconColor }} />
+                <Lock className="h-3 w-3" style={{ color: mutedIconColor }} />
               </span>
 
               <div
-                className="w-9 h-9 mb-3 rounded-full flex items-center justify-center relative z-10"
-                style={{ background: "hsla(0, 0%, 100%, 0.85)" }}
+                className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
+                style={{ background: "hsl(230, 25%, 95%)" }}
               >
-                <card.Icon className="h-4 w-4" style={{ color: disabledIconColor }} />
+                <card.Icon className="h-4 w-4" style={{ color: mutedIconColor }} />
               </div>
-              <div className="relative z-10">
-                <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(230, 20%, 25%, 0.75)" }}>
-                  {card.label}
-                </p>
-                <p className="font-extrabold text-base flex items-center gap-1 mb-1.5" style={{ color: "hsla(230, 20%, 20%, 0.55)" }}>
-                  <span>₪</span>
-                  <span
-                    className="inline-block tracking-[2px]"
-                    style={{
-                      background: "hsla(230, 15%, 35%, 0.25)",
-                      borderRadius: "3px",
-                      padding: "0 6px",
-                      color: "transparent",
-                    }}
-                  >
-                    ███
-                  </span>
-                </p>
-                <p className="text-[9.5px] leading-tight" style={{ color: "hsla(230, 20%, 25%, 0.6)" }}>
-                  הערכה: {card.estimate}
-                </p>
-              </div>
-            </button>
+              <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 18%, 40%)" }}>
+                {card.label}
+              </p>
+              <p className="font-extrabold text-lg mb-1" style={{ color: "hsl(230, 14%, 55%)" }}>
+                —
+              </p>
+              <p className="text-[9.5px] leading-tight mb-2" style={{ color: "hsl(230, 14%, 50%)" }}>
+                הערכה: {card.estimate}
+              </p>
+              <button
+                onClick={scrollToCta}
+                className="mt-auto w-full rounded-full py-1.5 text-[10px] font-semibold flex items-center justify-center gap-1 transition-transform active:scale-[0.97]"
+                style={{
+                  background: "hsl(250, 40%, 15%)",
+                  color: "white",
+                }}
+              >
+                <Plus className="h-3 w-3" />
+                חיבור לנתונים
+              </button>
+            </div>
           ))}
         </div>
       </div>
