@@ -220,6 +220,8 @@ const PhoneMockup = () => {
               </div>
             </div>
           </div>
+            </div>
+          </div>
         </div>
         {/* Bottom fade overlay inside the clipping window */}
         <div
