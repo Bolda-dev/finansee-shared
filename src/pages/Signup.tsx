@@ -51,25 +51,16 @@ const Signup = () => {
       }
     >
       <div
-        className="overflow-hidden flex-1"
+        className="flex-1 overflow-hidden"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
         <div
-          className="flex h-full transition-transform duration-300 ease-out"
-          style={{
-            // RTL: slide 0 is at translateX(0), slide 1 at translateX(100%) (since dir=rtl flips axis)
-            transform: `translateX(${index * 100}%)`,
-            width: `${total * 100}%`,
-          }}
+          key={index}
+          className="h-full animate-in fade-in slide-in-from-bottom-2 duration-300"
         >
-          <div className="w-full shrink-0">
-            <WelcomeSlideOne />
-          </div>
-          <div className="w-full shrink-0">
-            <WelcomeSlideTwo />
-          </div>
+          {index === 0 ? <WelcomeSlideOne /> : <WelcomeSlideTwo />}
         </div>
       </div>
     </SignupShell>
