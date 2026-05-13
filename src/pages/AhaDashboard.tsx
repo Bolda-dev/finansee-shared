@@ -415,21 +415,30 @@ const AhaDashboard = () => {
               );
             }
             return (
-              <div
+              <button
                 key={card.label}
-                className="rounded-2xl flex flex-col items-center justify-center p-4 opacity-70"
+                onClick={() => navigate(card.category === "liabilities" ? "/c/liabilities" : "/c/assets")}
+                className="rounded-2xl flex flex-col text-start px-3 py-3 transition-transform active:scale-[0.99]"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.4)",
-                  border: "2px dashed hsl(230, 20%, 82%)",
+                  border: `1.5px dashed ${dashedBorder}`,
                   minHeight: "150px",
                   ...animStyle,
                 }}
               >
-                <div className="w-11 h-11 rounded-full flex items-center justify-center mb-2" style={{ background: "hsl(230, 25%, 95%)", color: "hsl(230, 14%, 55%)" }}>
-                  <card.Icon className="h-5 w-5" />
+                <div className="flex justify-between items-start mb-3">
+                  <div className="relative w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "hsl(230, 25%, 95%)", color: mutedIconColor }}>
+                    <card.Icon className="h-4 w-4" />
+                    <span
+                      className="absolute -bottom-0.5 -left-0.5 w-4 h-4 rounded-full flex items-center justify-center text-white"
+                      style={{ background: p.solid, boxShadow: "0 2px 4px hsla(0,0%,0%,0.15)", border: "1.5px solid white" }}
+                    >
+                      <Plus className="h-2.5 w-2.5" strokeWidth={3} />
+                    </span>
+                  </div>
+                  <span className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{card.label}</span>
                 </div>
-                <span className="text-[12.5px] font-bold" style={{ color: "hsl(230, 14%, 50%)" }}>{card.label}</span>
-              </div>
+              </button>
             );
           })}
         </div>
