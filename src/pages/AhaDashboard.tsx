@@ -1193,18 +1193,18 @@ const ConsentAnnex = ({
     </div>
 
     {/* Collapsible: details + full document */}
-    <div className="rounded-2xl overflow-hidden" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
+    <div className="rounded-2xl overflow-hidden" style={{ background: "hsl(230, 30%, 98%)" }}>
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center justify-between px-3.5 py-2.5"
+        className="w-full flex items-center justify-between px-3.5 py-2.5 focus:outline-none"
         aria-expanded={expanded}
       >
         <span className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>
           מה כולל הנספח
         </span>
         <ChevronDown
-          className="h-4 w-4 transition-transform"
+          className="h-4 w-4 transition-transform duration-300"
           style={{
             color: "hsl(230, 15%, 45%)",
             transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
