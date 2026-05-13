@@ -39,6 +39,34 @@ const AhaDashboard = () => {
   const firstName = (location.state as { firstName?: string } | null)?.firstName || userData.name;
   const [chatOpen, setChatOpen] = useState(false);
   const [tipOpen, setTipOpen] = useState(true);
+  const [chatStage, setChatStage] = useState<"intro" | "harBituach" | "more">("intro");
+  const [insuranceStatus, setInsuranceStatus] = useState<"idle" | "connecting" | "done">("idle");
+  const [clearingStatus, setClearingStatus] = useState<"idle" | "scheduled">("idle");
+  const [showInsight, setShowInsight] = useState(false);
+
+  // Reset chat state when sheet closes
+  useEffect(() => {
+    if (!chatOpen) {
+      const t = setTimeout(() => {
+        setChatStage("intro");
+        setInsuranceStatus("idle");
+        setClearingStatus("idle");
+        setShowInsight(false);
+      }, 300);
+      return () => clearTimeout(t);
+    }
+  }, [chatOpen]);
+
+  // Simulate insurance connection
+  useEffect(() => {
+    if (insuranceStatus === "connecting") {
+      const t = setTimeout(() => {
+        setInsuranceStatus("done");
+        setTimeout(() => setShowInsight(true), 500);
+      }, 1800);
+      return () => clearTimeout(t);
+    }
+  }, [insuranceStatus]);
 
   const heroCards = [
     { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/c/assets" },
