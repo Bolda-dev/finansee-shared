@@ -183,24 +183,86 @@ const AhaDashboard = () => {
       <div className="relative z-10 px-3 mb-6">
         {!homeAlmostDone ? (
           <div
-            className="rounded-2xl p-4 flex items-start gap-3"
+            className="rounded-2xl p-4"
             style={{
               background: "white",
               boxShadow: "0 4px 18px hsla(250, 30%, 25%, 0.08)",
               border: "1px solid hsl(230, 20%, 93%)",
             }}
           >
-            <span className="relative flex-shrink-0">
-              <span className="block w-12 h-12 rounded-full overflow-hidden" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
+            <div className="flex items-start gap-3">
+              <span className="block w-11 h-11 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
                 <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
               </span>
-            </span>
-            <div className="flex-1 min-w-0">
-              <p className="text-[13px] leading-relaxed" style={{ color: "hsl(250, 35%, 22%)" }}>
-                היי {firstName} 👋 אנשים בפרופיל שלך בדרך כלל שווים בין{" "}
-                <span className="font-bold">₪450K ל-₪1.2M</span>. רוצה לראות את השווי האמיתי שלך?
-              </p>
+              <div className="flex-1 min-w-0">
+                <p className="text-[13px] leading-relaxed mb-0.5" style={{ color: "hsl(250, 35%, 22%)" }}>
+                  היי {firstName} 👋 חיברנו <span className="font-bold">42%</span> מהנתונים שלך.
+                </p>
+                <p className="text-[11.5px] leading-snug" style={{ color: "hsl(250, 25%, 45%)" }}>
+                  בוא נשלים את התמונה לשווי האמיתי שלך.
+                </p>
+              </div>
             </div>
+
+            {/* Progress bar */}
+            <div className="flex items-center gap-2 mt-3 mb-3">
+              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "hsl(230, 20%, 93%)" }}>
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: "42%",
+                    background: "linear-gradient(90deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%))",
+                    transition: "width 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
+                  }}
+                />
+              </div>
+              <span className="text-[11px] font-extrabold whitespace-nowrap" style={{ color: "hsl(262, 75%, 45%)" }}>
+                42%
+              </span>
+            </div>
+
+            {/* Expand toggle */}
+            <button
+              onClick={() => setDanaExpanded((v) => !v)}
+              className="w-full flex items-center justify-between text-right focus:outline-none"
+              style={{ color: "hsl(250, 35%, 25%)" }}
+            >
+              <span className="text-[12px] font-bold">חיבור לנתונים הבאים</span>
+              <ChevronDown
+                className="h-4 w-4 transition-transform duration-300"
+                style={{ transform: danaExpanded ? "rotate(180deg)" : "rotate(0deg)", color: "hsl(262, 75%, 55%)" }}
+              />
+            </button>
+
+            {danaExpanded && (
+              <div className="space-y-2 mt-3" style={{ animation: "aha-item-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both" }}>
+                {[
+                  { Icon: ShieldCheck, label: "ביטוח ופנסיה", desc: "מסלקה פנסיונית והר הביטוח", category: "insurance" as const, route: "/c/insurance" },
+                  { Icon: PiggyBank, label: "הוצאות", desc: "חשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
+                  { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", category: "assets" as const, route: "/c/assets" },
+                  { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", category: "assets" as const, route: "/c/assets" },
+                ].map((item) => {
+                  const p = palettes[item.category];
+                  return (
+                    <button
+                      key={item.label}
+                      onClick={() => navigate(item.route)}
+                      className="w-full text-start rounded-xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
+                      style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
+                    >
+                      <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: p.gradient }}>
+                        <item.Icon className="h-4 w-4 text-white" />
+                      </span>
+                      <span className="flex-1 min-w-0">
+                        <span className="block text-[12.5px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>{item.label}</span>
+                        <span className="block text-[10.5px]" style={{ color: "hsl(230, 15%, 50%)" }}>{item.desc}</span>
+                      </span>
+                      <Plus className="h-4 w-4 flex-shrink-0" style={{ color: "hsl(262, 75%, 55%)" }} />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
         ) : (
           <div
