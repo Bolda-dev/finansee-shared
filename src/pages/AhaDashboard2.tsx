@@ -408,6 +408,7 @@ const AhaDashboard2 = () => {
         <div className="grid grid-cols-2 gap-3">
           {centerCards.map((card) => {
             const p = palettes[card.category];
+            const isPension = card.label === "פנסיה";
             return (
               <div
                 key={card.label}
@@ -424,16 +425,41 @@ const AhaDashboard2 = () => {
                     <card.Icon className="h-4 w-4" style={{ color: p.solid }} />
                   </div>
                   <p className="text-[12px] font-semibold" style={{ color: "hsl(250, 40%, 20%)" }}>{card.label}</p>
+                  {isPension && (
+                    <span
+                      className="mr-auto text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1"
+                      style={{ background: "hsl(148, 55%, 92%)", color: "hsl(150, 70%, 28%)" }}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(150, 70%, 35%)" }} />
+                      מחובר
+                    </span>
+                  )}
                 </div>
-                <p className="font-extrabold text-base mb-2" style={{ color: "hsl(230, 14%, 60%)" }}>—</p>
-                <button
-                  onClick={() => navigate("/c")}
-                  className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-semibold flex items-center justify-center gap-1 transition-colors"
-                  style={{ background: "transparent", color: p.solid, border: `1px solid ${p.solid}` }}
-                >
-                  <Plus className="h-3 w-3" />
-                  חיבור לנתונים
-                </button>
+                {isPension ? (
+                  <>
+                    <p className="font-extrabold text-base mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>₪1,233,500</p>
+                    <p className="text-[10px] mb-2" style={{ color: "hsl(230, 14%, 50%)" }}>צפי קצבה ₪9,069/חודש</p>
+                    <button
+                      onClick={() => navigate("/c/assets")}
+                      className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-semibold flex items-center justify-center gap-1 text-white transition-transform active:scale-[0.97]"
+                      style={{ background: p.gradient, boxShadow: p.shadow }}
+                    >
+                      צפייה בפרטים
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="font-extrabold text-base mb-2" style={{ color: "hsl(230, 14%, 60%)" }}>—</p>
+                    <button
+                      onClick={() => navigate("/c")}
+                      className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-semibold flex items-center justify-center gap-1 transition-colors"
+                      style={{ background: "transparent", color: p.solid, border: `1px solid ${p.solid}` }}
+                    >
+                      <Plus className="h-3 w-3" />
+                      חיבור לנתונים
+                    </button>
+                  </>
+                )}
               </div>
             );
           })}
