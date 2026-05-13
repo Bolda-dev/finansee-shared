@@ -648,75 +648,36 @@ const AhaDashboard2 = () => {
                 </div>
               )}
 
-              {/* Credit consents */}
+              {/* Credit consent (single step) */}
               {stage === "creditReport" && (creditStep === 1 || creditStep === 2) && (
                 <div className="space-y-3">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "hsl(230, 20%, 93%)" }}>
-                      <div
-                        className="h-full rounded-full"
-                        style={{
-                          width: `${(creditStep / 2) * 100}%`,
-                          background: "linear-gradient(90deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%))",
-                          transition: "width 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
-                        }}
-                      />
-                    </div>
-                    <span className="text-[10.5px] font-bold whitespace-nowrap" style={{ color: "hsl(250, 40%, 20%)" }}>
-                      שלב {creditStep}/2
-                    </span>
-                  </div>
+                  <ConsentAnnex
+                    icon={<PiggyBank className="h-6 w-6" style={{ color: "hsl(220, 85%, 50%)" }} />}
+                    iconBg="hsl(220, 85%, 94%)"
+                    title="אישור לדוח אשראי - אשראי ובנק"
+                    subtitle="לניתוח פיננסי מלא נצטרך גישה לדוח האשראי שלך"
+                    bullets={[
+                      "זיהוי כל החשבונות, הפיקדונות וההשקעות שלך",
+                      "מיפוי הלוואות, משכנתאות ומסגרות פעילות",
+                      "אסטרטגיות לשיפור ציון אשראי וניהול אופטימלי",
+                    ]}
+                    consentText="המידע מוצפן ומאובטח"
+                    checked={consents.creditAssets}
+                    onToggle={() => setConsents((c) => ({ creditAssets: !c.creditAssets, creditLiab: !c.creditAssets }))}
+                  />
 
-                  {creditStep === 1 && (
-                    <ConsentAnnex
-                      icon={<TrendingUp className="h-6 w-6" style={{ color: "hsl(178, 70%, 32%)" }} />}
-                      iconBg="hsl(176, 55%, 92%)"
-                      title="אישור לדוח אשראי - נכסים"
-                      subtitle="לניתוח פיננסי מלא נצטרך גישה לדוח האשראי שלך"
-                      bullets={[
-                        "זיהוי כל החשבונות והפיקדונות שלך",
-                        "מיפוי השקעות וקרנות פעילות",
-                        "ניהול אופטימלי של הנכסים",
-                      ]}
-                      consentText="המידע מוצפן ומאובטח"
-                      checked={consents.creditAssets}
-                      onToggle={() => setConsents((c) => ({ ...c, creditAssets: !c.creditAssets }))}
-                    />
-                  )}
-                  {creditStep === 2 && (
-                    <ConsentAnnex
-                      icon={<TrendingDown className="h-6 w-6" style={{ color: "hsl(220, 85%, 55%)" }} />}
-                      iconBg="hsl(220, 85%, 94%)"
-                      title="אישור לדוח אשראי - התחייבויות"
-                      subtitle="כדי להציג מצב מלא נצטרך לראות גם את ההתחייבויות"
-                      bullets={[
-                        "זיהוי הלוואות ומשכנתאות פעילות",
-                        "אסטרטגיות לשיפור ציון אשראי",
-                        "ניהול אופטימלי של מסגרות",
-                      ]}
-                      consentText="המידע מוצפן ומאובטח"
-                      checked={consents.creditLiab}
-                      onToggle={() => setConsents((c) => ({ ...c, creditLiab: !c.creditLiab }))}
-                    />
-                  )}
-
-                  {(() => {
-                    const valid = creditStep === 1 ? consents.creditAssets : consents.creditLiab;
-                    return (
-                      <button
-                        onClick={() => setCreditStep((s) => (s === 1 ? 2 : 3))}
-                        disabled={!valid}
-                        className="w-full rounded-full py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
-                        style={{
-                          background: valid ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
-                          boxShadow: valid ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
-                          opacity: valid ? 1 : 0.5,
-                        }}
-                      >
-                        {creditStep === 2 ? "סיים והתחל איסוף" : "המשך"}
-                      </button>
-                    );
-                  })()}
+                  <button
+                    onClick={() => setCreditStep(3)}
+                    disabled={!consents.creditAssets}
+                    className="w-full rounded-full py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
+                    style={{
+                      background: consents.creditAssets ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
+                      boxShadow: consents.creditAssets ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
+                      opacity: consents.creditAssets ? 1 : 0.5,
+                    }}
+                  >
+                    סיים והתחל איסוף
+                  </button>
                 </div>
               )}
 
