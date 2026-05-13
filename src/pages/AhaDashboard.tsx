@@ -396,6 +396,7 @@ const AhaDashboard = () => {
                   border: "1px solid hsl(230, 20%, 92%)",
                   boxShadow: "0 2px 10px hsla(250, 30%, 25%, 0.04)",
                   minHeight: "138px",
+                  animation: `aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${ccDelay}s both`,
                 }}
               >
                 <div className="flex items-center gap-2 mb-2">
