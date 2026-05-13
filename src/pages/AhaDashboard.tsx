@@ -252,21 +252,20 @@ const AhaDashboard = () => {
         @keyframes aha-tip-glow {
           0%, 100% {
             box-shadow:
-              0 0 0 0 hsla(262, 75%, 58%, 0.55),
-              0 10px 24px hsla(250, 40%, 25%, 0.18);
+              0 0 6px 1px hsla(220, 85%, 65%, 0.35),
+              0 8px 20px hsla(250, 40%, 25%, 0.12);
           }
           50% {
             box-shadow:
-              0 0 0 10px hsla(262, 75%, 58%, 0),
-              0 0 24px 4px hsla(220, 85%, 60%, 0.5),
-              0 12px 30px hsla(250, 40%, 25%, 0.22);
+              0 0 28px 5px hsla(220, 85%, 65%, 0.22),
+              0 12px 32px hsla(250, 40%, 25%, 0.18);
           }
         }
         .aha-tip-wrap {
           background: white;
           border-radius: 18px;
-          border: 1.5px solid hsl(220, 85%, 65%);
-          animation: aha-tip-bob 2.6s ease-in-out infinite, aha-tip-glow 2.2s ease-in-out infinite;
+          border: 0.5px solid hsla(220, 85%, 65%, 0.35);
+          animation: aha-tip-bob 2.6s ease-in-out infinite, aha-tip-glow 2.6s ease-in-out infinite;
         }
       `}</style>
 
