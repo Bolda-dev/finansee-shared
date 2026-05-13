@@ -54,7 +54,7 @@ export const WelcomeSlideTwo = () => {
         className="text-[27px] font-extrabold tracking-tight text-center mt-5 mb-2 leading-[1.15]"
         style={{ color: "hsl(250, 50%, 10%)" }}
       >
-        השווי האמיתי שלך
+        השווי האמיתי שלך (נתונים להדגמה)
         <br />
         <span className="ws2-shimmer-text">חשוף תוך דקה</span>
       </h1>
@@ -192,7 +192,7 @@ const DanaHero = () => {
           }}
         >
           <p className="text-[10px] font-medium text-center mb-0.5" style={{ color: "hsl(250, 22%, 50%)" }}>
-            השווי האמיתי שלך
+            השווי האמיתי שלך (נתונים להדגמה)
           </p>
           <p
             className="text-[20px] font-extrabold text-center leading-none"
