@@ -78,7 +78,7 @@ export const SignupShell = ({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col">{children}</div>
+      <div className="relative z-10 flex-1 flex flex-col pt-14">{children}</div>
 
       {/* Pagination + bottom CTA */}
       <div className="relative z-10 px-5 pb-8 pt-4 shrink-0">
