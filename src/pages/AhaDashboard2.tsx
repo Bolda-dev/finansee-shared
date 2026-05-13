@@ -347,9 +347,9 @@ const AhaDashboard2 = () => {
                 {danaExpanded && (
                   <div className="space-y-2 mt-3">
                     {[
-                      { Icon: PiggyBank, label: "הוצאות", desc: "חשבון בנק וכרטיסי אשראי" },
-                      { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע" },
-                      { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים" },
+                      { Icon: PiggyBank, label: "אשראי ובנק", desc: "חשבון בנק וכרטיסי אשראי", gradient: palettes.liabilities.gradient },
+                      { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", gradient: palettes.assets.gradient },
+                      { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", gradient: palettes.assets.gradient },
                     ].map((item) => (
                       <button
                         key={item.label}
@@ -357,7 +357,7 @@ const AhaDashboard2 = () => {
                         className="w-full text-start rounded-xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
                         style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
                       >
-                        <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: insuranceP.gradient }}>
+                        <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: item.gradient }}>
                           <item.Icon className="h-4 w-4 text-white" />
                         </span>
                         <span className="flex-1 min-w-0">
