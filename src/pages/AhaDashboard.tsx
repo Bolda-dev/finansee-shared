@@ -768,17 +768,13 @@ const AhaDashboard = () => {
                               <Sparkles className="h-2.5 w-2.5" /> התובנה הראשונה שלך
                             </span>
                           </div>
-                          <p className="text-[16px] font-extrabold leading-tight mb-1.5" style={{ color: "hsl(258, 55%, 20%)" }}>
+                          <p className="text-[20px] font-extrabold leading-tight mb-1" style={{ color: "hsl(258, 55%, 18%)" }}>
                             ביטוח חיים כפול
                           </p>
-                          <p className="text-[22px] font-extrabold tracking-tight leading-none mb-2" style={{
-                            background: "linear-gradient(110deg, hsl(258, 72%, 45%), hsl(275, 78%, 55%))",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                          }}>
-                            חיסכון ₪2,000 בשנה
+                          <p className="text-[13px] font-bold leading-tight mb-1" style={{ color: "hsl(258, 50%, 35%)" }}>
+                            חיסכון של <span className="text-[15px] font-extrabold" style={{ color: "hsl(265, 75%, 45%)" }}>₪2,000</span> בשנה
                           </p>
-                          <p className="text-[11.5px] leading-snug mb-3" style={{ color: "hsl(258, 30%, 32%)" }}>
+                          <p className="text-[11.5px] leading-snug mb-3" style={{ color: "hsl(258, 25%, 38%)" }}>
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
