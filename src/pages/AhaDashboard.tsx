@@ -398,10 +398,7 @@ const AhaDashboard = () => {
           cursor: pointer;
         }
         .aha-tip-title {
-          background: linear-gradient(135deg, hsl(262, 75%, 50%), hsl(220, 85%, 55%), hsl(178, 70%, 45%));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: hsl(250, 50%, 10%);
         }
       `}</style>
 
