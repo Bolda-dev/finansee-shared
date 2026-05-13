@@ -1128,7 +1128,7 @@ const AhaDashboard = () => {
                       {showInsight && (
                         <div className="flex justify-center mt-3">
                           <button
-                            onClick={() => { setInsuranceUpgraded(true); setChatOpen(false); }}
+                            onClick={() => { setInsuranceUpgraded(true); navigate("/aha2"); }}
                             className="text-[12.5px] font-bold py-1.5 px-2 focus:outline-none"
                             style={{ color: "hsl(262, 75%, 50%)" }}
                           >
