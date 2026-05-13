@@ -644,7 +644,7 @@ const AhaDashboard = () => {
                     </div>
 
                     <div
-                      className="w-full rounded-xl py-3 text-center text-[14px] font-extrabold text-white flex items-center justify-center gap-1.5"
+                      className="w-full rounded-full py-3 text-center text-[14px] font-extrabold text-white flex items-center justify-center gap-1.5"
                       style={{
                         background: "hsl(250, 40%, 12%)",
                         boxShadow: "0 8px 18px -8px hsla(250, 40%, 12%, 0.55)",
