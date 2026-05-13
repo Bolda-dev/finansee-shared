@@ -168,12 +168,7 @@ const AhaDashboard = () => {
         </p>
         <p
           className="font-extrabold tracking-tight text-4xl mb-1"
-          style={{
-            background:
-              "linear-gradient(110deg, hsl(262, 75%, 45%) 0%, hsl(220, 85%, 50%) 50%, hsl(178, 70%, 38%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
+          style={{ color: "hsl(250, 50%, 10%)" }}
         >
           ₪450K - ₪1.2M
         </p>
@@ -403,10 +398,7 @@ const AhaDashboard = () => {
           cursor: pointer;
         }
         .aha-tip-title {
-          background: linear-gradient(135deg, hsl(262, 75%, 50%), hsl(220, 85%, 55%), hsl(178, 70%, 45%));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: hsl(250, 50%, 10%);
         }
       `}</style>
 
@@ -423,7 +415,7 @@ const AhaDashboard = () => {
               <div className="flex items-start gap-2 rounded-[18px] px-3.5 py-3 max-w-[300px]">
                 <div className="flex-1 min-w-0">
                   <p className="text-[13px] font-extrabold aha-tip-title mb-1">
-                    איזה כיף להכיר. טוב שהצטרפת!
+                    👋 איזה כיף להכיר. טוב שהצטרפת!
                   </p>
                   <p className="text-[11.5px] leading-snug" style={{ color: "hsl(250, 30%, 30%)" }}>
                     האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
