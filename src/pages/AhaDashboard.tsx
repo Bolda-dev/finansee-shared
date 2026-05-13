@@ -821,22 +821,22 @@ const AhaDashboard = () => {
                     );
                   })()}
 
-                  {/* === STEP 5/9: collecting animation === */}
+                  {/* === STEP 5/9: chat skeleton loader === */}
                   {(collectStep === 5 || collectStep === 9) && (
-                    <div className="rounded-2xl p-6 flex flex-col items-center gap-3" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
-                      <div className="relative w-16 h-16 flex items-center justify-center">
+                    <div className="space-y-3" dir="rtl">
+                      {/* skeleton chat bubble */}
+                      <div className="flex items-end gap-2">
                         <div
-                          className="absolute inset-0 rounded-full"
-                          style={{
-                            background: "conic-gradient(from 0deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%), hsl(178, 70%, 45%), hsl(262, 75%, 55%))",
-                            animation: "spin 1.2s linear infinite",
-                          }}
+                          className="w-9 h-9 rounded-full flex-shrink-0 chat-skeleton"
                         />
-                        <div className="absolute inset-1.5 rounded-full bg-white flex items-center justify-center">
-                          <Loader2 className="h-6 w-6 animate-spin" style={{ color: "hsl(262, 75%, 55%)" }} />
+                        <div className="rounded-2xl rounded-br-md px-3.5 py-3 max-w-[85%] flex-1 space-y-2" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
+                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "82%" }} />
+                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "62%" }} />
+                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "45%" }} />
                         </div>
                       </div>
-                      <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>
+                      {/* status text */}
+                      <p className="text-[12px] text-center font-medium" style={{ color: "hsl(230, 15%, 50%)" }}>
                         {collectStep === 5 && collectingMsg === 0 && "מתחברת לרשות שוק ההון..."}
                         {collectStep === 5 && collectingMsg === 1 && "מאמתת את הזהות שלך..."}
                         {collectStep === 5 && collectingMsg === 2 && "מושכת את הפוליסות שלך..."}
@@ -844,6 +844,16 @@ const AhaDashboard = () => {
                         {collectStep === 9 && collectingMsg === 1 && "מזהה נכסים והתחייבויות..."}
                         {collectStep === 9 && collectingMsg === 2 && "מסכמת את התמונה הפיננסית..."}
                       </p>
+                      <style>{`
+                        @keyframes chat-skel-pulse {
+                          0%, 100% { background-color: hsl(230, 20%, 93%); }
+                          50% { background-color: hsl(230, 20%, 87%); }
+                        }
+                        .chat-skeleton {
+                          background: hsl(230, 20%, 92%);
+                          animation: chat-skel-pulse 1.4s ease-in-out infinite;
+                        }
+                      `}</style>
                     </div>
                   )}
 
