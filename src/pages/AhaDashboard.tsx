@@ -1094,19 +1094,20 @@ const AhaDashboard = () => {
                           onClick={() => setCollectStep(7)}
                           className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] mt-2"
                           style={{
-                            background: palettes.assets.gradient,
-                            boxShadow: "0 12px 28px -8px hsla(176, 70%, 32%, 0.5)",
+                            background: "white",
+                            border: "1.5px solid hsl(176, 50%, 82%)",
+                            boxShadow: "0 8px 22px -10px hsla(176, 70%, 32%, 0.28)",
                             animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both",
                             opacity: 0,
                             animationFillMode: "forwards",
                           }}
                         >
-                          <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "hsla(0,0%,100%,0.22)" }}>
+                          <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: palettes.assets.gradient }}>
                             <TrendingUp className="h-5 w-5 text-white" />
                           </span>
                           <span className="flex-1 min-w-0">
-                            <span className="block text-[14px] font-extrabold text-white mb-0.5">חיבור לנכסים</span>
-                            <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.9)" }}>בנק, השקעות ונדל״ן · גילוי השווי האמיתי</span>
+                            <span className="block text-[14px] font-extrabold mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>חיבור לנכסים</span>
+                            <span className="block text-[11px]" style={{ color: "hsl(250, 22%, 50%)" }}>בנק, השקעות ונדל״ן · גילוי השווי האמיתי</span>
                           </span>
                         </button>
                       )}
