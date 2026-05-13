@@ -506,7 +506,7 @@ const AhaDashboard2 = () => {
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
-          <span className="relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
+          <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
               <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
             </span>
@@ -520,8 +520,8 @@ const AhaDashboard2 = () => {
           >
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
-          <span className="relative w-9 h-9 rounded-full flex-shrink-0">
-            <span className="flex w-full h-full rounded-full items-center justify-center" style={{ background: insuranceP.gradient }}>
+          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
+            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
               <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
             </span>
           </span>
@@ -760,7 +760,12 @@ const AhaDashboard2 = () => {
                     return (
                       <button
                         key={opt.id}
-                        onClick={() => setStyleAnswers((s) => ({ ...s, [styleStep]: opt.id }))}
+                        onClick={() => {
+                          setStyleAnswers((s) => ({ ...s, [styleStep]: opt.id }));
+                          if (styleStep < 2) {
+                            setTimeout(() => setStyleStep((s) => s + 1), 220);
+                          }
+                        }}
                         className="w-full text-start rounded-2xl p-3.5 flex items-center gap-3 transition-all active:scale-[0.98]"
                         style={{
                           background: selected
@@ -790,25 +795,33 @@ const AhaDashboard2 = () => {
                     );
                   })}
 
-                  <button
-                    onClick={() => {
-                      if (styleStep < 2) {
-                        setStyleStep((s) => s + 1);
-                      } else {
-                        setCompleted85(true);
-                        setChatOpen(false);
-                      }
-                    }}
-                    disabled={!styleAnswers[styleStep]}
-                    className="w-full rounded-full py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
-                    style={{
-                      background: styleAnswers[styleStep] ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
-                      boxShadow: styleAnswers[styleStep] ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
-                      opacity: styleAnswers[styleStep] ? 1 : 0.5,
-                    }}
-                  >
-                    {styleStep === 2 ? "סיום" : "המשך"}
-                  </button>
+                  {styleStep === 2 && (
+                    <button
+                      onClick={() => { setCompleted85(true); setChatOpen(false); }}
+                      disabled={!styleAnswers[styleStep]}
+                      className="w-full rounded-full py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
+                      style={{
+                        background: styleAnswers[styleStep] ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
+                        boxShadow: styleAnswers[styleStep] ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
+                        opacity: styleAnswers[styleStep] ? 1 : 0.5,
+                      }}
+                    >
+                      סיום
+                    </button>
+                  )}
+
+                  {styleStep > 0 && (
+                    <div className="flex justify-center pt-1">
+                      <button
+                        onClick={() => setStyleStep((s) => Math.max(0, s - 1))}
+                        className="text-[12px] font-medium py-1.5 px-2 focus:outline-none flex items-center gap-1"
+                        style={{ color: "hsl(230, 15%, 50%)" }}
+                      >
+                        <ArrowLeft className="h-3 w-3 rotate-180" />
+                        שאלה קודמת
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
