@@ -732,24 +732,46 @@ const AhaDashboard = () => {
                   {/* === STEP 6: result + insight === */}
                   {collectStep === 6 && (
                     <>
-                      <ResultRow
-                        title="הר הביטוח"
-                        subtitle="מחובר · 7 פוליסות נמצאו"
-                        badgeText="מחובר"
-                        badgeBg="hsl(150, 65%, 92%)"
-                        badgeColor="hsl(150, 70%, 28%)"
-                        iconGradient="linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
-                        borderColor="hsl(150, 60%, 70%)"
-                      />
-                      <ResultRow
-                        title="מסלקה פנסיונית"
-                        subtitle="מתוזמן · קרנות, גמל, השתלמות"
-                        badgeText="זמין תוך שעתיים"
-                        badgeBg="hsl(45, 95%, 88%)"
-                        badgeColor="hsl(35, 90%, 25%)"
-                        iconGradient="linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
-                        borderColor="hsl(150, 60%, 70%)"
-                      />
+                      {/* 3-bullet progress checklist */}
+                      <div className="rounded-2xl p-4" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)", boxShadow: "0 4px 14px hsla(250, 30%, 25%, 0.05)" }}>
+                        <ul className="space-y-3">
+                          {[
+                            "קיבלנו אישור לגשת להר הביטוח ומסלקה",
+                            "נתוני הביטוח שלך מוכנים לצפייה",
+                            "המידע מעודכן באופן אוטומטי כל חודש",
+                          ].map((t, i) => (
+                            <li key={i} className="flex items-center gap-2.5">
+                              <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "hsl(220, 85%, 55%)" }}>
+                                <Check className="h-3 w-3 text-white" strokeWidth={3.5} />
+                              </span>
+                              <span className="text-[12.5px] leading-snug text-end flex-1" style={{ color: "hsl(250, 35%, 22%)" }}>
+                                {t}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Insurance card — purple gradient, connected */}
+                      <button
+                        onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
+                        className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
+                        style={{
+                          background: palettes.insurance.gradient,
+                          boxShadow: "0 12px 28px -8px hsla(262, 72%, 50%, 0.55)",
+                        }}
+                      >
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsla(0,0%,100%,0.95)", color: "hsl(150, 70%, 28%)" }}>
+                          <Check className="h-2.5 w-2.5" strokeWidth={4} /> הכל תקין
+                        </span>
+                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "hsla(0,0%,100%,0.22)" }}>
+                          <ShieldCheck className="h-5 w-5 text-white" />
+                        </span>
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-[14px] font-extrabold text-white mb-0.5">ביטוח</span>
+                          <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.9)" }}>7 פוליסות מחוברות · עדכון אוטומטי</span>
+                        </span>
+                      </button>
 
                       {showInsight && (
                         <div
@@ -788,6 +810,45 @@ const AhaDashboard = () => {
                             חסוך ₪2,000 בקליק
                           </button>
                         </div>
+                      )}
+
+                      {/* Dana follow-up: connect assets */}
+                      {showInsight && (
+                        <div className="flex items-end gap-2 mt-4" style={{ animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both", opacity: 0, animationFillMode: "forwards" }}>
+                          <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
+                            <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+                          </div>
+                          <div className="rounded-2xl rounded-br-md px-3.5 py-2.5 max-w-[85%]" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
+                            <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                              מעולה! עכשיו בוא נחבר את הנכסים שלך 💎
+                            </p>
+                            <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                              חיבור לבנק ולתיקי ההשקעות יחשוף את השווי האמיתי שלך.
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      {showInsight && (
+                        <button
+                          onClick={() => { setChatOpen(false); navigate("/c/assets"); }}
+                          className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] mt-2"
+                          style={{
+                            background: palettes.assets.gradient,
+                            boxShadow: "0 12px 28px -8px hsla(176, 70%, 32%, 0.5)",
+                            animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both",
+                            opacity: 0,
+                            animationFillMode: "forwards",
+                          }}
+                        >
+                          <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "hsla(0,0%,100%,0.22)" }}>
+                            <TrendingUp className="h-5 w-5 text-white" />
+                          </span>
+                          <span className="flex-1 min-w-0">
+                            <span className="block text-[14px] font-extrabold text-white mb-0.5">חיבור לנכסים</span>
+                            <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.9)" }}>בנק, השקעות ונדל״ן · גילוי השווי האמיתי</span>
+                          </span>
+                        </button>
                       )}
                     </>
                   )}
