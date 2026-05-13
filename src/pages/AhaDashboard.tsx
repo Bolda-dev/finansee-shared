@@ -1170,7 +1170,9 @@ const ConsentAnnex = ({
   consentText: string;
   checked: boolean;
   onToggle: () => void;
-}) => (
+}) => {
+  const [expanded, setExpanded] = useState(false);
+  return (
   <div dir="rtl" className="space-y-3">
     {/* Header — flat info */}
     <div className="flex items-center gap-3 px-1">
@@ -1190,32 +1192,49 @@ const ConsentAnnex = ({
       </div>
     </div>
 
-    {/* Info — flat, no card */}
-    <div className="px-1">
-      <div className="flex items-center justify-between mb-1.5">
-        <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: "hsl(230, 15%, 45%)" }}>
+    {/* Collapsible: details + full document */}
+    <div className="rounded-2xl overflow-hidden" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        className="w-full flex items-center justify-between px-3.5 py-2.5"
+        aria-expanded={expanded}
+      >
+        <span className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>
           מה כולל הנספח
-        </p>
-        <button
-          className="text-[10.5px] font-semibold inline-flex items-center gap-1 underline-offset-2 hover:underline"
-          style={{ color: "hsl(220, 85%, 50%)" }}
-        >
-          קרא את המסמך המלא
-          <ArrowLeft className="h-3 w-3" />
-        </button>
-      </div>
-      <ul className="space-y-1">
-        {bullets.map((b, i) => (
-          <li
-            key={i}
-            className="text-[11.5px] leading-snug flex gap-1.5 text-right"
-            style={{ color: "hsl(250, 25%, 35%)" }}
+        </span>
+        <ChevronDown
+          className="h-4 w-4 transition-transform"
+          style={{
+            color: "hsl(230, 15%, 45%)",
+            transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+          }}
+        />
+      </button>
+      {expanded && (
+        <div className="px-3.5 pb-3.5 pt-0">
+          <ul className="space-y-1 mb-2.5">
+            {bullets.map((b, i) => (
+              <li
+                key={i}
+                className="text-[11.5px] leading-snug flex gap-1.5 text-right"
+                style={{ color: "hsl(250, 25%, 35%)" }}
+              >
+                <span style={{ color: "hsl(262, 75%, 55%)" }}>•</span>
+                <span className="flex-1">{b}</span>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="text-[11px] font-semibold inline-flex items-center gap-1 underline-offset-2 hover:underline"
+            style={{ color: "hsl(220, 85%, 50%)" }}
           >
-            <span style={{ color: "hsl(262, 75%, 55%)" }}>•</span>
-            <span className="flex-1">{b}</span>
-          </li>
-        ))}
-      </ul>
+            קרא את המסמך המלא
+            <ArrowLeft className="h-3 w-3" />
+          </button>
+        </div>
+      )}
     </div>
 
     {/* Action — the only real card */}
@@ -1249,7 +1268,8 @@ const ConsentAnnex = ({
       </div>
     </button>
   </div>
-);
+  );
+};
 
 const ResultRow = ({
   title,
