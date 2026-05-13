@@ -345,12 +345,7 @@ const AhaDashboard = () => {
                   minHeight: "168px",
                 }}
               >
-                <span
-                  className="absolute top-2 left-2 w-6 h-6 rounded-full flex items-center justify-center"
-                  style={{ background: "hsl(230, 25%, 95%)" }}
-                >
-                  <Lock className="h-3 w-3" style={{ color: mutedIconColor }} />
-                </span>
+
 
                 <div
                   className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
