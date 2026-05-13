@@ -333,7 +333,68 @@ const AhaDashboard = () => {
         </button>
       </div>
 
-      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      {chatOpen && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setChatOpen(false)} />
+          <div
+            className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
+            style={{ animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both" }}
+          >
+            <div className="flex justify-center pt-3 pb-2">
+              <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 88%)" }} />
+            </div>
+            <div className="px-5 pt-2 pb-6">
+              <div className="flex items-end gap-2 mb-4">
+                <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
+                  <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+                </div>
+                <div className="rounded-2xl rounded-br-md px-3.5 py-2.5 max-w-[85%]" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
+                  <p className="text-[13px] leading-relaxed font-semibold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                    מה תרצה לחבר תחילה?
+                  </p>
+                  <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                    אפשר להתחיל עם הר הביטוח ומסלקת אשראי, או עם הוצאות והשקעות.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-2.5">
+                {[
+                  { label: "הר הביטוח ומסלקת אשראי", desc: "חיבור מהיר לכל הפוליסות והאשראי", category: "insurance" as const, route: "/c/insurance" },
+                  { label: "הוצאות", desc: "חיבור לחשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
+                  { label: "השקעות", desc: "חיבור לתיקי השקעות וקרנות", category: "assets" as const, route: "/c/assets" },
+                ].map((opt) => {
+                  const p = palettes[opt.category];
+                  return (
+                    <button
+                      key={opt.label}
+                      onClick={() => { setChatOpen(false); navigate(opt.route); }}
+                      className="w-full text-start rounded-2xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
+                      style={{ background: "white", border: `1.5px solid ${p.solid}`, boxShadow: p.shadow }}
+                    >
+                      <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: p.gradient }}>
+                        <Plus className="h-4 w-4 text-white" />
+                      </span>
+                      <span className="flex-1 min-w-0">
+                        <span className="block text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{opt.label}</span>
+                        <span className="block text-[11px]" style={{ color: "hsl(230, 15%, 50%)" }}>{opt.desc}</span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => setChatOpen(false)}
+                className="w-full mt-4 text-[12px] font-medium py-2"
+                style={{ color: "hsl(230, 15%, 50%)" }}
+              >
+                אולי מאוחר יותר
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
