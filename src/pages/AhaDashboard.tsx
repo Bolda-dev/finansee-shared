@@ -875,44 +875,14 @@ const AhaDashboard = () => {
                       {/* Dana avatar + bubble skeleton */}
                       <div className="flex items-end gap-2">
                         <div className="w-9 h-9 rounded-full flex-shrink-0 chat-shimmer" />
-                        <div
-                          className="rounded-2xl rounded-br-md px-3.5 py-3 max-w-[85%] flex-1 space-y-2.5"
-                          style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
-                        >
-                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "82%" }} />
-                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "62%" }} />
-                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "45%" }} />
-                        </div>
-                      </div>
-
-                      {/* User bubble skeleton */}
-                      <div className="flex items-end gap-2 justify-end">
-                        <div
-                          className="rounded-2xl rounded-bl-md px-3.5 py-3 max-w-[70%] space-y-2.5"
-                          style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
-                        >
-                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "90%" }} />
-                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "55%" }} />
-                        </div>
+                        <div className="flex-1 h-16 rounded-2xl rounded-br-md chat-shimmer" style={{ maxWidth: "85%" }} />
                       </div>
 
                       {/* Card skeleton */}
-                      <div
-                        className="rounded-2xl p-3 flex items-center gap-3"
-                        style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)" }}
-                      >
-                        <div className="w-10 h-10 rounded-xl flex-shrink-0 chat-shimmer" />
-                        <div className="flex-1 space-y-2">
-                          <div className="h-3 rounded-full chat-shimmer" style={{ width: "60%" }} />
-                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "80%" }} />
-                        </div>
-                      </div>
-
-                      {/* CTA button skeleton */}
-                      <div className="h-11 rounded-full chat-shimmer w-full" />
+                      <div className="w-full h-20 rounded-2xl chat-shimmer" />
 
                       {/* status text */}
-                      <p className="text-[12px] text-center font-medium" style={{ color: "hsl(230, 15%, 50%)" }}>
+                      <p className="text-[12px] text-center font-medium pt-1" style={{ color: "hsl(230, 15%, 50%)" }}>
                         {collectStep === 5 && collectingMsg === 0 && "מתחברת לרשות שוק ההון..."}
                         {collectStep === 5 && collectingMsg === 1 && "מאמתת את הזהות שלך..."}
                         {collectStep === 5 && collectingMsg === 2 && "מושכת את הפוליסות שלך..."}
@@ -1147,7 +1117,7 @@ const AhaDashboard = () => {
                             }}
                           >
                             <span className="relative z-[1] flex items-center gap-1.5">
-                              <Zap className="h-3.5 w-3.5" />
+                              <span className="text-[14px] leading-none">⚡</span>
                               חסוך ₪2,000 בקליק
                             </span>
                           </button>
@@ -1158,12 +1128,8 @@ const AhaDashboard = () => {
                         <div className="flex justify-center mt-3">
                           <button
                             onClick={() => { setInsuranceUpgraded(true); setChatOpen(false); }}
-                            className="text-[12.5px] font-bold py-2 px-5 rounded-full focus:outline-none transition-transform active:scale-[0.97]"
-                            style={{ 
-                              background: "hsl(48, 95%, 55%)", 
-                              color: "hsl(250, 40%, 8%)",
-                              boxShadow: "0 4px 14px -4px hsla(48, 95%, 40%, 0.35)",
-                            }}
+                            className="text-[12.5px] font-bold py-1.5 px-2 focus:outline-none"
+                            style={{ color: "hsl(262, 75%, 50%)" }}
                           >
                             לתובנות נוספות ←
                           </button>
