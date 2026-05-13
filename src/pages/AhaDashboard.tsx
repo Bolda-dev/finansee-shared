@@ -237,7 +237,6 @@ const AhaDashboard = () => {
             {danaExpanded && (
               <div className="space-y-2 mt-3" style={{ animation: "aha-item-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both" }}>
                 {[
-                  { Icon: ShieldCheck, label: "ביטוח ופנסיה", desc: "מסלקה פנסיונית והר הביטוח", category: "insurance" as const, route: "/c/insurance" },
                   { Icon: PiggyBank, label: "הוצאות", desc: "חשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
                   { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", category: "assets" as const, route: "/c/assets" },
                   { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", category: "assets" as const, route: "/c/assets" },
