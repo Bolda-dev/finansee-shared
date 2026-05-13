@@ -58,6 +58,7 @@ const App = () => (
               <Route path="/d/expenses" element={<ExpensesPage />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/aha" element={<AhaDashboard />} />
+              <Route path="/aha2" element={<AhaDashboard2 />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
