@@ -200,6 +200,7 @@ const AhaDashboard2 = () => {
                 border: "1px solid hsla(250, 50%, 92%, 0.5)",
               }}
               aria-label="תפריט"
+              onClick={handleBurgerClick}
             >
               <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
             </button>
