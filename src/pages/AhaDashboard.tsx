@@ -888,17 +888,45 @@ const AhaDashboard = () => {
                   {/* === STEP 5/9: chat skeleton loader === */}
                   {(collectStep === 5 || collectStep === 9) && (
                     <div className="space-y-3" dir="rtl">
-                      {/* skeleton chat bubble */}
+                      {/* Dana avatar + bubble skeleton */}
                       <div className="flex items-end gap-2">
+                        <div className="w-9 h-9 rounded-full flex-shrink-0 chat-shimmer" />
                         <div
-                          className="w-9 h-9 rounded-full flex-shrink-0 chat-skeleton"
-                        />
-                        <div className="rounded-2xl rounded-br-md px-3.5 py-3 max-w-[85%] flex-1 space-y-2" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
-                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "82%" }} />
-                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "62%" }} />
-                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "45%" }} />
+                          className="rounded-2xl rounded-br-md px-3.5 py-3 max-w-[85%] flex-1 space-y-2.5"
+                          style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
+                        >
+                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "82%" }} />
+                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "62%" }} />
+                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "45%" }} />
                         </div>
                       </div>
+
+                      {/* User bubble skeleton */}
+                      <div className="flex items-end gap-2 justify-end">
+                        <div
+                          className="rounded-2xl rounded-bl-md px-3.5 py-3 max-w-[70%] space-y-2.5"
+                          style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
+                        >
+                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "90%" }} />
+                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "55%" }} />
+                        </div>
+                      </div>
+
+                      {/* Card skeleton */}
+                      <div
+                        className="rounded-2xl p-3 flex items-center gap-3"
+                        style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)" }}
+                      >
+                        <div className="w-10 h-10 rounded-xl flex-shrink-0 chat-shimmer" />
+                        <div className="flex-1 space-y-2">
+                          <div className="h-3 rounded-full chat-shimmer" style={{ width: "60%" }} />
+                          <div className="h-2.5 rounded-full chat-shimmer" style={{ width: "80%" }} />
+                        </div>
+                      </div>
+
+                      {/* CTA button skeleton */}
+                      <div className="h-11 rounded-full chat-shimmer w-full" />
+
                       {/* status text */}
                       <p className="text-[12px] text-center font-medium" style={{ color: "hsl(230, 15%, 50%)" }}>
                         {collectStep === 5 && collectingMsg === 0 && "מתחברת לרשות שוק ההון..."}
@@ -909,13 +937,17 @@ const AhaDashboard = () => {
                         {collectStep === 9 && collectingMsg === 2 && "מסכמת את התמונה הפיננסית..."}
                       </p>
                       <style>{`
-                        @keyframes chat-skel-pulse {
-                          0%, 100% { background-color: hsl(230, 20%, 93%); }
-                          50% { background-color: hsl(230, 20%, 87%); }
+                        @keyframes chat-shimmer-anim {
+                          0% { background-position: -200% 0; }
+                          100% { background-position: 200% 0; }
                         }
-                        .chat-skeleton {
-                          background: hsl(230, 20%, 92%);
-                          animation: chat-skel-pulse 1.4s ease-in-out infinite;
+                        .chat-shimmer {
+                          background: linear-gradient(90deg,
+                            hsl(230, 25%, 93%) 0%,
+                            hsl(230, 20%, 98%) 50%,
+                            hsl(230, 25%, 93%) 100%);
+                          background-size: 200% 100%;
+                          animation: chat-shimmer-anim 1.8s ease-in-out infinite;
                         }
                       `}</style>
                     </div>
@@ -1142,8 +1174,12 @@ const AhaDashboard = () => {
                         <div className="flex justify-center mt-3">
                           <button
                             onClick={() => { setInsuranceUpgraded(true); setChatOpen(false); }}
-                            className="text-[12.5px] font-bold py-1.5 px-2 focus:outline-none"
-                            style={{ color: "hsl(262, 75%, 50%)" }}
+                            className="text-[12.5px] font-bold py-2 px-5 rounded-full focus:outline-none transition-transform active:scale-[0.97]"
+                            style={{ 
+                              background: "hsl(48, 95%, 55%)", 
+                              color: "hsl(250, 40%, 8%)",
+                              boxShadow: "0 4px 14px -4px hsla(48, 95%, 40%, 0.35)",
+                            }}
                           >
                             לתובנות נוספות ←
                           </button>
