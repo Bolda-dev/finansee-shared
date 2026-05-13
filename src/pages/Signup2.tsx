@@ -176,10 +176,7 @@ const Signup2 = () => {
               "ניתוח מצב המשכנתא והלוואות",
               "איתור הזדמנויות לחיסכון חודשי",
             ]}
-            consentText="המידע מוצפן ומאובטח"
             socialProof="המשתמשים שלנו חסכו בממוצע ₪780 בחודש על המשכנתא"
-            checked={consents.credit}
-            onToggle={() => setConsents((c) => ({ ...c, credit: !c.credit }))}
           />
         );
       case 10:
