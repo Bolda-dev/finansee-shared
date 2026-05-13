@@ -138,10 +138,7 @@ const Signup2 = () => {
               "בדיקת דמי ניהול וחיסכון פוטנציאלי",
               "הצלבה מול ביטוחים קיימים",
             ]}
-            consentText="המידע מוצפן ומאובטח"
             socialProof="43% מהמשתמשים גילו כפל ביטוחים אחרי החיבור"
-            checked={consents.pension}
-            onToggle={() => setConsents((c) => ({ ...c, pension: !c.pension }))}
           />
         );
       case 4:
