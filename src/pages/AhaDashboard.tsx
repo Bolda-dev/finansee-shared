@@ -622,32 +622,45 @@ const AhaDashboard = () => {
                   {/* Primary CTA — clean white card with purple accent */}
                   <button
                     onClick={() => setChatStage("harBituach")}
-                    className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98]"
+                    className="w-full text-start rounded-2xl p-4 transition-transform active:scale-[0.98]"
                     style={{
                       background: "white",
                       border: "1.5px solid hsl(262, 60%, 88%)",
                       boxShadow: "0 8px 22px -10px hsla(262, 60%, 45%, 0.28)",
                     }}
                   >
-                    <span
-                      className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: palettes.insurance.gradient }}
+                    <div className="flex items-center gap-3 mb-3">
+                      <span
+                        className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
+                        style={{ background: palettes.insurance.gradient }}
+                      >
+                        <Zap className="h-5 w-5 text-white" />
+                      </span>
+                      <span className="flex-1 min-w-0">
+                        <span className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-[14px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>
+                            הר ביטוח + מסלקה
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold" style={{ background: "hsl(262, 75%, 95%)", color: "hsl(262, 75%, 45%)" }}>
+                            מומלץ
+                          </span>
+                        </span>
+                        <span className="block text-[11px] leading-snug" style={{ color: "hsl(250, 22%, 50%)" }}>
+                          חיבור אחד · כל הנתונים שלך
+                        </span>
+                      </span>
+                    </div>
+
+                    <div
+                      className="w-full rounded-xl py-3 text-center text-[14px] font-extrabold text-white flex items-center justify-center gap-1.5"
+                      style={{
+                        background: "hsl(250, 40%, 12%)",
+                        boxShadow: "0 8px 18px -8px hsla(250, 40%, 12%, 0.55)",
+                      }}
                     >
-                      <Zap className="h-5 w-5 text-white" />
-                    </span>
-                    <span className="flex-1 min-w-0">
-                      <span className="flex items-center gap-1.5 mb-0.5">
-                        <span className="text-[14px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>
-                          הר ביטוח + מסלקה
-                        </span>
-                        <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold" style={{ background: "hsl(262, 75%, 95%)", color: "hsl(262, 75%, 45%)" }}>
-                          מומלץ
-                        </span>
-                      </span>
-                      <span className="block text-[11px] leading-snug" style={{ color: "hsl(250, 22%, 50%)" }}>
-                        חיבור אחד · כל הנתונים שלך
-                      </span>
-                    </span>
+                      בוא נתחבר
+                      <ArrowLeft className="h-4 w-4" />
+                    </div>
                   </button>
 
                   {/* Secondary */}
