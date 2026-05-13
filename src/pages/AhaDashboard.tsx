@@ -694,48 +694,44 @@ const AhaDashboard = () => {
                       <p className="text-center text-[15px] font-extrabold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>פרטי תעודת זהות</p>
                       <p className="text-center text-[11px] mb-4" style={{ color: "hsl(230, 15%, 50%)" }}>נדרשים לאימות הזהות שלך</p>
 
-                      <label className="block text-[11px] font-bold text-end mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>מספר תעודת זהות</label>
+                      <label className="block text-[11px] font-bold text-right mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>מספר תעודת זהות</label>
                       <input
+                        dir="rtl"
                         type="text"
                         inputMode="numeric"
                         maxLength={9}
                         value={idNumber}
                         onChange={(e) => setIdNumber(e.target.value.replace(/\D/g, ""))}
                         placeholder="123456789"
-                        className="w-full text-center text-[15px] font-bold tracking-widest rounded-xl py-3 mb-3 focus:outline-none"
+                        className="w-full text-right text-[15px] font-bold tracking-widest rounded-xl py-3 px-3 mb-3 focus:outline-none"
                         style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
                       />
 
-                      <label className="block text-[11px] font-bold text-end mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>תאריך הוצאת תעודת זהות</label>
+                      <label className="block text-[11px] font-bold text-right mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>תאריך הוצאת תעודת זהות</label>
                       <input
+                        dir="rtl"
                         type="text"
                         value={idDate}
                         onChange={(e) => setIdDate(e.target.value)}
                         placeholder="dd/mm/yyyy"
-                        className="w-full text-end text-[14px] rounded-xl py-3 px-3 mb-3 focus:outline-none"
+                        className="w-full text-right text-[14px] rounded-xl py-3 px-3 mb-3 focus:outline-none"
                         style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
                       />
 
-                      <div className="flex items-center gap-2 my-3">
-                        <div className="flex-1 h-px" style={{ background: "hsl(230, 20%, 88%)" }} />
-                        <span className="text-[10.5px] font-medium" style={{ color: "hsl(230, 15%, 55%)" }}>או</span>
-                        <div className="flex-1 h-px" style={{ background: "hsl(230, 20%, 88%)" }} />
+                      <div className="flex items-center justify-between gap-2 mt-2">
+                        <span className="text-[10.5px]" style={{ color: "hsl(230, 15%, 55%)" }}>או מלא אוטומטית מצילום</span>
+                        <button
+                          onClick={() => setUsePhoto(!usePhoto)}
+                          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition-all active:scale-[0.97]"
+                          style={{
+                            border: `1px dashed ${usePhoto ? "hsl(262, 75%, 55%)" : "hsl(262, 50%, 70%)"}`,
+                            background: usePhoto ? "hsl(262, 75%, 96%)" : "transparent",
+                          }}
+                        >
+                          {usePhoto ? <Check className="h-3.5 w-3.5" strokeWidth={3} style={{ color: "hsl(262, 75%, 45%)" }} /> : <Camera className="h-3.5 w-3.5" style={{ color: "hsl(262, 75%, 45%)" }} />}
+                          <span className="text-[11.5px] font-bold" style={{ color: "hsl(262, 75%, 40%)" }}>צלם תעודה</span>
+                        </button>
                       </div>
-
-                      <button
-                        onClick={() => setUsePhoto(!usePhoto)}
-                        className="w-full rounded-2xl py-3 flex flex-col items-center gap-1.5 transition-all active:scale-[0.99]"
-                        style={{
-                          border: `1.5px dashed ${usePhoto ? "hsl(262, 75%, 55%)" : "hsl(262, 50%, 75%)"}`,
-                          background: usePhoto ? "hsl(262, 75%, 96%)" : "transparent",
-                        }}
-                      >
-                        <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "hsl(262, 75%, 92%)" }}>
-                          {usePhoto ? <Check className="h-4 w-4" strokeWidth={3} style={{ color: "hsl(262, 75%, 45%)" }} /> : <Camera className="h-4 w-4" style={{ color: "hsl(262, 75%, 45%)" }} />}
-                        </span>
-                        <span className="text-[12.5px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>צלם תעודת זהות</span>
-                        <span className="text-[10.5px]" style={{ color: "hsl(230, 15%, 50%)" }}>נמלא את הפרטים אוטומטית</span>
-                      </button>
                     </div>
                   )}
 
