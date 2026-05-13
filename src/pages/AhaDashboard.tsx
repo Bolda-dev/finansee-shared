@@ -562,7 +562,7 @@ const AhaDashboard = () => {
                 </button>
               ) : <span />}
               <button
-                onClick={() => setChatOpen(false)}
+                onClick={() => { if (showInsight) setInsuranceUpgraded(true); setChatOpen(false); }}
                 className="w-7 h-7 rounded-full flex items-center justify-center"
                 style={{ background: "hsl(230, 25%, 95%)" }}
                 aria-label="סגור"
