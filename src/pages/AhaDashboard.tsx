@@ -1089,7 +1089,7 @@ const AhaDashboard = () => {
                           style={{
                             background: palettes.insurance.gradient,
                             boxShadow: palettes.insurance.shadow,
-                            animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+                            animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both",
                           }}
                         >
                           <span
@@ -1115,11 +1115,19 @@ const AhaDashboard = () => {
                           </p>
                           <button
                             onClick={() => { /* visual only */ }}
-                            className="w-full rounded-full py-2.5 text-[12px] font-extrabold flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
-                            style={{ background: "white", color: palettes.insurance.solid }}
+                            className="w-full rounded-full py-2.5 text-[12px] font-extrabold flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98] overflow-hidden relative"
+                            style={{
+                              background: "linear-gradient(110deg, hsl(220, 60%, 8%), hsl(250, 60%, 10%), hsl(220, 60%, 8%))",
+                              backgroundSize: "250% 100%",
+                              color: "white",
+                              animation: "insight-cta-shimmer 4s linear infinite",
+                              boxShadow: "0 6px 18px -6px hsla(0,0%,0%,0.5)",
+                            }}
                           >
-                            <Zap className="h-3.5 w-3.5" />
-                            חסוך ₪2,000 בקליק
+                            <span className="relative z-[1] flex items-center gap-1.5">
+                              <Zap className="h-3.5 w-3.5" />
+                              חסוך ₪2,000 בקליק
+                            </span>
                           </button>
                         </div>
                       )}
