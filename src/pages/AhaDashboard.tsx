@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap } from "lucide-react";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 
@@ -39,6 +39,34 @@ const AhaDashboard = () => {
   const firstName = (location.state as { firstName?: string } | null)?.firstName || userData.name;
   const [chatOpen, setChatOpen] = useState(false);
   const [tipOpen, setTipOpen] = useState(true);
+  const [chatStage, setChatStage] = useState<"intro" | "harBituach" | "more">("intro");
+  const [insuranceStatus, setInsuranceStatus] = useState<"idle" | "connecting" | "done">("idle");
+  const [clearingStatus, setClearingStatus] = useState<"idle" | "scheduled">("idle");
+  const [showInsight, setShowInsight] = useState(false);
+
+  // Reset chat state when sheet closes
+  useEffect(() => {
+    if (!chatOpen) {
+      const t = setTimeout(() => {
+        setChatStage("intro");
+        setInsuranceStatus("idle");
+        setClearingStatus("idle");
+        setShowInsight(false);
+      }, 300);
+      return () => clearTimeout(t);
+    }
+  }, [chatOpen]);
+
+  // Simulate insurance connection
+  useEffect(() => {
+    if (insuranceStatus === "connecting") {
+      const t = setTimeout(() => {
+        setInsuranceStatus("done");
+        setTimeout(() => setShowInsight(true), 500);
+      }, 1800);
+      return () => clearTimeout(t);
+    }
+  }, [insuranceStatus]);
 
   const heroCards = [
     { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/c/assets" },
@@ -357,62 +385,299 @@ const AhaDashboard = () => {
           <div className="absolute inset-0 bg-black/40" onClick={() => setChatOpen(false)} />
           <div
             className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
-            style={{ animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both" }}
+            style={{ animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both", maxHeight: "92dvh" }}
           >
-            <div className="flex justify-center pt-3 pb-2">
+            <div className="flex justify-center pt-3 pb-2 flex-shrink-0">
               <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 88%)" }} />
             </div>
-            <div className="px-5 pt-2 pb-6">
+
+            {/* Header bar with optional back */}
+            <div className="px-5 pt-1 pb-2 flex items-center justify-between flex-shrink-0">
+              {chatStage !== "intro" ? (
+                <button
+                  onClick={() => { setChatStage("intro"); setShowInsight(false); }}
+                  className="flex items-center gap-1 text-[11.5px] font-medium"
+                  style={{ color: "hsl(230, 15%, 45%)" }}
+                >
+                  <ArrowLeft className="h-3.5 w-3.5 rotate-180" /> חזרה
+                </button>
+              ) : <span />}
+              <button
+                onClick={() => setChatOpen(false)}
+                className="w-7 h-7 rounded-full flex items-center justify-center"
+                style={{ background: "hsl(230, 25%, 95%)" }}
+                aria-label="סגור"
+              >
+                <X className="h-3.5 w-3.5" style={{ color: "hsl(230, 15%, 45%)" }} />
+              </button>
+            </div>
+
+            <div className="px-5 pb-6 overflow-y-auto">
+              {/* Dana message */}
               <div className="flex items-end gap-2 mb-4">
                 <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
                   <img src={advisorImg} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div className="rounded-2xl rounded-br-md px-3.5 py-2.5 max-w-[85%]" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
-                  <p className="text-[13px] leading-relaxed font-semibold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
-                    מה תרצה לחבר תחילה?
-                  </p>
-                  <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
-                    אפשר להתחיל עם הר הביטוח ומסלקת אשראי, או עם הוצאות והשקעות.
-                  </p>
+                  {chatStage === "intro" && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        {firstName}, רוצה התחלה חכמה? ✨
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        בלחיצה אחת על <b>הר הביטוח והמסלקה</b> אני מקבלת את כל התמונה הפיננסית שלך — בלי שתמלא כלום.
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && !showInsight && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        מעולה! בוא נתחיל לחבר 🚀
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        הר הביטוח מתחבר מיידית. המסלקה תיקח עד 24 שעות — אבל אל דאגה, נתחיל לעבוד מיד עם מה שיש.
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && showInsight && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        וואו, מצאתי משהו מיד! 🎯
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        זיהיתי <b>ביטוח חיים כפול</b> — אתה משלם פעמיים על אותו כיסוי. התחלה טובה לחיסכון!
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "more" && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        איזה מקור תרצה לחבר?
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        בחר ואני אצרף את הנתונים אוטומטית.
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-2.5">
-                {[
-                  { label: "הר הביטוח ומסלקת אשראי", desc: "חיבור מהיר לכל הפוליסות והאשראי", category: "insurance" as const, route: "/c/insurance" },
-                  { label: "הוצאות", desc: "חיבור לחשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
-                  { label: "השקעות", desc: "חיבור לתיקי השקעות וקרנות", category: "assets" as const, route: "/c/assets" },
-                ].map((opt) => {
-                  const p = palettes[opt.category];
-                  return (
-                    <button
-                      key={opt.label}
-                      onClick={() => { setChatOpen(false); navigate(opt.route); }}
-                      className="w-full text-start rounded-2xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
-                      style={{ background: "white", border: `1.5px solid ${p.solid}`, boxShadow: p.shadow }}
-                    >
-                      <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: p.gradient }}>
-                        <Plus className="h-4 w-4 text-white" />
-                      </span>
-                      <span className="flex-1 min-w-0">
-                        <span className="block text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{opt.label}</span>
-                        <span className="block text-[11px]" style={{ color: "hsl(230, 15%, 50%)" }}>{opt.desc}</span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+              {/* === STAGE: INTRO === */}
+              {chatStage === "intro" && (
+                <div className="space-y-2.5">
+                  {/* Primary CTA — large, gradient */}
+                  <button
+                    onClick={() => setChatStage("harBituach")}
+                    className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
+                    style={{
+                      background: palettes.insurance.gradient,
+                      boxShadow: "0 12px 28px -8px hsla(262, 72%, 50%, 0.55)",
+                    }}
+                  >
+                    <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold" style={{ background: "hsla(0,0%,100%,0.25)", color: "white" }}>
+                      <Sparkles className="h-2.5 w-2.5" /> מומלץ
+                    </span>
+                    <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "hsla(0,0%,100%,0.22)" }}>
+                      <Zap className="h-5 w-5 text-white" />
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-[14px] font-extrabold text-white mb-0.5">הר ביטוח + מסלקה</span>
+                      <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.85)" }}>חיבור אחד · כל הנתונים שלך · התובנה הראשונה תוך דקה</span>
+                    </span>
+                  </button>
 
-              <button
-                onClick={() => setChatOpen(false)}
-                className="w-full mt-4 text-[12px] font-medium py-2"
-                style={{ color: "hsl(230, 15%, 50%)" }}
-              >
-                אולי מאוחר יותר
-              </button>
+                  {/* Secondary */}
+                  <button
+                    onClick={() => setChatStage("more")}
+                    className="w-full rounded-2xl py-2.5 text-[12.5px] font-semibold flex items-center justify-center gap-1.5"
+                    style={{
+                      background: "white",
+                      border: "1px solid hsl(230, 20%, 88%)",
+                      color: "hsl(250, 35%, 30%)",
+                    }}
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    התחלה בחיבורים נוספים
+                  </button>
+                </div>
+              )}
+
+              {/* === STAGE: HAR BITUACH === */}
+              {chatStage === "harBituach" && (
+                <div className="space-y-2.5">
+                  {/* Insurance row */}
+                  <ConnectionRow
+                    title="הר הביטוח"
+                    subtitle={
+                      insuranceStatus === "idle" ? "חיבור מיידי · כל הפוליסות שלך" :
+                      insuranceStatus === "connecting" ? "מתחברת לרשות שוק ההון..." :
+                      "מחובר · 7 פוליסות נמצאו"
+                    }
+                    status={insuranceStatus}
+                    palette={palettes.insurance}
+                    onConnect={() => setInsuranceStatus("connecting")}
+                  />
+                  {/* Clearing house row */}
+                  <ConnectionRow
+                    title="מסלקה פנסיונית"
+                    subtitle={
+                      clearingStatus === "idle" ? "מתעדכן תוך 24 שעות · קרנות, גמל, השתלמות" :
+                      "מתוזמן · נמשיך כשהנתונים יגיעו"
+                    }
+                    status={clearingStatus === "scheduled" ? "done" : "idle"}
+                    statusLabel={clearingStatus === "scheduled" ? "תוך 24 שעות" : undefined}
+                    palette={palettes.assets}
+                    onConnect={() => setClearingStatus("scheduled")}
+                    icon={<Clock className="h-4 w-4 text-white" />}
+                  />
+
+                  {/* Insight reveal */}
+                  {showInsight && (
+                    <div
+                      className="rounded-2xl p-3.5 mt-1"
+                      style={{
+                        background: "linear-gradient(135deg, hsl(150, 75%, 96%) 0%, hsl(165, 70%, 93%) 100%)",
+                        border: "1.5px solid hsl(150, 60%, 70%)",
+                        boxShadow: "0 8px 24px -8px hsla(150, 60%, 35%, 0.25)",
+                        animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+                      }}
+                    >
+                      <div className="flex items-start gap-2.5">
+                        <span
+                          className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                          style={{ background: "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))" }}
+                        >
+                          <Sparkles className="h-4 w-4 text-white" />
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[10px] font-bold mb-0.5" style={{ color: "hsl(150, 70%, 30%)" }}>
+                            התובנה הראשונה שלך
+                          </p>
+                          <p className="text-[13px] font-extrabold leading-tight mb-1" style={{ color: "hsl(150, 70%, 18%)" }}>
+                            ביטוח חיים כפול — חיסכון של ₪2,000 בשנה
+                          </p>
+                          <p className="text-[11px] leading-snug mb-2.5" style={{ color: "hsl(150, 35%, 28%)" }}>
+                            יש לך שני ביטוחי חיים שמכסים אותו דבר. אפשר לבטל אחד בקליק.
+                          </p>
+                          <button
+                            onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
+                            className="w-full rounded-full py-2 text-[12px] font-bold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
+                            style={{
+                              background: "linear-gradient(135deg, hsl(150, 70%, 38%), hsl(160, 70%, 48%))",
+                              boxShadow: "0 6px 16px -4px hsla(150, 70%, 30%, 0.45)",
+                            }}
+                          >
+                            <Zap className="h-3.5 w-3.5" />
+                            חסוך ₪2,000 בקליק
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* === STAGE: MORE === */}
+              {chatStage === "more" && (
+                <div className="grid grid-cols-1 gap-2.5">
+                  {[
+                    { label: "הוצאות", desc: "חיבור לחשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
+                    { label: "השקעות", desc: "תיקי השקעות, קרנות וני״ע", category: "assets" as const, route: "/c/assets" },
+                    { label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים נוספים", category: "assets" as const, route: "/c/assets" },
+                  ].map((opt) => {
+                    const p = palettes[opt.category];
+                    return (
+                      <button
+                        key={opt.label}
+                        onClick={() => { setChatOpen(false); navigate(opt.route); }}
+                        className="w-full text-start rounded-2xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
+                        style={{ background: "white", border: `1.5px solid ${p.solid}` }}
+                      >
+                        <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: p.gradient }}>
+                          <Plus className="h-4 w-4 text-white" />
+                        </span>
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{opt.label}</span>
+                          <span className="block text-[11px]" style={{ color: "hsl(230, 15%, 50%)" }}>{opt.desc}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
+      )}
+    </div>
+  );
+};
+
+type ConnRowPalette = { gradient: string; solid: string; soft: string; shadow: string };
+type ConnRowStatus = "idle" | "connecting" | "done";
+
+const ConnectionRow = ({
+  title,
+  subtitle,
+  status,
+  palette,
+  onConnect,
+  icon,
+  statusLabel,
+}: {
+  title: string;
+  subtitle: string;
+  status: ConnRowStatus;
+  palette: ConnRowPalette;
+  onConnect: () => void;
+  icon?: React.ReactNode;
+  statusLabel?: string;
+}) => {
+  const isDone = status === "done";
+  const isConnecting = status === "connecting";
+  return (
+    <div
+      className="rounded-2xl p-3 flex items-center gap-3"
+      style={{
+        background: "white",
+        border: `1.5px solid ${isDone ? "hsl(150, 60%, 70%)" : palette.solid}`,
+        boxShadow: isDone ? "0 6px 16px -4px hsla(150, 60%, 30%, 0.2)" : palette.shadow,
+        transition: "all 0.3s ease",
+      }}
+    >
+      <span
+        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+        style={{
+          background: isDone
+            ? "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
+            : palette.gradient,
+        }}
+      >
+        {isDone ? <Check className="h-5 w-5 text-white" strokeWidth={3} /> : (icon || <Zap className="h-4 w-4 text-white" />)}
+      </span>
+      <div className="flex-1 min-w-0">
+        <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
+        <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
+      </div>
+      {status === "idle" && (
+        <button
+          onClick={onConnect}
+          className="rounded-full px-3 py-1.5 text-[11px] font-bold text-white flex items-center gap-1 flex-shrink-0 transition-transform active:scale-[0.96]"
+          style={{ background: palette.gradient, boxShadow: palette.shadow }}
+        >
+          חבר
+        </button>
+      )}
+      {isConnecting && (
+        <span className="flex items-center gap-1 text-[10.5px] font-semibold flex-shrink-0" style={{ color: palette.solid }}>
+          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          מתחבר...
+        </span>
+      )}
+      {isDone && (
+        <span className="flex items-center gap-1 text-[10.5px] font-bold flex-shrink-0 px-2 py-1 rounded-full" style={{ color: "hsl(150, 70%, 28%)", background: "hsl(150, 65%, 92%)" }}>
+          {statusLabel || "מחובר"}
+        </span>
       )}
     </div>
   );
