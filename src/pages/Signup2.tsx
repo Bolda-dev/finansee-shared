@@ -142,11 +142,6 @@ const Signup2 = () => {
             socialProof="43% מהמשתמשים גילו כפל ביטוחים אחרי החיבור"
             checked={consents.pension}
             onToggle={() => setConsents((c) => ({ ...c, pension: !c.pension }))}
-            onConfirm={() => {
-              setConnected((c) => ({ ...c, pension: true }));
-              next();
-            }}
-            onSkip={next}
           />
         );
       case 4:
@@ -169,11 +164,6 @@ const Signup2 = () => {
             socialProof="86% מהמשתמשים חסכו מעל ₪104,500 בשנה הראשונה"
             checked={consents.insurance}
             onToggle={() => setConsents((c) => ({ ...c, insurance: !c.insurance }))}
-            onConfirm={() => {
-              setConnected((c) => ({ ...c, insurance: true }));
-              next();
-            }}
-            onSkip={next}
           />
         );
       case 7:
@@ -196,11 +186,6 @@ const Signup2 = () => {
             socialProof="המשתמשים שלנו חסכו בממוצע ₪780 בחודש על המשכנתא"
             checked={consents.credit}
             onToggle={() => setConsents((c) => ({ ...c, credit: !c.credit }))}
-            onConfirm={() => {
-              setConnected((c) => ({ ...c, credit: true }));
-              next();
-            }}
-            onSkip={next}
           />
         );
       case 10:
@@ -213,18 +198,36 @@ const Signup2 = () => {
   // Continuous progress 1..10 (loading hidden)
   const progress = !inLoading ? { current: index + 1, total: TOTAL } : undefined;
 
-  // SMS step + consent steps + loading manage their own bottom CTA
-  const showCta = index !== 1 && !inLoading && !isConsentStep;
+  // SMS step + loading manage their own bottom CTA; all others use unified CTA
+  const showCta = index !== 1 && !inLoading;
 
   const onMainCta = () => {
     if (index === 8) {
-      // Goals — apply toast then advance to credit consent
       showDanaToast("מצוין, בונים תוכנית 🎯");
       setTimeout(() => next(), 200);
       return;
     }
     if (index < TOTAL - 1) next();
   };
+
+  // Consent CTA confirm handler
+  const onConsentConfirm = () => {
+    if (index === 3) {
+      if (consents.pension) setConnected((c) => ({ ...c, pension: true }));
+      next();
+    } else if (index === 6) {
+      if (consents.insurance) setConnected((c) => ({ ...c, insurance: true }));
+      next();
+    } else if (index === 9) {
+      if (consents.credit) setConnected((c) => ({ ...c, credit: true }));
+      next();
+    }
+  };
+
+  const consentChecked =
+    (index === 3 && consents.pension) ||
+    (index === 6 && consents.insurance) ||
+    (index === 9 && consents.credit);
 
   return (
     <SignupShell
@@ -234,17 +237,33 @@ const Signup2 = () => {
       progress={progress}
       bottom={
         showCta ? (
-          <button
-            onClick={onMainCta}
-            disabled={!canContinue}
-            className="w-full rounded-full py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
-            style={{
-              background: "hsl(0, 0%, 8%)",
-              boxShadow: "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)",
-            }}
-          >
-            {ctaLabel}
-          </button>
+          isConsentStep ? (
+            <button
+              onClick={onConsentConfirm}
+              disabled={!consentChecked}
+              className="w-full rounded-full py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
+              style={{
+                background: consentChecked ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
+                boxShadow: consentChecked
+                  ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)"
+                  : "none",
+              }}
+            >
+              אשר וחתום
+            </button>
+          ) : (
+            <button
+              onClick={onMainCta}
+              disabled={!canContinue}
+              className="w-full rounded-full py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
+              style={{
+                background: "hsl(0, 0%, 8%)",
+                boxShadow: "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)",
+              }}
+            >
+              {ctaLabel}
+            </button>
+          )
         ) : null
       }
     >

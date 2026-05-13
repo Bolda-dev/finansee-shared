@@ -12,8 +12,6 @@ interface ConsentStepProps {
   socialProof: string;
   checked: boolean;
   onToggle: () => void;
-  onConfirm: () => void;
-  onSkip: () => void;
 }
 
 export const ConsentStep = ({
@@ -26,12 +24,11 @@ export const ConsentStep = ({
   socialProof,
   checked,
   onToggle,
-  onConfirm,
-  onSkip,
 }: ConsentStepProps) => {
   return (
     <div dir="rtl" className="px-5 pt-6 pb-4 flex flex-col h-full">
       <div className="flex-1 space-y-4">
+        <SocialProofCallout text={socialProof} />
         <ConsentAnnex
           icon={icon}
           iconBg={iconBg}
@@ -42,22 +39,7 @@ export const ConsentStep = ({
           checked={checked}
           onToggle={onToggle}
         />
-        <SocialProofCallout text={socialProof} />
-      </div>
-
-      <div className="pt-4">
-        <button
-          onClick={onConfirm}
-          disabled={!checked}
-          className="w-full rounded-full py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
-          style={{
-            background: checked ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
-            boxShadow: checked ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
-          }}
-        >
-          אשר וחתום
-        </button>
       </div>
     </div>
   );
-};
+}
