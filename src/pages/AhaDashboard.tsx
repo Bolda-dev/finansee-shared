@@ -248,24 +248,31 @@ const AhaDashboard = () => {
 
       {/* Pulsing glow for tooltip */}
       <style>{`
-        @keyframes aha-tip-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        @keyframes aha-tip-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
         @keyframes aha-tip-glow {
           0%, 100% {
             box-shadow:
-              0 0 6px 1px hsla(220, 85%, 65%, 0.35),
-              0 8px 20px hsla(250, 40%, 25%, 0.12);
+              0 0 8px 2px hsla(262, 75%, 58%, 0.35),
+              0 10px 24px hsla(250, 40%, 25%, 0.15);
           }
           50% {
             box-shadow:
-              0 0 28px 5px hsla(220, 85%, 65%, 0.22),
-              0 12px 32px hsla(250, 40%, 25%, 0.18);
+              0 0 32px 8px hsla(262, 75%, 58%, 0.18),
+              0 14px 36px hsla(250, 40%, 25%, 0.2);
           }
         }
         .aha-tip-wrap {
           background: white;
-          border-radius: 18px;
-          border: 0.5px solid hsla(220, 85%, 65%, 0.35);
-          animation: aha-tip-bob 2.6s ease-in-out infinite, aha-tip-glow 2.6s ease-in-out infinite;
+          border-radius: 20px;
+          border: 1px solid hsla(262, 75%, 58%, 0.3);
+          animation: aha-tip-bob 2.4s ease-in-out infinite, aha-tip-glow 2.4s ease-in-out infinite;
+          cursor: pointer;
+        }
+        .aha-tip-title {
+          background: linear-gradient(135deg, hsl(262, 75%, 50%), hsl(220, 85%, 55%), hsl(178, 70%, 45%));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
       `}</style>
 
@@ -274,17 +281,20 @@ const AhaDashboard = () => {
         {/* Coach-mark tooltip above avatar */}
         {tipOpen && (
           <div className="relative pointer-events-auto mb-2 mr-1 inline-block">
-            <div className="aha-tip-wrap">
-              <div
-                className="flex items-start gap-2 rounded-[16px] px-3 py-2 max-w-[300px]"
-                style={{
-                  background: "white",
-                  boxShadow: "0 10px 28px hsla(250, 40%, 25%, 0.18)",
-                }}
-              >
-                <p className="text-[12.5px] leading-snug font-medium" style={{ color: "hsl(250, 40%, 15%)" }}>
-                  האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
-                </p>
+            <button
+              onClick={() => setChatOpen(true)}
+              className="aha-tip-wrap block text-right w-full"
+              aria-label="פתח צ'אט"
+            >
+              <div className="flex items-start gap-2 rounded-[18px] px-3.5 py-3 max-w-[300px]">
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] font-extrabold aha-tip-title mb-1">
+                    איזה כיף להכיר. טוב שהצטרפת!
+                  </p>
+                  <p className="text-[11.5px] leading-snug" style={{ color: "hsl(250, 30%, 30%)" }}>
+                    האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
+                  </p>
+                </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); setTipOpen(false); }}
                   className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
@@ -294,13 +304,13 @@ const AhaDashboard = () => {
                   <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
                 </button>
               </div>
-            </div>
+            </button>
             {/* tail */}
             <span
               className="absolute -bottom-1 right-6 w-2.5 h-2.5 rotate-45"
               style={{
                 background: "white",
-                boxShadow: "2px 2px 0 0 hsl(220, 85%, 55%)",
+                boxShadow: "2px 2px 0 0 hsla(262, 75%, 58%, 0.3)",
               }}
             />
           </div>
