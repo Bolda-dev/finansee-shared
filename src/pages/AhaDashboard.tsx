@@ -74,6 +74,12 @@ const AhaDashboard = () => {
     }
   }, [chatOpen]);
 
+  // Show Dana tooltip after 4s on first landing
+  useEffect(() => {
+    const t = setTimeout(() => setTipOpen(true), 4000);
+    return () => clearTimeout(t);
+  }, []);
+
   // Collecting animations: step 5 → 6 (insurance), step 9 → 10 (credit)
   useEffect(() => {
     if (collectStep !== 5 && collectStep !== 9) return;
