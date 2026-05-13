@@ -748,8 +748,8 @@ const AhaDashboard = () => {
                         badgeText="זמין תוך שעתיים"
                         badgeBg="hsl(45, 95%, 88%)"
                         badgeColor="hsl(35, 90%, 25%)"
-                        iconGradient="linear-gradient(135deg, hsl(38, 92%, 50%), hsl(45, 95%, 58%))"
-                        borderColor="hsl(45, 85%, 65%)"
+                        iconGradient="linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
+                        borderColor="hsl(150, 60%, 70%)"
                       />
 
                       {showInsight && (
@@ -757,28 +757,28 @@ const AhaDashboard = () => {
                           ref={insightRef}
                           className="rounded-2xl p-4 mt-2 relative overflow-hidden"
                           style={{
-                            background: "linear-gradient(135deg, hsl(150, 80%, 96%) 0%, hsl(165, 75%, 94%) 50%, hsl(45, 90%, 95%) 100%)",
-                            border: "1.5px solid hsl(150, 60%, 65%)",
-                            boxShadow: "0 12px 32px -8px hsla(150, 60%, 35%, 0.3)",
+                            background: "linear-gradient(135deg, hsl(260, 75%, 97%) 0%, hsl(265, 70%, 95%) 55%, hsl(275, 75%, 96%) 100%)",
+                            border: "1.5px solid hsl(262, 60%, 82%)",
+                            boxShadow: "0 12px 32px -8px hsla(262, 60%, 45%, 0.22)",
                             animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
                           }}
                         >
                           <div className="flex items-center gap-1.5 mb-2">
-                            <span className="px-2 py-0.5 rounded-full text-[9.5px] font-extrabold flex items-center gap-1" style={{ background: "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))", color: "white" }}>
+                            <span className="px-2 py-0.5 rounded-full text-[9.5px] font-extrabold flex items-center gap-1" style={{ background: palettes.insurance.gradient, color: "white" }}>
                               <Sparkles className="h-2.5 w-2.5" /> התובנה הראשונה שלך
                             </span>
                           </div>
-                          <p className="text-[16px] font-extrabold leading-tight mb-1.5" style={{ color: "hsl(150, 70%, 15%)" }}>
+                          <p className="text-[16px] font-extrabold leading-tight mb-1.5" style={{ color: "hsl(258, 55%, 20%)" }}>
                             ביטוח חיים כפול
                           </p>
                           <p className="text-[22px] font-extrabold tracking-tight leading-none mb-2" style={{
-                            background: "linear-gradient(110deg, hsl(150, 70%, 30%), hsl(160, 70%, 38%))",
+                            background: "linear-gradient(110deg, hsl(258, 72%, 45%), hsl(275, 78%, 55%))",
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
                           }}>
                             חיסכון ₪2,000 בשנה
                           </p>
-                          <p className="text-[11.5px] leading-snug mb-3" style={{ color: "hsl(150, 35%, 25%)" }}>
+                          <p className="text-[11.5px] leading-snug mb-3" style={{ color: "hsl(258, 30%, 32%)" }}>
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
