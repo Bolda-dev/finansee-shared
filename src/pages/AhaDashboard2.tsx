@@ -727,10 +727,37 @@ const AhaDashboard2 = () => {
                       "מיפוי הלוואות, משכנתאות ומסגרות פעילות",
                       "אסטרטגיות לשיפור ציון אשראי וניהול אופטימלי",
                     ]}
-                    consentText="המידע מוצפן ומאובטח"
-                    checked={consents.creditAssets}
-                    onToggle={() => setConsents((c) => ({ creditAssets: !c.creditAssets, creditLiab: !c.creditAssets }))}
                   />
+
+                  <button
+                    onClick={() => setConsents((c) => ({ creditAssets: !c.creditAssets, creditLiab: !c.creditAssets }))}
+                    className="w-full rounded-2xl p-3.5 flex items-center gap-3 transition-all active:scale-[0.99]"
+                    style={{
+                      background: "white",
+                      border: `2px solid ${consents.creditAssets ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 88%)"}`,
+                      boxShadow: consents.creditAssets
+                        ? "0 6px 18px -8px hsla(262, 75%, 55%, 0.45)"
+                        : "0 4px 14px -10px hsla(250, 40%, 20%, 0.18)",
+                    }}
+                  >
+                    <span
+                      className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
+                      style={{
+                        background: consents.creditAssets ? "hsl(262, 75%, 55%)" : "white",
+                        border: `1.5px solid ${consents.creditAssets ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 75%)"}`,
+                      }}
+                    >
+                      {consents.creditAssets && <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />}
+                    </span>
+                    <div className="flex-1 min-w-0 text-right">
+                      <p className="text-[13.5px] font-extrabold leading-tight" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        אני מאשר/ת
+                      </p>
+                      <p className="text-[10.5px] leading-snug mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>
+                        המידע מוצפן ומאובטח
+                      </p>
+                    </div>
+                  </button>
 
                   <button
                     onClick={() => setCreditStep(3)}
