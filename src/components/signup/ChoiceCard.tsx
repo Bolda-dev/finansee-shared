@@ -37,8 +37,12 @@ export const ChoiceCard = ({
           ? "flex-col items-center justify-center gap-2 aspect-[1.15/1] p-3"
           : "flex-row items-center gap-3 w-full px-5 py-4")
       }
-      style={baseStyle}
+      style={{
+        ...baseStyle,
+        animation: selected ? "choice-pulse 0.45s ease-out" : undefined,
+      }}
     >
+      <style>{`@keyframes choice-pulse { 0% { transform: scale(1); } 40% { transform: scale(1.04); box-shadow: 0 8px 22px -8px hsla(262, 75%, 45%, 0.45); } 100% { transform: scale(1); } }`}</style>
       {emoji && (
         <span className={isGrid ? "text-3xl" : "text-2xl"} aria-hidden>
           {emoji}
