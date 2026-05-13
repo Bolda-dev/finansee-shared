@@ -246,17 +246,27 @@ const AhaDashboard = () => {
         </div>
       </div>
 
-      {/* Animated gradient ring for tooltip */}
+      {/* Pulsing glow for tooltip */}
       <style>{`
-        @keyframes aha-tip-spin { to { transform: rotate(360deg); } }
         @keyframes aha-tip-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        .aha-tip-wrap { position: relative; padding: 1.5px; border-radius: 18px; isolation: isolate; animation: aha-tip-bob 2.6s ease-in-out infinite; }
-        .aha-tip-wrap::before {
-          content: ""; position: absolute; inset: -1px; border-radius: 19px; padding: 1.5px; z-index: -1;
-          background: conic-gradient(from 0deg, hsl(178,70%,45%), hsl(220,85%,55%), hsl(262,75%,58%), hsl(178,70%,45%));
-          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-          -webkit-mask-composite: xor; mask-composite: exclude;
-          animation: aha-tip-spin 4s linear infinite;
+        @keyframes aha-tip-glow {
+          0%, 100% {
+            box-shadow:
+              0 0 0 0 hsla(262, 75%, 58%, 0.55),
+              0 10px 24px hsla(250, 40%, 25%, 0.18);
+          }
+          50% {
+            box-shadow:
+              0 0 0 10px hsla(262, 75%, 58%, 0),
+              0 0 24px 4px hsla(220, 85%, 60%, 0.5),
+              0 12px 30px hsla(250, 40%, 25%, 0.22);
+          }
+        }
+        .aha-tip-wrap {
+          background: white;
+          border-radius: 18px;
+          border: 1.5px solid hsl(220, 85%, 65%);
+          animation: aha-tip-bob 2.6s ease-in-out infinite, aha-tip-glow 2.2s ease-in-out infinite;
         }
       `}</style>
 
