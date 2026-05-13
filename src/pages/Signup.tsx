@@ -54,6 +54,11 @@ const Signup = () => {
   const next = () => setIndex((i) => Math.min(i + 1, TOTAL - 1));
   const back = () => setIndex((i) => Math.max(i - 1, 0));
 
+  const autoAdvance = (setter: (v: string) => void) => (v: string) => {
+    setter(v);
+    setTimeout(() => next(), 380);
+  };
+
   const canContinue =
     inWelcome ||
     (index === 2 && phone.length >= 9) ||
