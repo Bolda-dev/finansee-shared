@@ -130,9 +130,9 @@ const Signup = () => {
             disabled={!canContinue}
             className="w-full rounded-2xl py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
             style={{
-              background: "hsl(250, 40%, 12%)",
+              background: "hsl(0, 0%, 8%)",
               boxShadow:
-                "0 10px 24px -10px hsla(250, 40%, 12%, 0.45)",
+                "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)",
             }}
           >
             {ctaLabel}
