@@ -142,11 +142,6 @@ const Signup2 = () => {
             socialProof="43% מהמשתמשים גילו כפל ביטוחים אחרי החיבור"
             checked={consents.pension}
             onToggle={() => setConsents((c) => ({ ...c, pension: !c.pension }))}
-            onConfirm={() => {
-              setConnected((c) => ({ ...c, pension: true }));
-              next();
-            }}
-            onSkip={next}
           />
         );
       case 4:
