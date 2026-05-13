@@ -8,6 +8,7 @@ interface SignupShellProps {
   pagination?: { total: number; current: number; onDotClick?: (i: number) => void };
   progress?: { current: number; total: number }; // 1-indexed step bar
   bottom?: ReactNode;
+  edgeTop?: boolean;
 }
 
 export const SignupShell = ({
@@ -18,6 +19,7 @@ export const SignupShell = ({
   pagination,
   progress,
   bottom,
+  edgeTop = false,
 }: SignupShellProps) => {
   return (
     <div
