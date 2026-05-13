@@ -250,13 +250,27 @@ const AhaDashboard2 = () => {
                 <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 18%, 40%)" }}>
                   {card.label}
                 </p>
-                <button
-                  onClick={openCreditChat}
-                  className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center text-white transition-transform active:scale-[0.97]"
-                  style={{ background: p.gradient, boxShadow: p.shadow }}
-                >
-                  חיבור לנתונים
-                </button>
+                {completed85 ? (
+                  <div
+                    className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center gap-1"
+                    style={{
+                      background: "hsl(45, 90%, 55%)",
+                      color: "hsl(40, 90%, 15%)",
+                      boxShadow: "0 2px 8px hsla(45, 90%, 40%, 0.3)",
+                    }}
+                  >
+                    <Loader className="h-3 w-3 animate-spin" />
+                    שולף נתונים
+                  </div>
+                ) : (
+                  <button
+                    onClick={openCreditChat}
+                    className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center text-white transition-transform active:scale-[0.97]"
+                    style={{ background: p.gradient, boxShadow: p.shadow }}
+                  >
+                    חיבור לנתונים
+                  </button>
+                )}
               </div>
             );
           })}
