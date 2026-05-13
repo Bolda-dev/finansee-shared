@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Check, ArrowLeft, ChevronDown } from "lucide-react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Check, ArrowLeft, ChevronDown, Loader } from "lucide-react";
 import { ConsentAnnex } from "@/components/aha/ConsentAnnex";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
@@ -8,10 +8,10 @@ import advisorImg from "@/assets/advisor-avatar.jpg";
 type Palette = { gradient: string; shadow: string; solid: string; soft: string };
 const palettes: Record<"assets" | "liabilities" | "insurance", Palette> = {
   assets: {
-    gradient: "linear-gradient(135deg, hsl(150, 70%, 32%) 0%, hsl(145, 65%, 42%) 55%, hsl(140, 70%, 56%) 100%)",
-    shadow: "0 6px 16px -4px hsla(148, 70%, 28%, 0.45)",
-    solid: "hsl(150, 70%, 32%)",
-    soft: "hsl(148, 55%, 95%)",
+    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+    shadow: "0 6px 16px -4px hsla(176, 70%, 28%, 0.45)",
+    solid: "hsl(178, 70%, 30%)",
+    soft: "hsl(176, 55%, 95%)",
   },
   liabilities: {
     gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
@@ -250,13 +250,27 @@ const AhaDashboard2 = () => {
                 <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 18%, 40%)" }}>
                   {card.label}
                 </p>
-                <button
-                  onClick={openCreditChat}
-                  className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center text-white transition-transform active:scale-[0.97]"
-                  style={{ background: p.gradient, boxShadow: p.shadow }}
-                >
-                  חיבור לנתונים
-                </button>
+                {completed85 ? (
+                  <div
+                    className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center gap-1"
+                    style={{
+                      background: "hsl(45, 90%, 55%)",
+                      color: "hsl(40, 90%, 15%)",
+                      boxShadow: "0 2px 8px hsla(45, 90%, 40%, 0.3)",
+                    }}
+                  >
+                    <Loader className="h-3 w-3 animate-spin" />
+                    שולף נתונים
+                  </div>
+                ) : (
+                  <button
+                    onClick={openCreditChat}
+                    className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center text-white transition-transform active:scale-[0.97]"
+                    style={{ background: p.gradient, boxShadow: p.shadow }}
+                  >
+                    חיבור לנתונים
+                  </button>
+                )}
               </div>
             );
           })}
