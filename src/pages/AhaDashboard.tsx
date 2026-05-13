@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap } from "lucide-react";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 
