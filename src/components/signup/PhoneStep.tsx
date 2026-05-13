@@ -23,8 +23,9 @@ export const PhoneStep = ({ value, onChange }: PhoneStepProps) => {
         נשלח לך קוד בן 6 ספרות לאימות
       </p>
 
-      {/* Input row — RTL: country code on right, input on left */}
+      {/* Input row — country code on visual LEFT, number on visual RIGHT */}
       <div
+        dir="ltr"
         className="flex items-stretch rounded-2xl overflow-hidden bg-white"
         style={{
           border: "1.5px solid hsl(230, 20%, 88%)",
@@ -53,7 +54,8 @@ export const PhoneStep = ({ value, onChange }: PhoneStepProps) => {
             onChange(digits);
           }}
           placeholder="50 123 4567"
-          className="flex-1 px-4 py-3.5 text-[15px] font-semibold bg-transparent outline-none tracking-wide"
+          dir="rtl"
+          className="flex-1 px-4 py-3.5 text-[15px] font-semibold bg-transparent outline-none tracking-wide text-right"
           style={{ color: "hsl(250, 40%, 15%)" }}
         />
       </div>

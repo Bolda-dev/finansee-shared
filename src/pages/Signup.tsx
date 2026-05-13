@@ -128,7 +128,7 @@ const Signup = () => {
               if (index < TOTAL - 1) next();
             }}
             disabled={!canContinue}
-            className="w-full rounded-2xl py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
+            className="w-full rounded-full py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
             style={{
               background: "hsl(0, 0%, 8%)",
               boxShadow:
