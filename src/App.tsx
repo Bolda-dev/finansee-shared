@@ -23,6 +23,7 @@ const AssetsPageD = lazy(() => import("./pages/AssetsPageD"));
 const LiabilitiesPageD = lazy(() => import("./pages/LiabilitiesPageD"));
 const Signup = lazy(() => import("./pages/Signup"));
 const AhaDashboard = lazy(() => import("./pages/AhaDashboard"));
+const AhaDashboard2 = lazy(() => import("./pages/AhaDashboard2"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
               <Route path="/d/expenses" element={<ExpensesPage />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/aha" element={<AhaDashboard />} />
+              <Route path="/aha2" element={<AhaDashboard2 />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
