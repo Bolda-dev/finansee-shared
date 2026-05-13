@@ -246,38 +246,52 @@ const AhaDashboard = () => {
         </div>
       </div>
 
+      {/* Animated gradient ring for tooltip */}
+      <style>{`
+        @keyframes aha-tip-spin { to { transform: rotate(360deg); } }
+        @keyframes aha-tip-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        .aha-tip-wrap { position: relative; padding: 1.5px; border-radius: 18px; isolation: isolate; animation: aha-tip-bob 2.6s ease-in-out infinite; }
+        .aha-tip-wrap::before {
+          content: ""; position: absolute; inset: -1px; border-radius: 19px; padding: 1.5px; z-index: -1;
+          background: conic-gradient(from 0deg, hsl(178,70%,45%), hsl(220,85%,55%), hsl(262,75%,58%), hsl(178,70%,45%));
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor; mask-composite: exclude;
+          animation: aha-tip-spin 4s linear infinite;
+        }
+      `}</style>
+
       {/* Bottom Chat Bar (matches IndexC) */}
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none" dir="rtl">
         {/* Coach-mark tooltip above avatar */}
         {tipOpen && (
-          <div className="relative pointer-events-auto mb-2 mr-1">
-            <div
-              className="inline-flex items-start gap-2 rounded-2xl px-3 py-2 max-w-[300px]"
-              style={{
-                background: "white",
-                boxShadow: "0 8px 24px hsla(250, 30%, 25%, 0.15)",
-                border: "1px solid hsl(230, 20%, 92%)",
-              }}
-            >
-              <p className="text-[12.5px] leading-snug" style={{ color: "hsl(250, 40%, 15%)" }}>
-                האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
-              </p>
-              <button
-                onClick={(e) => { e.stopPropagation(); setTipOpen(false); }}
-                className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
-                style={{ background: "hsl(230, 25%, 95%)" }}
-                aria-label="סגור"
+          <div className="relative pointer-events-auto mb-2 mr-1 inline-block">
+            <div className="aha-tip-wrap">
+              <div
+                className="flex items-start gap-2 rounded-[16px] px-3 py-2 max-w-[300px]"
+                style={{
+                  background: "white",
+                  boxShadow: "0 10px 28px hsla(250, 40%, 25%, 0.18)",
+                }}
               >
-                <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
-              </button>
+                <p className="text-[12.5px] leading-snug font-medium" style={{ color: "hsl(250, 40%, 15%)" }}>
+                  האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
+                </p>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setTipOpen(false); }}
+                  className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+                  style={{ background: "hsl(230, 25%, 95%)" }}
+                  aria-label="סגור"
+                >
+                  <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
+                </button>
+              </div>
             </div>
             {/* tail */}
             <span
-              className="absolute -bottom-1.5 right-6 w-3 h-3 rotate-45"
+              className="absolute -bottom-1 right-6 w-2.5 h-2.5 rotate-45"
               style={{
                 background: "white",
-                borderRight: "1px solid hsl(230, 20%, 92%)",
-                borderBottom: "1px solid hsl(230, 20%, 92%)",
+                boxShadow: "2px 2px 0 0 hsl(220, 85%, 55%)",
               }}
             />
           </div>
