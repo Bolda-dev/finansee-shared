@@ -541,7 +541,7 @@ const AhaDashboard = () => {
 
       {chatOpen && (
         <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setChatOpen(false)} />
+          <div className="absolute inset-0 bg-black/40" onClick={() => { if (showInsight) setInsuranceUpgraded(true); setChatOpen(false); }} />
           <div
             className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
             style={{ animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both", maxHeight: "92dvh" }}
