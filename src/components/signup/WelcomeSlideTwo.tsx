@@ -15,7 +15,7 @@ const Eye = (p: IconProps) => <SvgIcon {...p}><path d="M2 12s3-7 10-7 10 7 10 7-
 
 export const WelcomeSlideTwo = () => {
   return (
-    <div className="px-5 pt-2 pb-4 flex flex-col items-center" dir="rtl">
+    <div className="px-5 pt-8 pb-4 flex flex-col items-center" dir="rtl">
       <style>{`
         @keyframes ws2-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
         @keyframes ws2-twinkle { 0%,100% { opacity: 0.3; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.1); } }
