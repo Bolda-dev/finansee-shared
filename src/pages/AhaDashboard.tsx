@@ -432,7 +432,7 @@ const AhaDashboard = () => {
             <div className="px-5 pt-1 pb-2 flex items-center justify-between flex-shrink-0">
               {chatStage !== "intro" ? (
                 <button
-                  onClick={() => { setChatStage("intro"); setShowInsight(false); setCollectStep(1); setConsents({ pension: false, copies: false, harBituach: false }); }}
+                  onClick={() => { setChatStage("intro"); setShowInsight(false); setCollectStep(1); setConsents({ pension: false, copies: false, harBituach: false, creditAssets: false, creditLiab: false }); }}
                   className="flex items-center gap-1 text-[11.5px] font-medium"
                   style={{ color: "hsl(230, 15%, 45%)" }}
                 >
