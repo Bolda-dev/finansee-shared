@@ -41,33 +41,63 @@ const AhaDashboard = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [tipOpen, setTipOpen] = useState(true);
   const [chatStage, setChatStage] = useState<"intro" | "harBituach" | "more">("intro");
-  const [insuranceStatus, setInsuranceStatus] = useState<"idle" | "connecting" | "done">("idle");
-  const [clearingStatus, setClearingStatus] = useState<"idle" | "scheduled">("idle");
   const [showInsight, setShowInsight] = useState(false);
+
+  // Multi-step collection flow (1..4 = steps, 5 = collecting, 6 = result)
+  const [collectStep, setCollectStep] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
+  const [idNumber, setIdNumber] = useState("");
+  const [idDate, setIdDate] = useState("");
+  const [usePhoto, setUsePhoto] = useState(false);
+  const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false });
+  const [collectingMsg, setCollectingMsg] = useState(0);
+  const insightRef = useRef<HTMLDivElement | null>(null);
 
   // Reset chat state when sheet closes
   useEffect(() => {
     if (!chatOpen) {
       const t = setTimeout(() => {
         setChatStage("intro");
-        setInsuranceStatus("idle");
-        setClearingStatus("idle");
         setShowInsight(false);
+        setCollectStep(1);
+        setIdNumber("");
+        setIdDate("");
+        setUsePhoto(false);
+        setConsents({ pension: false, copies: false, harBituach: false });
+        setCollectingMsg(0);
       }, 300);
       return () => clearTimeout(t);
     }
   }, [chatOpen]);
 
-  // Simulate insurance connection
+  // Collecting animation: cycle messages then advance to result
   useEffect(() => {
-    if (insuranceStatus === "connecting") {
-      const t = setTimeout(() => {
-        setInsuranceStatus("done");
-        setTimeout(() => setShowInsight(true), 500);
-      }, 1800);
-      return () => clearTimeout(t);
-    }
-  }, [insuranceStatus]);
+    if (collectStep !== 5) return;
+    setCollectingMsg(0);
+    const t1 = setTimeout(() => setCollectingMsg(1), 600);
+    const t2 = setTimeout(() => setCollectingMsg(2), 1200);
+    const t3 = setTimeout(() => {
+      setCollectStep(6);
+      setTimeout(() => setShowInsight(true), 450);
+    }, 1900);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [collectStep]);
+
+  // Fire confetti when insight appears
+  useEffect(() => {
+    if (!showInsight) return;
+    const rect = insightRef.current?.getBoundingClientRect();
+    const origin = rect
+      ? { x: (rect.left + rect.width / 2) / window.innerWidth, y: (rect.top + 20) / window.innerHeight }
+      : { x: 0.5, y: 0.5 };
+    confetti({
+      particleCount: 90,
+      spread: 75,
+      startVelocity: 38,
+      origin,
+      colors: ["#7C3AED", "#3B82F6", "#10B981", "#F59E0B", "#EC4899"],
+      zIndex: 100,
+    });
+  }, [showInsight]);
 
   const heroCards = [
     { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/c/assets" },
