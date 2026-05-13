@@ -288,9 +288,10 @@ const AhaDashboard = () => {
       {/* 3 hero locked cards */}
       <div className="relative z-10 px-3">
         <div className="grid grid-cols-3 gap-3 mb-8">
-          {heroCards.map((card) => {
+          {heroCards.map((card, idx) => {
             const p = palettes[card.category];
             const isUpgradedInsurance = card.category === "insurance" && insuranceUpgraded;
+            const enterAnim = `aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${0.36 + idx * 0.1}s both`;
             if (isUpgradedInsurance) {
               return (
                 <button
