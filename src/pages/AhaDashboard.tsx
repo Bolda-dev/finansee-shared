@@ -53,6 +53,7 @@ const AhaDashboard = () => {
   const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false, creditAssets: false, creditLiab: false });
   const [collectingMsg, setCollectingMsg] = useState(0);
   const [homeAlmostDone, setHomeAlmostDone] = useState(false);
+  const [insuranceUpgraded, setInsuranceUpgraded] = useState(false);
   const insightRef = useRef<HTMLDivElement | null>(null);
 
   // Reset chat state when sheet closes (keep homeAlmostDone)
