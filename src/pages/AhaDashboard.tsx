@@ -380,12 +380,13 @@ const AhaDashboard = () => {
         </div>
 
         {/* Financial Center */}
-        <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>
+        <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)", animation: "aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both" }}>
           מרכז פיננסי
         </h2>
         <div className="grid grid-cols-2 gap-3">
-          {centerCards.map((card) => {
+          {centerCards.map((card, idx) => {
             const p = palettes[card.category];
+            const ccDelay = 0.78 + idx * 0.08;
             return (
               <div
                 key={card.label}
