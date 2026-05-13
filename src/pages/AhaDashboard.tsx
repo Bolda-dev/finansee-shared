@@ -957,7 +957,7 @@ const AhaDashboard = () => {
                                 background: "hsl(150, 50%, 97%)",
                                 border: "1px solid hsl(150, 40%, 90%)",
                                 opacity: 0,
-                                animation: `sheet-slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + i * 0.18}s forwards`,
+                                animation: `aha-item-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + i * 0.18}s forwards`,
                               }}
                             >
                               <span
@@ -982,7 +982,7 @@ const AhaDashboard = () => {
                           background: palettes.insurance.gradient,
                           boxShadow: "0 12px 28px -8px hsla(262, 72%, 50%, 0.55)",
                           opacity: 0,
-                          animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards",
+                          animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards",
                         }}
                       >
                         <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsla(0,0%,100%,0.95)", color: "hsl(150, 70%, 28%)" }}>
@@ -1011,7 +1011,7 @@ const AhaDashboard = () => {
                           border: "1.5px solid hsl(45, 90%, 80%)",
                           boxShadow: "0 8px 22px -10px hsla(45, 80%, 40%, 0.25)",
                           opacity: 0,
-                          animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards",
+                          animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards",
                         }}
                       >
                         <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsl(45, 95%, 92%)", color: "hsl(35, 85%, 35%)", border: "1px solid hsl(45, 90%, 75%)" }}>
@@ -1073,7 +1073,7 @@ const AhaDashboard = () => {
 
                       {/* Dana follow-up: connect assets */}
                       {showInsight && (
-                        <div className="flex items-end gap-2 mt-4" style={{ animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both", opacity: 0, animationFillMode: "forwards" }}>
+                        <div className="flex items-end gap-2 mt-4" style={{ animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both", opacity: 0, animationFillMode: "forwards" }}>
                           <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
                             <img src={advisorImg} alt="" className="w-full h-full object-cover" />
                           </div>
@@ -1095,7 +1095,7 @@ const AhaDashboard = () => {
                           style={{
                             background: palettes.assets.gradient,
                             boxShadow: "0 12px 28px -8px hsla(176, 70%, 32%, 0.5)",
-                            animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both",
+                            animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both",
                             opacity: 0,
                             animationFillMode: "forwards",
                           }}
