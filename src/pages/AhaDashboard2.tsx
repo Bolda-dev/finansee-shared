@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { TrendingUp, TrendingDown, ShieldCheck, Menu, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Check, ArrowLeft, ChevronDown, Loader } from "lucide-react";
 import { ConsentAnnex } from "@/components/aha/ConsentAnnex";
