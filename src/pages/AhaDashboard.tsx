@@ -39,7 +39,7 @@ const AhaDashboard = () => {
   const location = useLocation();
   const firstName = (location.state as { firstName?: string } | null)?.firstName || userData.name;
   const [chatOpen, setChatOpen] = useState(false);
-  const [tipOpen, setTipOpen] = useState(true);
+  const [tipOpen, setTipOpen] = useState(false);
   const [chatStage, setChatStage] = useState<"intro" | "harBituach" | "more">("intro");
   const [showInsight, setShowInsight] = useState(false);
 
