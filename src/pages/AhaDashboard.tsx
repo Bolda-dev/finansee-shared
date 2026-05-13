@@ -619,24 +619,34 @@ const AhaDashboard = () => {
               {/* === STAGE: INTRO === */}
               {chatStage === "intro" && (
                 <div className="space-y-2.5">
-                  {/* Primary CTA — large, gradient */}
+                  {/* Primary CTA — clean white card with purple accent */}
                   <button
                     onClick={() => setChatStage("harBituach")}
-                    className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
+                    className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98]"
                     style={{
-                      background: palettes.insurance.gradient,
-                      boxShadow: "0 12px 28px -8px hsla(262, 72%, 50%, 0.55)",
+                      background: "white",
+                      border: "1.5px solid hsl(262, 60%, 88%)",
+                      boxShadow: "0 8px 22px -10px hsla(262, 60%, 45%, 0.28)",
                     }}
                   >
-                    <span className="absolute top-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold" style={{ background: "hsla(0,0%,100%,0.25)", color: "white" }}>
-                      <Sparkles className="h-2.5 w-2.5" /> מומלץ
-                    </span>
-                    <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "hsla(0,0%,100%,0.22)" }}>
+                    <span
+                      className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: palettes.insurance.gradient }}
+                    >
                       <Zap className="h-5 w-5 text-white" />
                     </span>
                     <span className="flex-1 min-w-0">
-                      <span className="block text-[14px] font-extrabold text-white mb-0.5">הר ביטוח + מסלקה</span>
-                      <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.85)" }}>חיבור אחד · כל הנתונים שלך · התובנה הראשונה תוך דקה</span>
+                      <span className="flex items-center gap-1.5 mb-0.5">
+                        <span className="text-[14px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>
+                          הר ביטוח + מסלקה
+                        </span>
+                        <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold" style={{ background: "hsl(262, 75%, 95%)", color: "hsl(262, 75%, 45%)" }}>
+                          מומלץ
+                        </span>
+                      </span>
+                      <span className="block text-[11px] leading-snug" style={{ color: "hsl(250, 22%, 50%)" }}>
+                        חיבור אחד · כל הנתונים שלך
+                      </span>
                     </span>
                   </button>
 
