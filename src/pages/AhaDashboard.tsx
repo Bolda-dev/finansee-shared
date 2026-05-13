@@ -835,74 +835,106 @@ const AhaDashboard = () => {
   );
 };
 
-type ConnRowPalette = { gradient: string; solid: string; soft: string; shadow: string };
-type ConnRowStatus = "idle" | "connecting" | "done";
-
-const ConnectionRow = ({
+const ConsentAnnex = ({
+  icon,
+  iconBg,
   title,
   subtitle,
-  status,
-  palette,
-  onConnect,
-  icon,
-  statusLabel,
+  bullets,
+  consentText,
+  checked,
+  onToggle,
 }: {
+  icon: React.ReactNode;
+  iconBg: string;
   title: string;
   subtitle: string;
-  status: ConnRowStatus;
-  palette: ConnRowPalette;
-  onConnect: () => void;
-  icon?: React.ReactNode;
-  statusLabel?: string;
-}) => {
-  const isDone = status === "done";
-  const isConnecting = status === "connecting";
-  return (
-    <div
-      className="rounded-2xl p-3 flex items-center gap-3"
+  bullets: string[];
+  consentText: string;
+  checked: boolean;
+  onToggle: () => void;
+}) => (
+  <div className="rounded-2xl p-4" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
+    <div className="flex justify-center mb-2">
+      <span className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ background: iconBg }}>
+        {icon}
+      </span>
+    </div>
+    <p className="text-center text-[15px] font-extrabold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
+    <p className="text-center text-[11px] mb-3" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
+
+    <div className="rounded-xl p-3 mb-3" style={{ background: "hsl(220, 60%, 97%)", border: "1px solid hsl(220, 50%, 92%)" }}>
+      <div className="flex items-center justify-between mb-1.5">
+        <button className="text-[10.5px] font-bold flex items-center gap-0.5" style={{ color: "hsl(220, 85%, 50%)" }}>
+          <ArrowLeft className="h-3 w-3" /> קרא את המסמך המלא
+        </button>
+        <p className="text-[12px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>מה כולל הנספח?</p>
+      </div>
+      <ul className="space-y-1 text-end">
+        {bullets.map((b, i) => (
+          <li key={i} className="text-[11px] leading-snug" style={{ color: "hsl(250, 30%, 30%)" }}>• {b}</li>
+        ))}
+      </ul>
+    </div>
+
+    <button
+      onClick={onToggle}
+      className="w-full rounded-xl p-3 flex items-center gap-2.5 text-end transition-all active:scale-[0.99]"
       style={{
-        background: "white",
-        border: `1.5px solid ${isDone ? "hsl(150, 60%, 70%)" : palette.solid}`,
-        boxShadow: isDone ? "0 6px 16px -4px hsla(150, 60%, 30%, 0.2)" : palette.shadow,
-        transition: "all 0.3s ease",
+        background: checked ? "hsl(262, 75%, 96%)" : "white",
+        border: `1.5px solid ${checked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 88%)"}`,
       }}
     >
       <span
-        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-        style={{
-          background: isDone
-            ? "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
-            : palette.gradient,
-        }}
+        className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+        style={{ background: checked ? "hsl(262, 75%, 55%)" : "hsl(230, 25%, 95%)" }}
       >
-        {isDone ? <Check className="h-5 w-5 text-white" strokeWidth={3} /> : (icon || <Zap className="h-4 w-4 text-white" />)}
+        {checked && <Check className="h-4 w-4 text-white" strokeWidth={3} />}
       </span>
       <div className="flex-1 min-w-0">
-        <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
-        <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
+        <p className="text-[13px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>אני מאשר/ת</p>
+        <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{consentText}</p>
       </div>
-      {status === "idle" && (
-        <button
-          onClick={onConnect}
-          className="rounded-full px-3 py-1.5 text-[11px] font-bold text-white flex items-center gap-1 flex-shrink-0 transition-transform active:scale-[0.96]"
-          style={{ background: palette.gradient, boxShadow: palette.shadow }}
-        >
-          חבר
-        </button>
-      )}
-      {isConnecting && (
-        <span className="flex items-center gap-1 text-[10.5px] font-semibold flex-shrink-0" style={{ color: palette.solid }}>
-          <Loader2 className="h-3.5 w-3.5 animate-spin" />
-          מתחבר...
-        </span>
-      )}
-      {isDone && (
-        <span className="flex items-center gap-1 text-[10.5px] font-bold flex-shrink-0 px-2 py-1 rounded-full" style={{ color: "hsl(150, 70%, 28%)", background: "hsl(150, 65%, 92%)" }}>
-          {statusLabel || "מחובר"}
-        </span>
-      )}
+    </button>
+  </div>
+);
+
+const ResultRow = ({
+  title,
+  subtitle,
+  badgeText,
+  badgeBg,
+  badgeColor,
+  iconGradient,
+  borderColor,
+}: {
+  title: string;
+  subtitle: string;
+  badgeText: string;
+  badgeBg: string;
+  badgeColor: string;
+  iconGradient: string;
+  borderColor: string;
+}) => (
+  <div
+    className="rounded-2xl p-3 flex items-center gap-3"
+    style={{
+      background: "white",
+      border: `1.5px solid ${borderColor}`,
+      boxShadow: "0 6px 16px -4px hsla(230, 30%, 25%, 0.08)",
+    }}
+  >
+    <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: iconGradient }}>
+      <Check className="h-5 w-5 text-white" strokeWidth={3} />
+    </span>
+    <div className="flex-1 min-w-0">
+      <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
+      <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
     </div>
-  );
-};
+    <span className="text-[10.5px] font-bold flex-shrink-0 px-2 py-1 rounded-full whitespace-nowrap" style={{ color: badgeColor, background: badgeBg }}>
+      {badgeText}
+    </span>
+  </div>
+);
 
 export default AhaDashboard;
