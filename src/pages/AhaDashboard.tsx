@@ -735,8 +735,8 @@ const AhaDashboard = () => {
                     );
                   })()}
 
-                  {/* === STEP 5: collecting animation === */}
-                  {collectStep === 5 && (
+                  {/* === STEP 5/9: collecting animation === */}
+                  {(collectStep === 5 || collectStep === 9) && (
                     <div className="rounded-2xl p-6 flex flex-col items-center gap-3" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
                       <div className="relative w-16 h-16 flex items-center justify-center">
                         <div
@@ -751,10 +751,100 @@ const AhaDashboard = () => {
                         </div>
                       </div>
                       <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>
-                        {collectingMsg === 0 && "מתחברת לרשות שוק ההון..."}
-                        {collectingMsg === 1 && "מאמתת את הזהות שלך..."}
-                        {collectingMsg === 2 && "מושכת את הפוליסות שלך..."}
+                        {collectStep === 5 && collectingMsg === 0 && "מתחברת לרשות שוק ההון..."}
+                        {collectStep === 5 && collectingMsg === 1 && "מאמתת את הזהות שלך..."}
+                        {collectStep === 5 && collectingMsg === 2 && "מושכת את הפוליסות שלך..."}
+                        {collectStep === 9 && collectingMsg === 0 && "מושכת את דוח האשראי שלך..."}
+                        {collectStep === 9 && collectingMsg === 1 && "מזהה נכסים והתחייבויות..."}
+                        {collectStep === 9 && collectingMsg === 2 && "מסכמת את התמונה הפיננסית..."}
                       </p>
+                    </div>
+                  )}
+
+                  {/* === STEPS 7-8: credit report consents === */}
+                  {collectStep === 7 && (
+                    <ConsentAnnex
+                      icon={<TrendingUp className="h-6 w-6" style={{ color: "hsl(178, 70%, 32%)" }} />}
+                      iconBg="hsl(176, 55%, 92%)"
+                      title="אישור לדוח אשראי - נכסים"
+                      subtitle="לניתוח פיננסי מלא נצטרך גישה לדוח האשראי שלך"
+                      bullets={[
+                        "זיהוי כל החשבונות והפיקדונות שלך",
+                        "מיפוי השקעות וקרנות פעילות",
+                        "ניהול אופטימלי של הנכסים",
+                      ]}
+                      consentText="המידע מוצפן ומאובטח"
+                      checked={consents.creditAssets}
+                      onToggle={() => setConsents((c) => ({ ...c, creditAssets: !c.creditAssets }))}
+                    />
+                  )}
+                  {collectStep === 8 && (
+                    <ConsentAnnex
+                      icon={<TrendingDown className="h-6 w-6" style={{ color: "hsl(220, 85%, 55%)" }} />}
+                      iconBg="hsl(220, 85%, 94%)"
+                      title="אישור לדוח אשראי - התחייבויות"
+                      subtitle="כדי להציג מצב מלא נצטרך לראות גם את ההתחייבויות"
+                      bullets={[
+                        "זיהוי הלוואות ומשכנתאות פעילות",
+                        "אסטרטגיות לשיפור ציון אשראי",
+                        "ניהול אופטימלי של מסגרות",
+                      ]}
+                      consentText="המידע מוצפן ומאובטח"
+                      checked={consents.creditLiab}
+                      onToggle={() => setConsents((c) => ({ ...c, creditLiab: !c.creditLiab }))}
+                    />
+                  )}
+
+                  {/* Continue button (steps 7-8) */}
+                  {(collectStep === 7 || collectStep === 8) && (() => {
+                    const stepValid = collectStep === 7 ? consents.creditAssets : consents.creditLiab;
+                    return (
+                      <button
+                        onClick={() => setCollectStep((s) => (s === 7 ? 8 : 9))}
+                        disabled={!stepValid}
+                        className="w-full rounded-full py-3 text-[13px] font-extrabold text-white transition-all active:scale-[0.98]"
+                        style={{
+                          background: stepValid
+                            ? "linear-gradient(135deg, hsl(262, 75%, 52%), hsl(220, 85%, 55%))"
+                            : "hsl(230, 18%, 80%)",
+                          boxShadow: stepValid ? "0 8px 20px -6px hsla(262, 72%, 50%, 0.5)" : "none",
+                          opacity: stepValid ? 1 : 0.7,
+                        }}
+                      >
+                        {collectStep === 8 ? "סיים והתחל איסוף" : "המשך"}
+                      </button>
+                    );
+                  })()}
+
+                  {/* === STEP 10: wrap-up === */}
+                  {collectStep === 10 && (
+                    <div className="rounded-2xl p-4" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)", boxShadow: "0 4px 14px hsla(250, 30%, 25%, 0.05)" }}>
+                      <ul className="space-y-3 mb-4">
+                        {[
+                          "ביטוח, פנסיה והשקעות מחוברים",
+                          "דוח אשראי לנכסים והתחייבויות התקבל",
+                          "המידע יתעדכן אוטומטית כל חודש",
+                        ].map((t, i) => (
+                          <li key={i} className="flex items-center gap-2.5">
+                            <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "hsl(150, 65%, 45%)" }}>
+                              <Check className="h-3 w-3 text-white" strokeWidth={3.5} />
+                            </span>
+                            <span className="text-[12.5px] leading-snug text-end flex-1" style={{ color: "hsl(250, 35%, 22%)" }}>
+                              {t}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <button
+                        onClick={() => { setHomeAlmostDone(true); setChatOpen(false); }}
+                        className="w-full rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
+                        style={{
+                          background: "hsl(250, 40%, 12%)",
+                          boxShadow: "0 8px 20px -4px hsla(250, 40%, 12%, 0.45)",
+                        }}
+                      >
+                        חזרה לדף הבית
+                      </button>
                     </div>
                   )}
 
