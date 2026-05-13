@@ -79,6 +79,7 @@ const AhaDashboard2 = () => {
   const [collectingMsg, setCollectingMsg] = useState(0);
   const [completed85, setCompleted85] = useState(false);
   const [danaExpanded, setDanaExpanded] = useState(false);
+  const [danaCollapsed, setDanaCollapsed] = useState(false);
 
   // Reset chat when sheet closes (preserve completed85)
   useEffect(() => {
