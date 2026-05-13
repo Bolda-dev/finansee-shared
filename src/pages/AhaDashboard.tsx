@@ -613,4 +613,74 @@ const AhaDashboard = () => {
   );
 };
 
+type ConnRowPalette = { gradient: string; solid: string; soft: string; shadow: string };
+type ConnRowStatus = "idle" | "connecting" | "done";
+
+const ConnectionRow = ({
+  title,
+  subtitle,
+  status,
+  palette,
+  onConnect,
+  icon,
+  statusLabel,
+}: {
+  title: string;
+  subtitle: string;
+  status: ConnRowStatus;
+  palette: ConnRowPalette;
+  onConnect: () => void;
+  icon?: React.ReactNode;
+  statusLabel?: string;
+}) => {
+  const isDone = status === "done";
+  const isConnecting = status === "connecting";
+  return (
+    <div
+      className="rounded-2xl p-3 flex items-center gap-3"
+      style={{
+        background: "white",
+        border: `1.5px solid ${isDone ? "hsl(150, 60%, 70%)" : palette.solid}`,
+        boxShadow: isDone ? "0 6px 16px -4px hsla(150, 60%, 30%, 0.2)" : palette.shadow,
+        transition: "all 0.3s ease",
+      }}
+    >
+      <span
+        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+        style={{
+          background: isDone
+            ? "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
+            : palette.gradient,
+        }}
+      >
+        {isDone ? <Check className="h-5 w-5 text-white" strokeWidth={3} /> : (icon || <Zap className="h-4 w-4 text-white" />)}
+      </span>
+      <div className="flex-1 min-w-0">
+        <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
+        <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
+      </div>
+      {status === "idle" && (
+        <button
+          onClick={onConnect}
+          className="rounded-full px-3 py-1.5 text-[11px] font-bold text-white flex items-center gap-1 flex-shrink-0 transition-transform active:scale-[0.96]"
+          style={{ background: palette.gradient, boxShadow: palette.shadow }}
+        >
+          חבר
+        </button>
+      )}
+      {isConnecting && (
+        <span className="flex items-center gap-1 text-[10.5px] font-semibold flex-shrink-0" style={{ color: palette.solid }}>
+          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          מתחבר...
+        </span>
+      )}
+      {isDone && (
+        <span className="flex items-center gap-1 text-[10.5px] font-bold flex-shrink-0 px-2 py-1 rounded-full" style={{ color: "hsl(150, 70%, 28%)", background: "hsl(150, 65%, 92%)" }}>
+          {statusLabel || "מחובר"}
+        </span>
+      )}
+    </div>
+  );
+};
+
 export default AhaDashboard;
