@@ -89,7 +89,7 @@ const AhaDashboard = () => {
     const t3 = setTimeout(() => {
       if (collectStep === 5) {
         setCollectStep(6);
-        setTimeout(() => setShowInsight(true), 1000);
+        setTimeout(() => setShowInsight(true), 1700);
       } else {
         setCollectStep(10);
       }
@@ -1081,7 +1081,8 @@ const AhaDashboard = () => {
                           style={{
                             background: palettes.insurance.gradient,
                             boxShadow: palettes.insurance.shadow,
-                            animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both",
+                            opacity: 0,
+                            animation: "aha-item-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards",
                           }}
                         >
                           <span
