@@ -43,16 +43,19 @@ const AhaDashboard = () => {
   const [chatStage, setChatStage] = useState<"intro" | "harBituach" | "more">("intro");
   const [showInsight, setShowInsight] = useState(false);
 
-  // Multi-step collection flow (1..4 = steps, 5 = collecting, 6 = result)
-  const [collectStep, setCollectStep] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
+  // Multi-step collection flow:
+  // 1..4 = insurance steps, 5 = collecting, 6 = result+insight
+  // 7 = credit (assets), 8 = credit (liab), 9 = collecting, 10 = wrap-up
+  const [collectStep, setCollectStep] = useState<1|2|3|4|5|6|7|8|9|10>(1);
   const [idNumber, setIdNumber] = useState("");
   const [idDate, setIdDate] = useState("");
   const [usePhoto, setUsePhoto] = useState(false);
-  const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false });
+  const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false, creditAssets: false, creditLiab: false });
   const [collectingMsg, setCollectingMsg] = useState(0);
+  const [homeAlmostDone, setHomeAlmostDone] = useState(false);
   const insightRef = useRef<HTMLDivElement | null>(null);
 
-  // Reset chat state when sheet closes
+  // Reset chat state when sheet closes (keep homeAlmostDone)
   useEffect(() => {
     if (!chatOpen) {
       const t = setTimeout(() => {
@@ -62,22 +65,26 @@ const AhaDashboard = () => {
         setIdNumber("");
         setIdDate("");
         setUsePhoto(false);
-        setConsents({ pension: false, copies: false, harBituach: false });
+        setConsents({ pension: false, copies: false, harBituach: false, creditAssets: false, creditLiab: false });
         setCollectingMsg(0);
       }, 300);
       return () => clearTimeout(t);
     }
   }, [chatOpen]);
 
-  // Collecting animation: cycle messages then advance to result
+  // Collecting animations: step 5 → 6 (insurance), step 9 → 10 (credit)
   useEffect(() => {
-    if (collectStep !== 5) return;
+    if (collectStep !== 5 && collectStep !== 9) return;
     setCollectingMsg(0);
     const t1 = setTimeout(() => setCollectingMsg(1), 600);
     const t2 = setTimeout(() => setCollectingMsg(2), 1200);
     const t3 = setTimeout(() => {
-      setCollectStep(6);
-      setTimeout(() => setShowInsight(true), 450);
+      if (collectStep === 5) {
+        setCollectStep(6);
+        setTimeout(() => setShowInsight(true), 450);
+      } else {
+        setCollectStep(10);
+      }
     }, 1900);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [collectStep]);
