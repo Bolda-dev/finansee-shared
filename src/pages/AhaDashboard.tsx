@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap, Camera, FileText, ShieldHalf } from "lucide-react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap, Camera, FileText, ShieldHalf, ChevronDown } from "lucide-react";
 import confetti from "canvas-confetti";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
@@ -644,7 +644,7 @@ const AhaDashboard = () => {
                     </div>
 
                     <div
-                      className="w-full rounded-xl py-3 text-center text-[14px] font-extrabold text-white flex items-center justify-center gap-1.5"
+                      className="w-full rounded-full py-3 text-center text-[14px] font-extrabold text-white flex items-center justify-center gap-1.5"
                       style={{
                         background: "hsl(250, 40%, 12%)",
                         boxShadow: "0 8px 18px -8px hsla(250, 40%, 12%, 0.55)",
@@ -808,7 +808,7 @@ const AhaDashboard = () => {
                       <button
                         onClick={() => setCollectStep((s) => (s === 4 ? 5 : (s + 1) as 1 | 2 | 3 | 4))}
                         disabled={!stepValid}
-                        className="w-full rounded-2xl py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
+                        className="w-full rounded-full py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
                         style={{
                           background: stepValid ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
                           boxShadow: stepValid ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
@@ -887,7 +887,7 @@ const AhaDashboard = () => {
                       <button
                         onClick={() => setCollectStep((s) => (s === 7 ? 8 : 9))}
                         disabled={!stepValid}
-                        className="w-full rounded-2xl py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
+                        className="w-full rounded-full py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
                         style={{
                           background: stepValid ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
                           boxShadow: stepValid ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
@@ -974,22 +974,23 @@ const AhaDashboard = () => {
                         </ul>
                       </div>
 
-                      {/* Insurance — connected, green check icon */}
+                      {/* Insurance — connected, white card with purple icon */}
                       <button
                         onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
                         className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
                         style={{
-                          background: palettes.insurance.gradient,
-                          boxShadow: "0 12px 28px -8px hsla(262, 72%, 50%, 0.55)",
+                          background: "white",
+                          border: "1.5px solid hsl(262, 60%, 88%)",
+                          boxShadow: "0 8px 22px -10px hsla(262, 60%, 45%, 0.28)",
                           opacity: 0,
                           animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards",
                         }}
                       >
-                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsla(0,0%,100%,0.95)", color: "hsl(150, 70%, 28%)" }}>
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsl(150, 60%, 95%)", color: "hsl(150, 70%, 28%)", border: "1px solid hsl(150, 50%, 85%)" }}>
                           <Check className="h-2.5 w-2.5" strokeWidth={4} /> הכל תקין
                         </span>
-                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 relative" style={{ background: "white" }}>
-                          <ShieldCheck className="h-5 w-5" style={{ color: "hsl(262, 75%, 55%)" }} />
+                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 relative" style={{ background: palettes.insurance.gradient }}>
+                          <ShieldCheck className="h-5 w-5 text-white" />
                           <span
                             className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
                             style={{ background: "hsl(150, 65%, 45%)", border: "2px solid white" }}
@@ -998,8 +999,8 @@ const AhaDashboard = () => {
                           </span>
                         </span>
                         <span className="flex-1 min-w-0">
-                          <span className="block text-[14px] font-extrabold text-white mb-0.5">ביטוח</span>
-                          <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.9)" }}>7 פוליסות מחוברות · עדכון אוטומטי</span>
+                          <span className="block text-[14px] font-extrabold mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>ביטוח</span>
+                          <span className="block text-[11px]" style={{ color: "hsl(250, 22%, 50%)" }}>7 פוליסות מחוברות · עדכון אוטומטי</span>
                         </span>
                       </button>
 
@@ -1093,19 +1094,20 @@ const AhaDashboard = () => {
                           onClick={() => setCollectStep(7)}
                           className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] mt-2"
                           style={{
-                            background: palettes.assets.gradient,
-                            boxShadow: "0 12px 28px -8px hsla(176, 70%, 32%, 0.5)",
+                            background: "white",
+                            border: "1.5px solid hsl(176, 50%, 82%)",
+                            boxShadow: "0 8px 22px -10px hsla(176, 70%, 32%, 0.28)",
                             animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both",
                             opacity: 0,
                             animationFillMode: "forwards",
                           }}
                         >
-                          <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "hsla(0,0%,100%,0.22)" }}>
+                          <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: palettes.assets.gradient }}>
                             <TrendingUp className="h-5 w-5 text-white" />
                           </span>
                           <span className="flex-1 min-w-0">
-                            <span className="block text-[14px] font-extrabold text-white mb-0.5">חיבור לנכסים</span>
-                            <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.9)" }}>בנק, השקעות ונדל״ן · גילוי השווי האמיתי</span>
+                            <span className="block text-[14px] font-extrabold mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>חיבור לנכסים</span>
+                            <span className="block text-[11px]" style={{ color: "hsl(250, 22%, 50%)" }}>בנק, השקעות ונדל״ן · גילוי השווי האמיתי</span>
                           </span>
                         </button>
                       )}
@@ -1168,7 +1170,9 @@ const ConsentAnnex = ({
   consentText: string;
   checked: boolean;
   onToggle: () => void;
-}) => (
+}) => {
+  const [expanded, setExpanded] = useState(false);
+  return (
   <div dir="rtl" className="space-y-3">
     {/* Header — flat info */}
     <div className="flex items-center gap-3 px-1">
@@ -1188,32 +1192,49 @@ const ConsentAnnex = ({
       </div>
     </div>
 
-    {/* Info — flat, no card */}
-    <div className="px-1">
-      <div className="flex items-center justify-between mb-1.5">
-        <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: "hsl(230, 15%, 45%)" }}>
+    {/* Collapsible: details + full document */}
+    <div className="rounded-2xl overflow-hidden" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        className="w-full flex items-center justify-between px-3.5 py-2.5"
+        aria-expanded={expanded}
+      >
+        <span className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>
           מה כולל הנספח
-        </p>
-        <button
-          className="text-[10.5px] font-semibold inline-flex items-center gap-1 underline-offset-2 hover:underline"
-          style={{ color: "hsl(220, 85%, 50%)" }}
-        >
-          קרא את המסמך המלא
-          <ArrowLeft className="h-3 w-3" />
-        </button>
-      </div>
-      <ul className="space-y-1">
-        {bullets.map((b, i) => (
-          <li
-            key={i}
-            className="text-[11.5px] leading-snug flex gap-1.5 text-right"
-            style={{ color: "hsl(250, 25%, 35%)" }}
+        </span>
+        <ChevronDown
+          className="h-4 w-4 transition-transform"
+          style={{
+            color: "hsl(230, 15%, 45%)",
+            transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+          }}
+        />
+      </button>
+      {expanded && (
+        <div className="px-3.5 pb-3.5 pt-0">
+          <ul className="space-y-1 mb-2.5">
+            {bullets.map((b, i) => (
+              <li
+                key={i}
+                className="text-[11.5px] leading-snug flex gap-1.5 text-right"
+                style={{ color: "hsl(250, 25%, 35%)" }}
+              >
+                <span style={{ color: "hsl(262, 75%, 55%)" }}>•</span>
+                <span className="flex-1">{b}</span>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="text-[11px] font-semibold inline-flex items-center gap-1 underline-offset-2 hover:underline"
+            style={{ color: "hsl(220, 85%, 50%)" }}
           >
-            <span style={{ color: "hsl(262, 75%, 55%)" }}>•</span>
-            <span className="flex-1">{b}</span>
-          </li>
-        ))}
-      </ul>
+            קרא את המסמך המלא
+            <ArrowLeft className="h-3 w-3" />
+          </button>
+        </div>
+      )}
     </div>
 
     {/* Action — the only real card */}
@@ -1247,7 +1268,8 @@ const ConsentAnnex = ({
       </div>
     </button>
   </div>
-);
+  );
+};
 
 const ResultRow = ({
   title,
