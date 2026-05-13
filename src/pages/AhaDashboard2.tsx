@@ -252,16 +252,18 @@ const AhaDashboard2 = () => {
                   {card.label}
                 </p>
                 {completed85 ? (
-                  <div
-                    className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center gap-1"
-                    style={{
-                      background: "hsl(45, 90%, 55%)",
-                      color: "hsl(40, 90%, 15%)",
-                      boxShadow: "0 2px 8px hsla(45, 90%, 40%, 0.3)",
-                    }}
-                  >
-                    <Loader className="h-3 w-3 animate-spin" />
-                    שולף נתונים
+                  <div className="mt-auto flex">
+                    <span
+                      className="inline-flex items-center gap-1 text-[9.5px] font-bold px-2 py-0.5 rounded-full"
+                      style={{
+                        background: "hsl(45, 95%, 88%)",
+                        color: "hsl(35, 85%, 28%)",
+                        border: "1px solid hsl(45, 90%, 75%)",
+                      }}
+                    >
+                      <Loader className="h-2.5 w-2.5 animate-spin" />
+                      שולף נתונים
+                    </span>
                   </div>
                 ) : (
                   <button
