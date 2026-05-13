@@ -1,23 +1,135 @@
-## Replace floating chatbot in AhaDashboard with IndexC bottom chat bar
+## מטרה
+לאחר לחיצה על "הר ביטוח + מסלקה" בצ'אט (`AhaDashboard.tsx`), להוביל את היוזר דרך פלוו איסוף נתונים בתוך הצ'אט עצמו — לא לקפוץ למסכים חיצוניים. בסיום: שני וי על הר הביטוח (מיידי) ומסלקה פנסיונית (צהוב — "זמין תוך שעתיים"), ואז בועית תובנה חגיגית עם קונפטי וכפתור שחור.
 
-### Changes to `src/pages/AhaDashboard.tsx`
+## הפלוו החדש בצ'אט
 
-1. **Remove** `<ChatBot ... variant="centered" />` and its FAB.
-2. **Add** the exact same bottom chat bar pattern used in `IndexC.tsx` (lines 525–570):
-   - Fixed bottom, max-width 430px, white pill with shadow.
-   - Right-side avatar (`advisorImg`) with rotating tri-color ring (`tri-ring-c` class — already global from IndexC styles).
-   - Center placeholder text "שאל את Finansee AI".
-   - Mic button + Send button (tri-ring CTA) on the left.
-   - Click anywhere → opens chat.
-3. **Tooltip from the avatar**: a small persistent speech-bubble above the avatar showing  
-   "האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?"  
-   - Implemented as an absolutely-positioned bubble anchored to the avatar (not the radix Tooltip, since it should be visible by default to engage the user, like a coach-mark).
-   - White bg, soft shadow, rounded-2xl, tail pointing down to avatar, dismissible (small × button) with local `useState` so it hides on tap.
-4. **Imports**: add `Mic`, `Send` from lucide-react; replace `ChatBot` import with `InsightsSheet` from `@/components/InsightsSheet` (same as IndexC uses with `mode="context"`).
-5. Bottom padding of the page already `pb-28` — keep it so the chat bar doesn't cover content.
+החלפת ה־stage `"harBituach"` הקיים בפלוו רב־שלבי (`collectStep: 0..4`) המבוסס על 4 התמונות:
 
-No other sections (hero cards, financial center, Dana callout) change.
+```text
+[ progress bar  ▓▓▓░░  שלב 2 מתוך 4 ]
 
-### Technical notes
-- Reuse existing global CSS classes `tri-ring-c` and `cta-tri-c` (defined for IndexC, available globally via `index.css`).
-- Tooltip bubble uses inline styles consistent with the rest of the page (`hsl(250, 40%, 15%)` text, white bg, `0 8px 24px hsla(250,30%,25%,0.15)` shadow).
+  שלב 1: פרטי תעודת זהות
+    • שדה מספר ת"ז (9 ספרות)
+    • שדה תאריך הוצאה (dd/mm/yyyy)
+    • או — אזור מקווקו "צלם תעודת זהות · נמלא אוטומטית"
+    • כפתור "המשך" (disabled עד שמולאו השדות / נבחר צילום)
+
+  שלב 2: נספח א' — מסלקת הפנסיה
+    • אייקון מגן סגול
+    • כרטיס "מה כולל הנספח?" עם בולטים + לינק "קרא את המסמך המלא"
+    • שורת אישור עם צ'קבוקס "אני מאשר/ת — יציאה בשמי למסלקת הפנסיה"
+    • כפתור "המשך"
+
+  שלב 3: נספח ב' — העתקי פוליסות
+    • אייקון מסמך כחול
+    • אותו דפוס: סיכום + אישור + המשך
+
+  שלב 4: נספח ה' — הר הביטוח
+    • אייקון בניין/ארכיון כחול
+    • אותו דפוס: סיכום + אישור + "סיים והתחל איסוף"
+```
+
+לאחר שלב 4 → אנימציית "אוספת נתונים" קצרה (~1.5s, ספינר + טקסט מתחלף "מתחברת לרשות שוק ההון…", "מאמתת זהות…", "מושכת פוליסות…") ואז מסך תוצאה.
+
+## מסך התוצאה (אחרי השלבים)
+
+```text
+✓  הר הביטוח              [ירוק]   חובר · 7 פוליסות
+✓  מסלקה פנסיונית         [צהוב]   זמין תוך שעתיים
+```
+
+- וי על שניהם, אבל הצבע של ה־badge של המסלקה צהוב (`hsl(45, 95%, 55%)` רקע / `hsl(35, 90%, 25%)` טקסט) במקום ירוק, עם הטקסט "זמין תוך שעתיים".
+- מתחת — בועית תובנה חגיגית.
+
+## בועית התובנה החגיגית (עם קונפטי)
+
+```text
+                ✦  ✦
+            🎉 [ Confetti ]  🎉
+         ╭──────────────────────────╮
+         │ ✨ התובנה הראשונה שלך   │
+         │                          │
+         │ ביטוח חיים כפול          │
+         │ חיסכון ₪2,000 בשנה      │
+         │                          │
+         │ אתה משלם פעמיים על אותו │
+         │ כיסוי. אפשר לבטל בקליק. │
+         │                          │
+         │ [ ⚡ חסוך ₪2,000 בקליק ]│  ← כפתור שחור
+         ╰──────────────────────────╯
+```
+
+- בועית עם רקע gradient בהיר (ירוק/לבן), border עדין, shadow רך.
+- **קונפטי** בעת הופעת הבועית: ספריית `canvas-confetti` (קטנה, ללא תלויות), ירייה אחת מנקודת הבועית, ~80 חלקיקים, צבעים תואמים לפלטה (סגול/כחול/ירוק/זהב).
+- **CTA שחור** מלא: רקע `hsl(250, 40%, 12%)`, טקסט לבן, אייקון Zap. בלחיצה — סגירת הצ'אט וניווט ל־`/c/insurance` (כמו היום).
+
+## פרוגרס בר באיסוף
+
+רכיב חדש `CollectProgress` בראש אזור התוכן של ה־stage `"harBituach"`:
+
+```tsx
+<div className="flex items-center gap-2 mb-3">
+  <div className="flex-1 h-1.5 rounded-full bg-[hsl(230,20%,93%)] overflow-hidden">
+    <div
+      className="h-full rounded-full transition-all duration-500"
+      style={{
+        width: `${(step / 4) * 100}%`,
+        background: "linear-gradient(90deg, hsl(262,75%,55%), hsl(220,85%,55%))",
+      }}
+    />
+  </div>
+  <span className="text-[10.5px] font-bold text-[hsl(250,40%,20%)]">
+    שלב {step}/4
+  </span>
+</div>
+```
+
+מוצג כל זמן ש־`collectStep < 5`, מוסתר במסך התוצאה.
+
+## פירוט טכני
+
+**קובץ:** `src/pages/AhaDashboard.tsx` (שינוי בתוך ה־stage `"harBituach"` הקיים — אין צורך בקומפוננטות בקובץ נפרד; אפשר להוסיף קומפוננטות־עוזר באותו קובץ כמו `ConnectionRow` הקיימת).
+
+**State חדש:**
+```ts
+const [collectStep, setCollectStep] = useState<0|1|2|3|4|5>(1); // 5 = result
+const [idNumber, setIdNumber] = useState("");
+const [idDate, setIdDate] = useState("");
+const [usePhoto, setUsePhoto] = useState(false);
+const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false });
+const [collecting, setCollecting] = useState(false);
+```
+
+איפוס שלהם ב־`useEffect` הקיים שמתאפס בסגירת הצ'אט.
+
+**הסרה:** ה־`ConnectionRow`־ים הקיימים והכפתור "חבר" הנפרד עוברים — הם הופכים לתצוגת תוצאה בלבד אחרי השלמת השלבים.
+
+**ספרייה חדשה:**
+```bash
+bun add canvas-confetti
+bun add -d @types/canvas-confetti
+```
+
+שימוש:
+```ts
+import confetti from "canvas-confetti";
+useEffect(() => {
+  if (showInsight) {
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.65 },
+      colors: ["#7C3AED", "#3B82F6", "#10B981", "#F59E0B"],
+    });
+  }
+}, [showInsight]);
+```
+
+**טריגר התובנה:** במקום ה־`useEffect` הקיים שמופעל מ־`insuranceStatus === "connecting"`, נחליף ל־`collecting`: כשמסתיימת אנימציית האיסוף → `setCollectStep(5)` → אחרי 400ms → `setShowInsight(true)` → קונפטי נורה.
+
+**RTL וטוקנים:** כל הצבעים HSL inline בסגנון של הקובץ הקיים. שדות הטופס ב־RTL (כיוון ירושה מה־wrapper). כפתור CTA שחור — צבע inline, עקבי עם שאר הפלוו.
+
+## מה לא משתנה
+- תצוגת ה־"intro" (כפתור הר ביטוח + מסלקה והכפתור המשני).
+- ה־stage `"more"`.
+- כל מה שמחוץ לצ'אט (שאר `AhaDashboard`).

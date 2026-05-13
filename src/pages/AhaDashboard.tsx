@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap, Camera, FileText, ShieldHalf } from "lucide-react";
+import confetti from "canvas-confetti";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 
@@ -40,33 +41,63 @@ const AhaDashboard = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [tipOpen, setTipOpen] = useState(true);
   const [chatStage, setChatStage] = useState<"intro" | "harBituach" | "more">("intro");
-  const [insuranceStatus, setInsuranceStatus] = useState<"idle" | "connecting" | "done">("idle");
-  const [clearingStatus, setClearingStatus] = useState<"idle" | "scheduled">("idle");
   const [showInsight, setShowInsight] = useState(false);
+
+  // Multi-step collection flow (1..4 = steps, 5 = collecting, 6 = result)
+  const [collectStep, setCollectStep] = useState<1 | 2 | 3 | 4 | 5 | 6>(1);
+  const [idNumber, setIdNumber] = useState("");
+  const [idDate, setIdDate] = useState("");
+  const [usePhoto, setUsePhoto] = useState(false);
+  const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false });
+  const [collectingMsg, setCollectingMsg] = useState(0);
+  const insightRef = useRef<HTMLDivElement | null>(null);
 
   // Reset chat state when sheet closes
   useEffect(() => {
     if (!chatOpen) {
       const t = setTimeout(() => {
         setChatStage("intro");
-        setInsuranceStatus("idle");
-        setClearingStatus("idle");
         setShowInsight(false);
+        setCollectStep(1);
+        setIdNumber("");
+        setIdDate("");
+        setUsePhoto(false);
+        setConsents({ pension: false, copies: false, harBituach: false });
+        setCollectingMsg(0);
       }, 300);
       return () => clearTimeout(t);
     }
   }, [chatOpen]);
 
-  // Simulate insurance connection
+  // Collecting animation: cycle messages then advance to result
   useEffect(() => {
-    if (insuranceStatus === "connecting") {
-      const t = setTimeout(() => {
-        setInsuranceStatus("done");
-        setTimeout(() => setShowInsight(true), 500);
-      }, 1800);
-      return () => clearTimeout(t);
-    }
-  }, [insuranceStatus]);
+    if (collectStep !== 5) return;
+    setCollectingMsg(0);
+    const t1 = setTimeout(() => setCollectingMsg(1), 600);
+    const t2 = setTimeout(() => setCollectingMsg(2), 1200);
+    const t3 = setTimeout(() => {
+      setCollectStep(6);
+      setTimeout(() => setShowInsight(true), 450);
+    }, 1900);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [collectStep]);
+
+  // Fire confetti when insight appears
+  useEffect(() => {
+    if (!showInsight) return;
+    const rect = insightRef.current?.getBoundingClientRect();
+    const origin = rect
+      ? { x: (rect.left + rect.width / 2) / window.innerWidth, y: (rect.top + 20) / window.innerHeight }
+      : { x: 0.5, y: 0.5 };
+    confetti({
+      particleCount: 90,
+      spread: 75,
+      startVelocity: 38,
+      origin,
+      colors: ["#7C3AED", "#3B82F6", "#10B981", "#F59E0B", "#EC4899"],
+      zIndex: 100,
+    });
+  }, [showInsight]);
 
   const heroCards = [
     { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/c/assets" },
@@ -395,7 +426,7 @@ const AhaDashboard = () => {
             <div className="px-5 pt-1 pb-2 flex items-center justify-between flex-shrink-0">
               {chatStage !== "intro" ? (
                 <button
-                  onClick={() => { setChatStage("intro"); setShowInsight(false); }}
+                  onClick={() => { setChatStage("intro"); setShowInsight(false); setCollectStep(1); setConsents({ pension: false, copies: false, harBituach: false }); }}
                   className="flex items-center gap-1 text-[11.5px] font-medium"
                   style={{ color: "hsl(230, 15%, 45%)" }}
                 >
@@ -429,13 +460,39 @@ const AhaDashboard = () => {
                       </p>
                     </>
                   )}
-                  {chatStage === "harBituach" && !showInsight && (
+                  {chatStage === "harBituach" && collectStep <= 4 && (
                     <>
                       <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
-                        מעולה! בוא נתחיל לחבר 🚀
+                        {collectStep === 1 && "בוא נתחיל — קודם תעודת זהות 🪪"}
+                        {collectStep === 2 && "מעולה! עכשיו אישור למסלקת הפנסיה"}
+                        {collectStep === 3 && "נשאר מעט — אישור להעתקי הפוליסות"}
+                        {collectStep === 4 && "אחרון! אישור להר הביטוח"}
                       </p>
                       <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
-                        הר הביטוח מתחבר מיידית. המסלקה תיקח עד 24 שעות — אבל אל דאגה, נתחיל לעבוד מיד עם מה שיש.
+                        {collectStep === 1 && "פרטים אלה דרושים כדי שאוכל לפנות בשמך לרשויות."}
+                        {collectStep === 2 && "המסלקה אוספת עבורך מידע על כל קרנות הפנסיה, גמל והשתלמות."}
+                        {collectStep === 3 && "כך אקבל את הפוליסות הביטוחיות שלך ישירות מהיצרנים."}
+                        {collectStep === 4 && "הר הביטוח הוא המאגר המרכזי של רשות שוק ההון."}
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && collectStep === 5 && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        אוספת את הנתונים שלך... ⚡
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        רגע אחד, מתחברת למקורות.
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && collectStep === 6 && !showInsight && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        סיימנו! הנה מה שמצאתי 📊
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        הר הביטוח כבר מחובר. המסלקה תהיה זמינה תוך שעתיים.
                       </p>
                     </>
                   )}
@@ -445,7 +502,7 @@ const AhaDashboard = () => {
                         וואו, מצאתי משהו מיד! 🎯
                       </p>
                       <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
-                        זיהיתי <b>ביטוח חיים כפול</b> — אתה משלם פעמיים על אותו כיסוי. התחלה טובה לחיסכון!
+                        זיהיתי <b>ביטוח חיים כפול</b> — אתה משלם פעמיים על אותו כיסוי.
                       </p>
                     </>
                   )}
@@ -502,77 +559,242 @@ const AhaDashboard = () => {
                 </div>
               )}
 
-              {/* === STAGE: HAR BITUACH === */}
+              {/* === STAGE: HAR BITUACH — multi-step collection === */}
               {chatStage === "harBituach" && (
-                <div className="space-y-2.5">
-                  {/* Insurance row */}
-                  <ConnectionRow
-                    title="הר הביטוח"
-                    subtitle={
-                      insuranceStatus === "idle" ? "חיבור מיידי · כל הפוליסות שלך" :
-                      insuranceStatus === "connecting" ? "מתחברת לרשות שוק ההון..." :
-                      "מחובר · 7 פוליסות נמצאו"
-                    }
-                    status={insuranceStatus}
-                    palette={palettes.insurance}
-                    onConnect={() => setInsuranceStatus("connecting")}
-                  />
-                  {/* Clearing house row */}
-                  <ConnectionRow
-                    title="מסלקה פנסיונית"
-                    subtitle={
-                      clearingStatus === "idle" ? "מתעדכן תוך 24 שעות · קרנות, גמל, השתלמות" :
-                      "מתוזמן · נמשיך כשהנתונים יגיעו"
-                    }
-                    status={clearingStatus === "scheduled" ? "done" : "idle"}
-                    statusLabel={clearingStatus === "scheduled" ? "תוך 24 שעות" : undefined}
-                    palette={palettes.assets}
-                    onConnect={() => setClearingStatus("scheduled")}
-                    icon={<Clock className="h-4 w-4 text-white" />}
-                  />
+                <div className="space-y-3">
+                  {/* Progress bar (steps 1-4 only) */}
+                  {collectStep <= 4 && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "hsl(230, 20%, 93%)" }}>
+                        <div
+                          className="h-full rounded-full"
+                          style={{
+                            width: `${(collectStep / 4) * 100}%`,
+                            background: "linear-gradient(90deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%))",
+                            transition: "width 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                          }}
+                        />
+                      </div>
+                      <span className="text-[10.5px] font-bold whitespace-nowrap" style={{ color: "hsl(250, 40%, 20%)" }}>
+                        שלב {collectStep}/4
+                      </span>
+                    </div>
+                  )}
 
-                  {/* Insight reveal */}
-                  {showInsight && (
-                    <div
-                      className="rounded-2xl p-3.5 mt-1"
-                      style={{
-                        background: "linear-gradient(135deg, hsl(150, 75%, 96%) 0%, hsl(165, 70%, 93%) 100%)",
-                        border: "1.5px solid hsl(150, 60%, 70%)",
-                        boxShadow: "0 8px 24px -8px hsla(150, 60%, 35%, 0.25)",
-                        animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
-                      }}
-                    >
-                      <div className="flex items-start gap-2.5">
-                        <span
-                          className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                          style={{ background: "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))" }}
-                        >
-                          <Sparkles className="h-4 w-4 text-white" />
+                  {/* === STEP 1: ID details === */}
+                  {collectStep === 1 && (
+                    <div className="rounded-2xl p-4" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
+                      <p className="text-center text-[15px] font-extrabold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>פרטי תעודת זהות</p>
+                      <p className="text-center text-[11px] mb-4" style={{ color: "hsl(230, 15%, 50%)" }}>נדרשים לאימות הזהות שלך</p>
+
+                      <label className="block text-[11px] font-bold text-end mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>מספר תעודת זהות</label>
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={9}
+                        value={idNumber}
+                        onChange={(e) => setIdNumber(e.target.value.replace(/\D/g, ""))}
+                        placeholder="123456789"
+                        className="w-full text-center text-[15px] font-bold tracking-widest rounded-xl py-3 mb-3 focus:outline-none"
+                        style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
+                      />
+
+                      <label className="block text-[11px] font-bold text-end mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>תאריך הוצאת תעודת זהות</label>
+                      <input
+                        type="text"
+                        value={idDate}
+                        onChange={(e) => setIdDate(e.target.value)}
+                        placeholder="dd/mm/yyyy"
+                        className="w-full text-end text-[14px] rounded-xl py-3 px-3 mb-3 focus:outline-none"
+                        style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
+                      />
+
+                      <div className="flex items-center gap-2 my-3">
+                        <div className="flex-1 h-px" style={{ background: "hsl(230, 20%, 88%)" }} />
+                        <span className="text-[10.5px] font-medium" style={{ color: "hsl(230, 15%, 55%)" }}>או</span>
+                        <div className="flex-1 h-px" style={{ background: "hsl(230, 20%, 88%)" }} />
+                      </div>
+
+                      <button
+                        onClick={() => setUsePhoto(!usePhoto)}
+                        className="w-full rounded-2xl py-3 flex flex-col items-center gap-1.5 transition-all active:scale-[0.99]"
+                        style={{
+                          border: `1.5px dashed ${usePhoto ? "hsl(262, 75%, 55%)" : "hsl(262, 50%, 75%)"}`,
+                          background: usePhoto ? "hsl(262, 75%, 96%)" : "transparent",
+                        }}
+                      >
+                        <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "hsl(262, 75%, 92%)" }}>
+                          {usePhoto ? <Check className="h-4 w-4" strokeWidth={3} style={{ color: "hsl(262, 75%, 45%)" }} /> : <Camera className="h-4 w-4" style={{ color: "hsl(262, 75%, 45%)" }} />}
                         </span>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[10px] font-bold mb-0.5" style={{ color: "hsl(150, 70%, 30%)" }}>
-                            התובנה הראשונה שלך
+                        <span className="text-[12.5px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>צלם תעודת זהות</span>
+                        <span className="text-[10.5px]" style={{ color: "hsl(230, 15%, 50%)" }}>נמלא את הפרטים אוטומטית</span>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* === STEPS 2-4: consent annexes === */}
+                  {collectStep === 2 && (
+                    <ConsentAnnex
+                      icon={<ShieldHalf className="h-6 w-6" style={{ color: "hsl(262, 75%, 55%)" }} />}
+                      iconBg="hsl(262, 75%, 94%)"
+                      title="נספח א' - מסלקת הפנסיה"
+                      subtitle="יציאה בשמך להבאת מידע פנסיוני"
+                      bullets={[
+                        "יציאה בשמך למסלקת הפנסיה המרכזית",
+                        "קבלת מידע על כל קרנות פנסיה, קופות גמל והשתלמות",
+                        "ניתוח מלא של החיסכון הפנסיוני שלך",
+                      ]}
+                      consentText="יציאה בשמי למסלקת הפנסיה להבאת מידעים"
+                      checked={consents.pension}
+                      onToggle={() => setConsents((c) => ({ ...c, pension: !c.pension }))}
+                    />
+                  )}
+                  {collectStep === 3 && (
+                    <ConsentAnnex
+                      icon={<FileText className="h-6 w-6" style={{ color: "hsl(220, 85%, 55%)" }} />}
+                      iconBg="hsl(220, 85%, 94%)"
+                      title="נספח ב' - העתקי פוליסות"
+                      subtitle="קבלת העתקי פוליסות מהיצרנים"
+                      bullets={[
+                        "אישור לקבלת העתקי פוליסות ביטוח בשמך",
+                        "מידע ישירות מחברות הביטוח והיצרנים",
+                        "נתונים מפורטים על כל הכיסויים הביטוחיים שלך",
+                      ]}
+                      consentText="קבלת העתקי פוליסות מהיצרנים בשמי"
+                      checked={consents.copies}
+                      onToggle={() => setConsents((c) => ({ ...c, copies: !c.copies }))}
+                    />
+                  )}
+                  {collectStep === 4 && (
+                    <ConsentAnnex
+                      icon={<Building2 className="h-6 w-6" style={{ color: "hsl(220, 85%, 55%)" }} />}
+                      iconBg="hsl(220, 85%, 94%)"
+                      title="נספח ה' - הר הביטוח"
+                      subtitle="יציאה בשמך להבאת מידע ביטוחי"
+                      bullets={[
+                        "יציאה בשמך להר הביטוח המרכזי",
+                        "קבלת מידע על כל פוליסות הביטוח שלך",
+                        "עדכונים אוטומטיים מהמאגר המרכזי",
+                      ]}
+                      consentText="יציאה בשמי להר הביטוח להבאת מידעים"
+                      checked={consents.harBituach}
+                      onToggle={() => setConsents((c) => ({ ...c, harBituach: !c.harBituach }))}
+                    />
+                  )}
+
+                  {/* Continue button (steps 1-4) */}
+                  {collectStep <= 4 && (() => {
+                    const stepValid =
+                      collectStep === 1 ? (usePhoto || (idNumber.length === 9 && idDate.trim().length >= 8)) :
+                      collectStep === 2 ? consents.pension :
+                      collectStep === 3 ? consents.copies :
+                      consents.harBituach;
+                    return (
+                      <button
+                        onClick={() => setCollectStep((s) => (s === 4 ? 5 : (s + 1) as 1 | 2 | 3 | 4))}
+                        disabled={!stepValid}
+                        className="w-full rounded-full py-3 text-[13px] font-extrabold text-white transition-all active:scale-[0.98]"
+                        style={{
+                          background: stepValid
+                            ? "linear-gradient(135deg, hsl(262, 75%, 52%), hsl(220, 85%, 55%))"
+                            : "hsl(230, 18%, 80%)",
+                          boxShadow: stepValid ? "0 8px 20px -6px hsla(262, 72%, 50%, 0.5)" : "none",
+                          opacity: stepValid ? 1 : 0.7,
+                        }}
+                      >
+                        {collectStep === 4 ? "סיים והתחל איסוף" : "המשך"}
+                      </button>
+                    );
+                  })()}
+
+                  {/* === STEP 5: collecting animation === */}
+                  {collectStep === 5 && (
+                    <div className="rounded-2xl p-6 flex flex-col items-center gap-3" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
+                      <div className="relative w-16 h-16 flex items-center justify-center">
+                        <div
+                          className="absolute inset-0 rounded-full"
+                          style={{
+                            background: "conic-gradient(from 0deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%), hsl(178, 70%, 45%), hsl(262, 75%, 55%))",
+                            animation: "spin 1.2s linear infinite",
+                          }}
+                        />
+                        <div className="absolute inset-1.5 rounded-full bg-white flex items-center justify-center">
+                          <Loader2 className="h-6 w-6 animate-spin" style={{ color: "hsl(262, 75%, 55%)" }} />
+                        </div>
+                      </div>
+                      <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        {collectingMsg === 0 && "מתחברת לרשות שוק ההון..."}
+                        {collectingMsg === 1 && "מאמתת את הזהות שלך..."}
+                        {collectingMsg === 2 && "מושכת את הפוליסות שלך..."}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* === STEP 6: result + insight === */}
+                  {collectStep === 6 && (
+                    <>
+                      <ResultRow
+                        title="הר הביטוח"
+                        subtitle="מחובר · 7 פוליסות נמצאו"
+                        badgeText="מחובר"
+                        badgeBg="hsl(150, 65%, 92%)"
+                        badgeColor="hsl(150, 70%, 28%)"
+                        iconGradient="linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
+                        borderColor="hsl(150, 60%, 70%)"
+                      />
+                      <ResultRow
+                        title="מסלקה פנסיונית"
+                        subtitle="מתוזמן · קרנות, גמל, השתלמות"
+                        badgeText="זמין תוך שעתיים"
+                        badgeBg="hsl(45, 95%, 88%)"
+                        badgeColor="hsl(35, 90%, 25%)"
+                        iconGradient="linear-gradient(135deg, hsl(38, 92%, 50%), hsl(45, 95%, 58%))"
+                        borderColor="hsl(45, 85%, 65%)"
+                      />
+
+                      {showInsight && (
+                        <div
+                          ref={insightRef}
+                          className="rounded-2xl p-4 mt-2 relative overflow-hidden"
+                          style={{
+                            background: "linear-gradient(135deg, hsl(150, 80%, 96%) 0%, hsl(165, 75%, 94%) 50%, hsl(45, 90%, 95%) 100%)",
+                            border: "1.5px solid hsl(150, 60%, 65%)",
+                            boxShadow: "0 12px 32px -8px hsla(150, 60%, 35%, 0.3)",
+                            animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+                          }}
+                        >
+                          <div className="flex items-center gap-1.5 mb-2">
+                            <span className="px-2 py-0.5 rounded-full text-[9.5px] font-extrabold flex items-center gap-1" style={{ background: "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))", color: "white" }}>
+                              <Sparkles className="h-2.5 w-2.5" /> התובנה הראשונה שלך
+                            </span>
+                          </div>
+                          <p className="text-[16px] font-extrabold leading-tight mb-1.5" style={{ color: "hsl(150, 70%, 15%)" }}>
+                            ביטוח חיים כפול
                           </p>
-                          <p className="text-[13px] font-extrabold leading-tight mb-1" style={{ color: "hsl(150, 70%, 18%)" }}>
-                            ביטוח חיים כפול — חיסכון של ₪2,000 בשנה
+                          <p className="text-[22px] font-extrabold tracking-tight leading-none mb-2" style={{
+                            background: "linear-gradient(110deg, hsl(150, 70%, 30%), hsl(160, 70%, 38%))",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                          }}>
+                            חיסכון ₪2,000 בשנה
                           </p>
-                          <p className="text-[11px] leading-snug mb-2.5" style={{ color: "hsl(150, 35%, 28%)" }}>
-                            יש לך שני ביטוחי חיים שמכסים אותו דבר. אפשר לבטל אחד בקליק.
+                          <p className="text-[11.5px] leading-snug mb-3" style={{ color: "hsl(150, 35%, 25%)" }}>
+                            אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
                             onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
-                            className="w-full rounded-full py-2 text-[12px] font-bold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
+                            className="w-full rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
                             style={{
-                              background: "linear-gradient(135deg, hsl(150, 70%, 38%), hsl(160, 70%, 48%))",
-                              boxShadow: "0 6px 16px -4px hsla(150, 70%, 30%, 0.45)",
+                              background: "hsl(250, 40%, 12%)",
+                              boxShadow: "0 8px 20px -4px hsla(250, 40%, 12%, 0.45)",
                             }}
                           >
                             <Zap className="h-3.5 w-3.5" />
                             חסוך ₪2,000 בקליק
                           </button>
                         </div>
-                      </div>
-                    </div>
+                      )}
+                    </>
                   )}
                 </div>
               )}
@@ -613,74 +835,106 @@ const AhaDashboard = () => {
   );
 };
 
-type ConnRowPalette = { gradient: string; solid: string; soft: string; shadow: string };
-type ConnRowStatus = "idle" | "connecting" | "done";
-
-const ConnectionRow = ({
+const ConsentAnnex = ({
+  icon,
+  iconBg,
   title,
   subtitle,
-  status,
-  palette,
-  onConnect,
-  icon,
-  statusLabel,
+  bullets,
+  consentText,
+  checked,
+  onToggle,
 }: {
+  icon: React.ReactNode;
+  iconBg: string;
   title: string;
   subtitle: string;
-  status: ConnRowStatus;
-  palette: ConnRowPalette;
-  onConnect: () => void;
-  icon?: React.ReactNode;
-  statusLabel?: string;
-}) => {
-  const isDone = status === "done";
-  const isConnecting = status === "connecting";
-  return (
-    <div
-      className="rounded-2xl p-3 flex items-center gap-3"
+  bullets: string[];
+  consentText: string;
+  checked: boolean;
+  onToggle: () => void;
+}) => (
+  <div className="rounded-2xl p-4" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
+    <div className="flex justify-center mb-2">
+      <span className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ background: iconBg }}>
+        {icon}
+      </span>
+    </div>
+    <p className="text-center text-[15px] font-extrabold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
+    <p className="text-center text-[11px] mb-3" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
+
+    <div className="rounded-xl p-3 mb-3" style={{ background: "hsl(220, 60%, 97%)", border: "1px solid hsl(220, 50%, 92%)" }}>
+      <div className="flex items-center justify-between mb-1.5">
+        <button className="text-[10.5px] font-bold flex items-center gap-0.5" style={{ color: "hsl(220, 85%, 50%)" }}>
+          <ArrowLeft className="h-3 w-3" /> קרא את המסמך המלא
+        </button>
+        <p className="text-[12px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>מה כולל הנספח?</p>
+      </div>
+      <ul className="space-y-1 text-end">
+        {bullets.map((b, i) => (
+          <li key={i} className="text-[11px] leading-snug" style={{ color: "hsl(250, 30%, 30%)" }}>• {b}</li>
+        ))}
+      </ul>
+    </div>
+
+    <button
+      onClick={onToggle}
+      className="w-full rounded-xl p-3 flex items-center gap-2.5 text-end transition-all active:scale-[0.99]"
       style={{
-        background: "white",
-        border: `1.5px solid ${isDone ? "hsl(150, 60%, 70%)" : palette.solid}`,
-        boxShadow: isDone ? "0 6px 16px -4px hsla(150, 60%, 30%, 0.2)" : palette.shadow,
-        transition: "all 0.3s ease",
+        background: checked ? "hsl(262, 75%, 96%)" : "white",
+        border: `1.5px solid ${checked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 88%)"}`,
       }}
     >
       <span
-        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-        style={{
-          background: isDone
-            ? "linear-gradient(135deg, hsl(150, 70%, 40%), hsl(160, 70%, 50%))"
-            : palette.gradient,
-        }}
+        className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+        style={{ background: checked ? "hsl(262, 75%, 55%)" : "hsl(230, 25%, 95%)" }}
       >
-        {isDone ? <Check className="h-5 w-5 text-white" strokeWidth={3} /> : (icon || <Zap className="h-4 w-4 text-white" />)}
+        {checked && <Check className="h-4 w-4 text-white" strokeWidth={3} />}
       </span>
       <div className="flex-1 min-w-0">
-        <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
-        <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
+        <p className="text-[13px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>אני מאשר/ת</p>
+        <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{consentText}</p>
       </div>
-      {status === "idle" && (
-        <button
-          onClick={onConnect}
-          className="rounded-full px-3 py-1.5 text-[11px] font-bold text-white flex items-center gap-1 flex-shrink-0 transition-transform active:scale-[0.96]"
-          style={{ background: palette.gradient, boxShadow: palette.shadow }}
-        >
-          חבר
-        </button>
-      )}
-      {isConnecting && (
-        <span className="flex items-center gap-1 text-[10.5px] font-semibold flex-shrink-0" style={{ color: palette.solid }}>
-          <Loader2 className="h-3.5 w-3.5 animate-spin" />
-          מתחבר...
-        </span>
-      )}
-      {isDone && (
-        <span className="flex items-center gap-1 text-[10.5px] font-bold flex-shrink-0 px-2 py-1 rounded-full" style={{ color: "hsl(150, 70%, 28%)", background: "hsl(150, 65%, 92%)" }}>
-          {statusLabel || "מחובר"}
-        </span>
-      )}
+    </button>
+  </div>
+);
+
+const ResultRow = ({
+  title,
+  subtitle,
+  badgeText,
+  badgeBg,
+  badgeColor,
+  iconGradient,
+  borderColor,
+}: {
+  title: string;
+  subtitle: string;
+  badgeText: string;
+  badgeBg: string;
+  badgeColor: string;
+  iconGradient: string;
+  borderColor: string;
+}) => (
+  <div
+    className="rounded-2xl p-3 flex items-center gap-3"
+    style={{
+      background: "white",
+      border: `1.5px solid ${borderColor}`,
+      boxShadow: "0 6px 16px -4px hsla(230, 30%, 25%, 0.08)",
+    }}
+  >
+    <span className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: iconGradient }}>
+      <Check className="h-5 w-5 text-white" strokeWidth={3} />
+    </span>
+    <div className="flex-1 min-w-0">
+      <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
+      <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
     </div>
-  );
-};
+    <span className="text-[10.5px] font-bold flex-shrink-0 px-2 py-1 rounded-full whitespace-nowrap" style={{ color: badgeColor, background: badgeBg }}>
+      {badgeText}
+    </span>
+  </div>
+);
 
 export default AhaDashboard;
