@@ -377,76 +377,58 @@ const AhaDashboard = () => {
             const p = palettes[card.category];
             const ccDelay = 0.78 + idx * 0.08;
             const isPensionConnected = card.label === "פנסיה" && collectStep >= 5;
+            const animStyle = { animation: `aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${ccDelay}s both` } as const;
+            if (isPensionConnected) {
+              return (
+                <button
+                  key={card.label}
+                  onClick={() => navigate("/c/assets")}
+                  className="relative bg-white rounded-2xl border overflow-hidden flex flex-col text-start active:scale-[0.99] transition-transform"
+                  style={{
+                    borderColor: "hsl(230, 20%, 92%)",
+                    boxShadow: "0 4px 12px hsla(250, 30%, 25%, 0.05)",
+                    minHeight: "150px",
+                    ...animStyle,
+                  }}
+                >
+                  <div className="absolute top-0 inset-x-0 h-1.5" style={{ background: p.solid }} />
+                  <div className="p-3 flex flex-col h-full">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: p.soft, color: p.solid }}>
+                        <card.Icon className="h-4 w-4" />
+                      </div>
+                      <span className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{card.label}</span>
+                    </div>
+                    <div className="flex flex-col mb-3">
+                      <span className="text-[19px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(250, 40%, 10%)" }}>₪1,233,500</span>
+                      <span className="text-[10.5px] font-semibold mt-0.5" style={{ color: "hsl(230, 14%, 55%)" }}>סך החיסכון</span>
+                    </div>
+                    <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
+                      <div className="flex items-center gap-1 text-[10.5px]" style={{ color: "hsl(230, 14%, 50%)" }}>
+                        <span className="font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>₪9,069</span>
+                        <span>·</span>
+                        <span>צפי קצבה חודשית</span>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              );
+            }
             return (
               <div
                 key={card.label}
-                className="relative rounded-2xl p-3 text-start flex flex-col"
+                className="rounded-2xl flex flex-col items-center justify-center p-4 opacity-70"
                 style={{
-                  background: "white",
-                  border: "1px solid hsl(230, 20%, 92%)",
-                  boxShadow: "0 2px 10px hsla(250, 30%, 25%, 0.04)",
-                  minHeight: "138px",
-                  animation: `aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${ccDelay}s both`,
+                  background: "hsla(0, 0%, 100%, 0.4)",
+                  border: "2px dashed hsl(230, 20%, 82%)",
+                  minHeight: "150px",
+                  ...animStyle,
                 }}
               >
-                <div className="flex items-center gap-2 mb-2">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ background: p.soft }}
-                  >
-                    <card.Icon className="h-4 w-4" style={{ color: p.solid }} />
-                  </div>
-                  <p className="text-[12px] font-semibold" style={{ color: "hsl(250, 40%, 20%)" }}>
-                    {card.label}
-                  </p>
-                  {isPensionConnected && (
-                    <span
-                      className="mr-auto text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1"
-                      style={{ background: "hsl(148, 55%, 92%)", color: "hsl(150, 70%, 28%)" }}
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(150, 70%, 35%)" }} />
-                      מחובר
-                    </span>
-                  )}
+                <div className="w-11 h-11 rounded-full flex items-center justify-center mb-2" style={{ background: "hsl(230, 25%, 95%)", color: "hsl(230, 14%, 55%)" }}>
+                  <card.Icon className="h-5 w-5" />
                 </div>
-                {isPensionConnected ? (
-                  <>
-                    <p className="font-extrabold text-base mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>
-                      ₪1,233,500
-                    </p>
-                    <p className="text-[10px] mb-2" style={{ color: "hsl(230, 14%, 50%)" }}>
-                      צפי קצבה ₪9,069/חודש
-                    </p>
-                    <button
-                      onClick={() => navigate("/c/assets")}
-                      className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-semibold flex items-center justify-center gap-1 text-white transition-transform active:scale-[0.97]"
-                      style={{ background: p.gradient, boxShadow: p.shadow }}
-                    >
-                      צפייה בפרטים
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <p className="font-extrabold text-base mb-0.5" style={{ color: "hsl(230, 14%, 60%)" }}>
-                      —
-                    </p>
-                    <p className="text-[10px] mb-2" style={{ color: "hsl(230, 14%, 55%)" }}>
-                      ללא נתונים
-                    </p>
-                    <button
-                      onClick={() => navigate("/c")}
-                      className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-semibold flex items-center justify-center gap-1 transition-colors"
-                      style={{
-                        background: "transparent",
-                        color: p.solid,
-                        border: `1px solid ${p.solid}`,
-                      }}
-                    >
-                      <Plus className="h-3 w-3" />
-                      חיבור לנתונים
-                    </button>
-                  </>
-                )}
+                <span className="text-[12.5px] font-bold" style={{ color: "hsl(230, 14%, 50%)" }}>{card.label}</span>
               </div>
             );
           })}
