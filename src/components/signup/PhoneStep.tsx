@@ -23,15 +23,25 @@ export const PhoneStep = ({ value, onChange }: PhoneStepProps) => {
         נשלח לך קוד בן 6 ספרות לאימות
       </p>
 
-      {/* Input row */}
+      {/* Input row — RTL: country code on right, input on left */}
       <div
         className="flex items-stretch rounded-2xl overflow-hidden bg-white"
         style={{
-          border: "1px solid hsla(250, 30%, 88%, 0.9)",
+          border: "1.5px solid hsl(230, 20%, 88%)",
           boxShadow: "0 8px 24px -16px hsla(262, 50%, 30%, 0.18)",
         }}
-        dir="ltr"
       >
+        <div
+          className="flex items-center gap-1.5 px-4 text-[14px] font-bold select-none flex-shrink-0"
+          style={{
+            color: "hsl(250, 40%, 20%)",
+            background: "hsl(235, 30%, 97%)",
+            borderRight: "1px solid hsl(230, 20%, 88%)",
+          }}
+        >
+          <span style={{ color: "hsl(250, 25%, 50%)" }}>🇮🇱</span>
+          +972
+        </div>
         <input
           ref={inputRef}
           type="tel"
@@ -43,20 +53,9 @@ export const PhoneStep = ({ value, onChange }: PhoneStepProps) => {
             onChange(digits);
           }}
           placeholder="50 123 4567"
-          className="flex-1 px-4 py-4 text-[18px] font-semibold bg-transparent outline-none tracking-wide"
+          className="flex-1 px-4 py-3.5 text-[15px] font-semibold bg-transparent outline-none tracking-wide"
           style={{ color: "hsl(250, 40%, 15%)" }}
         />
-        <div
-          className="flex items-center px-4 text-[16px] font-bold select-none"
-          style={{
-            color: "hsl(250, 40%, 20%)",
-            background: "hsl(235, 30%, 97%)",
-            borderLeft: "1px solid hsla(250, 30%, 88%, 0.9)",
-          }}
-        >
-          <span className="text-[13px] me-1.5" style={{ color: "hsl(250, 25%, 50%)" }}>🇮🇱</span>
-          +972
-        </div>
       </div>
 
       <p className="text-[12px] mt-3 px-1" style={{ color: "hsl(250, 22%, 50%)" }}>
