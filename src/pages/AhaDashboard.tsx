@@ -482,7 +482,7 @@ const AhaDashboard = () => {
                       </p>
                     </>
                   )}
-                  {chatStage === "harBituach" && collectStep === 5 && (
+                  {chatStage === "harBituach" && (collectStep === 5 || collectStep === 9) && (
                     <>
                       <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
                         אוספת את הנתונים שלך... ⚡
@@ -502,13 +502,35 @@ const AhaDashboard = () => {
                       </p>
                     </>
                   )}
-                  {chatStage === "harBituach" && showInsight && (
+                  {chatStage === "harBituach" && collectStep === 6 && showInsight && (
                     <>
                       <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
                         וואו, מצאתי משהו מיד! 🎯
                       </p>
                       <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
                         זיהיתי <b>ביטוח חיים כפול</b> — אתה משלם פעמיים על אותו כיסוי.
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && (collectStep === 7 || collectStep === 8) && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        {collectStep === 7 ? "עכשיו דוח אשראי — בשביל הנכסים 💎" : "אחרון! דוח אשראי להתחייבויות 🏦"}
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        {collectStep === 7
+                          ? "בעזרת דוח האשראי אוכל לראות את כל הנכסים שלך — חשבונות, פיקדונות והשקעות."
+                          : "אותו דוח חושף גם את ההלוואות, המשכנתא והאשראי הפתוח שלך."}
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && collectStep === 10 && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        כמעט סיימנו! 🎉
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        חיברנו 85% מהנתונים שלך. נשארו רק שני דברים קטנים.
                       </p>
                     </>
                   )}
