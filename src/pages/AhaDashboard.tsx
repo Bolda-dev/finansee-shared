@@ -303,7 +303,7 @@ const AhaDashboard = () => {
                     boxShadow: p.shadow,
                     minHeight: "168px",
                     border: "1.5px solid transparent",
-                    animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+                    animation: enterAnim,
                   }}
                 >
                   <span
