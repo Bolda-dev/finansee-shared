@@ -1072,26 +1072,32 @@ const AhaDashboard = () => {
                       {showInsight && (
                         <div
                           ref={insightRef}
-                          className="rounded-2xl p-4 mt-2 relative overflow-hidden"
+                          className="relative rounded-2xl p-4 overflow-hidden mt-2"
                           style={{
-                            background: "linear-gradient(135deg, hsl(260, 75%, 97%) 0%, hsl(265, 70%, 95%) 55%, hsl(275, 75%, 96%) 100%)",
-                            border: "1.5px solid hsl(262, 60%, 82%)",
-                            boxShadow: "0 12px 32px -8px hsla(262, 60%, 45%, 0.32)",
+                            background: palettes.insurance.gradient,
+                            boxShadow: palettes.insurance.shadow,
                             animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
                           }}
                         >
-                          <div className="flex items-center gap-1.5 mb-2">
-                            <span className="px-2 py-0.5 rounded-full text-[9.5px] font-extrabold flex items-center gap-1" style={{ background: palettes.insurance.gradient, color: "white" }}>
-                              <Sparkles className="h-2.5 w-2.5" /> התובנה הראשונה שלך
-                            </span>
+                          <span
+                            className="absolute top-3 left-3 w-6 h-6 rounded-full flex items-center justify-center"
+                            style={{ background: "hsla(0,0%,100%,0.25)" }}
+                          >
+                            <Check className="h-3 w-3 text-white" strokeWidth={3.5} />
+                          </span>
+                          <div
+                            className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
+                            style={{ background: "hsla(0,0%,100%,0.22)" }}
+                          >
+                            <ShieldCheck className="h-4 w-4 text-white" />
                           </div>
-                          <p className="text-[20px] font-extrabold leading-tight mb-1" style={{ color: "hsl(258, 55%, 18%)" }}>
+                          <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(0,0%,100%,0.85)" }}>
                             ביטוח חיים כפול
                           </p>
-                          <p className="text-[13px] font-bold leading-tight mb-1" style={{ color: "hsl(258, 50%, 35%)" }}>
-                            חיסכון של <span className="text-[15px] font-extrabold" style={{ color: "hsl(265, 75%, 45%)" }}>₪2,000</span> בשנה
+                          <p className="font-extrabold text-lg mb-1 text-white">
+                            חוסך ₪2,000/שנה
                           </p>
-                          <p className="text-[11.5px] leading-snug mb-3" style={{ color: "hsl(258, 25%, 38%)" }}>
+                          <p className="text-[11px] leading-snug mb-3" style={{ color: "hsla(0,0%,100%,0.85)" }}>
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
@@ -1100,11 +1106,8 @@ const AhaDashboard = () => {
                               setInsuranceUpgraded(true);
                               setChatOpen(false);
                             }}
-                            className="w-full rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
-                            style={{
-                              background: "hsl(250, 40%, 12%)",
-                              boxShadow: "0 8px 20px -4px hsla(250, 40%, 12%, 0.45)",
-                            }}
+                            className="w-full rounded-full py-2.5 text-[12px] font-extrabold flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
+                            style={{ background: "white", color: palettes.insurance.solid }}
                           >
                             <Zap className="h-3.5 w-3.5" />
                             חסוך ₪2,000 בקליק
