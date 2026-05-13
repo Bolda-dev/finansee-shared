@@ -1104,48 +1104,95 @@ const ConsentAnnex = ({
   checked: boolean;
   onToggle: () => void;
 }) => (
-  <div className="rounded-2xl p-4" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
-    <div className="flex justify-center mb-2">
-      <span className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ background: iconBg }}>
-        {icon}
-      </span>
-    </div>
-    <p className="text-center text-[15px] font-extrabold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>{title}</p>
-    <p className="text-center text-[11px] mb-3" style={{ color: "hsl(230, 15%, 50%)" }}>{subtitle}</p>
-
-    <div className="rounded-xl p-3 mb-3" style={{ background: "hsl(220, 60%, 97%)", border: "1px solid hsl(220, 50%, 92%)" }}>
-      <div className="flex items-center justify-between mb-1.5">
-        <button className="text-[10.5px] font-bold flex items-center gap-0.5" style={{ color: "hsl(220, 85%, 50%)" }}>
-          <ArrowLeft className="h-3 w-3" /> קרא את המסמך המלא
-        </button>
-        <p className="text-[12px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>מה כולל הנספח?</p>
-      </div>
-      <ul className="space-y-1 text-end">
-        {bullets.map((b, i) => (
-          <li key={i} className="text-[11px] leading-snug" style={{ color: "hsl(250, 30%, 30%)" }}>• {b}</li>
-        ))}
-      </ul>
-    </div>
-
-    <button
-      onClick={onToggle}
-      className="w-full rounded-xl p-3 flex items-center gap-2.5 text-end transition-all active:scale-[0.99]"
-      style={{
-        background: checked ? "hsl(262, 75%, 96%)" : "white",
-        border: `1.5px solid ${checked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 88%)"}`,
-      }}
+  <div
+    dir="rtl"
+    className="rounded-2xl overflow-hidden"
+    style={{
+      background: "white",
+      border: "1px solid hsl(230, 20%, 90%)",
+      boxShadow: "0 4px 14px -8px hsla(250, 40%, 20%, 0.12)",
+    }}
+  >
+    {/* Header */}
+    <div
+      className="flex items-center gap-3 p-4"
+      style={{ borderBottom: "1px solid hsl(230, 20%, 94%)" }}
     >
       <span
-        className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
-        style={{ background: checked ? "hsl(262, 75%, 55%)" : "hsl(230, 25%, 95%)" }}
+        className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+        style={{ background: iconBg }}
       >
-        {checked && <Check className="h-4 w-4 text-white" strokeWidth={3} />}
+        {icon}
       </span>
-      <div className="flex-1 min-w-0">
-        <p className="text-[13px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>אני מאשר/ת</p>
-        <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>{consentText}</p>
+      <div className="flex-1 min-w-0 text-right">
+        <p className="text-[14.5px] font-extrabold leading-tight" style={{ color: "hsl(250, 40%, 15%)" }}>
+          {title}
+        </p>
+        <p className="text-[11px] leading-tight mt-1" style={{ color: "hsl(230, 15%, 50%)" }}>
+          {subtitle}
+        </p>
       </div>
-    </button>
+    </div>
+
+    {/* Body */}
+    <div className="p-4 space-y-3">
+      <div
+        className="rounded-xl p-3"
+        style={{ background: "hsl(220, 60%, 97.5%)", border: "1px solid hsl(220, 50%, 92%)" }}
+      >
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-[12px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>
+            מה כולל הנספח?
+          </p>
+          <button
+            className="text-[10.5px] font-bold inline-flex items-center gap-1"
+            style={{ color: "hsl(220, 85%, 50%)" }}
+          >
+            קרא את המסמך המלא
+            <ArrowLeft className="h-3 w-3" />
+          </button>
+        </div>
+        <ul className="space-y-1.5">
+          {bullets.map((b, i) => (
+            <li
+              key={i}
+              className="text-[11.5px] leading-snug flex gap-1.5 text-right"
+              style={{ color: "hsl(250, 30%, 30%)" }}
+            >
+              <span style={{ color: "hsl(262, 75%, 55%)" }}>•</span>
+              <span className="flex-1">{b}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <button
+        onClick={onToggle}
+        className="w-full rounded-xl p-3 flex items-center gap-3 transition-all active:scale-[0.99]"
+        style={{
+          background: checked ? "hsl(262, 75%, 96%)" : "hsl(230, 30%, 98%)",
+          border: `1.5px solid ${checked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 88%)"}`,
+        }}
+      >
+        <span
+          className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
+          style={{
+            background: checked ? "hsl(262, 75%, 55%)" : "white",
+            border: `1.5px solid ${checked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 80%)"}`,
+          }}
+        >
+          {checked && <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />}
+        </span>
+        <div className="flex-1 min-w-0 text-right">
+          <p className="text-[13px] font-extrabold leading-tight" style={{ color: "hsl(250, 40%, 15%)" }}>
+            אני מאשר/ת
+          </p>
+          <p className="text-[10.5px] leading-snug mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>
+            {consentText}
+          </p>
+        </div>
+      </button>
+    </div>
   </div>
 );
 
