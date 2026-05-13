@@ -460,13 +460,39 @@ const AhaDashboard = () => {
                       </p>
                     </>
                   )}
-                  {chatStage === "harBituach" && !showInsight && (
+                  {chatStage === "harBituach" && collectStep <= 4 && (
                     <>
                       <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
-                        מעולה! בוא נתחיל לחבר 🚀
+                        {collectStep === 1 && "בוא נתחיל — קודם תעודת זהות 🪪"}
+                        {collectStep === 2 && "מעולה! עכשיו אישור למסלקת הפנסיה"}
+                        {collectStep === 3 && "נשאר מעט — אישור להעתקי הפוליסות"}
+                        {collectStep === 4 && "אחרון! אישור להר הביטוח"}
                       </p>
                       <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
-                        הר הביטוח מתחבר מיידית. המסלקה תיקח עד 24 שעות — אבל אל דאגה, נתחיל לעבוד מיד עם מה שיש.
+                        {collectStep === 1 && "פרטים אלה דרושים כדי שאוכל לפנות בשמך לרשויות."}
+                        {collectStep === 2 && "המסלקה אוספת עבורך מידע על כל קרנות הפנסיה, גמל והשתלמות."}
+                        {collectStep === 3 && "כך אקבל את הפוליסות הביטוחיות שלך ישירות מהיצרנים."}
+                        {collectStep === 4 && "הר הביטוח הוא המאגר המרכזי של רשות שוק ההון."}
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && collectStep === 5 && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        אוספת את הנתונים שלך... ⚡
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        רגע אחד, מתחברת למקורות.
+                      </p>
+                    </>
+                  )}
+                  {chatStage === "harBituach" && collectStep === 6 && !showInsight && (
+                    <>
+                      <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                        סיימנו! הנה מה שמצאתי 📊
+                      </p>
+                      <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                        הר הביטוח כבר מחובר. המסלקה תהיה זמינה תוך שעתיים.
                       </p>
                     </>
                   )}
@@ -476,7 +502,7 @@ const AhaDashboard = () => {
                         וואו, מצאתי משהו מיד! 🎯
                       </p>
                       <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
-                        זיהיתי <b>ביטוח חיים כפול</b> — אתה משלם פעמיים על אותו כיסוי. התחלה טובה לחיסכון!
+                        זיהיתי <b>ביטוח חיים כפול</b> — אתה משלם פעמיים על אותו כיסוי.
                       </p>
                     </>
                   )}
