@@ -54,16 +54,7 @@ export const SmsCodeStep = ({ phone, onComplete }: SmsCodeStepProps) => {
         className="text-[26px] font-extrabold tracking-tight leading-[1.2] mb-2"
         style={{ color: "hsl(250, 50%, 10%)" }}
       >
-        <span
-          style={{
-            background:
-              "linear-gradient(110deg, hsl(262, 75%, 45%) 0%, hsl(220, 85%, 50%) 50%, hsl(178, 70%, 38%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          הקוד נשלח אליך
-        </span>
+        הקוד נשלח אליך
       </h1>
       <p className="text-[14px] leading-relaxed mb-8" style={{ color: "hsl(250, 22%, 42%)" }}>
         הזן את 6 הספרות שקיבלת ב-SMS

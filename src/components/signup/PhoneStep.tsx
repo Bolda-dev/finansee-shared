@@ -15,14 +15,7 @@ export const PhoneStep = ({ value, onChange }: PhoneStepProps) => {
         style={{ color: "hsl(250, 50%, 10%)" }}
       >
         הזן את{" "}
-        <span
-          style={{
-            background:
-              "linear-gradient(110deg, hsl(262, 75%, 45%) 0%, hsl(220, 85%, 50%) 50%, hsl(178, 70%, 38%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
+        <span style={{ color: "hsl(250, 50%, 10%)" }}>
           מספר הטלפון שלך
         </span>
       </h1>
