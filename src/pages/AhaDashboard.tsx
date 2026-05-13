@@ -344,6 +344,7 @@ const AhaDashboard = () => {
                   background: "hsla(0, 0%, 100%, 0.4)",
                   border: `1.5px dashed ${dashedBorder}`,
                   minHeight: "168px",
+                  animation: enterAnim,
                 }}
               >
 
