@@ -192,7 +192,7 @@ const DanaHero = () => {
           }}
         >
           <p className="text-[10px] font-medium text-center mb-0.5" style={{ color: "hsl(250, 22%, 50%)" }}>
-            השווי האמיתי שלך
+            השווי האמיתי שלך (נתונים להדגמה)
           </p>
           <p
             className="text-[20px] font-extrabold text-center leading-none"
