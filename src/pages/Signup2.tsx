@@ -157,10 +157,7 @@ const Signup2 = () => {
               "איתור כפילויות וחוסרים בכיסויים",
               "המלצות לחיסכון ושיפור כיסוי",
             ]}
-            consentText="המידע מוצפן ומאובטח"
             socialProof="86% מהמשתמשים חסכו מעל ₪104,500 בשנה הראשונה"
-            checked={consents.insurance}
-            onToggle={() => setConsents((c) => ({ ...c, insurance: !c.insurance }))}
           />
         );
       case 7:
