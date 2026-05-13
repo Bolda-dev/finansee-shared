@@ -1174,8 +1174,12 @@ const AhaDashboard = () => {
                         <div className="flex justify-center mt-3">
                           <button
                             onClick={() => { setInsuranceUpgraded(true); setChatOpen(false); }}
-                            className="text-[12.5px] font-bold py-1.5 px-2 focus:outline-none"
-                            style={{ color: "hsl(262, 75%, 50%)" }}
+                            className="text-[12.5px] font-bold py-2 px-5 rounded-full focus:outline-none transition-transform active:scale-[0.97]"
+                            style={{ 
+                              background: "hsl(48, 95%, 55%)", 
+                              color: "hsl(250, 40%, 8%)",
+                              boxShadow: "0 4px 14px -4px hsla(48, 95%, 40%, 0.35)",
+                            }}
                           >
                             לתובנות נוספות ←
                           </button>
