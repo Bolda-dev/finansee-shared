@@ -168,12 +168,7 @@ const AhaDashboard = () => {
         </p>
         <p
           className="font-extrabold tracking-tight text-4xl mb-1"
-          style={{
-            background:
-              "linear-gradient(110deg, hsl(262, 75%, 45%) 0%, hsl(220, 85%, 50%) 50%, hsl(178, 70%, 38%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
+          style={{ color: "hsl(250, 50%, 10%)" }}
         >
           ₪450K - ₪1.2M
         </p>
