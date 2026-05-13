@@ -237,7 +237,6 @@ const AhaDashboard = () => {
             {danaExpanded && (
               <div className="space-y-2 mt-3" style={{ animation: "aha-item-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both" }}>
                 {[
-                  { Icon: ShieldCheck, label: "ביטוח ופנסיה", desc: "מסלקה פנסיונית והר הביטוח", category: "insurance" as const, route: "/c/insurance" },
                   { Icon: PiggyBank, label: "הוצאות", desc: "חשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
                   { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", category: "assets" as const, route: "/c/assets" },
                   { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", category: "assets" as const, route: "/c/assets" },
@@ -541,7 +540,7 @@ const AhaDashboard = () => {
 
       {chatOpen && (
         <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setChatOpen(false)} />
+          <div className="absolute inset-0 bg-black/40" onClick={() => { if (showInsight) setInsuranceUpgraded(true); setChatOpen(false); }} />
           <div
             className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
             style={{ animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both", maxHeight: "92dvh" }}
@@ -562,7 +561,7 @@ const AhaDashboard = () => {
                 </button>
               ) : <span />}
               <button
-                onClick={() => setChatOpen(false)}
+                onClick={() => { if (showInsight) setInsuranceUpgraded(true); setChatOpen(false); }}
                 className="w-7 h-7 rounded-full flex items-center justify-center"
                 style={{ background: "hsl(230, 25%, 95%)" }}
                 aria-label="סגור"
@@ -1116,16 +1115,24 @@ const AhaDashboard = () => {
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
-                            onClick={() => {
-                              setShowInsight(false);
-                              setInsuranceUpgraded(true);
-                              setChatOpen(false);
-                            }}
+                            onClick={() => { /* visual only */ }}
                             className="w-full rounded-full py-2.5 text-[12px] font-extrabold flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
                             style={{ background: "white", color: palettes.insurance.solid }}
                           >
                             <Zap className="h-3.5 w-3.5" />
                             חסוך ₪2,000 בקליק
+                          </button>
+                        </div>
+                      )}
+
+                      {showInsight && (
+                        <div className="flex justify-center mt-3">
+                          <button
+                            onClick={() => { setInsuranceUpgraded(true); setChatOpen(false); }}
+                            className="text-[12.5px] font-bold py-1.5 px-2 focus:outline-none"
+                            style={{ color: "hsl(262, 75%, 50%)" }}
+                          >
+                            לתובנות נוספות ←
                           </button>
                         </div>
                       )}
