@@ -89,7 +89,7 @@ const AhaDashboard = () => {
     const t3 = setTimeout(() => {
       if (collectStep === 5) {
         setCollectStep(6);
-        setTimeout(() => setShowInsight(true), 1000);
+        setTimeout(() => setShowInsight(true), 1700);
       } else {
         setCollectStep(10);
       }
