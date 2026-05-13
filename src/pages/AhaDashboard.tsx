@@ -142,7 +142,7 @@ const AhaDashboard = () => {
       </div>
 
       {/* Header */}
-      <div className="relative z-10 px-3 pt-6 pb-0">
+      <div className="relative z-10 px-3 pt-6 pb-0" style={{ animation: "aha-item-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0s both" }}>
         <div className="flex flex-col items-start gap-4 text-start">
           <div className="relative flex items-center w-full">
             <button
