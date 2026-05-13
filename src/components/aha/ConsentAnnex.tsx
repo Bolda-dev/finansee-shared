@@ -1,4 +1,4 @@
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export const ConsentAnnex = ({
   icon,
@@ -6,18 +6,12 @@ export const ConsentAnnex = ({
   title,
   subtitle,
   bullets,
-  consentText,
-  checked,
-  onToggle,
 }: {
   icon: React.ReactNode;
   iconBg: string;
   title: string;
   subtitle: string;
   bullets: string[];
-  consentText: string;
-  checked: boolean;
-  onToggle: () => void;
 }) => {
   return (
     <div dir="rtl" className="space-y-3">
@@ -63,36 +57,6 @@ export const ConsentAnnex = ({
           <ArrowLeft className="h-3 w-3" />
         </button>
       </div>
-
-      <button
-        onClick={onToggle}
-        className="w-full rounded-2xl p-3.5 flex items-center gap-3 transition-all active:scale-[0.99]"
-        style={{
-          background: "white",
-          border: `2px solid ${checked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 88%)"}`,
-          boxShadow: checked
-            ? "0 6px 18px -8px hsla(262, 75%, 55%, 0.45)"
-            : "0 4px 14px -10px hsla(250, 40%, 20%, 0.18)",
-        }}
-      >
-        <span
-          className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
-          style={{
-            background: checked ? "hsl(262, 75%, 55%)" : "white",
-            border: `1.5px solid ${checked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 75%)"}`,
-          }}
-        >
-          {checked && <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />}
-        </span>
-        <div className="flex-1 min-w-0 text-right">
-          <p className="text-[13.5px] font-extrabold leading-tight" style={{ color: "hsl(250, 40%, 15%)" }}>
-            אני מאשר/ת
-          </p>
-          <p className="text-[10.5px] leading-snug mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>
-            {consentText}
-          </p>
-        </div>
-      </button>
     </div>
   );
 };

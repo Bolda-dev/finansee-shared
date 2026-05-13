@@ -138,10 +138,7 @@ const Signup2 = () => {
               "בדיקת דמי ניהול וחיסכון פוטנציאלי",
               "הצלבה מול ביטוחים קיימים",
             ]}
-            consentText="המידע מוצפן ומאובטח"
             socialProof="43% מהמשתמשים גילו כפל ביטוחים אחרי החיבור"
-            checked={consents.pension}
-            onToggle={() => setConsents((c) => ({ ...c, pension: !c.pension }))}
           />
         );
       case 4:
@@ -160,10 +157,7 @@ const Signup2 = () => {
               "איתור כפילויות וחוסרים בכיסויים",
               "המלצות לחיסכון ושיפור כיסוי",
             ]}
-            consentText="המידע מוצפן ומאובטח"
             socialProof="86% מהמשתמשים חסכו מעל ₪104,500 בשנה הראשונה"
-            checked={consents.insurance}
-            onToggle={() => setConsents((c) => ({ ...c, insurance: !c.insurance }))}
           />
         );
       case 7:
@@ -182,10 +176,7 @@ const Signup2 = () => {
               "ניתוח מצב המשכנתא והלוואות",
               "איתור הזדמנויות לחיסכון חודשי",
             ]}
-            consentText="המידע מוצפן ומאובטח"
             socialProof="המשתמשים שלנו חסכו בממוצע ₪780 בחודש על המשכנתא"
-            checked={consents.credit}
-            onToggle={() => setConsents((c) => ({ ...c, credit: !c.credit }))}
           />
         );
       case 10:
@@ -210,7 +201,17 @@ const Signup2 = () => {
     if (index < TOTAL - 1) next();
   };
 
-  // Consent CTA confirm handler
+  const consentChecked =
+    (index === 3 && consents.pension) ||
+    (index === 6 && consents.insurance) ||
+    (index === 9 && consents.credit);
+
+  const onConsentToggle = () => {
+    if (index === 3) setConsents((c) => ({ ...c, pension: !c.pension }));
+    else if (index === 6) setConsents((c) => ({ ...c, insurance: !c.insurance }));
+    else if (index === 9) setConsents((c) => ({ ...c, credit: !c.credit }));
+  };
+
   const onConsentConfirm = () => {
     if (index === 3) {
       if (consents.pension) setConnected((c) => ({ ...c, pension: true }));
@@ -224,11 +225,6 @@ const Signup2 = () => {
     }
   };
 
-  const consentChecked =
-    (index === 3 && consents.pension) ||
-    (index === 6 && consents.insurance) ||
-    (index === 9 && consents.credit);
-
   return (
     <SignupShell
       onSkip={isConsentStep ? next : undefined}
@@ -237,33 +233,61 @@ const Signup2 = () => {
       progress={progress}
       bottom={
         showCta ? (
-          isConsentStep ? (
+          <div className="space-y-3">
+            {isConsentStep && (
+              <button
+                onClick={onConsentToggle}
+                className="w-full rounded-2xl p-3.5 flex items-center gap-3 transition-all active:scale-[0.99]"
+                style={{
+                  background: "white",
+                  border: `2px solid ${consentChecked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 88%)"}`,
+                  boxShadow: consentChecked
+                    ? "0 6px 18px -8px hsla(262, 75%, 55%, 0.45)"
+                    : "0 4px 14px -10px hsla(250, 40%, 20%, 0.18)",
+                }}
+              >
+                <span
+                  className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: consentChecked ? "hsl(262, 75%, 55%)" : "white",
+                    border: `1.5px solid ${consentChecked ? "hsl(262, 75%, 55%)" : "hsl(230, 20%, 75%)"}`,
+                  }}
+                >
+                  {consentChecked && (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  )}
+                </span>
+                <div className="flex-1 min-w-0 text-right">
+                  <p className="text-[13.5px] font-extrabold leading-tight" style={{ color: "hsl(250, 40%, 15%)" }}>
+                    אני מאשר/ת
+                  </p>
+                  <p className="text-[10.5px] leading-snug mt-0.5" style={{ color: "hsl(230, 15%, 50%)" }}>
+                    המידע מוצפן ומאובטח
+                  </p>
+                </div>
+              </button>
+            )}
             <button
-              onClick={onConsentConfirm}
-              disabled={!consentChecked}
+              onClick={isConsentStep ? onConsentConfirm : onMainCta}
+              disabled={isConsentStep ? !consentChecked : !canContinue}
               className="w-full rounded-full py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
               style={{
-                background: consentChecked ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
-                boxShadow: consentChecked
-                  ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)"
-                  : "none",
+                background: isConsentStep
+                  ? consentChecked
+                    ? "hsl(0, 0%, 8%)"
+                    : "hsl(230, 18%, 80%)"
+                  : "hsl(0, 0%, 8%)",
+                boxShadow:
+                  isConsentStep && consentChecked
+                    ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)"
+                    : "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)",
               }}
             >
-              אשר וחתום
+              {isConsentStep ? "אשר וחתום" : ctaLabel}
             </button>
-          ) : (
-            <button
-              onClick={onMainCta}
-              disabled={!canContinue}
-              className="w-full rounded-full py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
-              style={{
-                background: "hsl(0, 0%, 8%)",
-                boxShadow: "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)",
-              }}
-            >
-              {ctaLabel}
-            </button>
-          )
+          </div>
         ) : null
       }
     >
