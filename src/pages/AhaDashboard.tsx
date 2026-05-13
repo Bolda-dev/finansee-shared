@@ -164,7 +164,7 @@ const AhaDashboard = () => {
       </div>
 
       {/* Hero — estimated range */}
-      <div className="relative z-10 px-3 mb-6">
+      <div className="relative z-10 px-3 mb-6" style={{ animation: "aha-item-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both" }}>
         <p className="text-sm font-medium mb-2" style={{ color: "hsl(250, 35%, 30%)" }}>
           הערכה ראשונית
         </p>
