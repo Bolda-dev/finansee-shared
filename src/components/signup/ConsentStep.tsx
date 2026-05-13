@@ -45,7 +45,7 @@ export const ConsentStep = ({
         <SocialProofCallout text={socialProof} />
       </div>
 
-      <div className="space-y-3 pt-4">
+      <div className="pt-4">
         <button
           onClick={onConfirm}
           disabled={!checked}
@@ -56,13 +56,6 @@ export const ConsentStep = ({
           }}
         >
           אשר וחתום
-        </button>
-        <button
-          onClick={onSkip}
-          className="w-full text-center text-[13px] font-medium py-1"
-          style={{ color: "hsl(230, 15%, 50%)" }}
-        >
-          דלג בינתיים
         </button>
       </div>
     </div>

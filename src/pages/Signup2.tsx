@@ -25,10 +25,11 @@ const LOADING_INDEX = 10;
 const showDanaToast = (msg: string) => {
   toast(msg, {
     duration: 2400,
-    position: "top-center",
+    position: "bottom-center",
     style: {
       direction: "rtl",
       textAlign: "right",
+      marginBottom: "72px",
     },
     icon: (
       <img
@@ -228,7 +229,7 @@ const Signup2 = () => {
   return (
     <SignupShell
       onSkip={isConsentStep ? next : undefined}
-      showSkip={false}
+      showSkip={isConsentStep}
       onBack={!inLoading && index > 0 ? back : undefined}
       progress={progress}
       bottom={
