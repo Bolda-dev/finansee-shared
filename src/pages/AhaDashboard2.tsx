@@ -714,7 +714,7 @@ const AhaDashboard2 = () => {
               {stage === "creditReport" && (creditStep === 1 || creditStep === 2) && (
                 <div className="space-y-3">
                   <ConsentAnnex
-                    icon={<PiggyBank className="h-6 w-6" style={{ color: "hsl(220, 85%, 50%)" }} />}
+                    icon={creditStep === 1 ? <PiggyBank className="h-6 w-6" style={{ color: "hsl(220, 85%, 50%)" }} /> : undefined}
                     iconBg="hsl(220, 85%, 94%)"
                     title="אישור לדוח אשראי - אשראי ובנק"
                     subtitle="לניתוח פיננסי מלא נצטרך גישה לדוח האשראי שלך"
