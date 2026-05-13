@@ -887,7 +887,7 @@ const AhaDashboard = () => {
                       <button
                         onClick={() => setCollectStep((s) => (s === 7 ? 8 : 9))}
                         disabled={!stepValid}
-                        className="w-full rounded-2xl py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
+                        className="w-full rounded-full py-3.5 text-[14px] font-extrabold text-white transition-all active:scale-[0.98]"
                         style={{
                           background: stepValid ? "hsl(0, 0%, 8%)" : "hsl(230, 18%, 80%)",
                           boxShadow: stepValid ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)" : "none",
