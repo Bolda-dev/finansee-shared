@@ -8,9 +8,6 @@ const SvgIcon = ({ className, style, children, strokeWidth = 2 }: IconProps & { 
   </svg>
 );
 
-const ShieldCheck = (p: IconProps) => <SvgIcon {...p}><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.25-2.4a1.4 1.4 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></SvgIcon>;
-const EyeOff = (p: IconProps) => <SvgIcon {...p}><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" /><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" /><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" /><path d="m2 2 20 20" /></SvgIcon>;
-const Pause = (p: IconProps) => <SvgIcon {...p}><rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" /></SvgIcon>;
 const Sparkle = (p: IconProps) => <SvgIcon {...p}><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /></SvgIcon>;
 const Link2 = (p: IconProps) => <SvgIcon {...p}><path d="M9 17H7A5 5 0 0 1 7 7h2" /><path d="M15 7h2a5 5 0 1 1 0 10h-2" /><line x1="8" y1="12" x2="16" y2="12" /></SvgIcon>;
 const Wand = (p: IconProps) => <SvgIcon {...p}><path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8 19 13M15 9h0M17.8 6.2 19 5M3 21l9-9M12.2 6.2 11 5" /></SvgIcon>;
@@ -68,102 +65,64 @@ export const WelcomeSlideTwo = () => {
         בלי טפסים. בלי שאלונים. דנה מתחברת למקורות הרשמיים ומציגה לך תמונה פיננסית מלאה — שלא ראית אף פעם.
       </p>
 
-      {/* How it works — 3 step timeline */}
-      <div className="w-full mb-5">
-        <div className="relative">
-          {/* connecting line */}
-          <div
-            className="absolute top-5 right-5 left-5 h-[2px]"
-            style={{
-              background:
-                "linear-gradient(90deg, hsl(178, 70%, 50%) 0%, hsl(220, 85%, 60%) 50%, hsl(262, 75%, 60%) 100%)",
-              opacity: 0.35,
-            }}
-          />
-          <div className="relative grid grid-cols-3 gap-2">
-            {[
-              { n: 1, label: "מתחברים", sub: "פעם אחת", Icon: Link2, color: "hsl(178, 70%, 38%)", grad: "linear-gradient(135deg, hsl(178, 70%, 38%), hsl(174, 70%, 50%))" },
-              { n: 2, label: "דנה אוספת", sub: "אוטומטית", Icon: Wand, color: "hsl(220, 85%, 50%)", grad: "linear-gradient(135deg, hsl(220, 85%, 50%), hsl(225, 90%, 62%))" },
-              { n: 3, label: "רואים הכול", sub: "במקום אחד", Icon: Eye, color: "hsl(262, 75%, 52%)", grad: "linear-gradient(135deg, hsl(262, 75%, 52%), hsl(270, 78%, 65%))" },
-            ].map((s, i) => (
-              <div
-                key={s.n}
-                className="ws2-row flex flex-col items-center text-center"
-                style={{ animationDelay: `${0.1 + i * 0.1}s` }}
-              >
-                <div
-                  className="relative w-10 h-10 rounded-full flex items-center justify-center mb-1.5"
-                  style={{
-                    background: s.grad,
-                    boxShadow: `0 6px 14px -4px ${s.color}66`,
-                  }}
-                >
-                  <s.Icon className="h-4 w-4" style={{ color: "white" }} strokeWidth={2.4} />
-                  <span
-                    className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white flex items-center justify-center text-[9px] font-extrabold"
-                    style={{ color: s.color, boxShadow: "0 1px 3px hsla(250, 40%, 25%, 0.18)" }}
-                  >
-                    {s.n}
-                  </span>
-                </div>
-                <p className="text-[11.5px] font-bold leading-tight" style={{ color: "hsl(250, 40%, 18%)" }}>
-                  {s.label}
-                </p>
-                <p className="text-[10px] leading-tight mt-0.5" style={{ color: "hsl(250, 18%, 50%)" }}>
-                  {s.sub}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Trust pills */}
-      <div className="w-full space-y-2">
+      {/* How it works — 3 step cards */}
+      <div className="w-full space-y-2.5 mb-5">
         {[
           {
-            text: "מאובטח ברמה בנקאית",
-            sub: "הצפנה מקצה לקצה",
-            Icon: ShieldCheck,
-            gradient:
-              "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+            n: 1,
+            label: "מתחברים",
+            sub: "חיבור פעם אחת לביטוח, פנסיה ובנק",
+            Icon: Link2,
+            color: "hsl(178, 70%, 38%)",
+            grad: "linear-gradient(135deg, hsl(178, 70%, 38%), hsl(174, 70%, 50%))",
           },
           {
-            text: "בלי לחשוף סיסמאות",
-            sub: "החיבור מבוצע מולך, ישירות מול המוסד",
-            Icon: EyeOff,
-            gradient:
-              "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
+            n: 2,
+            label: "דנה אוספת",
+            sub: "הנתונים מגיעים אוטומטית — בלי טפסים",
+            Icon: Wand,
+            color: "hsl(220, 85%, 50%)",
+            grad: "linear-gradient(135deg, hsl(220, 85%, 50%), hsl(225, 90%, 62%))",
           },
           {
-            text: "אפשר לעצור בכל שלב",
-            sub: "שליטה מלאה. ללא התחייבות",
-            Icon: Pause,
-            gradient:
-              "linear-gradient(135deg, hsl(258, 72%, 55%) 0%, hsl(265, 78%, 65%) 55%, hsl(275, 85%, 78%) 100%)",
+            n: 3,
+            label: "רואים הכול — וחוסכים",
+            sub: "תמונת מצב מלאה + הזדמנויות לחיסכון",
+            Icon: Eye,
+            color: "hsl(262, 75%, 52%)",
+            grad: "linear-gradient(135deg, hsl(262, 75%, 52%), hsl(270, 78%, 65%))",
           },
-        ].map((row, i) => (
+        ].map((s, i) => (
           <div
-            key={row.text}
-            className="ws2-row flex items-center gap-3 px-3 py-2 rounded-2xl bg-white"
+            key={s.n}
+            className="ws2-row flex items-center gap-3 px-3.5 py-3 rounded-2xl bg-white"
             style={{
               border: "1px solid hsla(250, 30%, 92%, 0.9)",
               boxShadow: "0 2px 10px -4px hsla(250, 40%, 30%, 0.06)",
-              animationDelay: `${0.4 + i * 0.08}s`,
+              animationDelay: `${0.1 + i * 0.1}s`,
             }}
           >
             <div
-              className="h-9 w-9 rounded-xl flex items-center justify-center shrink-0"
-              style={{ background: row.gradient }}
+              className="relative h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+              style={{
+                background: s.grad,
+                boxShadow: `0 6px 14px -4px ${s.color}66`,
+              }}
             >
-              <row.Icon className="h-4 w-4" style={{ color: "white" }} strokeWidth={2.4} />
+              <s.Icon className="h-4 w-4" style={{ color: "white" }} strokeWidth={2.4} />
+              <span
+                className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white flex items-center justify-center text-[9px] font-extrabold"
+                style={{ color: s.color, boxShadow: "0 1px 3px hsla(250, 40%, 25%, 0.18)" }}
+              >
+                {s.n}
+              </span>
             </div>
             <div className="flex-1 min-w-0 text-right">
-              <p className="text-[13px] font-bold leading-tight" style={{ color: "hsl(250, 40%, 18%)" }}>
-                {row.text}
+              <p className="text-[13.5px] font-bold leading-tight" style={{ color: "hsl(250, 40%, 18%)" }}>
+                {s.label}
               </p>
-              <p className="text-[10.5px] leading-tight mt-0.5" style={{ color: "hsl(250, 18%, 50%)" }}>
-                {row.sub}
+              <p className="text-[11px] leading-tight mt-0.5" style={{ color: "hsl(250, 18%, 50%)" }}>
+                {s.sub}
               </p>
             </div>
           </div>
