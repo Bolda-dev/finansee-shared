@@ -181,7 +181,7 @@ const AhaDashboard = () => {
 
       {/* Dana callout */}
       <div className="relative z-10 px-3 mb-6">
-        {!homeAlmostDone ? (
+        {insuranceUpgraded ? (
           <div
             className="rounded-2xl p-4"
             style={{
