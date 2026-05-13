@@ -96,11 +96,11 @@ const Signup = () => {
       case 4:
         return <NameStep firstName={name.firstName} lastName={name.lastName} onChange={setName} />;
       case 5:
-        return <AgeStep value={age} onChange={setAge} />;
+        return <AgeStep value={age} onChange={autoAdvance(setAge)} />;
       case 6:
-        return <FamilyStep value={family} onChange={setFamily} />;
+        return <FamilyStep value={family} onChange={autoAdvance(setFamily)} />;
       case 7:
-        return <EmploymentStep value={employment} onChange={setEmployment} />;
+        return <EmploymentStep value={employment} onChange={autoAdvance(setEmployment)} />;
       case 8:
         return <GoalsStep value={goals} onChange={setGoals} />;
       case 9:
