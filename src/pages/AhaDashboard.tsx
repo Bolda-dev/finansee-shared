@@ -53,6 +53,7 @@ const AhaDashboard = () => {
   const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false, creditAssets: false, creditLiab: false });
   const [collectingMsg, setCollectingMsg] = useState(0);
   const [homeAlmostDone, setHomeAlmostDone] = useState(false);
+  const [insuranceUpgraded, setInsuranceUpgraded] = useState(false);
   const insightRef = useRef<HTMLDivElement | null>(null);
 
   // Reset chat state when sheet closes (keep homeAlmostDone)
@@ -81,7 +82,7 @@ const AhaDashboard = () => {
     const t3 = setTimeout(() => {
       if (collectStep === 5) {
         setCollectStep(6);
-        setTimeout(() => setShowInsight(true), 450);
+        setTimeout(() => setShowInsight(true), 1000);
       } else {
         setCollectStep(10);
       }
@@ -275,6 +276,51 @@ const AhaDashboard = () => {
         <div className="grid grid-cols-3 gap-3 mb-8">
           {heroCards.map((card) => {
             const p = palettes[card.category];
+            const isUpgradedInsurance = card.category === "insurance" && insuranceUpgraded;
+            if (isUpgradedInsurance) {
+              return (
+                <button
+                  key={card.label}
+                  onClick={() => navigate(card.route)}
+                  className="relative rounded-2xl px-2.5 py-3 text-start flex flex-col transition-transform active:scale-[0.97]"
+                  style={{
+                    background: p.gradient,
+                    boxShadow: p.shadow,
+                    minHeight: "168px",
+                    border: "1.5px solid transparent",
+                    animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+                  }}
+                >
+                  <span
+                    className="absolute top-2 left-2 w-6 h-6 rounded-full flex items-center justify-center"
+                    style={{ background: "hsla(0,0%,100%,0.25)" }}
+                  >
+                    <Check className="h-3 w-3 text-white" strokeWidth={3.5} />
+                  </span>
+                  <div
+                    className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
+                    style={{ background: "hsla(0,0%,100%,0.22)" }}
+                  >
+                    <card.Icon className="h-4 w-4 text-white" />
+                  </div>
+                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(255,255,255,0.85)" }}>
+                    {card.label}
+                  </p>
+                  <p className="font-extrabold text-lg mb-1 text-white">
+                    7 פוליסות
+                  </p>
+                  <p className="text-[9.5px] leading-tight mb-2" style={{ color: "hsla(255,255,255,0.85)" }}>
+                    חוסך ₪2,000/שנה
+                  </p>
+                  <span
+                    className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center"
+                    style={{ background: "white", color: p.solid }}
+                  >
+                    צפייה בפרטים
+                  </span>
+                </button>
+              );
+            }
             return (
               <div
                 key={card.label}
@@ -820,22 +866,22 @@ const AhaDashboard = () => {
                     );
                   })()}
 
-                  {/* === STEP 5/9: collecting animation === */}
+                  {/* === STEP 5/9: chat skeleton loader === */}
                   {(collectStep === 5 || collectStep === 9) && (
-                    <div className="rounded-2xl p-6 flex flex-col items-center gap-3" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)" }}>
-                      <div className="relative w-16 h-16 flex items-center justify-center">
+                    <div className="space-y-3" dir="rtl">
+                      {/* skeleton chat bubble */}
+                      <div className="flex items-end gap-2">
                         <div
-                          className="absolute inset-0 rounded-full"
-                          style={{
-                            background: "conic-gradient(from 0deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%), hsl(178, 70%, 45%), hsl(262, 75%, 55%))",
-                            animation: "spin 1.2s linear infinite",
-                          }}
+                          className="w-9 h-9 rounded-full flex-shrink-0 chat-skeleton"
                         />
-                        <div className="absolute inset-1.5 rounded-full bg-white flex items-center justify-center">
-                          <Loader2 className="h-6 w-6 animate-spin" style={{ color: "hsl(262, 75%, 55%)" }} />
+                        <div className="rounded-2xl rounded-br-md px-3.5 py-3 max-w-[85%] flex-1 space-y-2" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
+                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "82%" }} />
+                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "62%" }} />
+                          <div className="h-2.5 rounded-full chat-skeleton" style={{ width: "45%" }} />
                         </div>
                       </div>
-                      <p className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>
+                      {/* status text */}
+                      <p className="text-[12px] text-center font-medium" style={{ color: "hsl(230, 15%, 50%)" }}>
                         {collectStep === 5 && collectingMsg === 0 && "מתחברת לרשות שוק ההון..."}
                         {collectStep === 5 && collectingMsg === 1 && "מאמתת את הזהות שלך..."}
                         {collectStep === 5 && collectingMsg === 2 && "מושכת את הפוליסות שלך..."}
@@ -843,6 +889,16 @@ const AhaDashboard = () => {
                         {collectStep === 9 && collectingMsg === 1 && "מזהה נכסים והתחייבויות..."}
                         {collectStep === 9 && collectingMsg === 2 && "מסכמת את התמונה הפיננסית..."}
                       </p>
+                      <style>{`
+                        @keyframes chat-skel-pulse {
+                          0%, 100% { background-color: hsl(230, 20%, 93%); }
+                          50% { background-color: hsl(230, 20%, 87%); }
+                        }
+                        .chat-skeleton {
+                          background: hsl(230, 20%, 92%);
+                          animation: chat-skel-pulse 1.4s ease-in-out infinite;
+                        }
+                      `}</style>
                     </div>
                   )}
 
@@ -934,56 +990,15 @@ const AhaDashboard = () => {
                   {/* === STEP 6: result + insight === */}
                   {collectStep === 6 && (
                     <>
-                      {/* 3-bullet progress checklist */}
-                      <div
-                        className="rounded-2xl p-4"
-                        style={{
-                          background: "white",
-                          border: "1px solid hsl(230, 20%, 90%)",
-                          boxShadow: "0 4px 14px hsla(250, 30%, 25%, 0.05)",
-                          animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
-                        }}
-                      >
-                        <ul className="space-y-2.5">
-                          {[
-                            "קיבלנו אישור לגשת להר הביטוח ומסלקה",
-                            "נתוני הביטוח שלך מוכנים לצפייה",
-                            "המידע מעודכן באופן אוטומטי כל חודש",
-                          ].map((t, i) => (
-                            <li
-                              key={i}
-                              className="flex items-center gap-3 rounded-xl p-2"
-                              style={{
-                                background: "hsl(150, 50%, 97%)",
-                                border: "1px solid hsl(150, 40%, 90%)",
-                                opacity: 0,
-                                animation: `aha-item-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + i * 0.18}s forwards`,
-                              }}
-                            >
-                              <span
-                                className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                                style={{ background: "hsl(150, 65%, 45%)", boxShadow: "0 2px 6px hsla(150, 65%, 35%, 0.35)" }}
-                              >
-                                <Check className="h-3.5 w-3.5 text-white" strokeWidth={3.5} />
-                              </span>
-                              <span className="text-[12.5px] font-medium leading-snug text-end flex-1" style={{ color: "hsl(150, 40%, 18%)" }}>
-                                {t}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Insurance — connected, white card with purple icon */}
+                      {/* Insurance — connected, white card with purple icon (FIRST) */}
                       <button
                         onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
                         className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
                         style={{
                           background: "white",
-                          border: "1.5px solid hsl(262, 60%, 88%)",
-                          boxShadow: "0 8px 22px -10px hsla(262, 60%, 45%, 0.28)",
+                          border: "1px solid hsl(230, 20%, 90%)",
                           opacity: 0,
-                          animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards",
+                          animation: "aha-item-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards",
                         }}
                       >
                         <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsl(150, 60%, 95%)", color: "hsl(150, 70%, 28%)", border: "1px solid hsl(150, 50%, 85%)" }}>
@@ -1004,15 +1019,14 @@ const AhaDashboard = () => {
                         </span>
                       </button>
 
-                      {/* Pension clearing house — pending, yellow badge */}
+                      {/* Pension clearing house — pending */}
                       <button
                         className="w-full text-start rounded-2xl p-4 flex items-center gap-3 relative overflow-hidden"
                         style={{
                           background: "white",
-                          border: "1.5px solid hsl(45, 90%, 80%)",
-                          boxShadow: "0 8px 22px -10px hsla(45, 80%, 40%, 0.25)",
+                          border: "1px solid hsl(230, 20%, 90%)",
                           opacity: 0,
-                          animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards",
+                          animation: "aha-item-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards",
                         }}
                       >
                         <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsl(45, 95%, 92%)", color: "hsl(35, 85%, 35%)", border: "1px solid hsl(45, 90%, 75%)" }}>
@@ -1020,18 +1034,40 @@ const AhaDashboard = () => {
                         </span>
                         <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 relative" style={{ background: "hsl(45, 90%, 95%)" }}>
                           <Building2 className="h-5 w-5" style={{ color: "hsl(35, 85%, 40%)" }} />
-                          <span
-                            className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
-                            style={{ background: "hsl(150, 65%, 45%)", border: "2px solid white" }}
-                          >
-                            <Check className="h-2 w-2 text-white" strokeWidth={4} />
-                          </span>
                         </span>
                         <span className="flex-1 min-w-0">
                           <span className="block text-[14px] font-extrabold mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>מסלקת הפנסיה</span>
                           <span className="block text-[11px]" style={{ color: "hsl(35, 60%, 40%)" }}>הנתונים יגיעו בשעתיים הקרובות</span>
                         </span>
                       </button>
+
+                      {/* Subtle bullets — after the cards */}
+                      <ul className="space-y-2 px-1 pt-1" dir="rtl">
+                        {[
+                          "קיבלנו אישור לגשת להר הביטוח ומסלקה",
+                          "נתוני הביטוח שלך מוכנים לצפייה",
+                          "המידע מעודכן באופן אוטומטי כל חודש",
+                        ].map((t, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center gap-2 text-right"
+                            style={{
+                              opacity: 0,
+                              animation: `aha-item-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) ${0.5 + i * 0.12}s forwards`,
+                            }}
+                          >
+                            <span
+                              className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                              style={{ background: "hsl(150, 50%, 92%)" }}
+                            >
+                              <Check className="h-2.5 w-2.5" strokeWidth={3.5} style={{ color: "hsl(150, 55%, 35%)" }} />
+                            </span>
+                            <span className="text-[11.5px] leading-snug flex-1 text-right" style={{ color: "hsl(230, 15%, 45%)" }}>
+                              {t}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
 
                       {showInsight && (
                         <div
@@ -1040,7 +1076,7 @@ const AhaDashboard = () => {
                           style={{
                             background: "linear-gradient(135deg, hsl(260, 75%, 97%) 0%, hsl(265, 70%, 95%) 55%, hsl(275, 75%, 96%) 100%)",
                             border: "1.5px solid hsl(262, 60%, 82%)",
-                            boxShadow: "0 12px 32px -8px hsla(262, 60%, 45%, 0.22)",
+                            boxShadow: "0 12px 32px -8px hsla(262, 60%, 45%, 0.32)",
                             animation: "sheet-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
                           }}
                         >
@@ -1059,7 +1095,11 @@ const AhaDashboard = () => {
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
-                            onClick={() => { setShowInsight(false); setCollectStep(7); }}
+                            onClick={() => {
+                              setShowInsight(false);
+                              setInsuranceUpgraded(true);
+                              setChatOpen(false);
+                            }}
                             className="w-full rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
                             style={{
                               background: "hsl(250, 40%, 12%)",
@@ -1070,46 +1110,6 @@ const AhaDashboard = () => {
                             חסוך ₪2,000 בקליק
                           </button>
                         </div>
-                      )}
-
-                      {/* Dana follow-up: connect assets */}
-                      {showInsight && (
-                        <div className="flex items-end gap-2 mt-4" style={{ animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both", opacity: 0, animationFillMode: "forwards" }}>
-                          <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
-                            <img src={advisorImg} alt="" className="w-full h-full object-cover" />
-                          </div>
-                          <div className="rounded-2xl rounded-br-md px-3.5 py-2.5 max-w-[85%]" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
-                            <p className="text-[13px] leading-relaxed font-bold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
-                              מעולה! עכשיו בוא נחבר את הנכסים שלך 💎
-                            </p>
-                            <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
-                              חיבור לבנק ולתיקי ההשקעות יחשוף את השווי האמיתי שלך.
-                            </p>
-                          </div>
-                        </div>
-                      )}
-
-                      {showInsight && (
-                        <button
-                          onClick={() => setCollectStep(7)}
-                          className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] mt-2"
-                          style={{
-                            background: "white",
-                            border: "1.5px solid hsl(176, 50%, 82%)",
-                            boxShadow: "0 8px 22px -10px hsla(176, 70%, 32%, 0.28)",
-                            animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both",
-                            opacity: 0,
-                            animationFillMode: "forwards",
-                          }}
-                        >
-                          <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: palettes.assets.gradient }}>
-                            <TrendingUp className="h-5 w-5 text-white" />
-                          </span>
-                          <span className="flex-1 min-w-0">
-                            <span className="block text-[14px] font-extrabold mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>חיבור לנכסים</span>
-                            <span className="block text-[11px]" style={{ color: "hsl(250, 22%, 50%)" }}>בנק, השקעות ונדל״ן · גילוי השווי האמיתי</span>
-                          </span>
-                        </button>
                       )}
                     </>
                   )}
