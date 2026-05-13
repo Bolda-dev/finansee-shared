@@ -164,11 +164,6 @@ const Signup2 = () => {
             socialProof="86% מהמשתמשים חסכו מעל ₪104,500 בשנה הראשונה"
             checked={consents.insurance}
             onToggle={() => setConsents((c) => ({ ...c, insurance: !c.insurance }))}
-            onConfirm={() => {
-              setConnected((c) => ({ ...c, insurance: true }));
-              next();
-            }}
-            onSkip={next}
           />
         );
       case 7:
