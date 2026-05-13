@@ -616,9 +616,9 @@ const AhaDashboard2 = () => {
                     <div className="flex items-center gap-3 mb-3">
                       <span
                         className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
-                        style={{ background: insuranceP.gradient }}
+                        style={{ background: palettes.liabilities.gradient }}
                       >
-                        <TrendingUp className="h-5 w-5 text-white" />
+                        <PiggyBank className="h-5 w-5 text-white" />
                       </span>
                       <span className="flex-1 min-w-0">
                         <span className="flex items-center gap-1.5 mb-0.5">
