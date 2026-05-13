@@ -947,18 +947,38 @@ const AhaDashboard = () => {
                   {collectStep === 6 && (
                     <>
                       {/* 3-bullet progress checklist */}
-                      <div className="rounded-2xl p-4" style={{ background: "white", border: "1px solid hsl(230, 20%, 90%)", boxShadow: "0 4px 14px hsla(250, 30%, 25%, 0.05)" }}>
-                        <ul className="space-y-3">
+                      <div
+                        className="rounded-2xl p-4"
+                        style={{
+                          background: "white",
+                          border: "1px solid hsl(230, 20%, 90%)",
+                          boxShadow: "0 4px 14px hsla(250, 30%, 25%, 0.05)",
+                          animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
+                        }}
+                      >
+                        <ul className="space-y-2.5">
                           {[
                             "קיבלנו אישור לגשת להר הביטוח ומסלקה",
                             "נתוני הביטוח שלך מוכנים לצפייה",
                             "המידע מעודכן באופן אוטומטי כל חודש",
                           ].map((t, i) => (
-                            <li key={i} className="flex items-center gap-2.5">
-                              <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "hsl(220, 85%, 55%)" }}>
-                                <Check className="h-3 w-3 text-white" strokeWidth={3.5} />
+                            <li
+                              key={i}
+                              className="flex items-center gap-3 rounded-xl p-2"
+                              style={{
+                                background: "hsl(150, 50%, 97%)",
+                                border: "1px solid hsl(150, 40%, 90%)",
+                                opacity: 0,
+                                animation: `sheet-slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) ${0.15 + i * 0.18}s forwards`,
+                              }}
+                            >
+                              <span
+                                className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                                style={{ background: "hsl(150, 65%, 45%)", boxShadow: "0 2px 6px hsla(150, 65%, 35%, 0.35)" }}
+                              >
+                                <Check className="h-3.5 w-3.5 text-white" strokeWidth={3.5} />
                               </span>
-                              <span className="text-[12.5px] leading-snug text-end flex-1" style={{ color: "hsl(250, 35%, 22%)" }}>
+                              <span className="text-[12.5px] font-medium leading-snug text-end flex-1" style={{ color: "hsl(150, 40%, 18%)" }}>
                                 {t}
                               </span>
                             </li>
@@ -966,24 +986,61 @@ const AhaDashboard = () => {
                         </ul>
                       </div>
 
-                      {/* Insurance card — purple gradient, connected */}
+                      {/* Insurance — connected, green check icon */}
                       <button
                         onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
                         className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
                         style={{
                           background: palettes.insurance.gradient,
                           boxShadow: "0 12px 28px -8px hsla(262, 72%, 50%, 0.55)",
+                          opacity: 0,
+                          animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards",
                         }}
                       >
                         <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsla(0,0%,100%,0.95)", color: "hsl(150, 70%, 28%)" }}>
                           <Check className="h-2.5 w-2.5" strokeWidth={4} /> הכל תקין
                         </span>
-                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "hsla(0,0%,100%,0.22)" }}>
-                          <ShieldCheck className="h-5 w-5 text-white" />
+                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 relative" style={{ background: "white" }}>
+                          <ShieldCheck className="h-5 w-5" style={{ color: "hsl(262, 75%, 55%)" }} />
+                          <span
+                            className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
+                            style={{ background: "hsl(150, 65%, 45%)", border: "2px solid white" }}
+                          >
+                            <Check className="h-2 w-2 text-white" strokeWidth={4} />
+                          </span>
                         </span>
                         <span className="flex-1 min-w-0">
                           <span className="block text-[14px] font-extrabold text-white mb-0.5">ביטוח</span>
                           <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.9)" }}>7 פוליסות מחוברות · עדכון אוטומטי</span>
+                        </span>
+                      </button>
+
+                      {/* Pension clearing house — pending, yellow badge */}
+                      <button
+                        className="w-full text-start rounded-2xl p-4 flex items-center gap-3 relative overflow-hidden"
+                        style={{
+                          background: "white",
+                          border: "1.5px solid hsl(45, 90%, 80%)",
+                          boxShadow: "0 8px 22px -10px hsla(45, 80%, 40%, 0.25)",
+                          opacity: 0,
+                          animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards",
+                        }}
+                      >
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsl(45, 95%, 92%)", color: "hsl(35, 85%, 35%)", border: "1px solid hsl(45, 90%, 75%)" }}>
+                          <Clock className="h-2.5 w-2.5" strokeWidth={3} /> שעתיים
+                        </span>
+                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 relative" style={{ background: "hsl(45, 90%, 95%)" }}>
+                          <Building2 className="h-5 w-5" style={{ color: "hsl(35, 85%, 40%)" }} />
+                          <span
+                            className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
+                            style={{ background: "hsl(150, 65%, 45%)", border: "2px solid white" }}
+                          >
+                            <Check className="h-2 w-2 text-white" strokeWidth={4} />
+                          </span>
+                        </span>
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-[14px] font-extrabold mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>מסלקת הפנסיה</span>
+                          <span className="block text-[11px]" style={{ color: "hsl(35, 60%, 40%)" }}>הנתונים יגיעו בשעתיים הקרובות</span>
                         </span>
                       </button>
 
