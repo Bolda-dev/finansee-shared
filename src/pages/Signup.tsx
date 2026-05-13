@@ -123,21 +123,20 @@ const Signup = () => {
       progress={progress}
       bottom={
         showCta ? (
-          <div className="flex justify-center">
-            <button
-              onClick={() => {
-                if (index < TOTAL - 1) next();
-              }}
-              disabled={!canContinue}
-              className="btn-black-deep rounded-full px-10 py-3 text-sm font-semibold text-white transition-all active:scale-[0.97] disabled:opacity-40"
-              style={{
-                boxShadow:
-                  "0 10px 24px -10px hsla(0, 0%, 0%, 0.55), 0 2px 6px hsla(0, 0%, 0%, 0.2), inset 0 1px 0 hsla(0, 0%, 100%, 0.12)",
-              }}
-            >
-              <span className="relative z-10">{ctaLabel}</span>
-            </button>
-          </div>
+          <button
+            onClick={() => {
+              if (index < TOTAL - 1) next();
+            }}
+            disabled={!canContinue}
+            className="w-full rounded-2xl py-3.5 text-[15px] font-extrabold text-white transition-all active:scale-[0.98] disabled:opacity-40"
+            style={{
+              background: "hsl(250, 40%, 12%)",
+              boxShadow:
+                "0 10px 24px -10px hsla(250, 40%, 12%, 0.45)",
+            }}
+          >
+            {ctaLabel}
+          </button>
         ) : null
       }
     >
