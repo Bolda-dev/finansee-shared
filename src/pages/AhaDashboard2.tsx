@@ -8,10 +8,10 @@ import advisorImg from "@/assets/advisor-avatar.jpg";
 type Palette = { gradient: string; shadow: string; solid: string; soft: string };
 const palettes: Record<"assets" | "liabilities" | "insurance", Palette> = {
   assets: {
-    gradient: "linear-gradient(135deg, hsl(150, 70%, 32%) 0%, hsl(145, 65%, 42%) 55%, hsl(140, 70%, 56%) 100%)",
-    shadow: "0 6px 16px -4px hsla(148, 70%, 28%, 0.45)",
-    solid: "hsl(150, 70%, 32%)",
-    soft: "hsl(148, 55%, 95%)",
+    gradient: "linear-gradient(135deg, hsl(178, 70%, 32%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
+    shadow: "0 6px 16px -4px hsla(176, 70%, 28%, 0.45)",
+    solid: "hsl(178, 70%, 30%)",
+    soft: "hsl(176, 55%, 95%)",
   },
   liabilities: {
     gradient: "linear-gradient(135deg, hsl(220, 85%, 48%) 0%, hsl(225, 90%, 60%) 55%, hsl(215, 95%, 75%) 100%)",
