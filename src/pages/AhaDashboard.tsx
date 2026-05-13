@@ -246,8 +246,80 @@ const AhaDashboard = () => {
         </div>
       </div>
 
-      {/* Floating Dana chatbot */}
-      <ChatBot open={chatOpen} onOpenChange={setChatOpen} variant="centered" />
+      {/* Bottom Chat Bar (matches IndexC) */}
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none" dir="rtl">
+        {/* Coach-mark tooltip above avatar */}
+        {tipOpen && (
+          <div className="relative pointer-events-auto mb-2 mr-1">
+            <div
+              className="inline-flex items-start gap-2 rounded-2xl px-3 py-2 max-w-[300px]"
+              style={{
+                background: "white",
+                boxShadow: "0 8px 24px hsla(250, 30%, 25%, 0.15)",
+                border: "1px solid hsl(230, 20%, 92%)",
+              }}
+            >
+              <p className="text-[12.5px] leading-snug" style={{ color: "hsl(250, 40%, 15%)" }}>
+                האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
+              </p>
+              <button
+                onClick={(e) => { e.stopPropagation(); setTipOpen(false); }}
+                className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+                style={{ background: "hsl(230, 25%, 95%)" }}
+                aria-label="סגור"
+              >
+                <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
+              </button>
+            </div>
+            {/* tail */}
+            <span
+              className="absolute -bottom-1.5 right-6 w-3 h-3 rotate-45"
+              style={{
+                background: "white",
+                borderRight: "1px solid hsl(230, 20%, 92%)",
+                borderBottom: "1px solid hsl(230, 20%, 92%)",
+              }}
+            />
+          </div>
+        )}
+
+        <button
+          onClick={() => setChatOpen(true)}
+          dir="rtl"
+          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+          style={{
+            background: "white",
+            boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
+            border: "1px solid hsl(230, 20%, 92%)",
+          }}
+          aria-label="פתח צ׳אט עם Finansee AI"
+        >
+          <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
+            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
+              <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            </span>
+          </span>
+
+          <span className="flex-1 text-start text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
+            שאל את Finansee AI
+          </span>
+
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: "hsl(230, 25%, 96%)", border: "1px solid hsl(230, 20%, 90%)" }}
+          >
+            <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
+          </span>
+
+          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
+            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
+              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+            </span>
+          </span>
+        </button>
+      </div>
+
+      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
     </div>
   );
 };
