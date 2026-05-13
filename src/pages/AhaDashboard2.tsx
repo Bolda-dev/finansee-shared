@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { TrendingUp, TrendingDown, ShieldCheck, Menu, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Check, ArrowLeft, ChevronDown, Loader } from "lucide-react";
 import { ConsentAnnex } from "@/components/aha/ConsentAnnex";
@@ -65,7 +65,16 @@ const styleQuestions = [
 
 const AhaDashboard2 = () => {
   const navigate = useNavigate();
-  const firstName = userData.name;
+  const location = useLocation();
+  const navState = (location.state || {}) as {
+    firstName?: string;
+    connected?: { pension?: boolean; insurance?: boolean; credit?: boolean };
+  };
+  const initialCompleted = !!(
+    navState.connected &&
+    (navState.connected.pension || navState.connected.insurance || navState.connected.credit)
+  );
+  const firstName = navState.firstName || userData.name;
 
   const [chatOpen, setChatOpen] = useState(false);
   const [tipOpen, setTipOpen] = useState(false);
@@ -77,7 +86,7 @@ const AhaDashboard2 = () => {
   const [styleAnswers, setStyleAnswers] = useState<Record<number, string>>({});
   const [consents, setConsents] = useState({ creditAssets: false, creditLiab: false });
   const [collectingMsg, setCollectingMsg] = useState(0);
-  const [completed85, setCompleted85] = useState(false);
+  const [completed85, setCompleted85] = useState(initialCompleted);
   const [danaExpanded, setDanaExpanded] = useState(false);
   const [danaCollapsed, setDanaCollapsed] = useState(false);
 
