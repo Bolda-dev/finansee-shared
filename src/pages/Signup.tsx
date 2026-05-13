@@ -118,7 +118,7 @@ const Signup = () => {
     <SignupShell
       onSkip={inWelcome ? () => setIndex(WELCOME_COUNT - 1) : undefined}
       showSkip={inWelcome && index < WELCOME_COUNT - 1}
-      onBack={!inWelcome && !inLoading ? back : undefined}
+      onBack={!inLoading && index > 0 ? back : undefined}
       pagination={inWelcome ? { total: WELCOME_COUNT, current: index, onDotClick: setIndex } : undefined}
       progress={progress}
       bottom={

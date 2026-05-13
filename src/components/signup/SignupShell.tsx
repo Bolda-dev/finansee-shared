@@ -36,8 +36,8 @@ export const SignupShell = ({
         />
       </div>
 
-      {/* Top bar */}
-      <div className="relative z-10 flex items-center justify-between px-5 pt-5 h-12 shrink-0">
+      {/* Floating top bar — no background */}
+      <div className="absolute z-20 flex items-center justify-between px-5 pt-5 inset-x-0 top-0">
         <div className="w-12">
           {onBack && (
             <button
@@ -78,7 +78,7 @@ export const SignupShell = ({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col">{children}</div>
+      <div className="relative z-10 flex-1 flex flex-col pt-14">{children}</div>
 
       {/* Pagination + bottom CTA */}
       <div className="relative z-10 px-5 pb-8 pt-4 shrink-0">
