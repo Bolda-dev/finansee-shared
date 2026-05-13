@@ -383,33 +383,30 @@ const AhaDashboard = () => {
                 <button
                   key={card.label}
                   onClick={() => navigate("/c/assets")}
-                  className="relative bg-white rounded-2xl border overflow-hidden flex flex-col text-start active:scale-[0.99] transition-transform"
+                  className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform active:scale-[0.98]"
                   style={{
-                    borderColor: "hsl(230, 20%, 92%)",
-                    boxShadow: "0 4px 12px hsla(250, 30%, 25%, 0.05)",
+                    background: "white",
+                    boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+                    border: "1px solid hsl(230, 20%, 94%)",
                     minHeight: "150px",
                     ...animStyle,
                   }}
                 >
-                  <div className="absolute top-0 inset-x-0 h-1.5" style={{ background: p.solid }} />
-                  <div className="p-3 flex flex-col h-full">
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: p.soft, color: p.solid }}>
-                        <card.Icon className="h-4 w-4" />
-                      </div>
-                      <span className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{card.label}</span>
-                    </div>
-                    <div className="flex flex-col mb-3">
-                      <span className="text-[19px] font-extrabold tracking-tight leading-tight" style={{ color: "hsl(250, 40%, 10%)" }}>₪1,233,500</span>
-                      <span className="text-[10.5px] font-semibold mt-0.5" style={{ color: "hsl(230, 14%, 55%)" }}>סך החיסכון</span>
-                    </div>
-                    <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
-                      <div className="flex items-center gap-1 text-[10.5px]" style={{ color: "hsl(230, 14%, 50%)" }}>
-                        <span className="font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>₪9,069</span>
-                        <span>·</span>
-                        <span>צפי קצבה חודשית</span>
-                      </div>
-                    </div>
+                  <span className="absolute top-0 inset-x-0 h-[3px] pointer-events-none" style={{ background: p.solid }} aria-hidden />
+                  <div className="flex items-center justify-start gap-2 mb-1">
+                    <span className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: p.soft }}>
+                      <card.Icon className="h-4 w-4" style={{ color: p.solid }} strokeWidth={2} />
+                    </span>
+                    <span className="text-[12px] font-bold tracking-tight" style={{ color: "hsl(250, 50%, 12%)" }}>{card.label}</span>
+                  </div>
+                  <p className="text-[22px] font-extrabold tracking-tight leading-none" style={{ color: "hsl(250, 50%, 12%)" }}>₪1,233,500</p>
+                  <p className="text-[10px] mt-1" style={{ color: "hsl(230, 12%, 58%)" }}>סך החיסכון</p>
+                  <div className="mt-auto pt-2 border-t" style={{ borderColor: "hsl(230, 20%, 94%)" }}>
+                    <p className="text-[11px] leading-none whitespace-nowrap">
+                      <span className="font-bold" style={{ color: "hsl(250, 50%, 12%)" }}>₪9,069</span>
+                      <span className="mx-1" style={{ color: "hsl(250, 50%, 12%)" }}>·</span>
+                      <span style={{ color: "hsl(250, 50%, 12%)" }}>צפי קצבה חודשית</span>
+                    </p>
                   </div>
                 </button>
               );
@@ -418,7 +415,7 @@ const AhaDashboard = () => {
               <button
                 key={card.label}
                 onClick={() => navigate(card.category === "liabilities" ? "/c/liabilities" : "/c/assets")}
-                className="rounded-2xl flex flex-col text-start px-3 py-3 transition-transform active:scale-[0.99]"
+                className="rounded-2xl flex flex-col items-center justify-center text-center px-3 py-4 gap-2 transition-transform active:scale-[0.98]"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.4)",
                   border: `1.5px dashed ${dashedBorder}`,
@@ -426,18 +423,16 @@ const AhaDashboard = () => {
                   ...animStyle,
                 }}
               >
-                <div className="flex justify-between items-start mb-3">
-                  <div className="relative w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "hsl(230, 25%, 95%)", color: mutedIconColor }}>
-                    <card.Icon className="h-4 w-4" />
-                    <span
-                      className="absolute -bottom-0.5 -left-0.5 w-4 h-4 rounded-full flex items-center justify-center text-white"
-                      style={{ background: p.solid, boxShadow: "0 2px 4px hsla(0,0%,0%,0.15)", border: "1.5px solid white" }}
-                    >
-                      <Plus className="h-2.5 w-2.5" strokeWidth={3} />
-                    </span>
-                  </div>
-                  <span className="text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{card.label}</span>
+                <div className="relative w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "hsl(230, 25%, 95%)", color: mutedIconColor }}>
+                  <card.Icon className="h-4 w-4" strokeWidth={2} />
+                  <span
+                    className="absolute -bottom-0.5 -left-0.5 w-4 h-4 rounded-full flex items-center justify-center"
+                    style={{ background: "hsl(230, 14%, 70%)", color: "white", border: "1.5px solid white" }}
+                  >
+                    <Plus className="h-2.5 w-2.5" strokeWidth={3} />
+                  </span>
                 </div>
+                <span className="text-[12px] font-bold tracking-tight" style={{ color: "hsl(250, 50%, 12%)" }}>{card.label}</span>
               </button>
             );
           })}
