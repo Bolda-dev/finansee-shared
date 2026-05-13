@@ -506,7 +506,7 @@ const AhaDashboard2 = () => {
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
-          <span className="relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
+          <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
             <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
               <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
             </span>
@@ -520,8 +520,8 @@ const AhaDashboard2 = () => {
           >
             <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
-          <span className="relative w-9 h-9 rounded-full flex-shrink-0">
-            <span className="flex w-full h-full rounded-full items-center justify-center" style={{ background: insuranceP.gradient }}>
+          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
+            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
               <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
             </span>
           </span>
