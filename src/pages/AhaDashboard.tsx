@@ -860,7 +860,7 @@ const AhaDashboard = () => {
 
                       {showInsight && (
                         <button
-                          onClick={() => { setChatOpen(false); navigate("/c/assets"); }}
+                          onClick={() => setCollectStep(7)}
                           className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] mt-2"
                           style={{
                             background: palettes.assets.gradient,
