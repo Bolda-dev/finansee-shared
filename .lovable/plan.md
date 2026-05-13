@@ -1,35 +1,23 @@
-## AhaDashboard updates
+## Replace floating chatbot in AhaDashboard with IndexC bottom chat bar
 
-### 1. Per-color "חיבור לנתונים" button in top 3 cards
-Each of the 3 locked cards (נכסים / התחייבויות / ביטוח) gets a colored connect button matching its IndexC gradient family:
-- נכסים → teal `linear-gradient(135deg, hsl(178, 70%, 32%), hsl(174, 65%, 42%), hsl(170, 70%, 56%))`
-- התחייבויות → blue `linear-gradient(135deg, hsl(220, 85%, 48%), hsl(225, 90%, 60%), hsl(215, 95%, 75%))`
-- ביטוח → purple `linear-gradient(135deg, hsl(258, 72%, 55%), hsl(265, 78%, 65%), hsl(275, 85%, 78%))`
+### Changes to `src/pages/AhaDashboard.tsx`
 
-Card itself stays dashed/empty look; only the button gets the brand gradient + white text. Add subtle colored shadow per card.
+1. **Remove** `<ChatBot ... variant="centered" />` and its FAB.
+2. **Add** the exact same bottom chat bar pattern used in `IndexC.tsx` (lines 525–570):
+   - Fixed bottom, max-width 430px, white pill with shadow.
+   - Right-side avatar (`advisorImg`) with rotating tri-color ring (`tri-ring-c` class — already global from IndexC styles).
+   - Center placeholder text "שאל את Finansee AI".
+   - Mic button + Send button (tri-ring CTA) on the left.
+   - Click anywhere → opens chat.
+3. **Tooltip from the avatar**: a small persistent speech-bubble above the avatar showing  
+   "האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?"  
+   - Implemented as an absolutely-positioned bubble anchored to the avatar (not the radix Tooltip, since it should be visible by default to engage the user, like a coach-mark).
+   - White bg, soft shadow, rounded-2xl, tail pointing down to avatar, dismissible (small × button) with local `useState` so it hides on tap.
+4. **Imports**: add `Mic`, `Send` from lucide-react; replace `ChatBot` import with `InsightsSheet` from `@/components/InsightsSheet` (same as IndexC uses with `mode="context"`).
+5. Bottom padding of the page already `pb-28` — keep it so the chat bar doesn't cover content.
 
-### 2. New "מרכז פיננסי" section
-Below the 3 hero cards, add a section titled `מרכז פיננסי` with 4 locked sub-cards in a 2-col grid (mirroring IndexC's financial center style but empty):
-1. פנסיה (PiggyBank, assets/teal)
-2. השקעות (LineChart, assets/teal)
-3. הלוואות (Briefcase, liabilities/blue)
-4. משכנתא (Building2, liabilities/blue)
-
-Each card:
-- White bg, soft border, dashed value placeholder `—`
-- Small label + sub-label ("ללא נתונים")
-- **Secondary** connect button: outline / ghost style with category-color text + thin colored border (so they don't compete visually with the top 3 primary buttons). Text: `+ חיבור לנתונים`
-
-### 3. Replace bottom CTA with Dana floating chatbot
-Remove the sticky bottom "גלה את השווי האמיתי שלי" CTA. Add `<ChatBot>` component (centered variant — same as IndexC) with state `chatOpen`. Avatar FAB floats at bottom center, opens the existing chat sheet.
-
-The hero range + Dana callout card at top remain unchanged. The "discover real value" goal is now served by the connect buttons on each card (which navigate to `/c` or stay in place — confirm below).
+No other sections (hero cards, financial center, Dana callout) change.
 
 ### Technical notes
-- File: `src/pages/AhaDashboard.tsx` only
-- Reuse `ChatBot` from `@/components/ChatBot` with `variant="centered"`
-- Add `pb-28` instead of `pb-32` since CTA is gone but FAB still needs clearance
-- Remove `ctaRef` / `scrollToCta`; primary card buttons navigate to `/c` (the empty dashboard) so user starts connecting data there
-
-### Open question
-The card "חיבור לנתונים" buttons — should they navigate to `/c` (empty dashboard, where user keeps adding data), or to the specific category page (`/c/assets`, `/c/liabilities`, `/c/insurance`)? Default to category-specific routes for primary cards, and `/c` for the secondary financial-center cards.
+- Reuse existing global CSS classes `tri-ring-c` and `cta-tri-c` (defined for IndexC, available globally via `index.css`).
+- Tooltip bubble uses inline styles consistent with the rest of the page (`hsl(250, 40%, 15%)` text, white bg, `0 8px 24px hsla(250,30%,25%,0.15)` shadow).

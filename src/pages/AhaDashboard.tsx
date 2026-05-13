@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2 } from "lucide-react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X } from "lucide-react";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
-import { ChatBot } from "@/components/ChatBot";
+import { InsightsSheet } from "@/components/InsightsSheet";
 
 type Palette = {
   gradient: string;
