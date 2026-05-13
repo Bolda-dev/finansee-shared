@@ -38,6 +38,7 @@ const AhaDashboard = () => {
   const location = useLocation();
   const firstName = (location.state as { firstName?: string } | null)?.firstName || userData.name;
   const [chatOpen, setChatOpen] = useState(false);
+  const [tipOpen, setTipOpen] = useState(true);
 
   const heroCards = [
     { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/c/assets" },
