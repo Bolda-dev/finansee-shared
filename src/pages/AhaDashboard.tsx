@@ -238,13 +238,12 @@ const AhaDashboard = () => {
                 </p>
                 <button
                   onClick={() => navigate(card.route)}
-                  className="mt-auto w-full rounded-full py-1.5 text-[10px] font-semibold flex items-center justify-center gap-1 text-white transition-transform active:scale-[0.97]"
+                  className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center text-white transition-transform active:scale-[0.97]"
                   style={{
                     background: p.gradient,
                     boxShadow: p.shadow,
                   }}
                 >
-                  <Plus className="h-3 w-3" />
                   חיבור לנתונים
                 </button>
               </div>
