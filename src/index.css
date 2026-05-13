@@ -173,6 +173,11 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes insight-cta-shimmer {
+  0% { background-position: 200% 50%; }
+  100% { background-position: -200% 50%; }
+}
+
 @keyframes backdrop-in {
   from { opacity: 0; }
   to { opacity: 1; }
