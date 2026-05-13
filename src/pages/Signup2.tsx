@@ -6,6 +6,7 @@ import { SignupShell } from "@/components/signup/SignupShell";
 import { PhoneStep } from "@/components/signup/PhoneStep";
 import { SmsCodeStep } from "@/components/signup/SmsCodeStep";
 import { NameStep } from "@/components/signup/NameStep";
+import { IdentityStep } from "@/components/signup/IdentityStep";
 import { AgeStep } from "@/components/signup/AgeStep";
 import { FamilyStep } from "@/components/signup/FamilyStep";
 import { EmploymentStep } from "@/components/signup/EmploymentStep";
@@ -15,12 +16,12 @@ import { ConsentStep } from "@/components/signup/ConsentStep";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 
 // Steps:
-// 0 phone | 1 sms | 2 name |
-// 3 ✱ pension consent | 4 age | 5 family |
-// 6 ✱ insurance consent | 7 employment | 8 goals |
-// 9 ✱ credit consent | 10 loading
-const TOTAL = 11;
-const LOADING_INDEX = 10;
+// 0 phone | 1 sms | 2 name | 3 identity (ID + issue date) |
+// 4 ✱ pension consent | 5 age | 6 family |
+// 7 ✱ insurance (Har HaBituach) consent | 8 employment | 9 goals |
+// 10 ✱ credit consent | 11 loading
+const TOTAL = 12;
+const LOADING_INDEX = 11;
 
 const showDanaToast = (msg: string) => {
   toast(msg, {
@@ -47,6 +48,7 @@ const Signup2 = () => {
   const [index, setIndex] = useState(0);
   const [phone, setPhone] = useState("");
   const [name, setName] = useState({ firstName: "", lastName: "" });
+  const [identity, setIdentity] = useState({ idNumber: "", issueDate: "" });
   const [age, setAge] = useState("");
   const [family, setFamily] = useState("");
   const [employment, setEmployment] = useState("");
@@ -63,26 +65,23 @@ const Signup2 = () => {
   });
 
   const inLoading = index === LOADING_INDEX;
-  const isConsentStep = index === 3 || index === 6 || index === 9;
+  const isConsentStep = index === 4 || index === 7 || index === 10;
 
   const next = () => setIndex((i) => Math.min(i + 1, TOTAL - 1));
   const back = () => setIndex((i) => Math.max(i - 1, 0));
 
-  const autoAdvance = (setter: (v: string) => void, after?: () => void) => (v: string) => {
+  const autoAdvance = (setter: (v: string) => void) => (v: string) => {
     setter(v);
-    setTimeout(() => {
-      after?.();
-      next();
-    }, 380);
+    setTimeout(() => next(), 380);
   };
 
   // Dana toasts on entering certain steps
   useEffect(() => {
-    if (index === 4 && name.firstName) {
+    if (index === 5 && name.firstName) {
       showDanaToast(`נעים להכיר, ${name.firstName} 👋`);
-    } else if (index === 5) {
+    } else if (index === 6) {
       showDanaToast("מתאימים לך המלצות לשלב הזה ✨");
-    } else if (index === 8) {
+    } else if (index === 9) {
       showDanaToast("יש זכויות שכדאי שתכיר/י 💡");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,12 +99,13 @@ const Signup2 = () => {
   const canContinue =
     (index === 0 && phone.length >= 9) ||
     (index === 2 && !!name.firstName.trim() && !!name.lastName.trim()) ||
-    (index === 4 && !!age) ||
-    (index === 5 && !!family) ||
-    (index === 7 && !!employment) ||
-    (index === 8 && goals.length > 0);
+    (index === 3 && identity.idNumber.length === 9 && !!identity.issueDate.trim()) ||
+    (index === 5 && !!age) ||
+    (index === 6 && !!family) ||
+    (index === 8 && !!employment) ||
+    (index === 9 && goals.length > 0);
 
-  const ctaLabel = index === 8 ? "סיום" : "המשך";
+  const ctaLabel = index === 9 ? "סיום" : "המשך";
 
   const renderStep = () => {
     switch (index) {
@@ -128,6 +128,14 @@ const Signup2 = () => {
         );
       case 3:
         return (
+          <IdentityStep
+            idNumber={identity.idNumber}
+            issueDate={identity.issueDate}
+            onChange={setIdentity}
+          />
+        );
+      case 4:
+        return (
           <ConsentStep
             icon={<PiggyBank className="h-5 w-5" style={{ color: "hsl(262, 75%, 55%)" }} />}
             iconBg="hsl(260, 75%, 96%)"
@@ -141,16 +149,16 @@ const Signup2 = () => {
             socialProof="43% מהמשתמשים גילו כפל ביטוחים אחרי החיבור"
           />
         );
-      case 4:
-        return <AgeStep value={age} onChange={autoAdvance(setAge)} />;
       case 5:
-        return <FamilyStep value={family} onChange={autoAdvance(setFamily)} />;
+        return <AgeStep value={age} onChange={autoAdvance(setAge)} />;
       case 6:
+        return <FamilyStep value={family} onChange={autoAdvance(setFamily)} />;
+      case 7:
         return (
           <ConsentStep
             icon={<ShieldCheck className="h-5 w-5" style={{ color: "hsl(178, 70%, 35%)" }} />}
             iconBg="hsl(176, 55%, 95%)"
-            title="קציר נתוני ביטוח"
+            title="התחברות להר הביטוח"
             subtitle="פוליסות ביטוח חיים, בריאות, רכוש"
             bullets={[
               "ניתוח כל הפוליסות הקיימות",
@@ -160,11 +168,11 @@ const Signup2 = () => {
             socialProof="86% מהמשתמשים חסכו מעל ₪104,500 בשנה הראשונה"
           />
         );
-      case 7:
-        return <EmploymentStep value={employment} onChange={autoAdvance(setEmployment)} />;
       case 8:
-        return <GoalsStep value={goals} onChange={setGoals} />;
+        return <EmploymentStep value={employment} onChange={autoAdvance(setEmployment)} />;
       case 9:
+        return <GoalsStep value={goals} onChange={setGoals} />;
+      case 10:
         return (
           <ConsentStep
             icon={<CreditCard className="h-5 w-5" style={{ color: "hsl(220, 85%, 50%)" }} />}
@@ -179,21 +187,21 @@ const Signup2 = () => {
             socialProof="המשתמשים שלנו חסכו בממוצע ₪780 בחודש על המשכנתא"
           />
         );
-      case 10:
+      case 11:
         return <LoadingStep onDone={finishToAha} />;
       default:
         return null;
     }
   };
 
-  // Continuous progress 1..10 (loading hidden)
+  // Continuous progress (loading hidden)
   const progress = !inLoading ? { current: index + 1, total: TOTAL } : undefined;
 
   // SMS step + loading manage their own bottom CTA; all others use unified CTA
   const showCta = index !== 1 && !inLoading;
 
   const onMainCta = () => {
-    if (index === 8) {
+    if (index === 9) {
       showDanaToast("מצוין, בונים תוכנית 🎯");
       setTimeout(() => next(), 200);
       return;
@@ -202,24 +210,24 @@ const Signup2 = () => {
   };
 
   const consentChecked =
-    (index === 3 && consents.pension) ||
-    (index === 6 && consents.insurance) ||
-    (index === 9 && consents.credit);
+    (index === 4 && consents.pension) ||
+    (index === 7 && consents.insurance) ||
+    (index === 10 && consents.credit);
 
   const onConsentToggle = () => {
-    if (index === 3) setConsents((c) => ({ ...c, pension: !c.pension }));
-    else if (index === 6) setConsents((c) => ({ ...c, insurance: !c.insurance }));
-    else if (index === 9) setConsents((c) => ({ ...c, credit: !c.credit }));
+    if (index === 4) setConsents((c) => ({ ...c, pension: !c.pension }));
+    else if (index === 7) setConsents((c) => ({ ...c, insurance: !c.insurance }));
+    else if (index === 10) setConsents((c) => ({ ...c, credit: !c.credit }));
   };
 
   const onConsentConfirm = () => {
-    if (index === 3) {
+    if (index === 4) {
       if (consents.pension) setConnected((c) => ({ ...c, pension: true }));
       next();
-    } else if (index === 6) {
+    } else if (index === 7) {
       if (consents.insurance) setConnected((c) => ({ ...c, insurance: true }));
       next();
-    } else if (index === 9) {
+    } else if (index === 10) {
       if (consents.credit) setConnected((c) => ({ ...c, credit: true }));
       next();
     }
@@ -279,10 +287,7 @@ const Signup2 = () => {
                     ? "hsl(0, 0%, 8%)"
                     : "hsl(230, 18%, 80%)"
                   : "hsl(0, 0%, 8%)",
-                boxShadow:
-                  isConsentStep && consentChecked
-                    ? "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)"
-                    : "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)",
+                boxShadow: "0 10px 24px -10px hsla(0, 0%, 0%, 0.5)",
               }}
             >
               {isConsentStep ? "אשר וחתום" : ctaLabel}
