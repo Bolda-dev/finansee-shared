@@ -1116,16 +1116,24 @@ const AhaDashboard = () => {
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
-                            onClick={() => {
-                              setShowInsight(false);
-                              setInsuranceUpgraded(true);
-                              setChatOpen(false);
-                            }}
+                            onClick={() => { /* visual only */ }}
                             className="w-full rounded-full py-2.5 text-[12px] font-extrabold flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
                             style={{ background: "white", color: palettes.insurance.solid }}
                           >
                             <Zap className="h-3.5 w-3.5" />
                             חסוך ₪2,000 בקליק
+                          </button>
+                        </div>
+                      )}
+
+                      {showInsight && (
+                        <div className="flex justify-center mt-3">
+                          <button
+                            onClick={() => { setInsuranceUpgraded(true); setChatOpen(false); }}
+                            className="text-[12.5px] font-bold py-1.5 px-2 focus:outline-none"
+                            style={{ color: "hsl(262, 75%, 50%)" }}
+                          >
+                            לתובנות נוספות ←
                           </button>
                         </div>
                       )}
