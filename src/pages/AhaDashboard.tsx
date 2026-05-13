@@ -1193,7 +1193,7 @@ const ConsentAnnex = ({
     </div>
 
     {/* Collapsible: details + full document */}
-    <div className="rounded-2xl overflow-hidden" style={{ background: "hsl(230, 30%, 98%)", border: "1px solid hsl(230, 20%, 90%)" }}>
+    <div className="rounded-2xl overflow-hidden" style={{ background: "hsl(230, 30%, 98%)" }}>
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
