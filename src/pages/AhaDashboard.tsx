@@ -142,7 +142,7 @@ const AhaDashboard = () => {
       </div>
 
       {/* Header */}
-      <div className="relative z-10 px-3 pt-6 pb-0">
+      <div className="relative z-10 px-3 pt-6 pb-0" style={{ animation: "aha-item-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0s both" }}>
         <div className="flex flex-col items-start gap-4 text-start">
           <div className="relative flex items-center w-full">
             <button
@@ -164,7 +164,7 @@ const AhaDashboard = () => {
       </div>
 
       {/* Hero — estimated range */}
-      <div className="relative z-10 px-3 mb-6">
+      <div className="relative z-10 px-3 mb-6" style={{ animation: "aha-item-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both" }}>
         <p className="text-sm font-medium mb-2" style={{ color: "hsl(250, 35%, 30%)" }}>
           הערכה ראשונית
         </p>
@@ -180,7 +180,7 @@ const AhaDashboard = () => {
       </div>
 
       {/* Dana callout */}
-      <div className="relative z-10 px-3 mb-6">
+      <div className="relative z-10 px-3 mb-6" style={{ animation: "aha-item-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both" }}>
         {insuranceUpgraded ? (
           <div
             className="rounded-2xl p-4"
@@ -288,9 +288,10 @@ const AhaDashboard = () => {
       {/* 3 hero locked cards */}
       <div className="relative z-10 px-3">
         <div className="grid grid-cols-3 gap-3 mb-8">
-          {heroCards.map((card) => {
+          {heroCards.map((card, idx) => {
             const p = palettes[card.category];
             const isUpgradedInsurance = card.category === "insurance" && insuranceUpgraded;
+            const enterAnim = `aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${0.36 + idx * 0.1}s both`;
             if (isUpgradedInsurance) {
               return (
                 <button
@@ -302,7 +303,7 @@ const AhaDashboard = () => {
                     boxShadow: p.shadow,
                     minHeight: "168px",
                     border: "1.5px solid transparent",
-                    animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+                    animation: enterAnim,
                   }}
                 >
                   <span
@@ -343,14 +344,10 @@ const AhaDashboard = () => {
                   background: "hsla(0, 0%, 100%, 0.4)",
                   border: `1.5px dashed ${dashedBorder}`,
                   minHeight: "168px",
+                  animation: enterAnim,
                 }}
               >
-                <span
-                  className="absolute top-2 left-2 w-6 h-6 rounded-full flex items-center justify-center"
-                  style={{ background: "hsl(230, 25%, 95%)" }}
-                >
-                  <Lock className="h-3 w-3" style={{ color: mutedIconColor }} />
-                </span>
+
 
                 <div
                   className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
@@ -383,12 +380,13 @@ const AhaDashboard = () => {
         </div>
 
         {/* Financial Center */}
-        <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)" }}>
+        <h2 className="text-sm font-bold mb-3" style={{ color: "hsl(250, 40%, 20%)", animation: "aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both" }}>
           מרכז פיננסי
         </h2>
         <div className="grid grid-cols-2 gap-3">
-          {centerCards.map((card) => {
+          {centerCards.map((card, idx) => {
             const p = palettes[card.category];
+            const ccDelay = 0.78 + idx * 0.08;
             return (
               <div
                 key={card.label}
@@ -398,6 +396,7 @@ const AhaDashboard = () => {
                   border: "1px solid hsl(230, 20%, 92%)",
                   boxShadow: "0 2px 10px hsla(250, 30%, 25%, 0.04)",
                   minHeight: "138px",
+                  animation: `aha-item-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${ccDelay}s both`,
                 }}
               >
                 <div className="flex items-center gap-2 mb-2">

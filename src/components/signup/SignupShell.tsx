@@ -8,6 +8,7 @@ interface SignupShellProps {
   pagination?: { total: number; current: number; onDotClick?: (i: number) => void };
   progress?: { current: number; total: number }; // 1-indexed step bar
   bottom?: ReactNode;
+  edgeTop?: boolean;
 }
 
 export const SignupShell = ({
@@ -18,6 +19,7 @@ export const SignupShell = ({
   pagination,
   progress,
   bottom,
+  edgeTop = false,
 }: SignupShellProps) => {
   return (
     <div
@@ -78,7 +80,7 @@ export const SignupShell = ({
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col pt-14">{children}</div>
+      <div className={"relative z-10 flex-1 flex flex-col " + (edgeTop ? "" : "pt-14")}>{children}</div>
 
       {/* Pagination + bottom CTA */}
       <div className="relative z-10 px-5 pb-8 pt-4 shrink-0">

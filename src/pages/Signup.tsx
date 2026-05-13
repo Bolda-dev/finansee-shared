@@ -121,6 +121,7 @@ const Signup = () => {
 
   return (
     <SignupShell
+      edgeTop={inWelcome}
       onSkip={inWelcome ? () => setIndex(WELCOME_COUNT - 1) : undefined}
       showSkip={inWelcome && index < WELCOME_COUNT - 1}
       onBack={!inLoading && index > 0 ? back : undefined}
