@@ -974,22 +974,23 @@ const AhaDashboard = () => {
                         </ul>
                       </div>
 
-                      {/* Insurance — connected, green check icon */}
+                      {/* Insurance — connected, white card with purple icon */}
                       <button
                         onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
                         className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
                         style={{
-                          background: palettes.insurance.gradient,
-                          boxShadow: "0 12px 28px -8px hsla(262, 72%, 50%, 0.55)",
+                          background: "white",
+                          border: "1.5px solid hsl(262, 60%, 88%)",
+                          boxShadow: "0 8px 22px -10px hsla(262, 60%, 45%, 0.28)",
                           opacity: 0,
                           animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards",
                         }}
                       >
-                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsla(0,0%,100%,0.95)", color: "hsl(150, 70%, 28%)" }}>
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold flex items-center gap-1" style={{ background: "hsl(150, 60%, 95%)", color: "hsl(150, 70%, 28%)", border: "1px solid hsl(150, 50%, 85%)" }}>
                           <Check className="h-2.5 w-2.5" strokeWidth={4} /> הכל תקין
                         </span>
-                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 relative" style={{ background: "white" }}>
-                          <ShieldCheck className="h-5 w-5" style={{ color: "hsl(262, 75%, 55%)" }} />
+                        <span className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 relative" style={{ background: palettes.insurance.gradient }}>
+                          <ShieldCheck className="h-5 w-5 text-white" />
                           <span
                             className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center"
                             style={{ background: "hsl(150, 65%, 45%)", border: "2px solid white" }}
@@ -998,8 +999,8 @@ const AhaDashboard = () => {
                           </span>
                         </span>
                         <span className="flex-1 min-w-0">
-                          <span className="block text-[14px] font-extrabold text-white mb-0.5">ביטוח</span>
-                          <span className="block text-[11px]" style={{ color: "hsla(0,0%,100%,0.9)" }}>7 פוליסות מחוברות · עדכון אוטומטי</span>
+                          <span className="block text-[14px] font-extrabold mb-0.5" style={{ color: "hsl(250, 40%, 15%)" }}>ביטוח</span>
+                          <span className="block text-[11px]" style={{ color: "hsl(250, 22%, 50%)" }}>7 פוליסות מחוברות · עדכון אוטומטי</span>
                         </span>
                       </button>
 
