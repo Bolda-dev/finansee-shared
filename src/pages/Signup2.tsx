@@ -229,7 +229,7 @@ const Signup2 = () => {
   return (
     <SignupShell
       onSkip={isConsentStep ? next : undefined}
-      showSkip={false}
+      showSkip={isConsentStep}
       onBack={!inLoading && index > 0 ? back : undefined}
       progress={progress}
       bottom={
