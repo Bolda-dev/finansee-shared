@@ -716,7 +716,7 @@ const AhaDashboard = () => {
                         value={idNumber}
                         onChange={(e) => setIdNumber(e.target.value.replace(/\D/g, ""))}
                         placeholder="123456789"
-                        className="w-full text-right text-[15px] font-bold tracking-widest rounded-xl py-3 px-3 mb-3 focus:outline-none"
+                        className="w-full text-right text-[15px] font-semibold tracking-wide rounded-xl py-3 px-3 mb-3 focus:outline-none"
                         style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
                       />
 
@@ -724,10 +724,17 @@ const AhaDashboard = () => {
                       <input
                         dir="rtl"
                         type="text"
+                        inputMode="numeric"
                         value={idDate}
-                        onChange={(e) => setIdDate(e.target.value)}
+                        onChange={(e) => {
+                          const raw = e.target.value.replace(/\D/g, "");
+                          let formatted = raw;
+                          if (raw.length >= 2) formatted = `${raw.slice(0, 2)}/${raw.slice(2)}`;
+                          if (raw.length >= 4) formatted = `${raw.slice(0, 2)}/${raw.slice(2, 4)}/${raw.slice(4, 8)}`;
+                          setIdDate(formatted.slice(0, 10));
+                        }}
                         placeholder="dd/mm/yyyy"
-                        className="w-full text-right text-[14px] rounded-xl py-3 px-3 mb-3 focus:outline-none"
+                        className="w-full text-right text-[15px] font-semibold tracking-wide rounded-xl py-3 px-3 mb-3 focus:outline-none"
                         style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
                       />
 
