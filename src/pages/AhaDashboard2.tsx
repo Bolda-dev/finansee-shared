@@ -90,6 +90,23 @@ const AhaDashboard2 = () => {
   const [danaExpanded, setDanaExpanded] = useState(false);
   const [danaCollapsed, setDanaCollapsed] = useState(false);
 
+  // Easter-egg: 5 rapid hamburger clicks → /c
+  const burgerClicks = useRef(0);
+  const burgerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handleBurgerClick = () => {
+    burgerClicks.current += 1;
+    if (burgerClicks.current >= 5) {
+      burgerClicks.current = 0;
+      if (burgerTimer.current) clearTimeout(burgerTimer.current);
+      navigate("/c");
+      return;
+    }
+    if (burgerTimer.current) clearTimeout(burgerTimer.current);
+    burgerTimer.current = setTimeout(() => {
+      burgerClicks.current = 0;
+    }, 2000);
+  };
+
   // Reset chat when sheet closes (preserve completed85)
   useEffect(() => {
     if (!chatOpen) {
@@ -183,6 +200,7 @@ const AhaDashboard2 = () => {
                 border: "1px solid hsla(250, 50%, 92%, 0.5)",
               }}
               aria-label="תפריט"
+              onClick={handleBurgerClick}
             >
               <Menu className="h-5 w-5" style={{ color: "hsl(250, 40%, 20%)" }} />
             </button>
