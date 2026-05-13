@@ -3,7 +3,7 @@ import { useState } from "react";
 import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X } from "lucide-react";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
-import { InsightsSheet } from "@/components/InsightsSheet";
+
 
 type Palette = {
   gradient: string;
@@ -246,38 +246,52 @@ const AhaDashboard = () => {
         </div>
       </div>
 
+      {/* Animated gradient ring for tooltip */}
+      <style>{`
+        @keyframes aha-tip-spin { to { transform: rotate(360deg); } }
+        @keyframes aha-tip-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        .aha-tip-wrap { position: relative; padding: 1.5px; border-radius: 18px; isolation: isolate; animation: aha-tip-bob 2.6s ease-in-out infinite; }
+        .aha-tip-wrap::before {
+          content: ""; position: absolute; inset: -1px; border-radius: 19px; padding: 1.5px; z-index: -1;
+          background: conic-gradient(from 0deg, hsl(178,70%,45%), hsl(220,85%,55%), hsl(262,75%,58%), hsl(178,70%,45%));
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor; mask-composite: exclude;
+          animation: aha-tip-spin 4s linear infinite;
+        }
+      `}</style>
+
       {/* Bottom Chat Bar (matches IndexC) */}
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none" dir="rtl">
         {/* Coach-mark tooltip above avatar */}
         {tipOpen && (
-          <div className="relative pointer-events-auto mb-2 mr-1">
-            <div
-              className="inline-flex items-start gap-2 rounded-2xl px-3 py-2 max-w-[300px]"
-              style={{
-                background: "white",
-                boxShadow: "0 8px 24px hsla(250, 30%, 25%, 0.15)",
-                border: "1px solid hsl(230, 20%, 92%)",
-              }}
-            >
-              <p className="text-[12.5px] leading-snug" style={{ color: "hsl(250, 40%, 15%)" }}>
-                האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
-              </p>
-              <button
-                onClick={(e) => { e.stopPropagation(); setTipOpen(false); }}
-                className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
-                style={{ background: "hsl(230, 25%, 95%)" }}
-                aria-label="סגור"
+          <div className="relative pointer-events-auto mb-2 mr-1 inline-block">
+            <div className="aha-tip-wrap">
+              <div
+                className="flex items-start gap-2 rounded-[16px] px-3 py-2 max-w-[300px]"
+                style={{
+                  background: "white",
+                  boxShadow: "0 10px 28px hsla(250, 40%, 25%, 0.18)",
+                }}
               >
-                <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
-              </button>
+                <p className="text-[12.5px] leading-snug font-medium" style={{ color: "hsl(250, 40%, 15%)" }}>
+                  האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
+                </p>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setTipOpen(false); }}
+                  className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+                  style={{ background: "hsl(230, 25%, 95%)" }}
+                  aria-label="סגור"
+                >
+                  <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
+                </button>
+              </div>
             </div>
             {/* tail */}
             <span
-              className="absolute -bottom-1.5 right-6 w-3 h-3 rotate-45"
+              className="absolute -bottom-1 right-6 w-2.5 h-2.5 rotate-45"
               style={{
                 background: "white",
-                borderRight: "1px solid hsl(230, 20%, 92%)",
-                borderBottom: "1px solid hsl(230, 20%, 92%)",
+                boxShadow: "2px 2px 0 0 hsl(220, 85%, 55%)",
               }}
             />
           </div>
@@ -319,7 +333,68 @@ const AhaDashboard = () => {
         </button>
       </div>
 
-      <InsightsSheet open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      {chatOpen && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center" dir="rtl">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setChatOpen(false)} />
+          <div
+            className="relative w-full max-w-[430px] bg-white rounded-t-3xl shadow-2xl flex flex-col"
+            style={{ animation: "sheet-slide-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both" }}
+          >
+            <div className="flex justify-center pt-3 pb-2">
+              <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 88%)" }} />
+            </div>
+            <div className="px-5 pt-2 pb-6">
+              <div className="flex items-end gap-2 mb-4">
+                <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
+                  <img src={advisorImg} alt="" className="w-full h-full object-cover" />
+                </div>
+                <div className="rounded-2xl rounded-br-md px-3.5 py-2.5 max-w-[85%]" style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}>
+                  <p className="text-[13px] leading-relaxed font-semibold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>
+                    מה תרצה לחבר תחילה?
+                  </p>
+                  <p className="text-[11.5px] leading-relaxed" style={{ color: "hsl(250, 30%, 35%)" }}>
+                    אפשר להתחיל עם הר הביטוח ומסלקת אשראי, או עם הוצאות והשקעות.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-2.5">
+                {[
+                  { label: "הר הביטוח ומסלקת אשראי", desc: "חיבור מהיר לכל הפוליסות והאשראי", category: "insurance" as const, route: "/c/insurance" },
+                  { label: "הוצאות", desc: "חיבור לחשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
+                  { label: "השקעות", desc: "חיבור לתיקי השקעות וקרנות", category: "assets" as const, route: "/c/assets" },
+                ].map((opt) => {
+                  const p = palettes[opt.category];
+                  return (
+                    <button
+                      key={opt.label}
+                      onClick={() => { setChatOpen(false); navigate(opt.route); }}
+                      className="w-full text-start rounded-2xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
+                      style={{ background: "white", border: `1.5px solid ${p.solid}`, boxShadow: p.shadow }}
+                    >
+                      <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: p.gradient }}>
+                        <Plus className="h-4 w-4 text-white" />
+                      </span>
+                      <span className="flex-1 min-w-0">
+                        <span className="block text-[13px] font-bold" style={{ color: "hsl(250, 40%, 15%)" }}>{opt.label}</span>
+                        <span className="block text-[11px]" style={{ color: "hsl(230, 15%, 50%)" }}>{opt.desc}</span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => setChatOpen(false)}
+                className="w-full mt-4 text-[12px] font-medium py-2"
+                style={{ color: "hsl(230, 15%, 50%)" }}
+              >
+                אולי מאוחר יותר
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
