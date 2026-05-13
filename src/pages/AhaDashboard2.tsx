@@ -279,61 +279,61 @@ const AhaDashboard2 = () => {
           })}
         </div>
 
-        {/* Dana insights card — collapsible */}
+        {/* Dana insights card */}
         <div className="mb-8">
           <div
-            className="rounded-2xl"
+            className="rounded-2xl p-4"
             style={{
               background: "white",
               boxShadow: "0 4px 18px hsla(250, 30%, 25%, 0.08)",
               border: "1px solid hsl(230, 20%, 93%)",
             }}
           >
-            {/* Header row with collapse toggle */}
-            <button
-              onClick={() => setDanaCollapsed((v) => !v)}
-              className="w-full flex items-center gap-2 p-4 text-right focus:outline-none"
-            >
-              <span className="block w-8 h-8 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
+            <div className="flex items-start gap-3">
+              <span className="block w-11 h-11 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsl(262, 75%, 55%)" }}>
                 <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
               </span>
               <div className="flex-1 min-w-0">
-                <p className="text-[12px] font-bold" style={{ color: "hsl(250, 35%, 22%)" }}>
-                  תובנות דנה
+                <p className="text-[13px] leading-relaxed mb-0.5" style={{ color: "hsl(250, 35%, 22%)" }}>
+                  היי {firstName} 👋 חיברנו <span className="font-bold">{progressPct}%</span> מהנתונים שלך.
                 </p>
-                <p className="text-[10.5px]" style={{ color: "hsl(250, 25%, 45%)" }}>
-                  חיברנו {progressPct}% מהנתונים
+                <p className="text-[11.5px] leading-snug" style={{ color: "hsl(250, 25%, 45%)" }}>
+                  {completed85 ? "כמעט שם — נשארו רק שני מקורות לחבר." : "בוא נשלים את התמונה לשווי האמיתי שלך."}
                 </p>
               </div>
-              <ChevronDown
-                className="h-4 w-4 transition-transform duration-300 flex-shrink-0"
-                style={{ transform: danaCollapsed ? "rotate(0deg)" : "rotate(180deg)", color: "hsl(230, 15%, 50%)" }}
-              />
-            </button>
+            </div>
 
-            {!danaCollapsed && (
-              <div className="px-4 pb-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "hsl(230, 20%, 93%)" }}>
-                    <div
-                      className="h-full rounded-full"
-                      style={{
-                        width: `${progressPct}%`,
-                        background: "linear-gradient(90deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%))",
-                        transition: "width 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
-                      }}
-                    />
-                  </div>
-                  <span className="text-[11px] font-extrabold whitespace-nowrap" style={{ color: "hsl(262, 75%, 45%)" }}>
-                    {progressPct}%
-                  </span>
-                </div>
+            <div className="flex items-center gap-2 mt-3 mb-3">
+              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: "hsl(230, 20%, 93%)" }}>
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: `${progressPct}%`,
+                    background: "linear-gradient(90deg, hsl(262, 75%, 55%), hsl(220, 85%, 55%))",
+                    transition: "width 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
+                  }}
+                />
+              </div>
+              <span className="text-[11px] font-extrabold whitespace-nowrap" style={{ color: "hsl(262, 75%, 45%)" }}>
+                {progressPct}%
+              </span>
+            </div>
 
-                {completed85 ? (
-                  <div className="space-y-2 mt-2">
-                    <p className="text-[11.5px] font-bold mb-1" style={{ color: "hsl(250, 35%, 25%)" }}>
-                      גישה מהירה
-                    </p>
+            {completed85 ? (
+              <>
+                <button
+                  onClick={() => setDanaExpanded((v) => !v)}
+                  className="w-full flex items-center justify-between text-right focus:outline-none"
+                  style={{ color: "hsl(250, 35%, 25%)" }}
+                >
+                  <span className="text-[12px] font-bold">גישה מהירה</span>
+                  <ChevronDown
+                    className="h-4 w-4 transition-transform duration-300"
+                    style={{ transform: danaExpanded ? "rotate(180deg)" : "rotate(0deg)", color: "hsl(262, 75%, 55%)" }}
+                  />
+                </button>
+                {danaExpanded && (
+                  <div className="space-y-2 mt-3">
                     {[
                       { Icon: Building2, label: "נדל״ן", desc: "דירות, רכבים ונכסים", category: "assets" as const, route: "/c/assets" },
                       { Icon: LineChart, label: "השקעות", desc: "תיקי השקעות וני״ע", category: "assets" as const, route: "/c/assets" },
@@ -358,47 +358,47 @@ const AhaDashboard2 = () => {
                       );
                     })}
                   </div>
-                ) : (
-                  <>
-                    <button
-                      onClick={() => setDanaExpanded((v) => !v)}
-                      className="w-full flex items-center justify-between text-right focus:outline-none mb-1"
-                      style={{ color: "hsl(250, 35%, 25%)" }}
-                    >
-                      <span className="text-[12px] font-bold">חיבור לנתונים הבאים</span>
-                      <ChevronDown
-                        className="h-4 w-4 transition-transform duration-300"
-                        style={{ transform: danaExpanded ? "rotate(180deg)" : "rotate(0deg)", color: "hsl(262, 75%, 55%)" }}
-                      />
-                    </button>
-                    {danaExpanded && (
-                      <div className="space-y-2 mt-3">
-                        {[
-                          { Icon: PiggyBank, label: "אשראי ובנק", desc: "חשבון בנק וכרטיסי אשראי", gradient: palettes.liabilities.gradient },
-                          { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", gradient: palettes.assets.gradient },
-                          { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", gradient: palettes.assets.gradient },
-                        ].map((item) => (
-                          <button
-                            key={item.label}
-                            onClick={openCreditChat}
-                            className="w-full text-start rounded-xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
-                            style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
-                          >
-                            <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: item.gradient }}>
-                              <item.Icon className="h-4 w-4 text-white" />
-                            </span>
-                            <span className="flex-1 min-w-0">
-                              <span className="block text-[12.5px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>{item.label}</span>
-                              <span className="block text-[10.5px]" style={{ color: "hsl(230, 15%, 50%)" }}>{item.desc}</span>
-                            </span>
-                            <Plus className="h-4 w-4 flex-shrink-0" style={{ color: "hsl(262, 75%, 55%)" }} />
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </>
                 )}
-              </div>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => setDanaExpanded((v) => !v)}
+                  className="w-full flex items-center justify-between text-right focus:outline-none"
+                  style={{ color: "hsl(250, 35%, 25%)" }}
+                >
+                  <span className="text-[12px] font-bold">חיבור לנתונים הבאים</span>
+                  <ChevronDown
+                    className="h-4 w-4 transition-transform duration-300"
+                    style={{ transform: danaExpanded ? "rotate(180deg)" : "rotate(0deg)", color: "hsl(262, 75%, 55%)" }}
+                  />
+                </button>
+                {danaExpanded && (
+                  <div className="space-y-2 mt-3">
+                    {[
+                      { Icon: PiggyBank, label: "אשראי ובנק", desc: "חשבון בנק וכרטיסי אשראי", gradient: palettes.liabilities.gradient },
+                      { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", gradient: palettes.assets.gradient },
+                      { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", gradient: palettes.assets.gradient },
+                    ].map((item) => (
+                      <button
+                        key={item.label}
+                        onClick={openCreditChat}
+                        className="w-full text-start rounded-xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
+                        style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
+                      >
+                        <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: item.gradient }}>
+                          <item.Icon className="h-4 w-4 text-white" />
+                        </span>
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-[12.5px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>{item.label}</span>
+                          <span className="block text-[10.5px]" style={{ color: "hsl(230, 15%, 50%)" }}>{item.desc}</span>
+                        </span>
+                        <Plus className="h-4 w-4 flex-shrink-0" style={{ color: "hsl(262, 75%, 55%)" }} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
