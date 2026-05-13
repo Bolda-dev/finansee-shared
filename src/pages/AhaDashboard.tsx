@@ -276,6 +276,51 @@ const AhaDashboard = () => {
         <div className="grid grid-cols-3 gap-3 mb-8">
           {heroCards.map((card) => {
             const p = palettes[card.category];
+            const isUpgradedInsurance = card.category === "insurance" && insuranceUpgraded;
+            if (isUpgradedInsurance) {
+              return (
+                <button
+                  key={card.label}
+                  onClick={() => navigate(card.route)}
+                  className="relative rounded-2xl px-2.5 py-3 text-start flex flex-col transition-transform active:scale-[0.97]"
+                  style={{
+                    background: p.gradient,
+                    boxShadow: p.shadow,
+                    minHeight: "168px",
+                    border: "1.5px solid transparent",
+                    animation: "aha-item-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+                  }}
+                >
+                  <span
+                    className="absolute top-2 left-2 w-6 h-6 rounded-full flex items-center justify-center"
+                    style={{ background: "hsla(0,0%,100%,0.25)" }}
+                  >
+                    <Check className="h-3 w-3 text-white" strokeWidth={3.5} />
+                  </span>
+                  <div
+                    className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
+                    style={{ background: "hsla(0,0%,100%,0.22)" }}
+                  >
+                    <card.Icon className="h-4 w-4 text-white" />
+                  </div>
+                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsla(255,255,255,0.85)" }}>
+                    {card.label}
+                  </p>
+                  <p className="font-extrabold text-lg mb-1 text-white">
+                    7 פוליסות
+                  </p>
+                  <p className="text-[9.5px] leading-tight mb-2" style={{ color: "hsla(255,255,255,0.85)" }}>
+                    חוסך ₪2,000/שנה
+                  </p>
+                  <span
+                    className="mt-auto w-full rounded-full py-1.5 text-[10.5px] font-bold flex items-center justify-center"
+                    style={{ background: "white", color: p.solid }}
+                  >
+                    צפייה בפרטים
+                  </span>
+                </button>
+              );
+            }
             return (
               <div
                 key={card.label}
