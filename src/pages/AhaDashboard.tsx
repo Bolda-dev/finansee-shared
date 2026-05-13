@@ -415,7 +415,7 @@ const AhaDashboard = () => {
               <div className="flex items-start gap-2 rounded-[18px] px-3.5 py-3 max-w-[300px]">
                 <div className="flex-1 min-w-0">
                   <p className="text-[13px] font-extrabold aha-tip-title mb-1">
-                    איזה כיף להכיר. טוב שהצטרפת!
+                    👋 איזה כיף להכיר. טוב שהצטרפת!
                   </p>
                   <p className="text-[11.5px] leading-snug" style={{ color: "hsl(250, 30%, 30%)" }}>
                     האם ברצונך לחבר כמה נתונים ונראה כמה אנחנו שווים?
