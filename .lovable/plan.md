@@ -1,71 +1,35 @@
-## סטייג' 4 — רגע ה-AHA
+## AhaDashboard updates
 
-מסכים אחרי "סיום" של סטייג' 3: מסך טעינה קצר, ואז דשבורד-skeleton (קלון של IndexC) עם נתונים מוסתרים, טווח הערכה, וכפתור CTA לחשיפת השווי האמיתי.
+### 1. Per-color "חיבור לנתונים" button in top 3 cards
+Each of the 3 locked cards (נכסים / התחייבויות / ביטוח) gets a colored connect button matching its IndexC gradient family:
+- נכסים → teal `linear-gradient(135deg, hsl(178, 70%, 32%), hsl(174, 65%, 42%), hsl(170, 70%, 56%))`
+- התחייבויות → blue `linear-gradient(135deg, hsl(220, 85%, 48%), hsl(225, 90%, 60%), hsl(215, 95%, 75%))`
+- ביטוח → purple `linear-gradient(135deg, hsl(258, 72%, 55%), hsl(265, 78%, 65%), hsl(275, 85%, 78%))`
 
-## זרימה
+Card itself stays dashed/empty look; only the button gets the brand gradient + white text. Add subtle colored shadow per card.
 
-`Signup.tsx` יוסיף שלב 9 (loading) אחרי שלב 8 (goals). לחיצה על "סיום" בשלב 8 מקדמת לשלב 9 ולא רושמת console.log. שלב 9 מציג את ה-Loading למשך 2.6 שניות ואז `navigate("/aha", { state: { firstName } })`.
+### 2. New "מרכז פיננסי" section
+Below the 3 hero cards, add a section titled `מרכז פיננסי` with 4 locked sub-cards in a 2-col grid (mirroring IndexC's financial center style but empty):
+1. פנסיה (PiggyBank, assets/teal)
+2. השקעות (LineChart, assets/teal)
+3. הלוואות (Briefcase, liabilities/blue)
+4. משכנתא (Building2, liabilities/blue)
 
-**Steps עדכניים:** 0,1 welcome | 2 phone | 3 sms | 4 name | 5 age | 6 family | 7 employment | 8 goals | **9 loading**.
-- בשלב 9 אין top bar, אין CTA, אין back, אין progress (מסך נקי בהיר).
+Each card:
+- White bg, soft border, dashed value placeholder `—`
+- Small label + sub-label ("ללא נתונים")
+- **Secondary** connect button: outline / ghost style with category-color text + thin colored border (so they don't compete visually with the top 3 primary buttons). Text: `+ חיבור לנתונים`
 
-## 4.1 — LoadingStep
+### 3. Replace bottom CTA with Dana floating chatbot
+Remove the sticky bottom "גלה את השווי האמיתי שלי" CTA. Add `<ChatBot>` component (centered variant — same as IndexC) with state `chatOpen`. Avatar FAB floats at bottom center, opens the existing chat sheet.
 
-קומפוננטה חדשה `src/components/signup/LoadingStep.tsx`:
-- רקע בהיר זהה לסטייג' 2/3.
-- במרכז: ספינר עגול עם גרדיינט סמנטי (SVG/CSS conic מסתובב).
-- מתחת: טקסט מתחלף כל ~900ms לפי הסדר:
-  1. "מחשבים את הפרופיל שלך…"
-  2. "משווים לאנשים בגילך…"
-  3. "מכינים את ההערכה הראשונית…"
-- אנימציית fade קצרה בכל החלפה.
-- `useEffect` עם `setTimeout(2600ms)` שמפעיל `onDone` שמועבר מ-`Signup.tsx`.
+The hero range + Dana callout card at top remain unchanged. The "discover real value" goal is now served by the connect buttons on each card (which navigate to `/c` or stay in place — confirm below).
 
-## 4.2 — דשבורד AHA (`/aha`)
+### Technical notes
+- File: `src/pages/AhaDashboard.tsx` only
+- Reuse `ChatBot` from `@/components/ChatBot` with `variant="centered"`
+- Add `pb-28` instead of `pb-32` since CTA is gone but FAB still needs clearance
+- Remove `ctaRef` / `scrollToCta`; primary card buttons navigate to `/c` (the empty dashboard) so user starts connecting data there
 
-עמוד חדש `src/pages/AhaDashboard.tsx` שמשכפל את המבנה הוויזואלי של IndexC עם השינויים הבאים בלבד:
-
-**ברכה:** "בוקר טוב, {firstName}" — הולך אחר `location.state.firstName` עם fallback ל-userData.name.
-
-**Hero (שווי נטו):** מחליף את המספר הגדול בטווח:
-- כותרת: "הערכה ראשונית"
-- ערך: "₪450K - ₪1.2M" בגרדיינט סמנטי
-- תת-טקסט: "הערכה לפי הפרופיל שלך"
-- מסיר את ה-pill +1.8% ואת חותמת הזמן.
-
-**כרטיס Dana callout** (מתחת ל-hero, לפני 3 הכרטיסים הצבעוניים):
-- אווטאר דנה (תמונה קיימת `advisor-avatar.jpg`) + בועה לבנה.
-- טקסט: "היי {firstName} 👋 אנשים בפרופיל שלך בדרך כלל שווים בין ₪450K ל-₪1.2M. רוצה לראות את השווי האמיתי שלך?"
-- עיצוב באותו סגנון של "התובנות של דנה" הקיים — רקע לבן, border עדין, צל רך.
-
-**3 כרטיסים צבעוניים (סגול/כחול/טורקיז):**
-- אותו עיצוב bold gradient כמו ב-IndexC, אך:
-  - ערך מוחלף ב-`₪ ███` (שלושה blocks אטומים)
-  - צלמית lock קטנה (`lucide-react` Lock) פינה עליונה.
-  - לא ניווט בלחיצה — onClick יקפיץ ל-CTA למטה (scroll).
-- התווית (נכסים/התחייבויות/ביטוח) נשארת.
-
-**מרכז פיננסי (גריד 2 קולונות):**
-- מוסתר לחלוטין בגרסה זו (לא רלוונטי לרגע ה-AHA). pb של הקונטיינר נשמר כדי שה-CTA הצף לא יחפה.
-
-**Bottom CTA צף (sticky):**
-- בתחתית, רוחב מלא עם padding, מעל ה-bottom-bar.
-- כפתור שחור עמוק: "גלה את השווי האמיתי שלי ←"
-- onClick: `navigate("/c")` (החזרת המשתמש לדשבורד הראשי כדי להמשיך להזין נתונים).
-
-**Bottom bar / FAB / Menu / Chat:** מוסתרים בגרסה זו. רק header (תפריט + ברכה) + תוכן + CTA.
-
-## Routing
-
-הוספת `/aha` ל-`App.tsx`:
-```
-<Route path="/aha" element={<AhaDashboard />} />
-```
-
-## טכני
-
-- `AhaDashboard.tsx` נכתב מאפס (לא משתף state עם IndexC) ומשתמש באותם tokens/gradients inline כדי לשמר את המראה.
-- אין שינוי ב-`IndexC.tsx`, ב-`SignupShell.tsx`, או ב-`data.ts`.
-- `firstName` מועבר דרך `useLocation().state` עם fallback בטוח.
-- Lock icon מ-`lucide-react`.
-- ספינר: SVG עם `circle` ו-`stroke-dasharray` + `animation: spin 1s linear infinite` (CSS inline ב-`style` או class קיימת).
+### Open question
+The card "חיבור לנתונים" buttons — should they navigate to `/c` (empty dashboard, where user keeps adding data), or to the specific category page (`/c/assets`, `/c/liabilities`, `/c/insurance`)? Default to category-specific routes for primary cards, and `/c` for the secondary financial-center cards.
