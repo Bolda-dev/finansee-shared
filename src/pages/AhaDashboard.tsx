@@ -828,7 +828,7 @@ const AhaDashboard = () => {
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
-                            onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
+                            onClick={() => { setShowInsight(false); setCollectStep(7); }}
                             className="w-full rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98]"
                             style={{
                               background: "hsl(250, 40%, 12%)",
