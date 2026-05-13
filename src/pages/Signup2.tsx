@@ -186,11 +186,6 @@ const Signup2 = () => {
             socialProof="המשתמשים שלנו חסכו בממוצע ₪780 בחודש על המשכנתא"
             checked={consents.credit}
             onToggle={() => setConsents((c) => ({ ...c, credit: !c.credit }))}
-            onConfirm={() => {
-              setConnected((c) => ({ ...c, credit: true }));
-              next();
-            }}
-            onSkip={next}
           />
         );
       case 10:
