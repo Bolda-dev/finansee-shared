@@ -1107,7 +1107,7 @@ const AhaDashboard = () => {
                             אתה משלם פעמיים על אותו כיסוי. אפשר לבטל אחד בקליק.
                           </p>
                           <button
-                            onClick={() => { /* visual only */ }}
+                            onClick={() => { setInsuranceUpgraded(true); navigate("/aha2"); }}
                             className="w-full rounded-full py-2.5 text-[12px] font-extrabold flex items-center justify-center gap-1.5 transition-transform active:scale-[0.98] overflow-hidden relative"
                             style={{
                               background: "linear-gradient(110deg, hsl(220, 60%, 8%), hsl(250, 60%, 10%), hsl(220, 60%, 8%))",
@@ -1128,7 +1128,7 @@ const AhaDashboard = () => {
                       {showInsight && (
                         <div className="flex justify-center mt-3">
                           <button
-                            onClick={() => { setInsuranceUpgraded(true); setChatOpen(false); }}
+                            onClick={() => { setInsuranceUpgraded(true); navigate("/aha2"); }}
                             className="text-[12.5px] font-bold py-1.5 px-2 focus:outline-none"
                             style={{ color: "hsl(262, 75%, 50%)" }}
                           >
