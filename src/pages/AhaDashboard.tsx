@@ -471,9 +471,12 @@ const AhaDashboard = () => {
         {/* Coach-mark tooltip above avatar */}
         {tipOpen && (
           <div className="relative pointer-events-auto mb-2 mr-1 inline-block">
-            <button
+            <div
+              role="button"
+              tabIndex={0}
               onClick={() => setChatOpen(true)}
-              className="aha-tip-wrap block text-right w-full"
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setChatOpen(true); }}
+              className="aha-tip-wrap block text-right w-full cursor-pointer"
               aria-label="פתח צ'אט"
             >
               <div className="flex items-start gap-2 rounded-[18px] px-3.5 py-3 max-w-[300px]">
@@ -494,7 +497,7 @@ const AhaDashboard = () => {
                   <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
                 </button>
               </div>
-            </button>
+            </div>
             {/* tail */}
             <span
               className="absolute -bottom-1 right-6 w-2.5 h-2.5 rotate-45"
