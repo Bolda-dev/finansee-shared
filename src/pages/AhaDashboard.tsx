@@ -497,7 +497,7 @@ const AhaDashboard = () => {
                   <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 40%)" }} />
                 </button>
               </div>
-            </button>
+            </div>
             {/* tail */}
             <span
               className="absolute -bottom-1 right-6 w-2.5 h-2.5 rotate-45"
