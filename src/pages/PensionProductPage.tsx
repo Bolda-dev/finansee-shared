@@ -182,8 +182,10 @@ const PensionProductPage = () => {
             boxShadow: "0 14px 36px hsla(178, 70%, 12%, 0.18), 0 2px 6px hsla(178, 70%, 12%, 0.06)",
           }}
         >
-          <div className="flex justify-between items-start mb-4">
-            <div className="flex-1 min-w-0 pl-3">
+          <div className="flex items-start gap-4 mb-4">
+            {/* Provider logo — RIGHT side in RTL */}
+            <ProviderLogo provider={product.provider} size={56} ring />
+            <div className="flex-1 min-w-0">
               <p className="text-[20px] font-extrabold leading-tight tracking-tight truncate" style={{ color: C.ink }}>
                 {product.provider}
               </p>
@@ -196,8 +198,6 @@ const PensionProductPage = () => {
               </p>
               <p className="text-[10.5px] mt-1 font-medium" style={{ color: C.muted }}>צבירה כוללת</p>
             </div>
-            {/* Provider logo — top hierarchy */}
-            <ProviderLogo provider={product.provider} size={56} ring />
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-4" style={{ borderTop: `1px solid ${C.hairline}` }}>

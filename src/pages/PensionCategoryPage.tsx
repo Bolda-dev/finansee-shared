@@ -109,34 +109,27 @@ const PensionCategoryPage = () => {
         </div>
       </div>
 
-      {/* Floating Summary Card — overlaps banner */}
+      {/* Floating Summary Card — no avatar, clean KPI */}
       <div className="px-5 -mt-12 relative z-10 float-card-in">
-        <button
-          onClick={() => setChatOpen(true)}
-          className="w-full text-right rounded-2xl bg-white p-5 transition-transform active:scale-[0.99]"
+        <div
+          className="w-full text-right rounded-2xl bg-white p-5"
           style={{
             border: `1px solid ${C.hairline}`,
             boxShadow: "0 14px 36px hsla(178, 70%, 12%, 0.18), 0 2px 6px hsla(178, 70%, 12%, 0.06)",
           }}
         >
-          <div className="flex justify-between items-start mb-4">
-            <div>
-              <p className="text-[36px] font-extrabold tracking-tight leading-none" style={{ color: C.ink }}>
-                <span className="text-[20px] font-bold ml-1" style={{ color: C.core }}>₪</span>
-                {(totalBalance / 1_000_000).toFixed(2)}M
-              </p>
-              <p className="text-[11px] mt-1.5 font-medium" style={{ color: C.muted }}>
-                {pensionProducts.length} מוצרים פנסיוניים
-              </p>
-            </div>
-            <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0">
-              <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 4px 10px hsla(178, 70%, 14%, 0.30)" }}>
-                <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
-              </span>
-            </span>
-          </div>
+          <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: C.muted }}>
+            סך החיסכון הפנסיוני
+          </p>
+          <p className="text-[36px] font-extrabold tracking-tight leading-none" style={{ color: C.ink }}>
+            <span className="text-[20px] font-bold ml-1" style={{ color: C.core }}>₪</span>
+            {(totalBalance / 1_000_000).toFixed(2)}M
+          </p>
+          <p className="text-[11px] mt-1.5 font-medium" style={{ color: C.muted }}>
+            {pensionProducts.length} מוצרים פנסיוניים
+          </p>
 
-          <div className="grid grid-cols-2 gap-3 pt-4" style={{ borderTop: `1px solid ${C.hairline}` }}>
+          <div className="grid grid-cols-2 gap-3 pt-4 mt-4" style={{ borderTop: `1px solid ${C.hairline}` }}>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wide mb-1" style={{ color: C.muted }}>צפי קצבה</p>
               <p className="text-[14px] font-extrabold" style={{ color: C.ink }}>{formatNIS(monthlyPension)}<span className="text-[10px] font-medium opacity-70">/חודש</span></p>
@@ -146,11 +139,38 @@ const PensionCategoryPage = () => {
               <p className="text-[14px] font-extrabold" style={{ color: C.ink }}>{activeCount} <span className="text-[10px] font-medium opacity-70">מוצרים</span></p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Dana section — right after hero */}
+      <div className="px-5 mt-4">
+        <button
+          onClick={() => setChatOpen(true)}
+          className="w-full rounded-2xl p-4 text-start flex items-center gap-3 transition-transform active:scale-[0.99]"
+          style={{
+            background: "white",
+            boxShadow: "0 4px 18px hsla(250, 30%, 25%, 0.08)",
+            border: "1px solid hsl(230, 20%, 93%)",
+          }}
+          dir="rtl"
+        >
+          <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0">
+            <span className="block w-full h-full rounded-full overflow-hidden">
+              <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
+            </span>
+          </span>
+          <div className="flex-1 min-w-0">
+            <p className="text-[13px] font-bold" style={{ color: C.ink }}>דנה — תובנה אישית</p>
+            <p className="text-[11px] mt-0.5" style={{ color: C.muted }}>
+              יש לך הזדמנות לחסוך בדמי ניהול בקופת גמל
+            </p>
+          </div>
+          <ChevronLeft className="h-4 w-4 flex-shrink-0" style={{ color: C.muted }} />
         </button>
       </div>
 
-      {/* Filter chips — identical to Assets page */}
-      <div className="px-4 pt-5 pb-1">
+      {/* Filter chips */}
+      <div className="px-4 pt-4 pb-1">
         <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
           {filters.map((chip) => {
             const isActive = chip.key === active;
@@ -178,7 +198,7 @@ const PensionCategoryPage = () => {
       </div>
 
       {/* List header */}
-      <div className="px-5 mt-5 mb-3 flex items-center justify-between">
+      <div className="px-5 mt-3 mb-2 flex items-center justify-between">
         <p className="text-[11px] font-bold uppercase tracking-wider" style={{ color: C.muted }}>
           מוצרי הפנסיה שלך
         </p>
@@ -187,85 +207,74 @@ const PensionCategoryPage = () => {
         </span>
       </div>
 
-      {/* Product grid — same card style as Home (IndexC) */}
-      <div className="px-3 pb-32 grid grid-cols-2 gap-3">
+      {/* Product list — Assets-style rows */}
+      <div className="mx-4 pb-32 flex flex-col gap-2.5">
         {visible.length === 0 && (
           <div
-            className="col-span-2 px-4 py-8 text-center rounded-2xl bg-white"
-            style={{ border: `1px solid ${C.hairline}` }}
+            className="px-4 py-8 text-center rounded-2xl bg-white"
+            style={{ border: "1px solid hsl(230, 20%, 94%)" }}
           >
-            <p className="text-[12px]" style={{ color: C.muted }}>אין מוצרים בקטגוריה זו</p>
+            <p className="text-[12px]" style={{ color: "hsl(230, 15%, 55%)" }}>אין מוצרים בקטגוריה זו</p>
           </div>
         )}
         {visible.map((p) => (
           <button
             key={p.id}
             onClick={() => navigate(`/assets/pension/${p.id}`)}
-            className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full flex items-start gap-3 px-4 py-4 rounded-2xl transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
             style={{
               background: "white",
-              boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
-              border: `1px solid ${C.hairline}`,
-              minHeight: "160px",
+              boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.05)",
+              border: "1px solid hsl(230, 20%, 94%)",
             }}
+            dir="rtl"
           >
-            <span
-              className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
-              style={{ background: `linear-gradient(90deg, ${C.fresh}, ${C.core})` }}
-              aria-hidden
-            />
+            {/* Logo (right in RTL) */}
+            <span className="relative flex-shrink-0">
+              <ProviderLogo provider={p.provider} size={44} />
+              {p.alert && (
+                <span
+                  className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
+                  style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+                >
+                  !
+                </span>
+              )}
+            </span>
 
-            <div className="flex items-center justify-start gap-2 mb-1">
-              <span className="relative">
-                <ProviderLogo provider={p.provider} size={36} />
-                {p.alert && (
-                  <span
-                    className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
-                    style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
-                  >
-                    !
-                  </span>
-                )}
-              </span>
-              <span
-                className="text-[12px] font-bold tracking-tight truncate"
-                style={{ color: C.ink }}
-              >
+            {/* Title + subtitle */}
+            <div className="flex-1 min-w-0 text-right">
+              <p className="text-[14px] font-bold tracking-tight" style={{ color: "hsl(250, 50%, 12%)" }}>
                 {p.provider}
-              </span>
-            </div>
-
-            <div className="flex items-baseline gap-1 flex-wrap">
-              <p
-                className="text-[20px] font-extrabold tracking-tight leading-none"
-                style={{ color: C.ink }}
-              >
-                {formatNIS(p.balance)}
+              </p>
+              <p className="text-[11.5px] mt-0.5 truncate" style={{ color: "hsl(230, 15%, 55%)" }}>
+                {p.label} · {p.typeLabel}
               </p>
             </div>
-            <p className="text-[10px] mt-1 truncate" style={{ color: C.muted }}>
-              {p.label} · {p.typeLabel}
-            </p>
 
-            {p.monthlyDeposit ? (
-              <div className="mt-auto pt-2 border-t" style={{ borderColor: C.hairline }}>
-                <p className="text-[11px] leading-none whitespace-nowrap">
-                  <span className="font-bold" style={{ color: C.ink }}>
-                    +{formatNIS(p.monthlyDeposit)}
-                  </span>
-                  <span className="mx-1" style={{ color: C.ink }}>·</span>
-                  <span style={{ color: C.ink }}>הפקדה חודשית</span>
+            {/* Trailing */}
+            <div className="flex items-center gap-1.5 flex-shrink-0 self-center">
+              <div className="text-left">
+                <p className="text-[13px] font-extrabold tracking-tight" style={{ color: "hsl(250, 50%, 12%)" }}>
+                  {formatNIS(p.balance)}
                 </p>
+                {p.monthlyDeposit ? (
+                  <span
+                    className="inline-block text-[9.5px] font-bold px-1.5 py-0.5 rounded mt-0.5"
+                    style={{ background: C.mint, color: C.core }}
+                  >
+                    +{formatNIS(p.monthlyDeposit)}/ח
+                  </span>
+                ) : (
+                  <span className="block text-[10px] font-medium mt-0.5" style={{ color: "hsl(230, 15%, 55%)" }}>ללא הפקדה</span>
+                )}
               </div>
-            ) : (
-              <div className="mt-auto pt-2 border-t" style={{ borderColor: C.hairline }}>
-                <p className="text-[11px] leading-none" style={{ color: C.muted }}>ללא הפקדה פעילה</p>
-              </div>
-            )}
+              <ChevronLeft className="h-4 w-4 flex-shrink-0" style={{ color: "hsl(230, 15%, 60%)" }} />
+            </div>
           </button>
         ))}
 
-        <p className="col-span-2 text-[10.5px] text-center mt-3 px-6" style={{ color: C.muted }}>
+        <p className="text-[10.5px] text-center mt-3 px-6" style={{ color: C.muted }}>
           הנתונים מתעדכנים אוטומטית מהמסלקה הפנסיונית
         </p>
       </div>
