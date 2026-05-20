@@ -6,21 +6,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { VersionCSettingsProvider } from "./contexts/VersionCSettings";
 
-const Index = lazy(() => import("./pages/Index"));
+const IndexC = lazy(() => import("./pages/IndexC"));
 const IncomePage = lazy(() => import("./pages/IncomePage"));
 const ExpensesPage = lazy(() => import("./pages/ExpensesPage"));
-const InsurancePage = lazy(() => import("./pages/InsurancePage"));
-const AssetsPage = lazy(() => import("./pages/AssetsPage"));
-const LiabilitiesPage = lazy(() => import("./pages/LiabilitiesPage"));
-const IndexB = lazy(() => import("./pages/IndexB"));
-const IndexC = lazy(() => import("./pages/IndexC"));
-const IndexD = lazy(() => import("./pages/IndexD"));
 const InsurancePageC = lazy(() => import("./pages/InsurancePageC"));
 const AssetsPageC = lazy(() => import("./pages/AssetsPageC"));
 const LiabilitiesPageC = lazy(() => import("./pages/LiabilitiesPageC"));
-const InsurancePageD = lazy(() => import("./pages/InsurancePageD"));
-const AssetsPageD = lazy(() => import("./pages/AssetsPageD"));
-const LiabilitiesPageD = lazy(() => import("./pages/LiabilitiesPageD"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Signup2 = lazy(() => import("./pages/Signup2"));
 const AhaDashboard = lazy(() => import("./pages/AhaDashboard"));
@@ -38,25 +29,12 @@ const App = () => (
         <VersionCSettingsProvider>
           <Suspense fallback={null}>
             <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/b" element={<IndexB />} />
-              <Route path="/c" element={<IndexC />} />
-              <Route path="/d" element={<IndexD />} />
+              <Route path="/" element={<IndexC />} />
               <Route path="/income" element={<IncomePage />} />
               <Route path="/expenses" element={<ExpensesPage />} />
-              <Route path="/insurance" element={<InsurancePage />} />
-              <Route path="/assets" element={<AssetsPage />} />
-              <Route path="/liabilities" element={<LiabilitiesPage />} />
-              <Route path="/c/insurance" element={<InsurancePageC />} />
-              <Route path="/c/assets" element={<AssetsPageC />} />
-              <Route path="/c/liabilities" element={<LiabilitiesPageC />} />
-              <Route path="/c/income" element={<IncomePage />} />
-              <Route path="/c/expenses" element={<ExpensesPage />} />
-              <Route path="/d/insurance" element={<InsurancePageD />} />
-              <Route path="/d/assets" element={<AssetsPageD />} />
-              <Route path="/d/liabilities" element={<LiabilitiesPageD />} />
-              <Route path="/d/income" element={<IncomePage />} />
-              <Route path="/d/expenses" element={<ExpensesPage />} />
+              <Route path="/insurance" element={<InsurancePageC />} />
+              <Route path="/assets" element={<AssetsPageC />} />
+              <Route path="/liabilities" element={<LiabilitiesPageC />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/signup2" element={<Signup2 />} />
               <Route path="/aha" element={<AhaDashboard />} />

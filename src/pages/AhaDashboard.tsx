@@ -115,9 +115,9 @@ const AhaDashboard = () => {
   }, [showInsight]);
 
   const heroCards = [
-    { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/c/assets" },
-    { label: "התחייבויות", Icon: TrendingDown, estimate: "₪150K - ₪400K", category: "liabilities" as const, route: "/c/liabilities" },
-    { label: "ביטוח", Icon: ShieldCheck, estimate: "חלקי", category: "insurance" as const, route: "/c/insurance" },
+    { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/assets" },
+    { label: "התחייבויות", Icon: TrendingDown, estimate: "₪150K - ₪400K", category: "liabilities" as const, route: "/liabilities" },
+    { label: "ביטוח", Icon: ShieldCheck, estimate: "חלקי", category: "insurance" as const, route: "/insurance" },
   ];
 
   const centerCards = [
@@ -243,8 +243,8 @@ const AhaDashboard = () => {
             {danaExpanded && (
               <div className="space-y-2 mt-3" style={{ animation: "aha-item-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both" }}>
                 {[
-                  { Icon: PiggyBank, label: "אשראי", desc: "חשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
-                  { Icon: TrendingUp, label: "השקעות ונדל״ן ונכסים", desc: "תיקי השקעות, נדל״ן ונכסים נוספים", category: "assets" as const, route: "/c/assets" },
+                  { Icon: PiggyBank, label: "אשראי", desc: "חשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/liabilities" },
+                  { Icon: TrendingUp, label: "השקעות ונדל״ן ונכסים", desc: "תיקי השקעות, נדל״ן ונכסים נוספים", category: "assets" as const, route: "/assets" },
                 ].map((item) => {
                   const p = palettes[item.category];
                   return (
@@ -382,7 +382,7 @@ const AhaDashboard = () => {
               return (
                 <button
                   key={card.label}
-                  onClick={() => navigate("/c/assets")}
+                  onClick={() => navigate("/assets")}
                   className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform active:scale-[0.98]"
                   style={{
                     background: "white",
@@ -414,7 +414,7 @@ const AhaDashboard = () => {
             return (
               <button
                 key={card.label}
-                onClick={() => navigate(card.category === "liabilities" ? "/c/liabilities" : "/c/assets")}
+                onClick={() => navigate(card.category === "liabilities" ? "/liabilities" : "/assets")}
                 className="rounded-2xl flex flex-col items-center justify-center text-center px-3 py-4 gap-2 transition-transform active:scale-[0.98]"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.4)",
@@ -1015,7 +1015,7 @@ const AhaDashboard = () => {
                     <>
                       {/* Insurance — connected, white card with purple icon (FIRST) */}
                       <button
-                        onClick={() => { setChatOpen(false); navigate("/c/insurance"); }}
+                        onClick={() => { setChatOpen(false); navigate("/insurance"); }}
                         className="w-full text-start rounded-2xl p-4 flex items-center gap-3 transition-transform active:scale-[0.98] relative overflow-hidden"
                         style={{
                           background: "white",
@@ -1163,9 +1163,9 @@ const AhaDashboard = () => {
               {chatStage === "more" && (
                 <div className="grid grid-cols-1 gap-2.5">
                   {[
-                    { label: "הוצאות", desc: "חיבור לחשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/c/liabilities" },
-                    { label: "השקעות", desc: "תיקי השקעות, קרנות וני״ע", category: "assets" as const, route: "/c/assets" },
-                    { label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים נוספים", category: "assets" as const, route: "/c/assets" },
+                    { label: "הוצאות", desc: "חיבור לחשבון בנק וכרטיסי אשראי", category: "liabilities" as const, route: "/liabilities" },
+                    { label: "השקעות", desc: "תיקי השקעות, קרנות וני״ע", category: "assets" as const, route: "/assets" },
+                    { label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים נוספים", category: "assets" as const, route: "/assets" },
                   ].map((opt) => {
                     const p = palettes[opt.category];
                     return (

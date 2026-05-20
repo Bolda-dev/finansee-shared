@@ -159,7 +159,7 @@ const IndexB = () => {
                 outline: "hsla(176, 70%, 28%, 0.18)",
                 iconColor: "hsl(178, 70%, 30%)",
                 ripple: { cx: 18, cy: 130, radii: [22, 44, 70, 98, 130] },
-                onClick: () => navigate("/c/assets"),
+                onClick: () => navigate("/assets"),
               },
               {
                 label: "התחייבויות",
@@ -171,7 +171,7 @@ const IndexB = () => {
                 outline: "hsla(222, 80%, 45%, 0.08)",
                 iconColor: "hsl(222, 85%, 45%)",
                 ripple: { cx: 130, cy: 20, radii: [18, 38, 62, 92, 124] },
-                onClick: () => navigate("/c/liabilities"),
+                onClick: () => navigate("/liabilities"),
               },
               {
                 label: "ביטוח",
@@ -183,7 +183,7 @@ const IndexB = () => {
                 outline: "hsla(262, 72%, 50%, 0.08)",
                 iconColor: "hsl(262, 75%, 52%)",
                 ripple: { cx: 70, cy: 145, radii: [28, 56, 86, 118] },
-                onClick: () => navigate("/c/insurance"),
+                onClick: () => navigate("/insurance"),
               },
             ].map((card) => (
               <button
@@ -354,7 +354,7 @@ const IndexB = () => {
                 { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
                 { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
                 { label: "משכנתא", Icon: Building2, value: "₪1,110,000", subLabel: "3 משכנתאות פעילות", extra: "₪8,500", extraSub: "תשלום חודשי", extraSuffix: "/חודש", badge: 1, category: "liabilities" },
-                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/c/insurance") },
+                { label: "ביטוח", Icon: ShieldCheck, value: "₪3,051", subLabel: "עלות ביטוח", extraSuffix: "/חודש", badge: 1, category: "insurance", onClick: () => navigate("/insurance") },
               ];
 
               return cards.map((card) => {
