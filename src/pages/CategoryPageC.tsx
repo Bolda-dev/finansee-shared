@@ -128,6 +128,8 @@ export type CategoryPageProps = {
   renderItemSubtitle: (item: CategoryItem) => string;
   /** Optional: which insights sheet variant to use ("c" default or "life") */
   insightsVariant?: "c" | "life";
+  /** Optional: per-item click handler. When provided, the card becomes a navigation trigger. */
+  onItemClick?: (item: CategoryItem, index: number) => void;
 };
 
 export const CategoryPageC = ({
