@@ -24,13 +24,8 @@ const menuItems = [
 ];
 
 export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
-  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const isVersionB = pathname === "/b" || pathname.startsWith("/b/");
-  const isVersionC = pathname === "/c" || pathname.startsWith("/c/");
-  const isVersionD = pathname === "/d" || pathname.startsWith("/d/");
-  const { boldCards, centerBar, innerGrid, logoLeft, filledIconsD, setBoldCards, setCenterBar, setInnerGrid, setLogoLeft, setFilledIconsD } = useVersionCSettings();
-  const [archiveOpen, setArchiveOpen] = useState(false);
+  const { innerGrid, setInnerGrid } = useVersionCSettings();
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -52,74 +47,11 @@ export const MenuDrawer = ({ open, onOpenChange }: MenuDrawerProps) => {
             ))}
           </div>
 
-          {isVersionC && (
-            <div className="border-t border-border mt-4 pt-4">
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
-                <Switch dir="ltr" checked={innerGrid} onCheckedChange={setInnerGrid} />
-              </div>
-            </div>
-          )}
-
-          {isVersionD && (
-            <div className="border-t border-border mt-4 pt-4">
-              <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסה D</p>
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
-                <Switch dir="ltr" checked={innerGrid} onCheckedChange={setInnerGrid} />
-              </div>
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">לוגו — צמוד לשמאל</span>
-                <Switch dir="ltr" checked={logoLeft} onCheckedChange={setLogoLeft} />
-              </div>
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">אייקוני קטגוריות — רקע צבעוני מלא</span>
-                <Switch dir="ltr" checked={filledIconsD} onCheckedChange={setFilledIconsD} />
-              </div>
-            </div>
-          )}
-
-          {isVersionB && (
-            <div className="border-t border-border mt-4 pt-4">
-              <p className="px-4 text-xs font-bold text-muted-foreground mb-2">גרסה B</p>
-              <div className="px-4 py-2.5 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-foreground">לוגו — צמוד לשמאל</span>
-                <Switch dir="ltr" checked={logoLeft} onCheckedChange={setLogoLeft} />
-              </div>
-            </div>
-          )}
-
           <div className="border-t border-border mt-4 pt-4">
-            <p className="px-4 text-xs font-bold text-muted-foreground mb-2">סגנונות</p>
-            <button onClick={() => { onOpenChange(false); navigate("/c"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-              <Sparkles className="h-4 w-4 text-muted-foreground" />
-              סגנון סולידי
-            </button>
-          </div>
-
-          <div className="border-t border-border mt-4 pt-4">
-            <button
-              onClick={() => setArchiveOpen((v) => !v)}
-              className="w-full flex items-center justify-between gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-muted-foreground hover:bg-accent transition-colors"
-            >
-              <span className="flex items-center gap-2">
-                <Archive className="h-3.5 w-3.5" />
-                סגנונות בארכיון
-              </span>
-              <ChevronDown className={`h-4 w-4 transition-transform ${archiveOpen ? "rotate-180" : ""}`} />
-            </button>
-            {archiveOpen && (
-              <div className="mt-1 space-y-1">
-                <button onClick={() => { onOpenChange(false); navigate("/b"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-                  <Sparkles className="h-4 w-4 text-muted-foreground" />
-                  גרסה B
-                </button>
-                <button onClick={() => { onOpenChange(false); navigate("/d"); }} className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">
-                  <Sparkles className="h-4 w-4 text-muted-foreground" />
-                  גרסה D — Dark Metallic
-                </button>
-              </div>
-            )}
+            <div className="px-4 py-2.5 flex items-center justify-between gap-3">
+              <span className="text-sm font-medium text-foreground">עמודים פנימיים — תצוגת גריד</span>
+              <Switch dir="ltr" checked={innerGrid} onCheckedChange={setInnerGrid} />
+            </div>
           </div>
 
           <div className="border-t border-border mt-4 pt-4">
