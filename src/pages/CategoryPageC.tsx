@@ -624,7 +624,7 @@ export const CategoryPageC = ({
       {/* === Dana invitation bubble === */}
       {danaBubbleOpen && !danaBubbleDismissed && (
         <div
-          className="fixed bottom-[88px] left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pointer-events-none"
+          className="fixed bottom-[88px] left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 px-4 pointer-events-none"
           dir="rtl"
         >
           <div
