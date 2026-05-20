@@ -472,6 +472,17 @@ const PensionProductPage = () => {
         alternative={{ provider: alt.provider, label: alt.label, mgmt: alt.mgmt, return3y: alt.return3y }}
         savings={alt.savings}
       />
+      {hasOpportunity && teaserVisible && !danaOpen && (
+        <DanaTeaserBubbles
+          productId={product.id}
+          savings={alt.savings}
+          onOpen={() => {
+            setDanaOpen(true);
+            setTeaserVisible(false);
+          }}
+          onClose={() => setTeaserVisible(false)}
+        />
+      )}
     </div>
   );
 };
