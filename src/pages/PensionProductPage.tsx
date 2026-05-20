@@ -9,7 +9,7 @@ import {
   ArrowLeftRight,
   RefreshCw,
   UserCog,
-  Sparkles,
+  
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
