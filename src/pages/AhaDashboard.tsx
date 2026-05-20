@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap, Camera, FileText, ShieldHalf, ChevronDown } from "lucide-react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Lock, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Sparkles, Check, Clock, Loader2, ArrowLeft, Zap, Camera, FileText, ShieldHalf, ChevronDown, UserSquare2, PenLine, RotateCcw } from "lucide-react";
 import confetti from "canvas-confetti";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
@@ -50,6 +50,9 @@ const AhaDashboard = () => {
   const [idNumber, setIdNumber] = useState("");
   const [idDate, setIdDate] = useState("");
   const [usePhoto, setUsePhoto] = useState(false);
+  const [idShot, setIdShot] = useState(false);
+  const [selfieShot, setSelfieShot] = useState(false);
+  const [signed, setSigned] = useState(false);
   const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false, creditAssets: false, creditLiab: false });
   const [collectingMsg, setCollectingMsg] = useState(0);
   const [homeAlmostDone, setHomeAlmostDone] = useState(false);
@@ -766,6 +769,47 @@ const AhaDashboard = () => {
                       <p className="text-center text-[15px] font-extrabold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>פרטי תעודת זהות</p>
                       <p className="text-center text-[11px] mb-4" style={{ color: "hsl(230, 15%, 50%)" }}>נדרשים לאימות הזהות שלך</p>
 
+                      {/* Capture buttons — above inputs */}
+                      <div className="grid grid-cols-2 gap-2 mb-3.5">
+                        <button
+                          onClick={() => {
+                            setIdShot(true);
+                            setUsePhoto(true);
+                            setIdNumber("123456789");
+                            setIdDate("15/03/2018");
+                          }}
+                          className="rounded-2xl px-2 py-3 flex flex-col items-center justify-center gap-1.5 text-center transition-all active:scale-[0.97]"
+                          style={{
+                            background: idShot ? "hsl(150, 60%, 96%)" : "white",
+                            border: idShot ? "1.5px solid hsl(150, 55%, 55%)" : "1.5px dashed hsl(262, 50%, 75%)",
+                            boxShadow: idShot ? "0 6px 16px -10px hsla(150, 55%, 30%, 0.35)" : "0 4px 14px -10px hsla(250, 40%, 20%, 0.15)",
+                          }}
+                        >
+                          <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: idShot ? "hsl(150, 55%, 88%)" : "hsl(262, 75%, 96%)", color: idShot ? "hsl(150, 60%, 26%)" : "hsl(262, 75%, 45%)" }}>
+                            {idShot ? <Check className="h-4 w-4" strokeWidth={3} /> : <Camera className="h-4 w-4" />}
+                          </span>
+                          <span className="text-[11.5px] font-bold leading-tight" style={{ color: idShot ? "hsl(150, 60%, 26%)" : "hsl(250, 40%, 25%)" }}>
+                            {idShot ? "צולם" : "צילום ת.ז"}
+                          </span>
+                        </button>
+                        <button
+                          onClick={() => setSelfieShot(true)}
+                          className="rounded-2xl px-2 py-3 flex flex-col items-center justify-center gap-1.5 text-center transition-all active:scale-[0.97]"
+                          style={{
+                            background: selfieShot ? "hsl(150, 60%, 96%)" : "white",
+                            border: selfieShot ? "1.5px solid hsl(150, 55%, 55%)" : "1.5px dashed hsl(262, 50%, 75%)",
+                            boxShadow: selfieShot ? "0 6px 16px -10px hsla(150, 55%, 30%, 0.35)" : "0 4px 14px -10px hsla(250, 40%, 20%, 0.15)",
+                          }}
+                        >
+                          <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: selfieShot ? "hsl(150, 55%, 88%)" : "hsl(262, 75%, 96%)", color: selfieShot ? "hsl(150, 60%, 26%)" : "hsl(262, 75%, 45%)" }}>
+                            {selfieShot ? <Check className="h-4 w-4" strokeWidth={3} /> : <UserSquare2 className="h-4 w-4" />}
+                          </span>
+                          <span className="text-[11.5px] font-bold leading-tight" style={{ color: selfieShot ? "hsl(150, 60%, 26%)" : "hsl(250, 40%, 25%)" }}>
+                            {selfieShot ? "אומת" : "צילום סלפי לאימות"}
+                          </span>
+                        </button>
+                      </div>
+
                       <label className="block text-[11px] font-bold text-right mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>מספר תעודת זהות</label>
                       <input
                         dir="rtl"
@@ -793,24 +837,9 @@ const AhaDashboard = () => {
                           setIdDate(formatted.slice(0, 10));
                         }}
                         placeholder="dd/mm/yyyy"
-                        className="w-full text-right text-[15px] font-semibold tracking-wide rounded-xl py-3 px-3 mb-3 focus:outline-none"
+                        className="w-full text-right text-[15px] font-semibold tracking-wide rounded-xl py-3 px-3 focus:outline-none"
                         style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
                       />
-
-                      <div className="flex items-center justify-between gap-2 mt-2">
-                        <span className="text-[10.5px]" style={{ color: "hsl(230, 15%, 55%)" }}>או מלא אוטומטית מצילום</span>
-                        <button
-                          onClick={() => setUsePhoto(!usePhoto)}
-                          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition-all active:scale-[0.97]"
-                          style={{
-                            border: `1px dashed ${usePhoto ? "hsl(262, 75%, 55%)" : "hsl(262, 50%, 70%)"}`,
-                            background: usePhoto ? "hsl(262, 75%, 96%)" : "transparent",
-                          }}
-                        >
-                          {usePhoto ? <Check className="h-3.5 w-3.5" strokeWidth={3} style={{ color: "hsl(262, 75%, 45%)" }} /> : <Camera className="h-3.5 w-3.5" style={{ color: "hsl(262, 75%, 45%)" }} />}
-                          <span className="text-[11.5px] font-bold" style={{ color: "hsl(262, 75%, 40%)" }}>צלם תעודה</span>
-                        </button>
-                      </div>
                     </div>
                   )}
 
@@ -848,20 +877,66 @@ const AhaDashboard = () => {
                     />
                   )}
                   {collectStep === 4 && (
-                    <ConsentAnnex
-                      icon={<Building2 className="h-6 w-6" style={{ color: "hsl(220, 85%, 55%)" }} />}
-                      iconBg="hsl(220, 85%, 94%)"
-                      title="נספח ה' - הר הביטוח"
-                      subtitle="יציאה בשמך להבאת מידע ביטוחי"
-                      bullets={[
-                        "יציאה בשמך להר הביטוח המרכזי",
-                        "קבלת מידע על כל פוליסות הביטוח שלך",
-                        "עדכונים אוטומטיים מהמאגר המרכזי",
-                      ]}
-                      consentText="יציאה בשמי להר הביטוח להבאת מידעים"
-                      checked={consents.harBituach}
-                      onToggle={() => setConsents((c) => ({ ...c, harBituach: !c.harBituach }))}
-                    />
+                    <>
+                      <ConsentAnnex
+                        icon={<Building2 className="h-6 w-6" style={{ color: "hsl(220, 85%, 55%)" }} />}
+                        iconBg="hsl(220, 85%, 94%)"
+                        title="נספח ה' - הר הביטוח"
+                        subtitle="יציאה בשמך להבאת מידע ביטוחי"
+                        bullets={[
+                          "יציאה בשמך להר הביטוח המרכזי",
+                          "קבלת מידע על כל פוליסות הביטוח שלך",
+                          "עדכונים אוטומטיים מהמאגר המרכזי",
+                        ]}
+                        consentText="יציאה בשמי להר הביטוח להבאת מידעים"
+                        checked={consents.harBituach}
+                        onToggle={() => setConsents((c) => ({ ...c, harBituach: !c.harBituach }))}
+                      />
+
+                      {/* Digital signature mock */}
+                      <div className="space-y-2" dir="rtl">
+                        <div className="flex items-center justify-between px-1">
+                          <p className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>חתימה דיגיטלית</p>
+                          {signed && (
+                            <button type="button" onClick={() => setSigned(false)} className="inline-flex items-center gap-1 text-[10.5px] font-semibold" style={{ color: "hsl(230, 15%, 50%)" }}>
+                              <RotateCcw className="h-3 w-3" />
+                              נקה
+                            </button>
+                          )}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setSigned(true)}
+                          className="w-full h-[110px] rounded-2xl flex items-center justify-center transition-all active:scale-[0.99]"
+                          style={{
+                            background: signed ? "hsl(150, 60%, 97%)" : "white",
+                            border: signed ? "1.5px solid hsl(150, 55%, 55%)" : "1.5px dashed hsl(250, 30%, 80%)",
+                            boxShadow: signed ? "0 6px 16px -10px hsla(150, 55%, 30%, 0.35)" : "0 4px 14px -10px hsla(250, 40%, 20%, 0.12)",
+                          }}
+                          aria-label="חתום כאן"
+                        >
+                          {signed ? (
+                            <div className="flex flex-col items-center gap-1">
+                              <svg width="160" height="48" viewBox="0 0 160 48" fill="none" aria-hidden>
+                                <path d="M6 32 Q 18 6, 30 28 T 58 26 Q 70 8, 84 30 T 114 22 Q 128 6, 142 30 L 152 24" stroke="hsl(250, 50%, 20%)" strokeWidth="2.2" strokeLinecap="round" fill="none" />
+                              </svg>
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold" style={{ color: "hsl(150, 60%, 26%)" }}>
+                                <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                                נחתם
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="flex flex-col items-center gap-1.5">
+                              <span className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "hsl(250, 30%, 96%)", color: "hsl(262, 75%, 55%)" }}>
+                                <PenLine className="h-4 w-4" />
+                              </span>
+                              <span className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 25%)" }}>חתמו כאן</span>
+                              <span className="text-[10.5px]" style={{ color: "hsl(230, 15%, 55%)" }}>השאירו טביעה לאישור הגישה</span>
+                            </div>
+                          )}
+                        </button>
+                      </div>
+                    </>
                   )}
 
                   {/* Continue button (steps 1-4) */}
@@ -870,7 +945,7 @@ const AhaDashboard = () => {
                       collectStep === 1 ? (usePhoto || (idNumber.length === 9 && idDate.trim().length >= 8)) :
                       collectStep === 2 ? consents.pension :
                       collectStep === 3 ? consents.copies :
-                      consents.harBituach;
+                      (consents.harBituach && signed);
                     return (
                       <button
                         onClick={() => setCollectStep((s) => (s === 4 ? 5 : (s + 1) as 1 | 2 | 3 | 4))}
