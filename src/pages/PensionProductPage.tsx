@@ -209,21 +209,6 @@ const PensionProductPage = () => {
           </span>
         </div>
 
-        {hasOpportunity && (
-          <button
-            onClick={() => setDanaOpen(true)}
-            className="relative mt-3 inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full text-white animate-pulse"
-            style={{
-              background: "linear-gradient(135deg, hsl(45, 95%, 55%), hsl(28, 90%, 55%))",
-              boxShadow: "0 4px 14px hsla(28, 90%, 40%, 0.4)",
-              animationDuration: "2.4s",
-            }}
-            aria-label="פתחי שיחה עם דנה"
-          >
-            <Sparkles className="h-3 w-3" />
-            דנה רוצה לדבר איתך
-          </button>
-        )}
       </div>
 
       {/* Floating Summary Card — IDENTICAL pattern to Category, but LOGO at top of hierarchy */}
