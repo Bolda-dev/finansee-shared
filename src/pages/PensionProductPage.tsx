@@ -102,7 +102,43 @@ const PensionProductPage = () => {
   const product = pensionProducts.find((p) => p.id === id);
 
   const [chatOpen, setChatOpen] = useState(false);
+  const [danaOpen, setDanaOpen] = useState(false);
   const [tab, setTab] = useState<TabKey>("overview");
+
+  // Detect opportunity: alert OR fees significantly above market
+  const hasOpportunity = product
+    ? Boolean(product.alert) ||
+      product.managementFromBalance - product.marketAvgFromBalance >= 0.3
+    : false;
+
+  // Build alternative + savings (hardcoded mapping per product)
+  const buildAlternative = (p: PensionProduct) => {
+    const map: Record<string, { provider: string; label: string; mgmt: number; return3y: number; savings: number }> = {
+      "migdal-managers": { provider: "מנורה מבטחים", label: "פנסיה מקיפה", mgmt: 0.22, return3y: 24.6, savings: 487000 },
+      "harel-gemel": { provider: "כלל", label: "קופת גמל מנייתית", mgmt: 0.18, return3y: 28.3, savings: 312000 },
+    };
+    return (
+      map[p.id] ?? {
+        provider: "מנורה מבטחים",
+        label: "מסלול מומלץ",
+        mgmt: Math.max(0.2, p.marketAvgFromBalance - 0.2),
+        return3y: p.return3y + 6,
+        savings: Math.round((p.managementFromBalance - 0.25) * p.balance * 20),
+      }
+    );
+  };
+
+  // Auto-open Dana chat for problematic products (once per session)
+  useEffect(() => {
+    if (!product || !hasOpportunity) return;
+    const flag = `dana-pension-${product.id}`;
+    if (sessionStorage.getItem(flag)) return;
+    const t = setTimeout(() => {
+      setDanaOpen(true);
+      sessionStorage.setItem(flag, "1");
+    }, 900);
+    return () => clearTimeout(t);
+  }, [product, hasOpportunity]);
 
   if (!product) {
     return (
@@ -114,6 +150,7 @@ const PensionProductPage = () => {
     );
   }
 
+  const alt = buildAlternative(product);
   const isExpensive = product.managementFromBalance > product.marketAvgFromBalance;
 
   const tabs: { key: TabKey; label: string }[] = [
