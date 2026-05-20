@@ -1,11 +1,11 @@
-// Brand-colored provider logo bubble (initials based)
-// Keeps a consistent visual identity per insurer/financial provider.
+// Brand-colored provider logo bubble (image when available, otherwise initials)
+import menoraLogo from "@/assets/logos/menora.jpg";
 
-type Brand = { bg: string; fg: string; initials: string };
+type Brand = { bg: string; fg: string; initials: string; image?: string };
 
 const BRANDS: Record<string, Brand> = {
-  "מנורה מבטחים": { bg: "hsl(217, 70%, 28%)", fg: "#fff", initials: "מנ" },
-  "מנורה": { bg: "hsl(217, 70%, 28%)", fg: "#fff", initials: "מנ" },
+  "מנורה מבטחים": { bg: "#fff", fg: "#1a1a1a", initials: "מנ", image: menoraLogo },
+  "מנורה": { bg: "#fff", fg: "#1a1a1a", initials: "מנ", image: menoraLogo },
   "כלל": { bg: "hsl(355, 75%, 45%)", fg: "#fff", initials: "כל" },
   "הראל": { bg: "hsl(145, 60%, 32%)", fg: "#fff", initials: "הר" },
   "מגדל": { bg: "hsl(28, 85%, 50%)", fg: "#fff", initials: "מג" },
@@ -19,7 +19,6 @@ const BRANDS: Record<string, Brand> = {
 
 export const getProviderBrand = (provider: string): Brand => {
   if (BRANDS[provider]) return BRANDS[provider];
-  // Fallback: hash to a neutral teal-family color, use first 2 chars
   const initials = provider.replace(/[^א-תa-zA-Z]/g, "").slice(0, 2) || "?";
   let h = 0;
   for (let i = 0; i < provider.length; i++) h = (h * 31 + provider.charCodeAt(i)) >>> 0;
@@ -38,11 +37,14 @@ export const ProviderLogo = ({
   className?: string;
   ring?: boolean;
 }) => {
-  const { bg, fg, initials } = getProviderBrand(provider);
+  const { bg, fg, initials, image } = getProviderBrand(provider);
   const fontSize = Math.round(size * 0.38);
+  const shadow = ring
+    ? "0 0 0 3px #fff, 0 0 0 4px hsla(178, 70%, 14%, 0.18), 0 6px 14px hsla(0,0%,0%,0.18)"
+    : "0 2px 6px hsla(0,0%,0%,0.10)";
   return (
     <span
-      className={`inline-flex items-center justify-center rounded-full flex-shrink-0 font-extrabold tracking-tight ${className}`}
+      className={`inline-flex items-center justify-center rounded-full flex-shrink-0 overflow-hidden font-extrabold tracking-tight ${className}`}
       style={{
         width: size,
         height: size,
@@ -50,13 +52,17 @@ export const ProviderLogo = ({
         color: fg,
         fontSize,
         letterSpacing: "-0.02em",
-        boxShadow: ring
-          ? "0 0 0 3px #fff, 0 0 0 4px hsla(178, 70%, 14%, 0.18), 0 6px 14px hsla(0,0%,0%,0.18)"
-          : "0 2px 6px hsla(0,0%,0%,0.12)",
+        boxShadow: shadow,
+        border: image ? "1px solid hsl(230, 20%, 92%)" : "none",
       }}
       aria-label={provider}
     >
-      {initials}
+      {image ? (
+        <img src={image} alt={provider} className="w-full h-full object-contain" style={{ padding: size * 0.1 }} />
+      ) : (
+        initials
+      )}
     </span>
   );
 };
+
