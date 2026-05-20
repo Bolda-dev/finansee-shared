@@ -50,6 +50,9 @@ const AhaDashboard = () => {
   const [idNumber, setIdNumber] = useState("");
   const [idDate, setIdDate] = useState("");
   const [usePhoto, setUsePhoto] = useState(false);
+  const [idShot, setIdShot] = useState(false);
+  const [selfieShot, setSelfieShot] = useState(false);
+  const [signed, setSigned] = useState(false);
   const [consents, setConsents] = useState({ pension: false, copies: false, harBituach: false, creditAssets: false, creditLiab: false });
   const [collectingMsg, setCollectingMsg] = useState(0);
   const [homeAlmostDone, setHomeAlmostDone] = useState(false);
