@@ -154,3 +154,116 @@ export const chatCategories = [
     ],
   },
 ];
+
+// Pension products — drill-down inside "פנסיה" asset row
+export type PensionProduct = {
+  id: string;
+  label: string;
+  provider: string;
+  type: "pension" | "study" | "gemel" | "managers";
+  typeLabel: string;
+  balance: number;
+  monthlyDeposit: number;
+  managementFromBalance: number; // %
+  managementFromDeposit: number; // %
+  marketAvgFromBalance: number; // %
+  return12m: number; // %
+  return3y: number; // %
+  return5y: number; // %
+  track: string;
+  projectedPension?: number; // monthly NIS
+  liquidFrom?: string;
+  joinedAt: string;
+  status: "active" | "inactive";
+  alert?: string;
+  employer?: { employer: number; employee: number; severance: number };
+  coverage?: { survivors: string; disability: string; death: string };
+  history: number[]; // sparkline values
+};
+
+export const pensionProducts: PensionProduct[] = [
+  {
+    id: "menora-comprehensive",
+    label: "פנסיה מקיפה",
+    provider: "מנורה מבטחים",
+    type: "pension",
+    typeLabel: "קרן פנסיה מקיפה",
+    balance: 842300,
+    monthlyDeposit: 3200,
+    managementFromBalance: 0.42,
+    managementFromDeposit: 1.8,
+    marketAvgFromBalance: 0.55,
+    return12m: 7.8,
+    return3y: 24.6,
+    return5y: 41.2,
+    track: "מסלול כללי",
+    projectedPension: 6140,
+    joinedAt: "מאי 2014",
+    status: "active",
+    employer: { employer: 6.5, employee: 6.0, severance: 6.0 },
+    coverage: { survivors: "60% מהשכר", disability: "75% מהשכר", death: "₪1.2M" },
+    history: [62, 64, 63, 66, 68, 67, 70, 72, 71, 74, 76, 78],
+  },
+  {
+    id: "clal-study",
+    label: "קרן השתלמות",
+    provider: "כלל",
+    type: "study",
+    typeLabel: "קרן השתלמות",
+    balance: 201400,
+    monthlyDeposit: 1050,
+    managementFromBalance: 0.28,
+    managementFromDeposit: 0,
+    marketAvgFromBalance: 0.65,
+    return12m: 9.1,
+    return3y: 28.3,
+    return5y: 47.8,
+    track: "מסלול מנייתי",
+    liquidFrom: "מרץ 2026",
+    joinedAt: "ספטמבר 2019",
+    status: "active",
+    history: [55, 57, 58, 60, 63, 62, 65, 68, 70, 72, 74, 77],
+  },
+  {
+    id: "harel-gemel",
+    label: "קופת גמל",
+    provider: "הראל",
+    type: "gemel",
+    typeLabel: "קופת גמל להשקעה",
+    balance: 134600,
+    monthlyDeposit: 480,
+    managementFromBalance: 0.55,
+    managementFromDeposit: 0,
+    marketAvgFromBalance: 0.55,
+    return12m: 5.2,
+    return3y: 15.4,
+    return5y: 28.1,
+    track: "מסלול אג״ח עד 25% מניות",
+    joinedAt: "פברואר 2017",
+    status: "active",
+    alert: "דמי ניהול גבוהים",
+    history: [60, 61, 62, 63, 62, 64, 65, 66, 64, 67, 68, 70],
+  },
+  {
+    id: "migdal-managers",
+    label: "ביטוח מנהלים ישן",
+    provider: "מגדל",
+    type: "managers",
+    typeLabel: "ביטוח מנהלים",
+    balance: 55200,
+    monthlyDeposit: 0,
+    managementFromBalance: 1.10,
+    managementFromDeposit: 0,
+    marketAvgFromBalance: 0.55,
+    return12m: 3.4,
+    return3y: 9.2,
+    return5y: 17.0,
+    track: "מסלול שמרני",
+    joinedAt: "אוגוסט 2008",
+    status: "inactive",
+    alert: "לא פעיל מאז 2017",
+    coverage: { survivors: "—", disability: "₪8,000/ח", death: "₪450K" },
+    history: [50, 51, 51, 52, 51, 52, 53, 53, 54, 54, 55, 55],
+  },
+];
+
