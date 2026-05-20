@@ -510,8 +510,8 @@ function CtaBlock({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           className="w-full rounded-xl py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.97]"
           style={{
-            background: `linear-gradient(135deg, ${C.deep} 0%, ${C.core} 100%)`,
-            boxShadow: `0 6px 18px hsla(178, 70%, 14%, 0.30)`,
+            background: "hsl(250, 30%, 8%)",
+            boxShadow: "0 6px 18px hsla(250, 30%, 15%, 0.40)",
           }}
         >
           ⚡ עברו לקרן המומלצת
