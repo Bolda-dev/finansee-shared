@@ -41,11 +41,11 @@ const PensionCategoryPage = () => {
       title="פנסיה"
       theme={{
         gradient:
-          "linear-gradient(160deg, hsl(258, 72%, 48%) 0%, hsl(240, 75%, 55%) 55%, hsl(220, 85%, 60%) 100%)",
-        accent: "hsl(258, 72%, 45%)",
-        accentBg: "hsl(258, 70%, 94%)",
-        accentText: "hsl(258, 72%, 28%)",
-        sheetShadow: "hsla(250, 60%, 22%, 0.35)",
+          "linear-gradient(160deg, hsl(155, 60%, 22%) 0%, hsl(150, 60%, 32%) 55%, hsl(145, 65%, 42%) 100%)",
+        accent: "hsl(150, 60%, 32%)",
+        accentBg: "hsl(150, 55%, 92%)",
+        accentText: "hsl(155, 60%, 18%)",
+        sheetShadow: "hsla(155, 50%, 18%, 0.35)",
       }}
       items={items}
       filters={[
