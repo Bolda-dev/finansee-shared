@@ -98,7 +98,7 @@ const AhaDashboard2 = () => {
     if (burgerClicks.current >= 5) {
       burgerClicks.current = 0;
       if (burgerTimer.current) clearTimeout(burgerTimer.current);
-      navigate("/c");
+      navigate("/");
       return;
     }
     if (burgerTimer.current) clearTimeout(burgerTimer.current);
@@ -145,9 +145,9 @@ const AhaDashboard2 = () => {
   }, [stage, creditStep]);
 
   const heroCards = [
-    { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/c/assets" },
-    { label: "התחייבויות", Icon: TrendingDown, estimate: "₪150K - ₪400K", category: "liabilities" as const, route: "/c/liabilities" },
-    { label: "ביטוח", Icon: ShieldCheck, estimate: "5 פוליסות", category: "insurance" as const, route: "/c/insurance" },
+    { label: "נכסים", Icon: TrendingUp, estimate: "₪600K - ₪1.4M", category: "assets" as const, route: "/assets" },
+    { label: "התחייבויות", Icon: TrendingDown, estimate: "₪150K - ₪400K", category: "liabilities" as const, route: "/liabilities" },
+    { label: "ביטוח", Icon: ShieldCheck, estimate: "5 פוליסות", category: "insurance" as const, route: "/insurance" },
   ];
 
   const centerCards = [
@@ -362,8 +362,8 @@ const AhaDashboard2 = () => {
                 {danaExpanded && (
                   <div className="space-y-2 mt-3">
                     {[
-                      { Icon: Building2, label: "נדל״ן", desc: "דירות, רכבים ונכסים", category: "assets" as const, route: "/c/assets" },
-                      { Icon: LineChart, label: "השקעות", desc: "תיקי השקעות וני״ע", category: "assets" as const, route: "/c/assets" },
+                      { Icon: Building2, label: "נדל״ן", desc: "דירות, רכבים ונכסים", category: "assets" as const, route: "/assets" },
+                      { Icon: LineChart, label: "השקעות", desc: "תיקי השקעות וני״ע", category: "assets" as const, route: "/assets" },
                     ].map((item) => {
                       const p = palettes[item.category];
                       return (
@@ -442,7 +442,7 @@ const AhaDashboard2 = () => {
               return (
                 <button
                   key={card.label}
-                  onClick={() => navigate("/c/assets")}
+                  onClick={() => navigate("/assets")}
                   className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform active:scale-[0.98]"
                   style={{
                     background: "white",
@@ -473,7 +473,7 @@ const AhaDashboard2 = () => {
             return (
               <button
                 key={card.label}
-                onClick={() => navigate(card.category === "liabilities" ? "/c/liabilities" : "/c/assets")}
+                onClick={() => navigate(card.category === "liabilities" ? "/liabilities" : "/assets")}
                 className="rounded-2xl flex flex-col items-center justify-center text-center px-3 py-4 gap-2 transition-transform active:scale-[0.98]"
                 style={{
                   background: "hsla(0, 0%, 100%, 0.4)",
