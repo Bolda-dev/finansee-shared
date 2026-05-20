@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Mic,
@@ -9,10 +9,12 @@ import {
   ArrowLeftRight,
   RefreshCw,
   UserCog,
+  Sparkles,
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
+import { DanaPensionChat } from "@/components/DanaPensionChat";
 import { ProviderLogo } from "@/lib/providerLogo";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
