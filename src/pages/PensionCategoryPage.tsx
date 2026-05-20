@@ -275,23 +275,27 @@ const PensionCategoryPage = () => {
         <button
           onClick={() => setChatOpen(true)}
           dir="rtl"
-          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all active:scale-[0.99] bg-white"
+          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
           style={{
-            boxShadow: "0 8px 32px hsla(155, 50%, 18%, 0.14), 0 2px 8px hsla(155, 50%, 18%, 0.06)",
-            border: `1px solid ${C.hairline}`,
+            background: "white",
+            boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
+            border: "1px solid hsl(230, 20%, 92%)",
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
           <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
-            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(155, 50%, 18%, 0.35)" }}>
+            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
               <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
             </span>
           </span>
-          <span className="flex-1 text-start text-sm" style={{ color: C.muted }}>
+          <span className="flex-1 text-start text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
             שאל את Finansee AI
           </span>
-          <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: C.soft, border: `1px solid ${C.hairline}` }}>
-            <Mic className="h-4 w-4" style={{ color: C.muted }} />
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: "hsl(230, 25%, 96%)", border: "1px solid hsl(230, 20%, 90%)" }}
+          >
+            <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
           <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
             <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
