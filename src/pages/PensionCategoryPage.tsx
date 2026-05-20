@@ -39,6 +39,8 @@ const PensionCategoryPage = () => {
   return (
     <CategoryPageC
       title="פנסיה"
+      parentLabel="נכסים"
+      parentPath="/assets"
       theme={{
         gradient:
           "linear-gradient(160deg, hsl(170, 80%, 35%) 0%, hsl(174, 65%, 42%) 55%, hsl(170, 70%, 56%) 100%)",
