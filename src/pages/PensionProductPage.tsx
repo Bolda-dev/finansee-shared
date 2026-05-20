@@ -225,28 +225,28 @@ const PensionProductPage = () => {
         </div>
       </div>
 
-      {/* Underline tabs */}
-      <div className="px-5 mt-5">
-        <div className="flex gap-1 overflow-x-auto" style={{ borderBottom: `1px solid ${C.hairline}`, scrollbarWidth: "none" }} role="tablist">
+      {/* Filter chips — identical to Assets / Pension category */}
+      <div className="px-4 pt-5 pb-1">
+        <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
           {tabs.map((t) => {
-            const active = tab === t.key;
+            const isActive = tab === t.key;
             return (
               <button
                 key={t.key}
-                role="tab"
-                aria-selected={active}
                 onClick={() => setTab(t.key)}
-                className="relative px-4 py-3 text-[12px] font-bold whitespace-nowrap transition-colors"
-                style={{ color: active ? C.core : C.muted }}
+                className="inline-flex items-center text-[11px] font-medium px-3 py-1.5 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98] flex-shrink-0"
+                style={{
+                  background: isActive ? "hsl(250, 30%, 12%)" : "white",
+                  border: isActive
+                    ? "1px solid hsl(250, 30%, 12%)"
+                    : "1px solid hsl(230, 20%, 90%)",
+                  color: isActive ? "white" : "hsl(230, 20%, 35%)",
+                  boxShadow: isActive
+                    ? "0 4px 12px hsla(250, 30%, 15%, 0.25)"
+                    : "0 1px 2px hsla(230, 20%, 40%, 0.04)",
+                }}
               >
                 {t.label}
-                {active && (
-                  <span
-                    className="absolute -bottom-px left-2 right-2 h-[2.5px] rounded-t-full"
-                    style={{ background: `linear-gradient(90deg, ${C.fresh}, ${C.core})` }}
-                    aria-hidden
-                  />
-                )}
               </button>
             );
           })}
