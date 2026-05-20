@@ -131,34 +131,32 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
         side="bottom"
         className="h-[90vh] rounded-t-3xl p-0 border-0 flex flex-col [&>button]:hidden"
         dir="rtl"
-        style={{ background: "hsl(180, 25%, 98%)" }}
+        style={{ background: "white" }}
       >
-        {/* Header */}
-        <div
-          className="relative px-5 pt-5 pb-4 flex items-center gap-3"
-          style={{
-            background: `linear-gradient(135deg, ${C.deep} 0%, ${C.core} 100%)`,
-          }}
-        >
-          <span className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid hsla(0,0%,100%,0.25)" }}>
+        {/* Floating avatar with rotating tri-color ring */}
+        <div className="tri-ring-c absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full" style={{ top: "-32px" }}>
+          <div className="w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 8px 24px hsla(250, 30%, 20%, 0.3)" }}>
             <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
-            <span className="absolute bottom-0 left-0 w-3 h-3 rounded-full" style={{ background: "hsl(140, 70%, 50%)", border: "2px solid white" }} />
-          </span>
-          <div className="flex-1 min-w-0">
-            <p className="text-[14px] font-extrabold text-white flex items-center gap-1.5">
-              דנה
-              <Sparkles className="h-3.5 w-3.5" style={{ color: "hsl(45, 95%, 70%)" }} />
-            </p>
-            <p className="text-[11px] text-white/75">היועצת הפיננסית שלך · מקוונת</p>
           </div>
+        </div>
+
+        {/* Drag handle */}
+        <div className="flex justify-center pt-3 pb-2">
+          <div className="w-10 h-1.5 rounded-full" style={{ background: "hsl(230, 15%, 88%)" }} />
+        </div>
+
+        {/* Header */}
+        <div className="relative flex flex-col items-center px-5 pt-7 pb-3">
           <button
             onClick={() => onOpenChange(false)}
-            className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ background: "hsla(0,0%,100%,0.15)" }}
+            className="absolute top-2 left-4 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
             aria-label="סגור"
           >
-            <X className="h-4 w-4 text-white" />
+            <X className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </button>
+          <p className="text-sm font-bold" style={{ color: "hsl(250, 45%, 15%)" }}>
+            דנה — Finansee AI
+          </p>
         </div>
 
         {/* Messages */}
@@ -518,14 +516,18 @@ function CtaBlock({ onClose }: { onClose: () => void }) {
         </button>
         <button
           className="w-full rounded-xl py-2.5 text-[12.5px] font-bold flex items-center justify-center gap-1.5"
-          style={{ background: "white", color: C.deep, border: `1.5px solid ${C.core}` }}
+          style={{
+            background: "white",
+            color: "hsl(250, 45%, 15%)",
+            border: "1px solid hsl(230, 20%, 88%)",
+          }}
         >
           <MessageCircle className="h-3.5 w-3.5" />
           דברו עם דנה
         </button>
         <button
           className="w-full text-[11.5px] font-semibold py-1.5"
-          style={{ color: C.muted }}
+          style={{ color: "hsl(230, 15%, 55%)" }}
         >
           השוואה מפורטת ›
         </button>
