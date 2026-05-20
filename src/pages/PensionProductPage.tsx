@@ -268,7 +268,7 @@ const PensionProductPage = () => {
 
       {/* Sheet content with curved top */}
       <div
-        className="relative -mt-6 rounded-t-3xl pb-32"
+        className="relative -mt-6 rounded-t-3xl pb-40"
         style={{ background: C.soft, boxShadow: `0 -8px 28px hsla(178, 70%, 14%, 0.22)` }}
       >
         <div className="flex justify-center pt-3 pb-1">
