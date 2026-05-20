@@ -157,31 +157,34 @@ const PensionProductPage = () => {
           ))}
         </svg>
 
-        {/* Top nav row — back + centered breadcrumb (Assets-like) */}
+        {/* Top nav row — back + attached breadcrumb */}
         <div className="relative flex items-center justify-between px-5 pt-5 pb-2 text-white">
-          <button
-            onClick={() => navigate("/assets/pension")}
-            className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
-            aria-label="חזרה"
-          >
-            <ChevronRight className="h-4 w-4" />
-            חזרה
-          </button>
-          <nav
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold"
-            style={{
-              background: "hsla(0, 0%, 100%, 0.16)",
-              backdropFilter: "blur(6px)",
-              border: "1px solid hsla(0,0%,100%,0.22)",
-            }}
-            aria-label="breadcrumb"
-          >
-            <button onClick={() => navigate("/assets")} className="text-white/85">נכסים</button>
-            <span className="text-white/50">›</span>
-            <button onClick={() => navigate("/assets/pension")} className="text-white/85">פנסיה</button>
-          </nav>
-          <span className="w-12" aria-hidden />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => navigate("/assets/pension")}
+              className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
+              aria-label="חזרה"
+            >
+              <ChevronRight className="h-4 w-4" />
+              חזרה
+            </button>
+            <nav
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold"
+              style={{
+                background: "hsla(0, 0%, 100%, 0.16)",
+                backdropFilter: "blur(6px)",
+                border: "1px solid hsla(0,0%,100%,0.22)",
+              }}
+              aria-label="breadcrumb"
+            >
+              <button onClick={() => navigate("/assets")} className="text-white/85">נכסים</button>
+              <span className="text-white/50">›</span>
+              <button onClick={() => navigate("/assets/pension")} className="text-white/85">פנסיה</button>
+            </nav>
+          </div>
+          <span className="w-7" aria-hidden />
         </div>
+
 
         {/* Hero content — centered stack, Assets-like rhythm */}
         <div className="relative flex flex-col items-center text-center px-6 pt-6 pb-10 text-white">
@@ -265,7 +268,7 @@ const PensionProductPage = () => {
 
       {/* Sheet content with curved top */}
       <div
-        className="relative -mt-6 rounded-t-3xl pb-32"
+        className="relative -mt-6 rounded-t-3xl pb-40"
         style={{ background: C.soft, boxShadow: `0 -8px 28px hsla(178, 70%, 14%, 0.22)` }}
       >
         <div className="flex justify-center pt-3 pb-1">
@@ -383,24 +386,34 @@ const PensionProductPage = () => {
           </SectionCard>
         )}
 
-        {/* Dana insight card — deep green */}
+        {/* Actions — daily quick actions first */}
+        <SectionCard title="פעולות">
+          <div className="grid grid-cols-4 gap-2">
+            <ActionBtn Icon={ArrowDownToLine} label="ייצא דוח" />
+            <ActionBtn Icon={RefreshCw} label="שנה מסלול" />
+            <ActionBtn Icon={ArrowLeftRight} label="ניוד" />
+            <ActionBtn Icon={UserCog} label="פנה לסוכן" />
+          </div>
+        </SectionCard>
+
+        {/* Dana insight card — closing insight, more breathing room */}
         <div
-          className="rounded-2xl p-4 text-right"
+          className="rounded-2xl p-5 text-right"
           style={{
             background: `linear-gradient(135deg, ${C.deep} 0%, ${C.core} 100%)`,
-            boxShadow: `0 8px 24px hsla(155, 60%, 18%, 0.28)`,
+            boxShadow: `0 8px 24px hsla(178, 70%, 14%, 0.30)`,
           }}
           dir="rtl"
         >
-          <div className="flex items-start gap-3 mb-3">
+          <div className="flex items-start gap-3 mb-4">
             <span className="tri-ring-c relative w-12 h-12 rounded-full flex-shrink-0">
               <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 4px 10px hsla(0, 0%, 0%, 0.3)" }}>
                 <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
               </span>
             </span>
             <div className="flex-1 min-w-0">
-              <p className="text-[13px] font-extrabold text-white mb-1">דנה — תובנה אישית</p>
-              <p className="text-[11.5px] leading-relaxed text-white/90">
+              <p className="text-[13px] font-extrabold text-white mb-1.5">דנה — תובנה אישית</p>
+              <p className="text-[12px] leading-relaxed text-white/90">
                 {isExpensive ? (
                   <>
                     דמי הניהול שלך ({product.managementFromBalance}%) גבוהים מממוצע השוק. מעבר למסלול דומה
@@ -423,7 +436,7 @@ const PensionProductPage = () => {
           </div>
           <button
             onClick={() => setChatOpen(true)}
-            className="w-full rounded-xl py-2.5 text-[12.5px] font-bold flex items-center justify-center gap-1.5 bg-white"
+            className="w-full rounded-xl py-3 text-[12.5px] font-bold flex items-center justify-center gap-1.5 bg-white"
             style={{ color: C.deep }}
           >
             פתחי שיחה איתי
@@ -431,17 +444,7 @@ const PensionProductPage = () => {
           </button>
         </div>
 
-        {/* Actions */}
-        <SectionCard title="פעולות">
-          <div className="grid grid-cols-4 gap-2">
-            <ActionBtn Icon={ArrowDownToLine} label="ייצא דוח" />
-            <ActionBtn Icon={RefreshCw} label="שנה מסלול" />
-            <ActionBtn Icon={ArrowLeftRight} label="ניוד" />
-            <ActionBtn Icon={UserCog} label="פנה לסוכן" />
-          </div>
-        </SectionCard>
-
-        <p className="text-[10.5px] text-center mt-1 px-6" style={{ color: C.muted }}>
+        <p className="text-[10.5px] text-center mt-2 px-6" style={{ color: C.muted }}>
           הנתונים מתעדכנים אוטומטית מהמסלקה הפנסיונית
         </p>
         </div>

@@ -247,40 +247,43 @@ export const CategoryPageC = ({
           ))}
         </svg>
 
-        {/* Top bar: back + title */}
+        {/* Top bar: back + (optional) breadcrumb attached, or back + title */}
         <div className="relative flex items-center justify-between mb-5" style={{ color: heroText }}>
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
-            aria-label="חזרה"
-          >
-            <ChevronRight className="h-4 w-4" />
-            חזרה
-          </button>
-          <h2 className="text-base font-bold" style={{ color: heroText }}>{title}</h2>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
+              aria-label="חזרה"
+            >
+              <ChevronRight className="h-4 w-4" />
+              חזרה
+            </button>
+            {parentLabel && (
+              <button
+                onClick={() => (parentPath ? navigate(parentPath) : navigate(-1))}
+                className="inline-flex items-center gap-1 text-[10.5px] font-bold px-2.5 py-1 rounded-full transition-opacity hover:opacity-100"
+                style={{
+                  background: heroText === "white" ? "hsla(0,0%,100%,0.16)" : "hsla(0,0%,0%,0.08)",
+                  color: heroText,
+                  border: heroText === "white" ? "1px solid hsla(0,0%,100%,0.22)" : "1px solid hsla(0,0%,0%,0.10)",
+                  backdropFilter: "blur(6px)",
+                }}
+                aria-label={`חזרה ל${parentLabel}`}
+              >
+                {parentLabel}
+                <span className="opacity-60">›</span>
+                <span className="opacity-90">{title}</span>
+              </button>
+            )}
+          </div>
+          {!parentLabel && (
+            <h2 className="text-base font-bold" style={{ color: heroText }}>{title}</h2>
+          )}
           <span className="w-7" aria-hidden />
         </div>
 
         {/* Hero KPI */}
         <div className="relative flex flex-col items-center text-center" style={{ color: heroText }}>
-          {parentLabel && (
-            <button
-              onClick={() => (parentPath ? navigate(parentPath) : navigate(-1))}
-              className="inline-flex items-center gap-1 text-[10.5px] font-bold px-2.5 py-1 rounded-full mb-3 transition-opacity hover:opacity-100"
-              style={{
-                background: heroText === "white" ? "hsla(0,0%,100%,0.18)" : "hsla(0,0%,0%,0.08)",
-                color: heroText,
-                border: heroText === "white" ? "1px solid hsla(0,0%,100%,0.25)" : "1px solid hsla(0,0%,0%,0.10)",
-                backdropFilter: "blur(6px)",
-              }}
-              aria-label={`חזרה ל${parentLabel}`}
-            >
-              <ChevronRight className="h-3 w-3" />
-              {parentLabel}
-              <span className="opacity-60">›</span>
-              <span className="opacity-90">{title}</span>
-            </button>
-          )}
           <p className="text-[12px] font-medium opacity-85 mb-1.5">{primaryKpiLabel}</p>
           <p className="text-[40px] font-extrabold tracking-tight leading-none mb-2">
             {primaryKpiValue}
