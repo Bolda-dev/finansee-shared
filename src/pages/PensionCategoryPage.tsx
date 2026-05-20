@@ -149,11 +149,11 @@ const PensionCategoryPage = () => {
         </button>
       </div>
 
-      {/* Segmented tab control */}
+      {/* Underline tabs — same as Specific Pension page */}
       <div className="px-5 mt-5">
         <div
-          className="flex p-1 rounded-xl gap-0.5 overflow-x-auto"
-          style={{ background: C.mint, scrollbarWidth: "none" }}
+          className="flex gap-1 overflow-x-auto"
+          style={{ borderBottom: `1px solid ${C.hairline}`, scrollbarWidth: "none" }}
           role="tablist"
         >
           {filters.map((f) => {
@@ -161,15 +161,20 @@ const PensionCategoryPage = () => {
             return (
               <button
                 key={f.key}
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActive(f.key)}
-                className="flex-shrink-0 px-3 py-2 rounded-lg text-[11px] font-bold transition-all whitespace-nowrap"
-                style={{
-                  background: isActive ? "white" : "transparent",
-                  color: isActive ? C.core : C.muted,
-                  boxShadow: isActive ? "0 2px 6px hsla(178, 70%, 14%, 0.10)" : "none",
-                }}
+                className="relative px-4 py-3 text-[12px] font-bold whitespace-nowrap transition-colors"
+                style={{ color: isActive ? C.core : C.muted }}
               >
                 {f.label}
+                {isActive && (
+                  <span
+                    className="absolute -bottom-px left-2 right-2 h-[2.5px] rounded-t-full"
+                    style={{ background: `linear-gradient(90deg, ${C.fresh}, ${C.core})` }}
+                    aria-hidden
+                  />
+                )}
               </button>
             );
           })}
@@ -177,7 +182,7 @@ const PensionCategoryPage = () => {
       </div>
 
       {/* List header */}
-      <div className="px-5 mt-5 mb-2 flex items-center justify-between">
+      <div className="px-5 mt-5 mb-3 flex items-center justify-between">
         <p className="text-[11px] font-bold uppercase tracking-wider" style={{ color: C.muted }}>
           מוצרי הפנסיה שלך
         </p>
@@ -186,50 +191,85 @@ const PensionCategoryPage = () => {
         </span>
       </div>
 
-      {/* Product list — light rows */}
-      <div className="px-4 pb-32 flex flex-col gap-2">
+      {/* Product grid — same card style as Home (IndexC) */}
+      <div className="px-3 pb-32 grid grid-cols-2 gap-3">
         {visible.length === 0 && (
           <div
-            className="px-4 py-8 text-center rounded-2xl bg-white"
+            className="col-span-2 px-4 py-8 text-center rounded-2xl bg-white"
             style={{ border: `1px solid ${C.hairline}` }}
           >
             <p className="text-[12px]" style={{ color: C.muted }}>אין מוצרים בקטגוריה זו</p>
           </div>
         )}
-        {visible.map((p) => {
-          return (
-            <button
-              key={p.id}
-              onClick={() => navigate(`/assets/pension/${p.id}`)}
-              className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl bg-white text-right transition-colors hover:bg-[hsl(176,40%,98%)] active:scale-[0.99]"
-              style={{
-                border: `1px solid ${C.hairline}`,
-                boxShadow: "0 1px 2px hsla(178, 70%, 14%, 0.04)",
-              }}
-            >
-              <ProviderLogo provider={p.provider} size={40} />
-              <div className="flex-1 min-w-0">
-                <p className="text-[13px] font-bold truncate" style={{ color: C.ink }}>{p.label}</p>
-                <p className="text-[10.5px] truncate mt-0.5" style={{ color: C.muted }}>{p.provider} · {p.typeLabel}</p>
-              </div>
-              <div className="text-left flex-shrink-0">
-                <p className="text-[13px] font-extrabold tracking-tight" style={{ color: C.ink }}>{formatNIS(p.balance)}</p>
-                {p.monthlyDeposit ? (
-                  <span
-                    className="inline-block text-[9.5px] font-bold px-1.5 py-0.5 rounded mt-0.5"
-                    style={{ background: C.mint, color: C.core }}
-                  >
-                    +{formatNIS(p.monthlyDeposit)}/ח
-                  </span>
-                ) : (
-                  <span className="block text-[10px] font-medium mt-0.5" style={{ color: C.muted }}>ללא הפקדה</span>
-                )}
-              </div>
-            </button>
-          );
-        })}
+        {visible.map((p) => (
+          <button
+            key={p.id}
+            onClick={() => navigate(`/assets/pension/${p.id}`)}
+            className="relative rounded-2xl p-3.5 pt-4 text-start flex flex-col gap-1 overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            style={{
+              background: "white",
+              boxShadow: "0 3px 14px hsla(250, 30%, 25%, 0.07)",
+              border: `1px solid ${C.hairline}`,
+              minHeight: "160px",
+            }}
+          >
+            <span
+              className="absolute top-0 inset-x-0 h-[3px] pointer-events-none"
+              style={{ background: `linear-gradient(90deg, ${C.fresh}, ${C.core})` }}
+              aria-hidden
+            />
 
-        <p className="text-[10.5px] text-center mt-3 px-6" style={{ color: C.muted }}>
+            <div className="flex items-center justify-start gap-2 mb-1">
+              <span className="relative">
+                <ProviderLogo provider={p.provider} size={36} />
+                {p.alert && (
+                  <span
+                    className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
+                    style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+                  >
+                    !
+                  </span>
+                )}
+              </span>
+              <span
+                className="text-[12px] font-bold tracking-tight truncate"
+                style={{ color: C.ink }}
+              >
+                {p.label}
+              </span>
+            </div>
+
+            <div className="flex items-baseline gap-1 flex-wrap">
+              <p
+                className="text-[20px] font-extrabold tracking-tight leading-none"
+                style={{ color: C.ink }}
+              >
+                {formatNIS(p.balance)}
+              </p>
+            </div>
+            <p className="text-[10px] mt-1 truncate" style={{ color: C.muted }}>
+              {p.provider} · {p.typeLabel}
+            </p>
+
+            {p.monthlyDeposit ? (
+              <div className="mt-auto pt-2 border-t" style={{ borderColor: C.hairline }}>
+                <p className="text-[11px] leading-none whitespace-nowrap">
+                  <span className="font-bold" style={{ color: C.ink }}>
+                    +{formatNIS(p.monthlyDeposit)}
+                  </span>
+                  <span className="mx-1" style={{ color: C.ink }}>·</span>
+                  <span style={{ color: C.ink }}>הפקדה חודשית</span>
+                </p>
+              </div>
+            ) : (
+              <div className="mt-auto pt-2 border-t" style={{ borderColor: C.hairline }}>
+                <p className="text-[11px] leading-none" style={{ color: C.muted }}>ללא הפקדה פעילה</p>
+              </div>
+            )}
+          </button>
+        ))}
+
+        <p className="col-span-2 text-[10.5px] text-center mt-3 px-6" style={{ color: C.muted }}>
           הנתונים מתעדכנים אוטומטית מהמסלקה הפנסיונית
         </p>
       </div>
