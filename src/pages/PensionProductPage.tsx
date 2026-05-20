@@ -104,6 +104,7 @@ const PensionProductPage = () => {
 
   const [chatOpen, setChatOpen] = useState(false);
   const [danaOpen, setDanaOpen] = useState(false);
+  const [teaserVisible, setTeaserVisible] = useState(false);
   const [tab, setTab] = useState<TabKey>("overview");
 
   // Detect opportunity: alert OR fees significantly above market
@@ -129,15 +130,11 @@ const PensionProductPage = () => {
     );
   };
 
-  // Auto-open Dana chat for problematic products (once per session)
+  // Show teaser bubbles for problematic products (once per session)
   useEffect(() => {
     if (!product || !hasOpportunity) return;
-    const flag = `dana-pension-${product.id}`;
-    if (sessionStorage.getItem(flag)) return;
-    const t = setTimeout(() => {
-      setDanaOpen(true);
-      sessionStorage.setItem(flag, "1");
-    }, 900);
+    if (sessionStorage.getItem(`dana-teaser-${product.id}`)) return;
+    const t = setTimeout(() => setTeaserVisible(true), 1500);
     return () => clearTimeout(t);
   }, [product, hasOpportunity]);
 
