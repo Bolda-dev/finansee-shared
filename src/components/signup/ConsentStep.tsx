@@ -10,6 +10,7 @@ interface ConsentStepProps {
   subtitle: string;
   bullets: string[];
   socialProof: string;
+  showSignature?: boolean;
 }
 
 export const ConsentStep = ({
@@ -19,6 +20,7 @@ export const ConsentStep = ({
   subtitle,
   bullets,
   socialProof,
+  showSignature = false,
 }: ConsentStepProps) => {
   const [signed, setSigned] = useState(false);
 
