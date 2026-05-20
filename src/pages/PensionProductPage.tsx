@@ -138,149 +138,125 @@ const PensionProductPage = () => {
 
   return (
     <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
-      {/* BOLD DARK HERO — makes the level change unmistakable */}
-      <div
-        className="relative overflow-hidden"
-        style={{
-          background: `linear-gradient(155deg, ${C.deep} 0%, ${C.core} 60%, ${C.fresh} 100%)`,
-        }}
-      >
-        {/* Decorative concentric arcs */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 140 160"
-          preserveAspectRatio="xMidYMid slice"
-          aria-hidden
+      {/* Header strip + breadcrumb on light bg */}
+      <div className="px-5 pt-8 pb-3">
+        <nav
+          className="inline-flex items-center text-[11px] font-semibold"
+          aria-label="breadcrumb"
+          dir="rtl"
+          style={{ color: C.muted }}
         >
-          {[40, 70, 100, 130, 160, 190].map((r) => (
-            <circle key={r} cx={130} cy={10} r={r} fill="none" stroke="hsla(0,0%,100%,0.07)" strokeWidth="1" />
-          ))}
-        </svg>
+          <button onClick={() => navigate("/assets")} className="hover:opacity-80 transition-opacity">נכסים</button>
+          <span className="mx-1.5" style={{ color: C.hairline }}>/</span>
+          <button onClick={() => navigate("/assets/pension")} className="hover:opacity-80 transition-opacity">פנסיה</button>
+          <span className="mx-1.5" style={{ color: C.hairline }}>/</span>
+          <span className="font-extrabold tracking-tight" style={{ color: C.core }}>{product.label}</span>
+        </nav>
+      </div>
 
-        {/* Hero — aligned to CategoryPageC geometry (px-5 pt-10 pb-12) */}
-        <div className="relative px-5 pt-10 pb-12 text-white">
-          {/* Top bar — inline breadcrumb, same Y as parent pages */}
-          <div className="relative flex items-center justify-between mb-5 min-h-[28px]">
-            <nav
-              className="inline-flex items-center gap-1.5 -mr-1 py-1.5 pl-2 pr-1 text-[13px] font-semibold"
-              aria-label="breadcrumb"
-              dir="rtl"
-            >
-              <button
-                onClick={() => navigate("/assets")}
-                className="inline-flex items-center gap-0.5 transition-opacity hover:opacity-100"
-                style={{ color: "white", opacity: 0.55 }}
-                aria-label="חזרה לנכסים"
-              >
-                <ChevronRight className="h-4 w-4" />
-                <span>נכסים</span>
-              </button>
-              <span style={{ opacity: 0.35 }}>›</span>
-              <button
-                onClick={() => navigate("/assets/pension")}
-                className="transition-opacity hover:opacity-100"
-                style={{ color: "white", opacity: 0.75 }}
-                aria-label="חזרה לפנסיה"
-              >
-                פנסיה
-              </button>
-              <span style={{ opacity: 0.35 }}>›</span>
-              <span style={{ color: "white", fontWeight: 800 }}>{product.label}</span>
-            </nav>
-            <span className="w-7" aria-hidden />
-          </div>
+      {/* HERO — Floating contained green card */}
+      <div className="px-4">
+        <div
+          className="relative rounded-3xl p-5 text-white overflow-hidden"
+          style={{
+            background: `linear-gradient(155deg, ${C.deep} 0%, ${C.core} 65%, ${C.fresh} 130%)`,
+            boxShadow: `0 14px 36px hsla(178, 70%, 12%, 0.28), 0 2px 6px hsla(178, 70%, 12%, 0.10)`,
+          }}
+        >
+          {/* Decorative arcs in top-left corner (RTL: visual far side) */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none opacity-70"
+            viewBox="0 0 200 200"
+            preserveAspectRatio="xMidYMid slice"
+            aria-hidden
+          >
+            {[60, 100, 140, 180].map((r) => (
+              <circle key={r} cx={0} cy={0} r={r} fill="none" stroke="hsla(0,0%,100%,0.10)" strokeWidth="1" />
+            ))}
+          </svg>
 
-          {/* Identity row — icon + name/provider stacked, right-aligned RTL */}
-          <div className="flex items-center gap-3 mb-7" dir="rtl">
-            <span
-              className="w-[52px] h-[52px] rounded-2xl flex items-center justify-center flex-shrink-0"
-              style={{
-                background: "hsla(0,0%,100%,0.95)",
-                boxShadow: "0 8px 24px hsla(178, 70%, 8%, 0.35)",
-              }}
-            >
-              <Icon className="h-6 w-6" style={{ color: C.deep }} strokeWidth={2.2} />
-            </span>
-            <div className="flex-1 min-w-0 text-right">
-              <p className="text-[18px] font-extrabold leading-tight tracking-tight truncate">
+          {/* Header row: identity + icon tile */}
+          <div className="relative flex items-start justify-between gap-3 mb-5">
+            <div className="flex-1 min-w-0">
+              <h1 className="text-[18px] font-extrabold leading-tight tracking-tight truncate">
                 {product.label}
-              </p>
-              <p className="text-[12px] opacity-80 truncate mt-0.5">
+              </h1>
+              <p className="text-[11px] font-medium opacity-80 truncate mt-0.5">
                 {product.provider} · {product.typeLabel}
               </p>
             </div>
+            <span
+              className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{
+                background: "hsla(0,0%,100%,0.16)",
+                backdropFilter: "blur(8px)",
+                border: "1px solid hsla(0,0%,100%,0.18)",
+              }}
+            >
+              <Icon className="h-5 w-5 text-white" strokeWidth={2.2} />
+            </span>
           </div>
 
-          {/* KPI block — single dominant element */}
-          <div className="text-center mb-5">
-            <p className="text-[12px] font-medium opacity-85 mb-1.5">צבירה כוללת</p>
-            <p className="text-[40px] font-extrabold tracking-tight leading-none">
+          {/* Primary KPI — left-aligned editorial */}
+          <div className="relative mb-5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.12em] opacity-70 mb-1">
+              צבירה כוללת
+            </p>
+            <p className="text-[34px] font-extrabold tracking-tight leading-none">
               {formatNIS(product.balance)}
             </p>
           </div>
 
-          {/* Meta pills row — status + secondary KPI, grouped */}
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            <span
-              className="inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full"
-              style={{
-                background:
-                  product.status === "active"
-                    ? "hsla(150, 70%, 50%, 0.22)"
-                    : "hsla(30, 90%, 60%, 0.22)",
-                border: `1px solid ${product.status === "active" ? "hsla(150, 70%, 70%, 0.50)" : "hsla(30, 90%, 70%, 0.50)"}`,
-                color: "white",
-                backdropFilter: "blur(6px)",
-              }}
+          {/* KPI 2x2 mini grid */}
+          <div className="relative grid grid-cols-2 gap-2.5">
+            <div
+              className="rounded-2xl p-3"
+              style={{ background: "hsla(178, 80%, 8%, 0.32)", border: "1px solid hsla(0,0%,100%,0.08)" }}
             >
-              <span
-                className="w-1.5 h-1.5 rounded-full"
-                style={{
-                  background: product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)",
-                  boxShadow: `0 0 6px ${product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)"}`,
-                }}
-              />
-              {product.status === "active" ? "פעיל" : "לא פעיל"}
-            </span>
-            <span
-              className="inline-flex items-center text-[11px] font-semibold px-3 py-1.5 rounded-full"
-              style={{
-                background: "hsla(0,0%,100%,0.18)",
-                border: "1px solid hsla(0,0%,100%,0.22)",
-                backdropFilter: "blur(8px)",
-                color: "white",
-              }}
+              <p className="text-[10px] font-semibold opacity-70 mb-1">סטטוס</p>
+              <div className="flex items-center gap-1.5">
+                <span
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{
+                    background: product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)",
+                    boxShadow: `0 0 8px ${product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)"}`,
+                  }}
+                />
+                <span className="text-[12px] font-bold">
+                  {product.status === "active" ? "פעיל" : "לא פעיל"}
+                </span>
+              </div>
+            </div>
+            <div
+              className="rounded-2xl p-3"
+              style={{ background: "hsla(178, 80%, 8%, 0.32)", border: "1px solid hsla(0,0%,100%,0.08)" }}
             >
-              {product.projectedPension
-                ? `צפי קצבה ${formatNIS(product.projectedPension)}/ח`
-                : product.liquidFrom
-                ? `נזיל החל מ-${product.liquidFrom}`
-                : product.monthlyDeposit
-                ? `הפקדה ${formatNIS(product.monthlyDeposit)}/ח`
-                : "ללא הפקדה פעילה"}
-            </span>
+              <p className="text-[10px] font-semibold opacity-70 mb-1">
+                {product.projectedPension
+                  ? "צפי קצבה"
+                  : product.liquidFrom
+                  ? "נזיל מ-"
+                  : product.monthlyDeposit
+                  ? "הפקדה חודשית"
+                  : "הפקדה"}
+              </p>
+              <p className="text-[12px] font-bold">
+                {product.projectedPension
+                  ? formatNIS(product.projectedPension)
+                  : product.liquidFrom
+                  ? product.liquidFrom
+                  : product.monthlyDeposit
+                  ? formatNIS(product.monthlyDeposit)
+                  : "—"}
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Sheet content with curved top */}
-      <div
-        className="relative -mt-6 rounded-t-3xl pb-40"
-        style={{ background: C.soft, boxShadow: `0 -8px 28px hsla(178, 70%, 14%, 0.22)` }}
-      >
-        <div className="flex justify-center pt-3 pb-1">
-          <div className="w-10 h-1.5 rounded-full" style={{ background: C.hairline }} />
-        </div>
-
-      <div className="px-4 pt-3 flex flex-col gap-4">
-
-
-        {/* Tab bar — real tabs, not chips */}
-        <div
-          className="flex items-stretch bg-white rounded-2xl overflow-hidden"
-          style={{ border: `1px solid ${C.hairline}` }}
-          role="tablist"
-        >
+      {/* Underline tabs on light bg */}
+      <div className="px-5 mt-6">
+        <div className="flex gap-1 overflow-x-auto" style={{ borderBottom: `1px solid ${C.hairline}`, scrollbarWidth: "none" }} role="tablist">
           {tabs.map((t) => {
             const active = tab === t.key;
             return (
@@ -289,22 +265,26 @@ const PensionProductPage = () => {
                 role="tab"
                 aria-selected={active}
                 onClick={() => setTab(t.key)}
-                className="flex-1 relative py-2.5 text-[12px] font-bold transition-colors"
-                style={{ color: active ? C.deep : C.muted }}
+                className="relative px-4 py-3 text-[12px] font-bold whitespace-nowrap transition-colors"
+                style={{ color: active ? C.core : C.muted }}
               >
                 {t.label}
-                <span
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] rounded-t-full transition-all"
-                  style={{
-                    width: active ? "40%" : "0%",
-                    background: `linear-gradient(90deg, ${C.fresh}, ${C.core})`,
-                  }}
-                  aria-hidden
-                />
+                {active && (
+                  <span
+                    className="absolute -bottom-px left-2 right-2 h-[2.5px] rounded-t-full"
+                    style={{ background: `linear-gradient(90deg, ${C.fresh}, ${C.core})` }}
+                    aria-hidden
+                  />
+                )}
               </button>
             );
           })}
         </div>
+      </div>
+
+      {/* Content area */}
+      <div className="px-4 pt-4 pb-40 flex flex-col gap-4">
+
 
         {/* Tab content */}
         {tab === "overview" && (
