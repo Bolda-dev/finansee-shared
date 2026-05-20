@@ -523,7 +523,7 @@ const IndexB = () => {
       )}
 
       {/* Bottom Chat Bar */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pt-10 pointer-events-none before:content-[&apos;&apos;] before:absolute before:inset-x-0 before:bottom-0 before:h-[120%] before:bg-gradient-to-t before:from-white before:via-white/85 before:to-transparent before:-z-10 before:pointer-events-none" dir="rtl">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pt-10 pointer-events-none before:content-[''] before:absolute before:inset-x-0 before:bottom-0 before:h-[120%] before:bg-gradient-to-t before:from-white before:via-white/85 before:to-transparent before:-z-10 before:pointer-events-none" dir="rtl">
         <button
           onClick={() => setChatOpen(true)}
           dir="rtl"
