@@ -244,7 +244,7 @@ const PensionCategoryPage = () => {
               </p>
             </div>
             <p className="text-[10px] mt-1 truncate" style={{ color: C.muted }}>
-              {p.provider} · {p.typeLabel}
+              {p.label} · {p.typeLabel}
             </p>
 
             {p.monthlyDeposit ? (
