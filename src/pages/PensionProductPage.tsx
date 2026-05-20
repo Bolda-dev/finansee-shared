@@ -1,36 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  ChevronRight,
-  PiggyBank,
-  Briefcase,
-  Landmark,
-  ShieldCheck,
+  Mic,
+  Send,
+  ChevronLeft,
+  TrendingUp,
   ArrowDownToLine,
   ArrowLeftRight,
   RefreshCw,
   UserCog,
-  Mic,
-  Send,
-  TrendingUp,
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
+import { ProviderLogo } from "@/lib/providerLogo";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
 
-const iconForType = (t: PensionProduct["type"]) => {
-  switch (t) {
-    case "pension": return PiggyBank;
-    case "study": return Briefcase;
-    case "gemel": return Landmark;
-    case "managers": return ShieldCheck;
-    default: return PiggyBank;
-  }
-};
-
-// Teal palette — matches Assets
+// Same palette as Pension Category — strict consistency
 const C = {
   deep: "hsl(178, 80%, 14%)",
   core: "hsl(178, 70%, 26%)",
@@ -66,13 +53,21 @@ const Sparkline = ({ values, color }: { values: number[]; color: string }) => {
   );
 };
 
+const Row = ({ label, value, accent }: { label: string; value: React.ReactNode; accent?: boolean }) => (
+  <div className="flex items-center justify-between py-1.5">
+    <span className="text-[11.5px]" style={{ color: C.muted }}>{label}</span>
+    <span className={`text-[12.5px] ${accent ? "font-extrabold" : "font-semibold"}`} style={{ color: accent ? C.core : C.ink }}>
+      {value}
+    </span>
+  </div>
+);
+
 const SectionCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div
     className="relative rounded-2xl bg-white p-4 text-right overflow-hidden"
-    style={{ border: `1px solid ${C.hairline}`, boxShadow: "0 1px 2px hsla(155, 30%, 20%, 0.04)" }}
+    style={{ border: `1px solid ${C.hairline}`, boxShadow: "0 1px 2px hsla(178, 70%, 14%, 0.04)" }}
     dir="rtl"
   >
-    {/* Right accent bar (RTL) */}
     <span
       className="absolute top-3 bottom-3 right-0 w-[3px] rounded-full"
       style={{ background: `linear-gradient(180deg, ${C.fresh}, ${C.core})` }}
@@ -82,15 +77,6 @@ const SectionCard = ({ title, children }: { title: string; children: React.React
       {title}
     </h3>
     <div className="pr-2">{children}</div>
-  </div>
-);
-
-const Row = ({ label, value, accent }: { label: string; value: React.ReactNode; accent?: boolean }) => (
-  <div className="flex items-center justify-between py-1.5">
-    <span className="text-[11.5px]" style={{ color: C.muted }}>{label}</span>
-    <span className={`text-[12.5px] ${accent ? "font-extrabold" : "font-semibold"}`} style={{ color: accent ? C.core : C.ink }}>
-      {value}
-    </span>
   </div>
 );
 
@@ -126,7 +112,6 @@ const PensionProductPage = () => {
     );
   }
 
-  const Icon = iconForType(product.type);
   const isExpensive = product.managementFromBalance > product.marketAvgFromBalance;
 
   const tabs: { key: TabKey; label: string }[] = [
@@ -137,125 +122,111 @@ const PensionProductPage = () => {
   ];
 
   return (
-    <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
-      {/* Header strip + breadcrumb on light bg */}
-      <div className="px-5 pt-8 pb-3">
-        <nav
-          className="inline-flex items-center text-[11px] font-semibold"
-          aria-label="breadcrumb"
-          dir="rtl"
-          style={{ color: C.muted }}
+    <div className="min-h-screen max-w-[430px] mx-auto relative page-enter" dir="rtl" style={{ background: C.soft }}>
+      {/* Banner — IDENTICAL to PensionCategoryPage */}
+      <div
+        className="relative px-5 pt-8 pb-20 overflow-hidden hero-rise"
+        style={{
+          background: `linear-gradient(160deg, ${C.deep} 0%, ${C.core} 70%, ${C.fresh} 130%)`,
+        }}
+      >
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none opacity-60"
+          viewBox="0 0 200 120"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden
         >
-          <button onClick={() => navigate("/assets")} className="hover:opacity-80 transition-opacity">נכסים</button>
-          <span className="mx-1.5" style={{ color: C.hairline }}>/</span>
-          <button onClick={() => navigate("/assets/pension")} className="hover:opacity-80 transition-opacity">פנסיה</button>
-          <span className="mx-1.5" style={{ color: C.hairline }}>/</span>
-          <span className="font-extrabold tracking-tight" style={{ color: C.core }}>{product.label}</span>
+          {[40, 70, 100, 130, 160].map((r) => (
+            <circle key={r} cx={0} cy={0} r={r} fill="none" stroke="hsla(0,0%,100%,0.08)" strokeWidth="1" />
+          ))}
+        </svg>
+
+        {/* Breadcrumb */}
+        <nav
+          className="relative inline-flex items-center text-[12px] font-semibold text-white/85"
+          aria-label="breadcrumb"
+        >
+          <button onClick={() => navigate("/assets")} className="inline-flex items-center gap-0.5 opacity-75 hover:opacity-100 transition-opacity">
+            <ChevronLeft className="h-3.5 w-3.5 rotate-180" />
+            <span>נכסים</span>
+          </button>
+          <span className="mx-1.5 opacity-50">/</span>
+          <button onClick={() => navigate("/assets/pension")} className="opacity-75 hover:opacity-100 transition-opacity">
+            פנסיה
+          </button>
+          <span className="mx-1.5 opacity-50">/</span>
+          <span className="font-extrabold text-white truncate max-w-[140px]">{product.label}</span>
         </nav>
+
+        <div className="relative flex items-center justify-between mt-4">
+          <h2 className="text-[14px] font-medium text-white/75">{product.typeLabel}</h2>
+          <span
+            className="inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full text-white"
+            style={{
+              background: "hsla(0,0%,100%,0.16)",
+              border: "1px solid hsla(0,0%,100%,0.18)",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            {product.status === "active" ? "פעיל" : "לא פעיל"}
+          </span>
+        </div>
       </div>
 
-      {/* HERO — Floating contained green card */}
-      <div className="px-4">
+      {/* Floating Summary Card — IDENTICAL pattern to Category, but LOGO at top of hierarchy */}
+      <div className="px-5 -mt-12 relative z-10 float-card-in">
         <div
-          className="relative rounded-3xl p-5 text-white overflow-hidden"
+          className="w-full text-right rounded-2xl bg-white p-5"
           style={{
-            background: `linear-gradient(155deg, ${C.deep} 0%, ${C.core} 65%, ${C.fresh} 130%)`,
-            boxShadow: `0 14px 36px hsla(178, 70%, 12%, 0.28), 0 2px 6px hsla(178, 70%, 12%, 0.10)`,
+            border: `1px solid ${C.hairline}`,
+            boxShadow: "0 14px 36px hsla(178, 70%, 12%, 0.18), 0 2px 6px hsla(178, 70%, 12%, 0.06)",
           }}
         >
-          {/* Decorative arcs in top-left corner (RTL: visual far side) */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none opacity-70"
-            viewBox="0 0 200 200"
-            preserveAspectRatio="xMidYMid slice"
-            aria-hidden
-          >
-            {[60, 100, 140, 180].map((r) => (
-              <circle key={r} cx={0} cy={0} r={r} fill="none" stroke="hsla(0,0%,100%,0.10)" strokeWidth="1" />
-            ))}
-          </svg>
-
-          {/* Header row: identity + icon tile */}
-          <div className="relative flex items-start justify-between gap-3 mb-5">
-            <div className="flex-1 min-w-0">
-              <h1 className="text-[18px] font-extrabold leading-tight tracking-tight truncate">
+          <div className="flex justify-between items-start mb-4">
+            <div className="flex-1 min-w-0 pl-3">
+              <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: C.muted }}>
+                {product.provider}
+              </p>
+              <p className="text-[18px] font-extrabold leading-tight tracking-tight truncate" style={{ color: C.ink }}>
                 {product.label}
-              </h1>
-              <p className="text-[11px] font-medium opacity-80 truncate mt-0.5">
-                {product.provider} · {product.typeLabel}
               </p>
+              <p className="text-[20px] font-extrabold tracking-tight leading-none mt-3" style={{ color: C.ink }}>
+                <span className="text-[12px] font-bold ml-1" style={{ color: C.core }}>₪</span>
+                {product.balance.toLocaleString("he-IL")}
+              </p>
+              <p className="text-[10.5px] mt-1 font-medium" style={{ color: C.muted }}>צבירה כוללת</p>
             </div>
-            <span
-              className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
-              style={{
-                background: "hsla(0,0%,100%,0.16)",
-                backdropFilter: "blur(8px)",
-                border: "1px solid hsla(0,0%,100%,0.18)",
-              }}
-            >
-              <Icon className="h-5 w-5 text-white" strokeWidth={2.2} />
-            </span>
+            {/* Provider logo — top hierarchy */}
+            <ProviderLogo provider={product.provider} size={56} ring />
           </div>
 
-          {/* Primary KPI — left-aligned editorial */}
-          <div className="relative mb-5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.12em] opacity-70 mb-1">
-              צבירה כוללת
-            </p>
-            <p className="text-[34px] font-extrabold tracking-tight leading-none">
-              {formatNIS(product.balance)}
-            </p>
-          </div>
-
-          {/* KPI 2x2 mini grid */}
-          <div className="relative grid grid-cols-2 gap-2.5">
-            <div
-              className="rounded-2xl p-3"
-              style={{ background: "hsla(178, 80%, 8%, 0.32)", border: "1px solid hsla(0,0%,100%,0.08)" }}
-            >
-              <p className="text-[10px] font-semibold opacity-70 mb-1">סטטוס</p>
-              <div className="flex items-center gap-1.5">
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{
-                    background: product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)",
-                    boxShadow: `0 0 8px ${product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)"}`,
-                  }}
-                />
-                <span className="text-[12px] font-bold">
-                  {product.status === "active" ? "פעיל" : "לא פעיל"}
-                </span>
-              </div>
-            </div>
-            <div
-              className="rounded-2xl p-3"
-              style={{ background: "hsla(178, 80%, 8%, 0.32)", border: "1px solid hsla(0,0%,100%,0.08)" }}
-            >
-              <p className="text-[10px] font-semibold opacity-70 mb-1">
-                {product.projectedPension
-                  ? "צפי קצבה"
-                  : product.liquidFrom
-                  ? "נזיל מ-"
-                  : product.monthlyDeposit
-                  ? "הפקדה חודשית"
-                  : "הפקדה"}
+          <div className="grid grid-cols-2 gap-3 pt-4" style={{ borderTop: `1px solid ${C.hairline}` }}>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-1" style={{ color: C.muted }}>
+                {product.projectedPension ? "צפי קצבה" : product.liquidFrom ? "נזיל מ-" : "הפקדה"}
               </p>
-              <p className="text-[12px] font-bold">
+              <p className="text-[14px] font-extrabold" style={{ color: C.ink }}>
                 {product.projectedPension
-                  ? formatNIS(product.projectedPension)
+                  ? <>{formatNIS(product.projectedPension)}<span className="text-[10px] font-medium opacity-70">/חודש</span></>
                   : product.liquidFrom
                   ? product.liquidFrom
                   : product.monthlyDeposit
-                  ? formatNIS(product.monthlyDeposit)
+                  ? <>{formatNIS(product.monthlyDeposit)}<span className="text-[10px] font-medium opacity-70">/חודש</span></>
                   : "—"}
+              </p>
+            </div>
+            <div className="pr-3" style={{ borderRight: `1px solid ${C.hairline}` }}>
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-1" style={{ color: C.muted }}>הפקדה חודשית</p>
+              <p className="text-[14px] font-extrabold" style={{ color: C.ink }}>
+                {product.monthlyDeposit ? formatNIS(product.monthlyDeposit) : "—"}
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Underline tabs on light bg */}
-      <div className="px-5 mt-6">
+      {/* Underline tabs */}
+      <div className="px-5 mt-5">
         <div className="flex gap-1 overflow-x-auto" style={{ borderBottom: `1px solid ${C.hairline}`, scrollbarWidth: "none" }} role="tablist">
           {tabs.map((t) => {
             const active = tab === t.key;
@@ -282,11 +253,7 @@ const PensionProductPage = () => {
         </div>
       </div>
 
-      {/* Content area */}
       <div className="px-4 pt-4 pb-40 flex flex-col gap-4">
-
-
-        {/* Tab content */}
         {tab === "overview" && (
           <SectionCard title="פרטי החיסכון">
             <Row label="הפקדה חודשית" value={product.monthlyDeposit ? `${formatNIS(product.monthlyDeposit)}/ח` : "לא פעיל"} accent />
@@ -363,7 +330,6 @@ const PensionProductPage = () => {
           </SectionCard>
         )}
 
-        {/* Actions — daily quick actions first */}
         <SectionCard title="פעולות">
           <div className="grid grid-cols-4 gap-2">
             <ActionBtn Icon={ArrowDownToLine} label="ייצא דוח" />
@@ -373,7 +339,6 @@ const PensionProductPage = () => {
           </div>
         </SectionCard>
 
-        {/* Dana insight card — closing insight, more breathing room */}
         <div
           className="rounded-2xl p-5 text-right"
           style={{
@@ -425,8 +390,6 @@ const PensionProductPage = () => {
           הנתונים מתעדכנים אוטומטית מהמסלקה הפנסיונית
         </p>
       </div>
-
-
 
       {/* Bottom Chat Bar */}
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none" dir="rtl">

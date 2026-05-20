@@ -12,6 +12,7 @@ import {
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
+import { ProviderLogo } from "@/lib/providerLogo";
 
 // Brand palette — same teal as Assets, applied with a different LAYOUT
 const C = {
@@ -61,10 +62,10 @@ const PensionCategoryPage = () => {
   const visible = pensionProducts.filter(currentFilter.test);
 
   return (
-    <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
+    <div className="min-h-screen max-w-[430px] mx-auto relative page-enter" dir="rtl" style={{ background: C.soft }}>
       {/* Compact teal banner — short, just identity */}
       <div
-        className="relative px-5 pt-8 pb-20 overflow-hidden"
+        className="relative px-5 pt-8 pb-20 overflow-hidden hero-rise"
         style={{
           background: `linear-gradient(160deg, ${C.deep} 0%, ${C.core} 70%, ${C.fresh} 130%)`,
         }}
@@ -109,7 +110,7 @@ const PensionCategoryPage = () => {
       </div>
 
       {/* Floating Summary Card — overlaps banner */}
-      <div className="px-5 -mt-12 relative z-10">
+      <div className="px-5 -mt-12 relative z-10 float-card-in">
         <button
           onClick={() => setChatOpen(true)}
           className="w-full text-right rounded-2xl bg-white p-5 transition-transform active:scale-[0.99]"
@@ -196,7 +197,6 @@ const PensionCategoryPage = () => {
           </div>
         )}
         {visible.map((p) => {
-          const Icon = iconForType(p.type);
           return (
             <button
               key={p.id}
@@ -207,12 +207,7 @@ const PensionCategoryPage = () => {
                 boxShadow: "0 1px 2px hsla(178, 70%, 14%, 0.04)",
               }}
             >
-              <span
-                className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ background: C.mint }}
-              >
-                <Icon className="h-5 w-5" style={{ color: C.core }} strokeWidth={2} />
-              </span>
+              <ProviderLogo provider={p.provider} size={40} />
               <div className="flex-1 min-w-0">
                 <p className="text-[13px] font-bold truncate" style={{ color: C.ink }}>{p.label}</p>
                 <p className="text-[10.5px] truncate mt-0.5" style={{ color: C.muted }}>{p.provider} · {p.typeLabel}</p>
