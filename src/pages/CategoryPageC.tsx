@@ -495,6 +495,7 @@ export const CategoryPageC = ({
               return (
                 <button
                   key={i}
+                  onClick={onItemClick ? () => onItemClick(item, i) : undefined}
                   className="relative rounded-2xl p-3.5 pt-4 flex flex-col gap-1 transition-transform hover:scale-[1.02] active:scale-[0.98] text-right"
                   style={{
                     background: "white",
