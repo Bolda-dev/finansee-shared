@@ -637,9 +637,9 @@ export const CategoryPageC = ({
             <div
               className="relative rounded-2xl rounded-br-sm pt-6 pb-3.5 px-3.5 pr-4"
               style={{
-                background: "white",
-                border: "1px solid hsl(230, 20%, 92%)",
-                boxShadow: "0 8px 28px hsla(250, 30%, 25%, 0.18)",
+                background: "hsl(0, 0%, 0%)",
+                border: "1px solid hsl(0, 0%, 0%)",
+                boxShadow: "0 8px 28px hsla(0, 0%, 0%, 0.35)",
               }}
             >
               <button
@@ -647,14 +647,14 @@ export const CategoryPageC = ({
                   setDanaBubbleOpen(false);
                   setDanaBubbleDismissed(true);
                 }}
-                className="absolute top-2 left-2 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+                className="absolute top-2 left-2 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-white/10"
                 aria-label="סגור"
               >
-                <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 55%)" }} />
+                <X className="h-3 w-3" style={{ color: "hsl(0, 0%, 75%)" }} />
               </button>
               <p
                 className="text-[12px] leading-relaxed pr-1 text-right"
-                style={{ color: "hsl(250, 35%, 20%)" }}
+                style={{ color: "hsl(0, 0%, 100%)" }}
               >
                 {danaBubbleText}
               </p>
@@ -664,11 +664,13 @@ export const CategoryPageC = ({
                   setDanaBubbleDismissed(true);
                   setChatOpen(true);
                 }}
-                className={`${ctaCls} mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]`}
+                className="mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                style={{ background: "hsl(0, 0%, 100%)", color: "hsl(0, 0%, 0%)" }}
               >
                 {danaBubbleCta}
                 <ChevronLeft className="h-3.5 w-3.5" />
               </button>
+
             </div>
           </div>
         </div>
