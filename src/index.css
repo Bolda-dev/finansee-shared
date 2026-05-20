@@ -525,3 +525,8 @@ All colors MUST be HSL.
 .float-card-in {
   animation: float-card-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
+
+@keyframes danaDot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
