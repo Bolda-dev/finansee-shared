@@ -266,8 +266,9 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
 
 const Dot = ({ delay }: { delay: number }) => (
   <span
-    className="w-1.5 h-1.5 rounded-full bg-white/80"
+    className="w-1.5 h-1.5 rounded-full"
     style={{
+      background: "hsl(230, 15%, 65%)",
       animation: "danaDot 1.2s ease-in-out infinite",
       animationDelay: `${delay}ms`,
     }}
