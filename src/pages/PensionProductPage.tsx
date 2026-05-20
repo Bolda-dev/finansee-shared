@@ -157,112 +157,109 @@ const PensionProductPage = () => {
           ))}
         </svg>
 
-        {/* Top nav row — back + attached breadcrumb */}
-        <div className="relative flex items-center justify-between px-5 pt-5 pb-2 text-white">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => navigate("/assets/pension")}
-              className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
-              aria-label="חזרה"
-            >
-              <ChevronRight className="h-4 w-4" />
-              חזרה
-            </button>
+        {/* Hero — aligned to CategoryPageC geometry (px-5 pt-10 pb-12) */}
+        <div className="relative px-5 pt-10 pb-12 text-white">
+          {/* Top bar — inline breadcrumb, same Y as parent pages */}
+          <div className="relative flex items-center justify-between mb-5 min-h-[28px]">
             <nav
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold"
-              style={{
-                background: "hsla(0, 0%, 100%, 0.16)",
-                backdropFilter: "blur(6px)",
-                border: "1px solid hsla(0,0%,100%,0.22)",
-              }}
+              className="inline-flex items-center gap-1.5 -mr-1 py-1.5 pl-2 pr-1 text-[13px] font-semibold"
               aria-label="breadcrumb"
+              dir="rtl"
             >
-              <button onClick={() => navigate("/assets")} className="text-white/85">נכסים</button>
-              <span className="text-white/50">›</span>
-              <button onClick={() => navigate("/assets/pension")} className="text-white/85">פנסיה</button>
+              <button
+                onClick={() => navigate("/assets")}
+                className="inline-flex items-center gap-0.5 transition-opacity hover:opacity-100"
+                style={{ color: "white", opacity: 0.55 }}
+                aria-label="חזרה לנכסים"
+              >
+                <ChevronRight className="h-4 w-4" />
+                <span>נכסים</span>
+              </button>
+              <span style={{ opacity: 0.35 }}>›</span>
+              <button
+                onClick={() => navigate("/assets/pension")}
+                className="transition-opacity hover:opacity-100"
+                style={{ color: "white", opacity: 0.75 }}
+                aria-label="חזרה לפנסיה"
+              >
+                פנסיה
+              </button>
+              <span style={{ opacity: 0.35 }}>›</span>
+              <span style={{ color: "white", fontWeight: 800 }}>{product.label}</span>
             </nav>
+            <span className="w-7" aria-hidden />
           </div>
-          <span className="w-7" aria-hidden />
-        </div>
 
-
-        {/* Hero content — centered stack, Assets-like rhythm */}
-        <div className="relative flex flex-col items-center text-center px-6 pt-6 pb-10 text-white">
-          {/* Type chip */}
-          <span
-            className="inline-flex items-center text-[10.5px] font-bold px-2.5 py-1 rounded-full mb-4"
-            style={{
-              background: "hsla(0,0%,100%,0.18)",
-              border: "1px solid hsla(0,0%,100%,0.22)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            {product.typeLabel}
-          </span>
-
-          {/* Icon */}
-          <span
-            className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
-            style={{
-              background: "hsla(0,0%,100%,0.95)",
-              boxShadow: "0 8px 24px hsla(178, 70%, 8%, 0.35)",
-            }}
-          >
-            <Icon className="h-8 w-8" style={{ color: C.deep }} strokeWidth={2.2} />
-          </span>
-
-          {/* Title + provider */}
-          <p className="text-[22px] font-extrabold leading-tight tracking-tight mb-1">
-            {product.label}
-          </p>
-          <p className="text-[12.5px] opacity-85 mb-3">{product.provider}</p>
-
-          {/* Status pill — centered under provider, not floating */}
-          <span
-            className="inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-full mb-7"
-            style={{
-              background:
-                product.status === "active"
-                  ? "hsla(150, 70%, 50%, 0.22)"
-                  : "hsla(30, 90%, 60%, 0.22)",
-              border: `1px solid ${product.status === "active" ? "hsla(150, 70%, 70%, 0.50)" : "hsla(30, 90%, 70%, 0.50)"}`,
-              color: "white",
-              backdropFilter: "blur(6px)",
-            }}
-          >
+          {/* Identity row — icon + name/provider stacked, right-aligned RTL */}
+          <div className="flex items-center gap-3 mb-7" dir="rtl">
             <span
-              className="w-1.5 h-1.5 rounded-full"
+              className="w-[52px] h-[52px] rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
-                background: product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)",
-                boxShadow: `0 0 6px ${product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)"}`,
+                background: "hsla(0,0%,100%,0.95)",
+                boxShadow: "0 8px 24px hsla(178, 70%, 8%, 0.35)",
               }}
-            />
-            {product.status === "active" ? "פעיל" : "לא פעיל"}
-          </span>
+            >
+              <Icon className="h-6 w-6" style={{ color: C.deep }} strokeWidth={2.2} />
+            </span>
+            <div className="flex-1 min-w-0 text-right">
+              <p className="text-[18px] font-extrabold leading-tight tracking-tight truncate">
+                {product.label}
+              </p>
+              <p className="text-[12px] opacity-80 truncate mt-0.5">
+                {product.provider} · {product.typeLabel}
+              </p>
+            </div>
+          </div>
 
-          {/* Big balance KPI — centered like Assets */}
-          <p className="text-[12px] font-medium opacity-85 mb-1.5">צבירה כוללת</p>
-          <p className="text-[40px] font-extrabold tracking-tight leading-none mb-3">
-            {formatNIS(product.balance)}
-          </p>
+          {/* KPI block — single dominant element */}
+          <div className="text-center mb-5">
+            <p className="text-[12px] font-medium opacity-85 mb-1.5">צבירה כוללת</p>
+            <p className="text-[40px] font-extrabold tracking-tight leading-none">
+              {formatNIS(product.balance)}
+            </p>
+          </div>
 
-          {/* Secondary KPI pill */}
-          <span
-            className="inline-flex items-center text-[11.5px] font-semibold px-3 py-1.5 rounded-full"
-            style={{
-              background: "hsla(0,0%,100%,0.18)",
-              border: "1px solid hsla(0,0%,100%,0.22)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            {product.projectedPension
-              ? `צפי קצבה ${formatNIS(product.projectedPension)}/ח`
-              : product.liquidFrom
-              ? `נזיל החל מ-${product.liquidFrom}`
-              : product.monthlyDeposit
-              ? `הפקדה ${formatNIS(product.monthlyDeposit)}/ח`
-              : "ללא הפקדה פעילה"}
-          </span>
+          {/* Meta pills row — status + secondary KPI, grouped */}
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            <span
+              className="inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-full"
+              style={{
+                background:
+                  product.status === "active"
+                    ? "hsla(150, 70%, 50%, 0.22)"
+                    : "hsla(30, 90%, 60%, 0.22)",
+                border: `1px solid ${product.status === "active" ? "hsla(150, 70%, 70%, 0.50)" : "hsla(30, 90%, 70%, 0.50)"}`,
+                color: "white",
+                backdropFilter: "blur(6px)",
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{
+                  background: product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)",
+                  boxShadow: `0 0 6px ${product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)"}`,
+                }}
+              />
+              {product.status === "active" ? "פעיל" : "לא פעיל"}
+            </span>
+            <span
+              className="inline-flex items-center text-[11px] font-semibold px-3 py-1.5 rounded-full"
+              style={{
+                background: "hsla(0,0%,100%,0.18)",
+                border: "1px solid hsla(0,0%,100%,0.22)",
+                backdropFilter: "blur(8px)",
+                color: "white",
+              }}
+            >
+              {product.projectedPension
+                ? `צפי קצבה ${formatNIS(product.projectedPension)}/ח`
+                : product.liquidFrom
+                ? `נזיל החל מ-${product.liquidFrom}`
+                : product.monthlyDeposit
+                ? `הפקדה ${formatNIS(product.monthlyDeposit)}/ח`
+                : "ללא הפקדה פעילה"}
+            </span>
+          </div>
         </div>
       </div>
 
