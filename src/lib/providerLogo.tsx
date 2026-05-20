@@ -1,14 +1,17 @@
 // Brand-colored provider logo bubble (image when available, otherwise initials)
 import menoraLogo from "@/assets/logos/menora.jpg";
+import harelLogo from "@/assets/logos/harel.webp";
+import migdalLogo from "@/assets/logos/migdal.png";
+import clalLogo from "@/assets/logos/clal.png";
 
 type Brand = { bg: string; fg: string; initials: string; image?: string };
 
 const BRANDS: Record<string, Brand> = {
   "מנורה מבטחים": { bg: "#fff", fg: "#1a1a1a", initials: "מנ", image: menoraLogo },
   "מנורה": { bg: "#fff", fg: "#1a1a1a", initials: "מנ", image: menoraLogo },
-  "כלל": { bg: "hsl(355, 75%, 45%)", fg: "#fff", initials: "כל" },
-  "הראל": { bg: "hsl(145, 60%, 32%)", fg: "#fff", initials: "הר" },
-  "מגדל": { bg: "hsl(28, 85%, 50%)", fg: "#fff", initials: "מג" },
+  "כלל": { bg: "#fff", fg: "#1a1a1a", initials: "כל", image: clalLogo },
+  "הראל": { bg: "#fff", fg: "#1a1a1a", initials: "הר", image: harelLogo },
+  "מגדל": { bg: "#fff", fg: "#1a1a1a", initials: "מג", image: migdalLogo },
   "הפניקס": { bg: "hsl(15, 80%, 48%)", fg: "#fff", initials: "הפ" },
   "אלטשולר שחם": { bg: "hsl(210, 30%, 18%)", fg: "#fff", initials: "אש" },
   "בנק הפועלים": { bg: "hsl(8, 75%, 50%)", fg: "#fff", initials: "בה" },
