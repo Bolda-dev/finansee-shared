@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShieldCheck, FileText, Camera } from "lucide-react";
+import { ShieldCheck, FileText, Camera, UserSquare2, Check } from "lucide-react";
 
 interface IdentityStepProps {
   idNumber: string;
@@ -8,14 +8,25 @@ interface IdentityStepProps {
 }
 
 export const IdentityStep = ({ idNumber, issueDate, onChange }: IdentityStepProps) => {
-  const [scanning, setScanning] = useState(false);
+  const [scanningId, setScanningId] = useState(false);
+  const [scanningSelfie, setScanningSelfie] = useState(false);
+  const [idDone, setIdDone] = useState(false);
+  const [selfieDone, setSelfieDone] = useState(false);
 
-  const handleScan = () => {
-    setScanning(true);
-    // Simulate scan auto-fill
+  const handleScanId = () => {
+    setScanningId(true);
     setTimeout(() => {
       onChange({ idNumber: "123456789", issueDate: "15/03/2018" });
-      setScanning(false);
+      setScanningId(false);
+      setIdDone(true);
+    }, 900);
+  };
+
+  const handleScanSelfie = () => {
+    setScanningSelfie(true);
+    setTimeout(() => {
+      setScanningSelfie(false);
+      setSelfieDone(true);
     }, 900);
   };
 
@@ -82,6 +93,24 @@ export const IdentityStep = ({ idNumber, issueDate, onChange }: IdentityStepProp
         </div>
       </div>
 
+      {/* Capture buttons — above ID inputs */}
+      <div className="grid grid-cols-2 gap-2.5 mb-3">
+        <CaptureButton
+          label="צילום ת.ז"
+          icon={<Camera className="h-4 w-4" />}
+          loading={scanningId}
+          done={idDone}
+          onClick={handleScanId}
+        />
+        <CaptureButton
+          label="צילום סלפי לאימות"
+          icon={<UserSquare2 className="h-4 w-4" />}
+          loading={scanningSelfie}
+          done={selfieDone}
+          onClick={handleScanSelfie}
+        />
+      </div>
+
       {/* Inputs */}
       <div className="space-y-2.5">
         <FieldInput
@@ -98,24 +127,52 @@ export const IdentityStep = ({ idNumber, issueDate, onChange }: IdentityStepProp
           onChange={(v) => onChange({ idNumber, issueDate: v })}
         />
       </div>
-
-      {/* Scan ID button */}
-      <button
-        onClick={handleScan}
-        disabled={scanning}
-        className="mt-3 self-start inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-2 rounded-full transition-all active:scale-[0.97]"
-        style={{
-          background: "white",
-          color: "hsl(220, 85%, 45%)",
-          border: "1px solid hsl(220, 50%, 88%)",
-        }}
-      >
-        <Camera className="h-3.5 w-3.5" />
-        {scanning ? "סורק..." : "צילום תעודת זהות"}
-      </button>
     </div>
   );
 };
+
+const CaptureButton = ({
+  label,
+  icon,
+  loading,
+  done,
+  onClick,
+}: {
+  label: string;
+  icon: React.ReactNode;
+  loading: boolean;
+  done: boolean;
+  onClick: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    disabled={loading}
+    className="rounded-2xl px-3 py-3 flex flex-col items-center justify-center gap-1.5 text-center transition-all active:scale-[0.97]"
+    style={{
+      background: done ? "hsl(150, 60%, 96%)" : "white",
+      border: done
+        ? "1.5px solid hsl(150, 55%, 55%)"
+        : "1.5px dashed hsl(250, 30%, 80%)",
+      boxShadow: done
+        ? "0 6px 16px -10px hsla(150, 55%, 30%, 0.35)"
+        : "0 4px 14px -10px hsla(250, 40%, 20%, 0.18)",
+      color: done ? "hsl(150, 60%, 26%)" : "hsl(250, 40%, 25%)",
+    }}
+  >
+    <span
+      className="w-8 h-8 rounded-full flex items-center justify-center"
+      style={{
+        background: done ? "hsl(150, 55%, 88%)" : "hsl(250, 30%, 96%)",
+        color: done ? "hsl(150, 60%, 26%)" : "hsl(262, 75%, 55%)",
+      }}
+    >
+      {done ? <Check className="h-4 w-4" /> : icon}
+    </span>
+    <span className="text-[11.5px] font-bold leading-tight">
+      {loading ? "סורק..." : done ? "צולם בהצלחה" : label}
+    </span>
+  </button>
+);
 
 const FieldInput = ({
   label,
