@@ -234,7 +234,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             <button
               onClick={handleYes}
               className="flex-1 rounded-full py-3 text-[13px] font-bold text-white transition-transform active:scale-[0.97]"
-              style={{ background: `linear-gradient(135deg, ${C.fresh} 0%, ${C.core} 100%)`, boxShadow: `0 4px 12px hsla(178, 70%, 20%, 0.25)` }}
+              style={{ background: "hsl(250, 30%, 8%)", boxShadow: "0 4px 12px hsla(250, 30%, 15%, 0.35)" }}
             >
               כן, ספרי לי ✨
             </button>
