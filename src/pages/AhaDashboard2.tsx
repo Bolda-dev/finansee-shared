@@ -403,9 +403,9 @@ const AhaDashboard2 = () => {
                 {danaExpanded && (
                   <div className="space-y-2 mt-3">
                     {[
-                      { Icon: PiggyBank, label: "אשראי ובנק", desc: "חשבון בנק וכרטיסי אשראי", gradient: palettes.liabilities.gradient },
-                      { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", gradient: palettes.assets.gradient },
-                      { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", gradient: palettes.assets.gradient },
+                      { Icon: PiggyBank, label: "אשראי ובנק", desc: "חשבון בנק וכרטיסי אשראי", soft: palettes.liabilities.soft, solid: palettes.liabilities.solid },
+                      { Icon: Briefcase, label: "השקעות", desc: "תיקי השקעות וני״ע", soft: palettes.assets.soft, solid: palettes.assets.solid },
+                      { Icon: Building2, label: "נדל״ן ונכסים", desc: "דירות, רכבים ונכסים", soft: palettes.assets.soft, solid: palettes.assets.solid },
                     ].map((item) => (
                       <button
                         key={item.label}
@@ -413,8 +413,8 @@ const AhaDashboard2 = () => {
                         className="w-full text-start rounded-xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
                         style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
                       >
-                        <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: item.gradient }}>
-                          <item.Icon className="h-4 w-4 text-white" />
+                        <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: item.soft }}>
+                          <item.Icon className="h-4 w-4" style={{ color: item.solid }} />
                         </span>
                         <span className="flex-1 min-w-0">
                           <span className="block text-[12.5px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>{item.label}</span>
