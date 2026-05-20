@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { CategoryPageC, formatNIS, formatCompact, type CategoryItem } from "./CategoryPageC";
 import { assetItems } from "@/lib/data";
 
 const AssetsPageC = () => {
+  const navigate = useNavigate();
   const items: CategoryItem[] = assetItems.map((a) => ({ ...a }));
 
   const totalValue = items.reduce((s, i) => s + (i.amount ?? 0), 0);
@@ -44,6 +46,11 @@ const AssetsPageC = () => {
       }
       danaBubbleCta="בוא/י נגדיל יחד"
       emptyText="אין נכסים בקטגוריה זו"
+      onItemClick={(item) => {
+        if (item.label === "פנסיה") {
+          navigate("/assets/pension");
+        }
+      }}
       renderItemSubtitle={(item) => item.subLabel ?? ""}
       renderItemTrailing={(item) => (
         <span className="text-end leading-tight">
