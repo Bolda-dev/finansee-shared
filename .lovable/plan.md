@@ -1,44 +1,43 @@
-## כרטיס ההשוואה החדש בצ׳אט של דנה — "אנליטיקס פרימיום"
+## תיקונים בצ׳אט של דנה בעמוד הפנסיה
 
-### קובץ יחיד שישתנה
-`src/components/DanaPensionChat.tsx` — להחליף את הקומפוננטה `CompareCard` (ולמחוק את `MetricRow` שכבר לא בשימוש).
+### 1. בועיות הצ׳אט שחור־לבן (זהה לבית — `InsightsSheetC`)
+ב־`src/components/DanaPensionChat.tsx`:
+- **בועיית משתמש** — רקע כהה `hsl(250, 30%, 8%)`, טקסט לבן, `rounded-2xl rounded-bl-md`, shadow כהה עדין. (במקום לבן עם border היום.)
+- **בועיית דנה** — רקע לבן, border `hsl(230, 20%, 92%)`, טקסט `hsl(250, 35%, 25%)`, `rounded-2xl rounded-br-md`, shadow `0 2px 10px hsla(230,30%,50%,0.06)`. אווטאר עגול (28px) מימין/שמאל לבועייה.
+- **נקודות "מקליד"** — באותו עיצוב של בועיית דנה (רקע לבן + border), נקודות `hsl(230,15%,65%)` באנימציית `typing-dot`.
+- **Quick reply ראשי "כן, ספרי לי"** — רקע שחור־עמוק `hsl(250, 30%, 8%)`, טקסט לבן, shadow כהה. (במקום הגרדיאנט הירוק־טורקיז היום.)
+- **"לא תודה"** נשאר לבן עם border — בלי שינוי.
+- **"סגור שיחה"** — בלי שינוי.
 
-### מבנה הכרטיס החדש (full-width בתוך בועיית הצ׳אט)
-1. **Header** — כותרת `השוואת קרנות מורחבת` (17px, extrabold, `C.deep`) + סאב־כותרת קטנה `מבוססת על נתוני שוק עדכניים` (10.5px, `C.muted`). מימין/שמאל אייקון עגול עם `ArrowLeftRight` ברקע `C.mint`.
+### 2. הסרת ה־chip "דנה רוצה לדבר איתך" → בועיות teaser מלמטה
+ב־`src/pages/PensionProductPage.tsx`:
+- להסיר את ה־`<button>` הצהוב־כתום של "דנה רוצה לדבר איתך" (שורות 214–228).
+- להסיר את ה־auto-open של ה־Sheet (שורות 131–141) — ה־teaser מחליף אותו.
+- להעלות קומפוננטה חדשה `<DanaTeaserBubbles>` בתחתית, שמופיעה רק אם `hasOpportunity === true`.
 
-2. **שני טורים עם עיגול VS באמצע**
-   - עיגול קטן (36px) במרכז, רקע לבן + טבעת `hsl(180,25%,98%)`, טקסט `VS` באפור.
-   - **טור שמאל — הנוכחית** (`bg hsl(180,12%,97%)`, border `C.hairline`, `rounded-2xl`):
-     - לוגו ב־`ProviderLogo size={36}` בתוך עטיפה לבנה.
-     - תגית `הנוכחית` באדום עדין + שם הספק.
-     - שורה: דמי ניהול (18px extrabold) + bar אדום ברוחב יחסי.
-     - שורה: תשואה 3ש׳ (18px extrabold) + bar אפור.
-     - שורת `צבירה` עם `formatNIS(product.balance)` בעקבות מפריד.
-   - **טור ימין — המומלצת** (`bg hsla(176,55%,91%,0.45)`, border `2px ${C.fresh}`, shadow ירקרק):
-     - badge עליון `✨ המלצה חכמה` ברקע `C.fresh`.
-     - לוגו של `alternative.provider` באותה עטיפה לבנה.
-     - דמי ניהול (`C.fresh`) + תגית הפחתה `−{X}%` (מחושבת מ־`(curr-alt)/curr`).
-     - תשואה (`C.deep`) + חץ `↑` ירוק + bar ב־`C.fresh`.
-     - שורת `פוטנציאל` עם `formatNIS(savings)`.
+קובץ חדש `src/components/DanaTeaserBubbles.tsx`:
+- `fixed bottom-4 inset-x-4`, `max-w-[430px]` ו־`mx-auto`, z-index גבוה (מעל ה־tabbar אם יש), `dir="rtl"`.
+- **אווטאר** דנה עגול 36px עם נקודת online ירוקה.
+- **2 בועיות צ׳אט לבנות** שנכנסות עם delay (slide-up + fade-in):
+  - בועיה 1 (אחרי ~1.2s): `היי משה 👋`
+  - בועיה 2 (אחרי ~2.2s): `מצאתי דרך להרוויח לך ₪487,000 עד הפרישה — רוצה לשמוע?` — סכום ה־savings מועבר ב־prop.
+  - סגנון בועיה: רקע לבן, border `hsl(230,20%,92%)`, shadow `0 8px 24px hsla(250,30%,15%,0.12)`, `rounded-2xl rounded-br-md`, טקסט `hsl(250,35%,25%)`.
+- **CTA שחור** (אחרי ~2.6s): `bg: hsl(250, 30%, 8%)`, טקסט לבן, full-width, `rounded-full`, py-3, טקסט `ספרי לי איך ✨` — לחיצה מפעילה `onOpen()` שפותחת את ה־`DanaPensionChat` המלא.
+- **כפתור X** קטן מעל הבועיות — סוגר את ה־teaser ושומר `sessionStorage.setItem('dana-teaser-${productId}', '1')`.
+- Trigger: `useEffect` שמציג את ה־teaser אחרי 1500ms אם אין flag ב־sessionStorage ו־`hasOpportunity`.
 
-3. **רצועת Market Benchmark** — כרטיסון אפור־בהיר עם נקודה כחולה + טקסט `ממוצע השוק` משמאל, ומימין `{marketAvgFromBalance}% דמי ניהול`.
+ב־`PensionProductPage.tsx`:
+- להוסיף state `teaserVisible` ו־`<DanaTeaserBubbles productId={product.id} savings={alt.savings} onOpen={() => { setDanaOpen(true); setTeaserVisible(false); }} onClose={() => setTeaserVisible(false)} />` רק כאשר `hasOpportunity && teaserVisible && !danaOpen`.
 
-4. **Bottom Power Banner** — רקע גרדיאנט `${C.deep} → ${C.core}`, `rounded-3xl`, עם רקע SVG דק (שני עקומות) בopacity 0.1:
-   - מיקרו־כותרת `רווח מצטבר צפוי לפרישה` (uppercase, letter-spacing 0.18em, בהיר־מנטה).
-   - מספר ענק `+{formatNIS(savings)}` (32px extrabold, לבן, tabular-nums).
-   - chip תחתון `החיסכון המקסימלי האפשרי עבורך` ב־`C.fresh`.
+### 3. ה־CTA הראשי בתוך הצ׳אט: שחור במקום ירוק
+ב־`src/components/DanaPensionChat.tsx`, `CtaBlock`:
+- כפתור "⚡ עברו לקרן המומלצת" — להחליף את הגרדיאנט הטורקיז (`C.deep → C.core`) ב־`background: hsl(250, 30%, 8%)`, טקסט לבן, `boxShadow: 0 6px 18px hsla(250, 30%, 15%, 0.35)`.
+- "דברו עם דנה" ו־"השוואה מפורטת" — בלי שינוי.
 
-### התאמות לעיצוב הקיים
-- צבעים: רק מתוך אובייקט ה־`C` הקיים (`deep/core/fresh/mint/ink/muted/hairline`) — אותו עץ צבעי טורקיז של הצ׳אט.
-- פונט/typography: ממשיכים עם פונט המערכת הקיים (Heebo) — לא מוסיפים import חדש.
-- הסרת `max-w-[82%]` ו־`mr-9` כדי שהכרטיס יתפוס את כל רוחב אזור הצ׳אט (עדיין יש padding-x של ה־ScrollArea).
-- אין button "בואי נתחיל" בתוך הכרטיס — ה־CTAs נשארים ב־`CtaBlock` הקיים מתחת.
-- אין שורת זהות "דנה" מעל הכרטיס — היא כבר קיימת ב־header של ה־Sheet.
-
-### חישובים פנימיים
-- `currMgmtW = min(95, mgmt/1.5 * 100)`, אותו דבר ל־alt — bar רוחב יחסי על סקאלת 0-1.5%.
-- `currRetW = return3y / max(curr,alt) * 100`, אותו דבר ל־alt.
-- `mgmtDelta = round((curr − alt) / curr * 100)` ל־badge `−X%`.
+### קבצים שישתנו / יתווספו
+- ערוך: `src/components/DanaPensionChat.tsx` (בועיות, dots, quick reply ראשי, CtaBlock ראשי).
+- ערוך: `src/pages/PensionProductPage.tsx` (הסרת chip + auto-open, mount של teaser).
+- חדש: `src/components/DanaTeaserBubbles.tsx`.
 
 ### לא נוגעים
-שאר הצ׳אט (header, bubbles, typing dots, quick replies, CtaBlock) — אותו דבר. השינוי ממוקד בכרטיס ההשוואה בלבד.
+כרטיס ההשוואה (`CompareCard`) — כבר באישור קודם בעיצוב הטורקיז העשיר; לא משנים אותו עכשיו.
