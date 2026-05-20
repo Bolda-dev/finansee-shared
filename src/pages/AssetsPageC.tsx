@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { CategoryPageC, formatNIS, formatCompact, type CategoryItem } from "./CategoryPageC";
-import { assetItems } from "@/lib/data";
+import { assetItems, pensionProducts } from "@/lib/data";
+import { Layers } from "lucide-react";
 
 const AssetsPageC = () => {
   const navigate = useNavigate();
