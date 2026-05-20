@@ -36,7 +36,8 @@ export const ConsentStep = ({
         />
         <SocialProofCallout text={socialProof} />
 
-        {/* Digital signature mock */}
+        {/* Digital signature mock — only when explicitly enabled */}
+        {showSignature && (
         <div className="space-y-2">
           <div className="flex items-center justify-between px-1">
             <p className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>
