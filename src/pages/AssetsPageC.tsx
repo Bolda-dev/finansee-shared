@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { CategoryPageC, formatNIS, formatCompact, type CategoryItem } from "./CategoryPageC";
-import { assetItems } from "@/lib/data";
+import { assetItems, pensionProducts } from "@/lib/data";
+import { Layers } from "lucide-react";
 
 const AssetsPageC = () => {
   const navigate = useNavigate();
@@ -53,14 +54,26 @@ const AssetsPageC = () => {
       }}
       renderItemSubtitle={(item) => item.subLabel ?? ""}
       renderItemTrailing={(item) => (
-        <span className="text-end leading-tight">
+        <span className="flex flex-col items-end gap-1 leading-tight">
           <span
             className="block text-[13px] font-bold text-primary tracking-tight"
             style={{ color: "hsl(250, 50%, 12%)" }}
           >
             {formatNIS(item.amount ?? 0)}
           </span>
-          {item.monthly ? (
+          {item.label === "פנסיה" ? (
+            <span
+              className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+              style={{
+                background: "hsl(176, 55%, 91%)",
+                color: "hsl(178, 70%, 22%)",
+                border: "1px solid hsl(176, 50%, 82%)",
+              }}
+            >
+              <Layers className="h-2.5 w-2.5" strokeWidth={2.5} />
+              {pensionProducts.length} מוצרים
+            </span>
+          ) : item.monthly ? (
             <span
               className="block text-[10px] font-medium"
               style={{ color: "hsl(150, 55%, 38%)" }}
