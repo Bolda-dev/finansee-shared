@@ -265,14 +265,15 @@ const PensionProductPage = () => {
 
       {/* Sheet content with curved top */}
       <div
-        className="relative -mt-4 rounded-t-3xl pb-32"
-        style={{ background: C.soft, boxShadow: `0 -8px 24px hsla(178, 70%, 14%, 0.18)` }}
+        className="relative -mt-6 rounded-t-3xl pb-32"
+        style={{ background: C.soft, boxShadow: `0 -8px 28px hsla(178, 70%, 14%, 0.22)` }}
       >
-        <div className="flex justify-center pt-2.5 pb-1">
+        <div className="flex justify-center pt-3 pb-1">
           <div className="w-10 h-1.5 rounded-full" style={{ background: C.hairline }} />
         </div>
 
-      <div className="px-4 pt-2 flex flex-col gap-3">
+      <div className="px-4 pt-3 flex flex-col gap-4">
+
 
         {/* Tab bar — real tabs, not chips */}
         <div
