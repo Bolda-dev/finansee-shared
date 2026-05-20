@@ -15,6 +15,7 @@ import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
 import { DanaPensionChat } from "@/components/DanaPensionChat";
+import { DanaTeaserBubbles } from "@/components/DanaTeaserBubbles";
 import { ProviderLogo } from "@/lib/providerLogo";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
