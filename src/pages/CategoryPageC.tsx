@@ -128,6 +128,8 @@ export type CategoryPageProps = {
   renderItemSubtitle: (item: CategoryItem) => string;
   /** Optional: which insights sheet variant to use ("c" default or "life") */
   insightsVariant?: "c" | "life";
+  /** Optional: per-item click handler. When provided, the card becomes a navigation trigger. */
+  onItemClick?: (item: CategoryItem, index: number) => void;
 };
 
 export const CategoryPageC = ({
@@ -149,6 +151,7 @@ export const CategoryPageC = ({
   renderItemTrailing,
   renderItemSubtitle,
   insightsVariant = "c",
+  onItemClick,
 }: CategoryPageProps) => {
   const navigate = useNavigate();
   const { innerGrid } = useVersionCSettings();
@@ -393,6 +396,7 @@ export const CategoryPageC = ({
             return (
               <button
                 key={i}
+                onClick={onItemClick ? () => onItemClick(item, i) : undefined}
                 className="w-full flex items-start gap-3 px-4 py-4 rounded-2xl transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
                 style={{
                   background: "white",
@@ -491,6 +495,7 @@ export const CategoryPageC = ({
               return (
                 <button
                   key={i}
+                  onClick={onItemClick ? () => onItemClick(item, i) : undefined}
                   className="relative rounded-2xl p-3.5 pt-4 flex flex-col gap-1 transition-transform hover:scale-[1.02] active:scale-[0.98] text-right"
                   style={{
                     background: "white",

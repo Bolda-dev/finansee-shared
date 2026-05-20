@@ -11,6 +11,8 @@ const IncomePage = lazy(() => import("./pages/IncomePage"));
 const ExpensesPage = lazy(() => import("./pages/ExpensesPage"));
 const InsurancePageC = lazy(() => import("./pages/InsurancePageC"));
 const AssetsPageC = lazy(() => import("./pages/AssetsPageC"));
+const PensionCategoryPage = lazy(() => import("./pages/PensionCategoryPage"));
+const PensionProductPage = lazy(() => import("./pages/PensionProductPage"));
 const LiabilitiesPageC = lazy(() => import("./pages/LiabilitiesPageC"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Signup2 = lazy(() => import("./pages/Signup2"));
@@ -34,6 +36,8 @@ const App = () => (
               <Route path="/expenses" element={<ExpensesPage />} />
               <Route path="/insurance" element={<InsurancePageC />} />
               <Route path="/assets" element={<AssetsPageC />} />
+              <Route path="/assets/pension" element={<PensionCategoryPage />} />
+              <Route path="/assets/pension/:id" element={<PensionProductPage />} />
               <Route path="/liabilities" element={<LiabilitiesPageC />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/signup2" element={<Signup2 />} />
