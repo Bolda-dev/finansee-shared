@@ -664,7 +664,8 @@ export const CategoryPageC = ({
                   setDanaBubbleDismissed(true);
                   setChatOpen(true);
                 }}
-                className={`${ctaCls} mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold text-primary transition-transform hover:scale-[1.01] active:scale-[0.99]`}
+                className="mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
+                style={{ background: "hsl(0, 0%, 8%)", color: "white" }}
               >
                 {danaBubbleCta}
                 <ChevronLeft className="h-3.5 w-3.5" />
