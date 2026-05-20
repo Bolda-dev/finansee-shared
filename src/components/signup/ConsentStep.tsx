@@ -108,6 +108,7 @@ export const ConsentStep = ({
             )}
           </button>
         </div>
+        )}
       </div>
     </div>
   );
