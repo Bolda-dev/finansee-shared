@@ -30,16 +30,17 @@ const iconForType = (t: PensionProduct["type"]) => {
   }
 };
 
-// Green palette — Level 2 (product detail)
+// Teal palette — matches Assets
 const C = {
-  deep: "hsl(155, 60%, 22%)",
-  core: "hsl(150, 60%, 32%)",
-  fresh: "hsl(145, 65%, 42%)",
-  mint: "hsl(150, 55%, 92%)",
-  soft: "hsl(150, 35%, 96%)",
-  ink: "hsl(155, 40%, 12%)",
-  muted: "hsl(150, 12%, 48%)",
-  hairline: "hsl(150, 20%, 90%)",
+  deep: "hsl(178, 80%, 14%)",
+  core: "hsl(178, 70%, 26%)",
+  fresh: "hsl(174, 65%, 42%)",
+  bright: "hsl(170, 70%, 52%)",
+  mint: "hsl(176, 55%, 91%)",
+  soft: "hsl(180, 25%, 97%)",
+  ink: "hsl(200, 30%, 10%)",
+  muted: "hsl(200, 12%, 48%)",
+  hairline: "hsl(180, 18%, 90%)",
 };
 
 const Sparkline = ({ values, color }: { values: number[]; color: string }) => {
