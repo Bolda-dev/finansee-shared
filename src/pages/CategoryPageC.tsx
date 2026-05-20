@@ -396,6 +396,7 @@ export const CategoryPageC = ({
             return (
               <button
                 key={i}
+                onClick={onItemClick ? () => onItemClick(item, i) : undefined}
                 className="w-full flex items-start gap-3 px-4 py-4 rounded-2xl transition-colors hover:bg-[hsl(230,25%,98%)] active:bg-[hsl(230,25%,96%)]"
                 style={{
                   background: "white",
