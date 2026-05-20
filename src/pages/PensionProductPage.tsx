@@ -184,11 +184,11 @@ const PensionProductPage = () => {
         >
           <div className="flex justify-between items-start mb-4">
             <div className="flex-1 min-w-0 pl-3">
-              <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: C.muted }}>
+              <p className="text-[20px] font-extrabold leading-tight tracking-tight truncate" style={{ color: C.ink }}>
                 {product.provider}
               </p>
-              <p className="text-[18px] font-extrabold leading-tight tracking-tight truncate" style={{ color: C.ink }}>
-                {product.label}
+              <p className="text-[12px] font-medium mt-0.5 truncate" style={{ color: C.muted }}>
+                {product.label} · {product.typeLabel}
               </p>
               <p className="text-[20px] font-extrabold tracking-tight leading-none mt-3" style={{ color: C.ink }}>
                 <span className="text-[12px] font-bold ml-1" style={{ color: C.core }}>₪</span>
@@ -225,28 +225,28 @@ const PensionProductPage = () => {
         </div>
       </div>
 
-      {/* Underline tabs */}
-      <div className="px-5 mt-5">
-        <div className="flex gap-1 overflow-x-auto" style={{ borderBottom: `1px solid ${C.hairline}`, scrollbarWidth: "none" }} role="tablist">
+      {/* Filter chips — identical to Assets / Pension category */}
+      <div className="px-4 pt-5 pb-1">
+        <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
           {tabs.map((t) => {
-            const active = tab === t.key;
+            const isActive = tab === t.key;
             return (
               <button
                 key={t.key}
-                role="tab"
-                aria-selected={active}
                 onClick={() => setTab(t.key)}
-                className="relative px-4 py-3 text-[12px] font-bold whitespace-nowrap transition-colors"
-                style={{ color: active ? C.core : C.muted }}
+                className="inline-flex items-center text-[11px] font-medium px-3 py-1.5 rounded-full transition-all hover:scale-[1.04] active:scale-[0.98] flex-shrink-0"
+                style={{
+                  background: isActive ? "hsl(250, 30%, 12%)" : "white",
+                  border: isActive
+                    ? "1px solid hsl(250, 30%, 12%)"
+                    : "1px solid hsl(230, 20%, 90%)",
+                  color: isActive ? "white" : "hsl(230, 20%, 35%)",
+                  boxShadow: isActive
+                    ? "0 4px 12px hsla(250, 30%, 15%, 0.25)"
+                    : "0 1px 2px hsla(230, 20%, 40%, 0.04)",
+                }}
               >
                 {t.label}
-                {active && (
-                  <span
-                    className="absolute -bottom-px left-2 right-2 h-[2.5px] rounded-t-full"
-                    style={{ background: `linear-gradient(90deg, ${C.fresh}, ${C.core})` }}
-                    aria-hidden
-                  />
-                )}
               </button>
             );
           })}
@@ -396,23 +396,27 @@ const PensionProductPage = () => {
         <button
           onClick={() => setChatOpen(true)}
           dir="rtl"
-          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all active:scale-[0.99] bg-white"
+          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
           style={{
-            boxShadow: "0 8px 32px hsla(155, 50%, 18%, 0.14), 0 2px 8px hsla(155, 50%, 18%, 0.06)",
-            border: `1px solid ${C.hairline}`,
+            background: "white",
+            boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
+            border: "1px solid hsl(230, 20%, 92%)",
           }}
           aria-label="פתח צ׳אט עם Finansee AI"
         >
           <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
-            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(155, 50%, 18%, 0.35)" }}>
+            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
               <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
             </span>
           </span>
-          <span className="flex-1 text-start text-sm" style={{ color: C.muted }}>
+          <span className="flex-1 text-start text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
             שאל את Finansee AI
           </span>
-          <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: C.soft, border: `1px solid ${C.hairline}` }}>
-            <Mic className="h-4 w-4" style={{ color: C.muted }} />
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: "hsl(230, 25%, 96%)", border: "1px solid hsl(230, 20%, 90%)" }}
+          >
+            <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
           </span>
           <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
             <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
