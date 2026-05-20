@@ -130,6 +130,10 @@ export type CategoryPageProps = {
   insightsVariant?: "c" | "life";
   /** Optional: per-item click handler. When provided, the card becomes a navigation trigger. */
   onItemClick?: (item: CategoryItem, index: number) => void;
+  /** Optional: parent breadcrumb label, e.g. "נכסים" — renders a small "‹ נכסים" pill above title. */
+  parentLabel?: string;
+  /** Optional: where the parent label navigates to (default: -1). */
+  parentPath?: string;
 };
 
 export const CategoryPageC = ({
