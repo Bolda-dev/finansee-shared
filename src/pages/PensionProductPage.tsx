@@ -424,7 +424,6 @@ const PensionProductPage = () => {
         <p className="text-[10.5px] text-center mt-2 px-6" style={{ color: C.muted }}>
           הנתונים מתעדכנים אוטומטית מהמסלקה הפנסיונית
         </p>
-        </div>
       </div>
 
 
