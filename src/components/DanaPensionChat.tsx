@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Send, Sparkles, MessageCircle, ArrowLeftRight } from "lucide-react";
+import { X, MessageCircle, ArrowLeftRight } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import advisorImg from "@/assets/advisor-avatar.jpg";
