@@ -184,11 +184,11 @@ const PensionProductPage = () => {
         >
           <div className="flex justify-between items-start mb-4">
             <div className="flex-1 min-w-0 pl-3">
-              <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: C.muted }}>
+              <p className="text-[20px] font-extrabold leading-tight tracking-tight truncate" style={{ color: C.ink }}>
                 {product.provider}
               </p>
-              <p className="text-[18px] font-extrabold leading-tight tracking-tight truncate" style={{ color: C.ink }}>
-                {product.label}
+              <p className="text-[12px] font-medium mt-0.5 truncate" style={{ color: C.muted }}>
+                {product.label} · {product.typeLabel}
               </p>
               <p className="text-[20px] font-extrabold tracking-tight leading-none mt-3" style={{ color: C.ink }}>
                 <span className="text-[12px] font-bold ml-1" style={{ color: C.core }}>₪</span>
