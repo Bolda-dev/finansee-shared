@@ -11,6 +11,8 @@ const IncomePage = lazy(() => import("./pages/IncomePage"));
 const ExpensesPage = lazy(() => import("./pages/ExpensesPage"));
 const InsurancePageC = lazy(() => import("./pages/InsurancePageC"));
 const AssetsPageC = lazy(() => import("./pages/AssetsPageC"));
+const PensionCategoryPage = lazy(() => import("./pages/PensionCategoryPage"));
+const PensionProductPage = lazy(() => import("./pages/PensionProductPage"));
 const LiabilitiesPageC = lazy(() => import("./pages/LiabilitiesPageC"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Signup2 = lazy(() => import("./pages/Signup2"));
