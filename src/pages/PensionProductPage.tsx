@@ -482,6 +482,13 @@ const PensionProductPage = () => {
       </div>
 
       <InsightsSheetC open={chatOpen} onOpenChange={setChatOpen} mode="context" />
+      <DanaPensionChat
+        open={danaOpen}
+        onOpenChange={setDanaOpen}
+        product={product}
+        alternative={{ provider: alt.provider, label: alt.label, mgmt: alt.mgmt, return3y: alt.return3y }}
+        savings={alt.savings}
+      />
     </div>
   );
 };
