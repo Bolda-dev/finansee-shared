@@ -138,93 +138,116 @@ const PensionProductPage = () => {
 
   return (
     <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
-      {/* Thin top bar with breadcrumb */}
+      {/* BOLD DARK HERO — makes the level change unmistakable */}
       <div
-        className="sticky top-0 z-30 bg-white/95 backdrop-blur-md"
-        style={{ borderBottom: `1px solid ${C.hairline}` }}
+        className="relative overflow-hidden"
+        style={{
+          background: `linear-gradient(155deg, ${C.deep} 0%, ${C.core} 60%, ${C.fresh} 100%)`,
+        }}
       >
-        <div className="flex items-center justify-between px-4 py-3">
+        {/* Decorative concentric arcs */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 140 160"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden
+        >
+          {[40, 70, 100, 130, 160, 190].map((r) => (
+            <circle key={r} cx={130} cy={10} r={r} fill="none" stroke="hsla(0,0%,100%,0.07)" strokeWidth="1" />
+          ))}
+        </svg>
+
+        {/* Top nav row — visible breadcrumb on dark */}
+        <div className="relative flex items-center justify-between px-4 pt-4 pb-2">
           <button
             onClick={() => navigate("/assets/pension")}
-            className="flex items-center gap-0.5 text-[12px] font-semibold"
-            style={{ color: C.core }}
+            className="flex items-center gap-1 text-[12.5px] font-semibold text-white/95"
             aria-label="חזרה"
           >
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          <nav className="text-[11.5px] flex items-center gap-1 truncate max-w-[65%]" style={{ color: C.muted }} aria-label="breadcrumb">
-            <button onClick={() => navigate("/assets/pension")} className="font-medium hover:underline" style={{ color: C.muted }}>פנסיה</button>
-            <span style={{ color: C.hairline }}>/</span>
-            <span className="font-bold truncate" style={{ color: C.ink }}>{product.label}</span>
+          {/* Visible breadcrumb pill */}
+          <nav
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold"
+            style={{ background: "hsla(0, 0%, 100%, 0.16)", backdropFilter: "blur(6px)", border: "1px solid hsla(0,0%,100%,0.22)" }}
+            aria-label="breadcrumb"
+          >
+            <button onClick={() => navigate("/assets")} className="text-white/80">נכסים</button>
+            <span className="text-white/50">›</span>
+            <button onClick={() => navigate("/assets/pension")} className="text-white/80">פנסיה</button>
+            <span className="text-white/50">›</span>
+            <span className="text-white">מוצר</span>
           </nav>
         </div>
-      </div>
 
-      <div className="px-4 pt-4 pb-32 flex flex-col gap-3">
-        {/* Product header card — distinctive Level 2 marker */}
-        <div
-          className="relative rounded-2xl bg-white p-4 overflow-hidden"
-          style={{ border: `1px solid ${C.hairline}`, boxShadow: "0 4px 16px hsla(155, 50%, 20%, 0.06)" }}
-          dir="rtl"
-        >
-          {/* Thick accent stripe on the right */}
-          <span
-            className="absolute top-0 bottom-0 right-0 w-1.5"
-            style={{ background: `linear-gradient(180deg, ${C.deep}, ${C.fresh})` }}
-            aria-hidden
-          />
-          <div className="pr-3">
-            <div className="flex items-start gap-3 mb-3">
+        {/* Hero content */}
+        <div className="relative px-5 pt-3 pb-6 text-white text-right">
+          <div className="flex items-start gap-3 mb-4">
+            <span
+              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{ background: "hsla(0,0%,100%,0.95)", boxShadow: "0 6px 20px hsla(178, 70%, 8%, 0.35)" }}
+            >
+              <Icon className="h-7 w-7" style={{ color: C.deep }} strokeWidth={2.2} />
+            </span>
+            <div className="flex-1 min-w-0">
               <span
-                className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ background: C.mint }}
+                className="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full mb-1.5"
+                style={{ background: "hsla(0,0%,100%,0.18)", border: "1px solid hsla(0,0%,100%,0.22)" }}
               >
-                <Icon className="h-6 w-6" style={{ color: C.deep }} strokeWidth={2.2} />
+                {product.typeLabel}
               </span>
-              <div className="flex-1 min-w-0 text-right">
-                <p className="text-[15px] font-extrabold leading-tight" style={{ color: C.ink }}>
-                  {product.label}
-                </p>
-                <p className="text-[11.5px] mt-0.5" style={{ color: C.muted }}>
-                  {product.provider} · {product.typeLabel}
-                </p>
-              </div>
-              <span
-                className="text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0"
-                style={{
-                  background: product.status === "active" ? C.mint : "hsl(30, 70%, 93%)",
-                  color: product.status === "active" ? C.deep : "hsl(30, 60%, 35%)",
-                }}
-              >
-                {product.status === "active" ? "פעיל" : "לא פעיל"}
-              </span>
+              <p className="text-[19px] font-extrabold leading-tight tracking-tight">{product.label}</p>
+              <p className="text-[12px] mt-0.5 text-white/85">{product.provider}</p>
             </div>
+            <span
+              className="text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0"
+              style={{
+                background: product.status === "active" ? "hsla(150, 70%, 50%, 0.25)" : "hsla(30, 90%, 60%, 0.25)",
+                border: `1px solid ${product.status === "active" ? "hsla(150, 70%, 70%, 0.45)" : "hsla(30, 90%, 70%, 0.45)"}`,
+                color: "white",
+              }}
+            >
+              {product.status === "active" ? "● פעיל" : "● לא פעיל"}
+            </span>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-3" style={{ borderTop: `1px solid ${C.hairline}` }}>
-              <div className="text-right">
-                <p className="text-[10.5px] mb-1" style={{ color: C.muted }}>צבירה כוללת</p>
-                <p className="text-[22px] font-extrabold tracking-tight leading-none" style={{ color: C.ink }}>
-                  {formatNIS(product.balance)}
-                </p>
-              </div>
-              <div className="text-right" style={{ borderRight: `1px solid ${C.hairline}`, paddingRight: 12 }}>
-                <p className="text-[10.5px] mb-1" style={{ color: C.muted }}>
-                  {product.projectedPension ? "צפי קצבה" : product.liquidFrom ? "נזיל החל מ" : "הפקדה חודשית"}
-                </p>
-                <p className="text-[16px] font-extrabold tracking-tight leading-none" style={{ color: C.core }}>
-                  {product.projectedPension
-                    ? `${formatNIS(product.projectedPension)}/ח`
-                    : product.liquidFrom
-                    ? product.liquidFrom
-                    : product.monthlyDeposit
-                    ? `${formatNIS(product.monthlyDeposit)}/ח`
-                    : "—"}
-                </p>
-              </div>
+          {/* Big balance + secondary */}
+          <div className="grid grid-cols-[1.4fr_1fr] gap-3 items-end">
+            <div>
+              <p className="text-[11px] text-white/80 mb-1">צבירה כוללת</p>
+              <p className="text-[34px] font-extrabold tracking-tight leading-none">
+                {formatNIS(product.balance)}
+              </p>
+            </div>
+            <div className="text-right pr-3" style={{ borderRight: "1px solid hsla(0,0%,100%,0.22)" }}>
+              <p className="text-[10.5px] text-white/80 mb-1">
+                {product.projectedPension ? "צפי קצבה" : product.liquidFrom ? "נזיל החל מ" : "הפקדה חודשית"}
+              </p>
+              <p className="text-[15px] font-extrabold tracking-tight leading-none">
+                {product.projectedPension
+                  ? `${formatNIS(product.projectedPension)}/ח`
+                  : product.liquidFrom
+                  ? product.liquidFrom
+                  : product.monthlyDeposit
+                  ? `${formatNIS(product.monthlyDeposit)}/ח`
+                  : "—"}
+              </p>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Sheet content with curved top */}
+      <div
+        className="relative -mt-4 rounded-t-3xl pb-32"
+        style={{ background: C.soft, boxShadow: `0 -8px 24px ${C.sheetShadow ?? "hsla(178, 70%, 14%, 0.18)"}` }}
+      >
+        <div className="flex justify-center pt-2.5 pb-1">
+          <div className="w-10 h-1.5 rounded-full" style={{ background: C.hairline }} />
+        </div>
+
+      <div className="px-4 pt-2 flex flex-col gap-3">
 
         {/* Tab bar — real tabs, not chips */}
         <div
