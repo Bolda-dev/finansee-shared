@@ -142,32 +142,6 @@ const PensionCategoryPage = () => {
         </div>
       </div>
 
-      {/* Dana section — right after hero */}
-      <div className="px-5 mt-4">
-        <button
-          onClick={() => setChatOpen(true)}
-          className="w-full rounded-2xl p-4 text-start flex items-center gap-3 transition-transform active:scale-[0.99]"
-          style={{
-            background: "white",
-            boxShadow: "0 4px 18px hsla(250, 30%, 25%, 0.08)",
-            border: "1px solid hsl(230, 20%, 93%)",
-          }}
-          dir="rtl"
-        >
-          <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0">
-            <span className="block w-full h-full rounded-full overflow-hidden">
-              <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
-            </span>
-          </span>
-          <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-bold" style={{ color: C.ink }}>דנה — תובנה אישית</p>
-            <p className="text-[11px] mt-0.5" style={{ color: C.muted }}>
-              יש לך הזדמנות לחסוך בדמי ניהול בקופת גמל
-            </p>
-          </div>
-          <ChevronLeft className="h-4 w-4 flex-shrink-0" style={{ color: C.muted }} />
-        </button>
-      </div>
 
       {/* Filter chips */}
       <div className="px-4 pt-4 pb-1">
