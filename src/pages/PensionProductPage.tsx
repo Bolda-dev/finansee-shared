@@ -418,7 +418,10 @@ const PensionProductPage = () => {
         <p className="text-[10.5px] text-center mt-1 px-6" style={{ color: C.muted }}>
           הנתונים מתעדכנים אוטומטית מהמסלקה הפנסיונית
         </p>
+        </div>
       </div>
+
+
 
       {/* Bottom Chat Bar */}
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none" dir="rtl">
