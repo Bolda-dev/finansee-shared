@@ -157,31 +157,34 @@ const PensionProductPage = () => {
           ))}
         </svg>
 
-        {/* Top nav row — back + centered breadcrumb (Assets-like) */}
+        {/* Top nav row — back + attached breadcrumb */}
         <div className="relative flex items-center justify-between px-5 pt-5 pb-2 text-white">
-          <button
-            onClick={() => navigate("/assets/pension")}
-            className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
-            aria-label="חזרה"
-          >
-            <ChevronRight className="h-4 w-4" />
-            חזרה
-          </button>
-          <nav
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold"
-            style={{
-              background: "hsla(0, 0%, 100%, 0.16)",
-              backdropFilter: "blur(6px)",
-              border: "1px solid hsla(0,0%,100%,0.22)",
-            }}
-            aria-label="breadcrumb"
-          >
-            <button onClick={() => navigate("/assets")} className="text-white/85">נכסים</button>
-            <span className="text-white/50">›</span>
-            <button onClick={() => navigate("/assets/pension")} className="text-white/85">פנסיה</button>
-          </nav>
-          <span className="w-12" aria-hidden />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => navigate("/assets/pension")}
+              className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
+              aria-label="חזרה"
+            >
+              <ChevronRight className="h-4 w-4" />
+              חזרה
+            </button>
+            <nav
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold"
+              style={{
+                background: "hsla(0, 0%, 100%, 0.16)",
+                backdropFilter: "blur(6px)",
+                border: "1px solid hsla(0,0%,100%,0.22)",
+              }}
+              aria-label="breadcrumb"
+            >
+              <button onClick={() => navigate("/assets")} className="text-white/85">נכסים</button>
+              <span className="text-white/50">›</span>
+              <button onClick={() => navigate("/assets/pension")} className="text-white/85">פנסיה</button>
+            </nav>
+          </div>
+          <span className="w-7" aria-hidden />
         </div>
+
 
         {/* Hero content — centered stack, Assets-like rhythm */}
         <div className="relative flex flex-col items-center text-center px-6 pt-6 pb-10 text-white">
