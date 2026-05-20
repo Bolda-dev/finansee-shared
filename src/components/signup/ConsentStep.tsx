@@ -10,6 +10,7 @@ interface ConsentStepProps {
   subtitle: string;
   bullets: string[];
   socialProof: string;
+  showSignature?: boolean;
 }
 
 export const ConsentStep = ({
@@ -19,6 +20,7 @@ export const ConsentStep = ({
   subtitle,
   bullets,
   socialProof,
+  showSignature = false,
 }: ConsentStepProps) => {
   const [signed, setSigned] = useState(false);
 
@@ -34,7 +36,8 @@ export const ConsentStep = ({
         />
         <SocialProofCallout text={socialProof} />
 
-        {/* Digital signature mock */}
+        {/* Digital signature mock — only when explicitly enabled */}
+        {showSignature && (
         <div className="space-y-2">
           <div className="flex items-center justify-between px-1">
             <p className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 20%)" }}>
@@ -105,6 +108,7 @@ export const ConsentStep = ({
             )}
           </button>
         </div>
+        )}
       </div>
     </div>
   );
