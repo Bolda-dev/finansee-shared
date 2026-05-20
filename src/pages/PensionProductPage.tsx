@@ -157,97 +157,123 @@ const PensionProductPage = () => {
           ))}
         </svg>
 
-        {/* Top nav row — visible breadcrumb on dark */}
-        <div className="relative flex items-center justify-between px-4 pt-4 pb-2">
+        {/* Top nav row — back + centered breadcrumb (Assets-like) */}
+        <div className="relative flex items-center justify-between px-5 pt-5 pb-2 text-white">
           <button
             onClick={() => navigate("/assets/pension")}
-            className="flex items-center gap-1 text-[12.5px] font-semibold text-white/95"
+            className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
             aria-label="חזרה"
           >
             <ChevronRight className="h-4 w-4" />
             חזרה
           </button>
-          {/* Visible breadcrumb pill */}
           <nav
             className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold"
-            style={{ background: "hsla(0, 0%, 100%, 0.16)", backdropFilter: "blur(6px)", border: "1px solid hsla(0,0%,100%,0.22)" }}
+            style={{
+              background: "hsla(0, 0%, 100%, 0.16)",
+              backdropFilter: "blur(6px)",
+              border: "1px solid hsla(0,0%,100%,0.22)",
+            }}
             aria-label="breadcrumb"
           >
-            <button onClick={() => navigate("/assets")} className="text-white/80">נכסים</button>
+            <button onClick={() => navigate("/assets")} className="text-white/85">נכסים</button>
             <span className="text-white/50">›</span>
-            <button onClick={() => navigate("/assets/pension")} className="text-white/80">פנסיה</button>
-            <span className="text-white/50">›</span>
-            <span className="text-white">מוצר</span>
+            <button onClick={() => navigate("/assets/pension")} className="text-white/85">פנסיה</button>
           </nav>
+          <span className="w-12" aria-hidden />
         </div>
 
-        {/* Hero content */}
-        <div className="relative px-5 pt-3 pb-6 text-white text-right">
-          <div className="flex items-start gap-3 mb-4">
-            <span
-              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-              style={{ background: "hsla(0,0%,100%,0.95)", boxShadow: "0 6px 20px hsla(178, 70%, 8%, 0.35)" }}
-            >
-              <Icon className="h-7 w-7" style={{ color: C.deep }} strokeWidth={2.2} />
-            </span>
-            <div className="flex-1 min-w-0">
-              <span
-                className="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full mb-1.5"
-                style={{ background: "hsla(0,0%,100%,0.18)", border: "1px solid hsla(0,0%,100%,0.22)" }}
-              >
-                {product.typeLabel}
-              </span>
-              <p className="text-[19px] font-extrabold leading-tight tracking-tight">{product.label}</p>
-              <p className="text-[12px] mt-0.5 text-white/85">{product.provider}</p>
-            </div>
-            <span
-              className="text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0"
-              style={{
-                background: product.status === "active" ? "hsla(150, 70%, 50%, 0.25)" : "hsla(30, 90%, 60%, 0.25)",
-                border: `1px solid ${product.status === "active" ? "hsla(150, 70%, 70%, 0.45)" : "hsla(30, 90%, 70%, 0.45)"}`,
-                color: "white",
-              }}
-            >
-              {product.status === "active" ? "● פעיל" : "● לא פעיל"}
-            </span>
-          </div>
+        {/* Hero content — centered stack, Assets-like rhythm */}
+        <div className="relative flex flex-col items-center text-center px-6 pt-6 pb-10 text-white">
+          {/* Type chip */}
+          <span
+            className="inline-flex items-center text-[10.5px] font-bold px-2.5 py-1 rounded-full mb-4"
+            style={{
+              background: "hsla(0,0%,100%,0.18)",
+              border: "1px solid hsla(0,0%,100%,0.22)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            {product.typeLabel}
+          </span>
 
-          {/* Big balance + secondary */}
-          <div className="grid grid-cols-[1.4fr_1fr] gap-3 items-end">
-            <div>
-              <p className="text-[11px] text-white/80 mb-1">צבירה כוללת</p>
-              <p className="text-[34px] font-extrabold tracking-tight leading-none">
-                {formatNIS(product.balance)}
-              </p>
-            </div>
-            <div className="text-right pr-3" style={{ borderRight: "1px solid hsla(0,0%,100%,0.22)" }}>
-              <p className="text-[10.5px] text-white/80 mb-1">
-                {product.projectedPension ? "צפי קצבה" : product.liquidFrom ? "נזיל החל מ" : "הפקדה חודשית"}
-              </p>
-              <p className="text-[15px] font-extrabold tracking-tight leading-none">
-                {product.projectedPension
-                  ? `${formatNIS(product.projectedPension)}/ח`
-                  : product.liquidFrom
-                  ? product.liquidFrom
-                  : product.monthlyDeposit
-                  ? `${formatNIS(product.monthlyDeposit)}/ח`
-                  : "—"}
-              </p>
-            </div>
-          </div>
+          {/* Icon */}
+          <span
+            className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
+            style={{
+              background: "hsla(0,0%,100%,0.95)",
+              boxShadow: "0 8px 24px hsla(178, 70%, 8%, 0.35)",
+            }}
+          >
+            <Icon className="h-8 w-8" style={{ color: C.deep }} strokeWidth={2.2} />
+          </span>
+
+          {/* Title + provider */}
+          <p className="text-[22px] font-extrabold leading-tight tracking-tight mb-1">
+            {product.label}
+          </p>
+          <p className="text-[12.5px] opacity-85 mb-3">{product.provider}</p>
+
+          {/* Status pill — centered under provider, not floating */}
+          <span
+            className="inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-full mb-7"
+            style={{
+              background:
+                product.status === "active"
+                  ? "hsla(150, 70%, 50%, 0.22)"
+                  : "hsla(30, 90%, 60%, 0.22)",
+              border: `1px solid ${product.status === "active" ? "hsla(150, 70%, 70%, 0.50)" : "hsla(30, 90%, 70%, 0.50)"}`,
+              color: "white",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            <span
+              className="w-1.5 h-1.5 rounded-full"
+              style={{
+                background: product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)",
+                boxShadow: `0 0 6px ${product.status === "active" ? "hsl(150, 80%, 60%)" : "hsl(30, 95%, 65%)"}`,
+              }}
+            />
+            {product.status === "active" ? "פעיל" : "לא פעיל"}
+          </span>
+
+          {/* Big balance KPI — centered like Assets */}
+          <p className="text-[12px] font-medium opacity-85 mb-1.5">צבירה כוללת</p>
+          <p className="text-[40px] font-extrabold tracking-tight leading-none mb-3">
+            {formatNIS(product.balance)}
+          </p>
+
+          {/* Secondary KPI pill */}
+          <span
+            className="inline-flex items-center text-[11.5px] font-semibold px-3 py-1.5 rounded-full"
+            style={{
+              background: "hsla(0,0%,100%,0.18)",
+              border: "1px solid hsla(0,0%,100%,0.22)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            {product.projectedPension
+              ? `צפי קצבה ${formatNIS(product.projectedPension)}/ח`
+              : product.liquidFrom
+              ? `נזיל החל מ-${product.liquidFrom}`
+              : product.monthlyDeposit
+              ? `הפקדה ${formatNIS(product.monthlyDeposit)}/ח`
+              : "ללא הפקדה פעילה"}
+          </span>
         </div>
       </div>
 
       {/* Sheet content with curved top */}
       <div
-        className="relative -mt-4 rounded-t-3xl pb-32"
-        style={{ background: C.soft, boxShadow: `0 -8px 24px hsla(178, 70%, 14%, 0.18)` }}
+        className="relative -mt-6 rounded-t-3xl pb-32"
+        style={{ background: C.soft, boxShadow: `0 -8px 28px hsla(178, 70%, 14%, 0.22)` }}
       >
-        <div className="flex justify-center pt-2.5 pb-1">
+        <div className="flex justify-center pt-3 pb-1">
           <div className="w-10 h-1.5 rounded-full" style={{ background: C.hairline }} />
         </div>
 
-      <div className="px-4 pt-2 flex flex-col gap-3">
+      <div className="px-4 pt-3 flex flex-col gap-4">
+
 
         {/* Tab bar — real tabs, not chips */}
         <div

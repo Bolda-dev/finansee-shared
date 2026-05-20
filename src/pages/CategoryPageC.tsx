@@ -130,6 +130,10 @@ export type CategoryPageProps = {
   insightsVariant?: "c" | "life";
   /** Optional: per-item click handler. When provided, the card becomes a navigation trigger. */
   onItemClick?: (item: CategoryItem, index: number) => void;
+  /** Optional: parent breadcrumb label, e.g. "נכסים" — renders a small "‹ נכסים" pill above title. */
+  parentLabel?: string;
+  /** Optional: where the parent label navigates to (default: -1). */
+  parentPath?: string;
 };
 
 export const CategoryPageC = ({
@@ -152,6 +156,8 @@ export const CategoryPageC = ({
   renderItemSubtitle,
   insightsVariant = "c",
   onItemClick,
+  parentLabel,
+  parentPath,
 }: CategoryPageProps) => {
   const navigate = useNavigate();
   const { innerGrid } = useVersionCSettings();
@@ -257,6 +263,24 @@ export const CategoryPageC = ({
 
         {/* Hero KPI */}
         <div className="relative flex flex-col items-center text-center" style={{ color: heroText }}>
+          {parentLabel && (
+            <button
+              onClick={() => (parentPath ? navigate(parentPath) : navigate(-1))}
+              className="inline-flex items-center gap-1 text-[10.5px] font-bold px-2.5 py-1 rounded-full mb-3 transition-opacity hover:opacity-100"
+              style={{
+                background: heroText === "white" ? "hsla(0,0%,100%,0.18)" : "hsla(0,0%,0%,0.08)",
+                color: heroText,
+                border: heroText === "white" ? "1px solid hsla(0,0%,100%,0.25)" : "1px solid hsla(0,0%,0%,0.10)",
+                backdropFilter: "blur(6px)",
+              }}
+              aria-label={`חזרה ל${parentLabel}`}
+            >
+              <ChevronRight className="h-3 w-3" />
+              {parentLabel}
+              <span className="opacity-60">›</span>
+              <span className="opacity-90">{title}</span>
+            </button>
+          )}
           <p className="text-[12px] font-medium opacity-85 mb-1.5">{primaryKpiLabel}</p>
           <p className="text-[40px] font-extrabold tracking-tight leading-none mb-2">
             {primaryKpiValue}
