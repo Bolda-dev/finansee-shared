@@ -769,6 +769,47 @@ const AhaDashboard = () => {
                       <p className="text-center text-[15px] font-extrabold mb-1" style={{ color: "hsl(250, 40%, 15%)" }}>פרטי תעודת זהות</p>
                       <p className="text-center text-[11px] mb-4" style={{ color: "hsl(230, 15%, 50%)" }}>נדרשים לאימות הזהות שלך</p>
 
+                      {/* Capture buttons — above inputs */}
+                      <div className="grid grid-cols-2 gap-2 mb-3.5">
+                        <button
+                          onClick={() => {
+                            setIdShot(true);
+                            setUsePhoto(true);
+                            setIdNumber("123456789");
+                            setIdDate("15/03/2018");
+                          }}
+                          className="rounded-2xl px-2 py-3 flex flex-col items-center justify-center gap-1.5 text-center transition-all active:scale-[0.97]"
+                          style={{
+                            background: idShot ? "hsl(150, 60%, 96%)" : "white",
+                            border: idShot ? "1.5px solid hsl(150, 55%, 55%)" : "1.5px dashed hsl(262, 50%, 75%)",
+                            boxShadow: idShot ? "0 6px 16px -10px hsla(150, 55%, 30%, 0.35)" : "0 4px 14px -10px hsla(250, 40%, 20%, 0.15)",
+                          }}
+                        >
+                          <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: idShot ? "hsl(150, 55%, 88%)" : "hsl(262, 75%, 96%)", color: idShot ? "hsl(150, 60%, 26%)" : "hsl(262, 75%, 45%)" }}>
+                            {idShot ? <Check className="h-4 w-4" strokeWidth={3} /> : <Camera className="h-4 w-4" />}
+                          </span>
+                          <span className="text-[11.5px] font-bold leading-tight" style={{ color: idShot ? "hsl(150, 60%, 26%)" : "hsl(250, 40%, 25%)" }}>
+                            {idShot ? "צולם" : "צילום ת.ז"}
+                          </span>
+                        </button>
+                        <button
+                          onClick={() => setSelfieShot(true)}
+                          className="rounded-2xl px-2 py-3 flex flex-col items-center justify-center gap-1.5 text-center transition-all active:scale-[0.97]"
+                          style={{
+                            background: selfieShot ? "hsl(150, 60%, 96%)" : "white",
+                            border: selfieShot ? "1.5px solid hsl(150, 55%, 55%)" : "1.5px dashed hsl(262, 50%, 75%)",
+                            boxShadow: selfieShot ? "0 6px 16px -10px hsla(150, 55%, 30%, 0.35)" : "0 4px 14px -10px hsla(250, 40%, 20%, 0.15)",
+                          }}
+                        >
+                          <span className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: selfieShot ? "hsl(150, 55%, 88%)" : "hsl(262, 75%, 96%)", color: selfieShot ? "hsl(150, 60%, 26%)" : "hsl(262, 75%, 45%)" }}>
+                            {selfieShot ? <Check className="h-4 w-4" strokeWidth={3} /> : <UserSquare2 className="h-4 w-4" />}
+                          </span>
+                          <span className="text-[11.5px] font-bold leading-tight" style={{ color: selfieShot ? "hsl(150, 60%, 26%)" : "hsl(250, 40%, 25%)" }}>
+                            {selfieShot ? "אומת" : "צילום סלפי לאימות"}
+                          </span>
+                        </button>
+                      </div>
+
                       <label className="block text-[11px] font-bold text-right mb-1" style={{ color: "hsl(250, 40%, 20%)" }}>מספר תעודת זהות</label>
                       <input
                         dir="rtl"
@@ -796,24 +837,9 @@ const AhaDashboard = () => {
                           setIdDate(formatted.slice(0, 10));
                         }}
                         placeholder="dd/mm/yyyy"
-                        className="w-full text-right text-[15px] font-semibold tracking-wide rounded-xl py-3 px-3 mb-3 focus:outline-none"
+                        className="w-full text-right text-[15px] font-semibold tracking-wide rounded-xl py-3 px-3 focus:outline-none"
                         style={{ border: "1.5px solid hsl(230, 20%, 88%)", color: "hsl(250, 40%, 15%)", background: "hsl(230, 30%, 98%)" }}
                       />
-
-                      <div className="flex items-center justify-between gap-2 mt-2">
-                        <span className="text-[10.5px]" style={{ color: "hsl(230, 15%, 55%)" }}>או מלא אוטומטית מצילום</span>
-                        <button
-                          onClick={() => setUsePhoto(!usePhoto)}
-                          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition-all active:scale-[0.97]"
-                          style={{
-                            border: `1px dashed ${usePhoto ? "hsl(262, 75%, 55%)" : "hsl(262, 50%, 70%)"}`,
-                            background: usePhoto ? "hsl(262, 75%, 96%)" : "transparent",
-                          }}
-                        >
-                          {usePhoto ? <Check className="h-3.5 w-3.5" strokeWidth={3} style={{ color: "hsl(262, 75%, 45%)" }} /> : <Camera className="h-3.5 w-3.5" style={{ color: "hsl(262, 75%, 45%)" }} />}
-                          <span className="text-[11.5px] font-bold" style={{ color: "hsl(262, 75%, 40%)" }}>צלם תעודה</span>
-                        </button>
-                      </div>
                     </div>
                   )}
 
