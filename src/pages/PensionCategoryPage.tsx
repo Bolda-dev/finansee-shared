@@ -231,7 +231,7 @@ const PensionCategoryPage = () => {
                 className="text-[12px] font-bold tracking-tight truncate"
                 style={{ color: C.ink }}
               >
-                {p.label}
+                {p.provider}
               </span>
             </div>
 
