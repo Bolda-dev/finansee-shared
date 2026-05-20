@@ -169,8 +169,12 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                 return (
                   <div key={m.id} className="flex justify-start">
                     <div
-                      className="max-w-[80%] rounded-2xl rounded-tr-md px-4 py-2.5 text-[13px] font-medium"
-                      style={{ background: "white", color: C.ink, border: `1px solid ${C.hairline}` }}
+                      className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5 text-[13px] font-medium text-right"
+                      style={{
+                        background: "hsl(250, 30%, 8%)",
+                        color: "white",
+                        boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)",
+                      }}
                     >
                       {m.text}
                     </div>
@@ -181,8 +185,13 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                 return (
                   <div key={m.id} className="flex justify-end gap-2 items-end">
                     <div
-                      className="max-w-[82%] rounded-2xl rounded-tl-md px-4 py-3 text-[13px] leading-relaxed text-white"
-                      style={{ background: `linear-gradient(135deg, ${C.core} 0%, ${C.deep} 100%)` }}
+                      className="max-w-[82%] rounded-2xl rounded-br-md px-3.5 py-2.5 text-[13px] leading-relaxed text-right"
+                      style={{
+                        background: "white",
+                        color: "hsl(250, 35%, 25%)",
+                        border: "1px solid hsl(230, 20%, 92%)",
+                        boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                      }}
                     >
                       {m.text}
                     </div>
@@ -202,8 +211,12 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             {typing && (
               <div className="flex justify-end gap-2 items-end">
                 <div
-                  className="rounded-2xl rounded-tl-md px-4 py-3 flex items-center gap-1"
-                  style={{ background: `linear-gradient(135deg, ${C.core} 0%, ${C.deep} 100%)` }}
+                  className="rounded-2xl rounded-br-md px-4 py-3 flex items-center gap-1"
+                  style={{
+                    background: "white",
+                    border: "1px solid hsl(230, 20%, 92%)",
+                    boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                  }}
                 >
                   <Dot delay={0} />
                   <Dot delay={150} />
