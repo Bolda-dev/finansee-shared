@@ -81,21 +81,21 @@ const PensionCategoryPage = () => {
         <span className="text-end leading-tight">
           <span
             className="block text-[13px] font-bold tracking-tight"
-            style={{ color: "hsl(250, 50%, 12%)" }}
+            style={{ color: "hsl(155, 40%, 12%)" }}
           >
             {formatNIS(item.amount ?? 0)}
           </span>
           {item.monthly ? (
             <span
               className="block text-[10px] font-medium"
-              style={{ color: "hsl(258, 60%, 45%)" }}
+              style={{ color: "hsl(150, 60%, 32%)" }}
             >
               +{formatNIS(item.monthly)}/חודש
             </span>
           ) : (
             <span
               className="block text-[10px] font-medium"
-              style={{ color: "hsl(230, 15%, 55%)" }}
+              style={{ color: "hsl(150, 12%, 48%)" }}
             >
               ללא הפקדה
             </span>
