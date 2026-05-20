@@ -65,7 +65,7 @@ const PensionCategoryPage = () => {
     <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
       {/* Compact teal banner — short, just identity */}
       <div
-        className="relative px-5 pt-8 pb-20 overflow-hidden hero-rise"
+        className="relative px-5 pt-10 pb-20 overflow-hidden hero-rise"
         style={{
           background: `linear-gradient(160deg, ${C.deep} 0%, ${C.core} 70%, ${C.fresh} 130%)`,
         }}
