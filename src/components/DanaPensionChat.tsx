@@ -169,8 +169,12 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                 return (
                   <div key={m.id} className="flex justify-start">
                     <div
-                      className="max-w-[80%] rounded-2xl rounded-tr-md px-4 py-2.5 text-[13px] font-medium"
-                      style={{ background: "white", color: C.ink, border: `1px solid ${C.hairline}` }}
+                      className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5 text-[13px] font-medium text-right"
+                      style={{
+                        background: "hsl(250, 30%, 8%)",
+                        color: "white",
+                        boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)",
+                      }}
                     >
                       {m.text}
                     </div>
@@ -181,8 +185,13 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                 return (
                   <div key={m.id} className="flex justify-end gap-2 items-end">
                     <div
-                      className="max-w-[82%] rounded-2xl rounded-tl-md px-4 py-3 text-[13px] leading-relaxed text-white"
-                      style={{ background: `linear-gradient(135deg, ${C.core} 0%, ${C.deep} 100%)` }}
+                      className="max-w-[82%] rounded-2xl rounded-br-md px-3.5 py-2.5 text-[13px] leading-relaxed text-right"
+                      style={{
+                        background: "white",
+                        color: "hsl(250, 35%, 25%)",
+                        border: "1px solid hsl(230, 20%, 92%)",
+                        boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                      }}
                     >
                       {m.text}
                     </div>
@@ -202,8 +211,12 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             {typing && (
               <div className="flex justify-end gap-2 items-end">
                 <div
-                  className="rounded-2xl rounded-tl-md px-4 py-3 flex items-center gap-1"
-                  style={{ background: `linear-gradient(135deg, ${C.core} 0%, ${C.deep} 100%)` }}
+                  className="rounded-2xl rounded-br-md px-4 py-3 flex items-center gap-1"
+                  style={{
+                    background: "white",
+                    border: "1px solid hsl(230, 20%, 92%)",
+                    boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
+                  }}
                 >
                   <Dot delay={0} />
                   <Dot delay={150} />
@@ -221,7 +234,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             <button
               onClick={handleYes}
               className="flex-1 rounded-full py-3 text-[13px] font-bold text-white transition-transform active:scale-[0.97]"
-              style={{ background: `linear-gradient(135deg, ${C.fresh} 0%, ${C.core} 100%)`, boxShadow: `0 4px 12px hsla(178, 70%, 20%, 0.25)` }}
+              style={{ background: "hsl(250, 30%, 8%)", boxShadow: "0 4px 12px hsla(250, 30%, 15%, 0.35)" }}
             >
               כן, ספרי לי ✨
             </button>
@@ -253,8 +266,9 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
 
 const Dot = ({ delay }: { delay: number }) => (
   <span
-    className="w-1.5 h-1.5 rounded-full bg-white/80"
+    className="w-1.5 h-1.5 rounded-full"
     style={{
+      background: "hsl(230, 15%, 65%)",
       animation: "danaDot 1.2s ease-in-out infinite",
       animationDelay: `${delay}ms`,
     }}
@@ -496,8 +510,8 @@ function CtaBlock({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           className="w-full rounded-xl py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.97]"
           style={{
-            background: `linear-gradient(135deg, ${C.deep} 0%, ${C.core} 100%)`,
-            boxShadow: `0 6px 18px hsla(178, 70%, 14%, 0.30)`,
+            background: "hsl(250, 30%, 8%)",
+            boxShadow: "0 6px 18px hsla(250, 30%, 15%, 0.40)",
           }}
         >
           ⚡ עברו לקרן המומלצת
