@@ -270,85 +270,223 @@ function CompareCard({
   alternative: { provider: string; label: string; mgmt: number; return3y: number };
   savings: number;
 }) {
-  return (
-    <div className="flex justify-end mr-9">
-      <div
-        className="w-full max-w-[82%] rounded-2xl p-3 bg-white"
-        style={{ border: `1px solid ${C.hairline}`, boxShadow: "0 4px 14px hsla(178, 70%, 14%, 0.08)" }}
-      >
-        <p className="text-[10.5px] font-bold uppercase tracking-wide mb-2.5 flex items-center gap-1" style={{ color: C.muted }}>
-          <ArrowLeftRight className="h-3 w-3" /> השוואת קרנות
-        </p>
+  const currMgmtW = Math.min(95, (product.managementFromBalance / 1.5) * 100);
+  const altMgmtW = Math.min(95, (alternative.mgmt / 1.5) * 100);
+  const maxRet = Math.max(product.return3y, alternative.return3y, 1);
+  const currRetW = (product.return3y / maxRet) * 100;
+  const altRetW = (alternative.return3y / maxRet) * 100;
+  const mgmtDelta = Math.round(
+    ((product.managementFromBalance - alternative.mgmt) / product.managementFromBalance) * 100,
+  );
 
-        <div className="grid grid-cols-2 gap-2">
+  return (
+    <div className="w-full">
+      <div
+        className="w-full rounded-3xl bg-white overflow-hidden"
+        style={{
+          border: `1px solid ${C.hairline}`,
+          boxShadow: "0 20px 50px hsla(178, 70%, 14%, 0.08)",
+        }}
+      >
+        {/* Header */}
+        <div className="pt-5 px-5 pb-1 flex justify-between items-end">
+          <div className="text-right">
+            <h3 className="text-[17px] font-extrabold tracking-tight" style={{ color: C.deep }}>
+              השוואת קרנות מורחבת
+            </h3>
+            <p className="text-[10.5px] font-medium" style={{ color: C.muted }}>
+              מבוססת על נתוני שוק עדכניים
+            </p>
+          </div>
+          <div
+            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: C.mint, border: "2px solid white" }}
+          >
+            <ArrowLeftRight className="h-4 w-4" style={{ color: C.core }} />
+          </div>
+        </div>
+
+        {/* Comparison */}
+        <div className="p-3 grid grid-cols-2 gap-2.5 relative">
+          <div
+            className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center z-10"
+            style={{
+              background: "white",
+              border: `4px solid hsl(180, 25%, 98%)`,
+              boxShadow: "0 2px 6px hsla(178, 70%, 14%, 0.08)",
+            }}
+          >
+            <span className="text-[9px] font-extrabold" style={{ color: C.muted }}>VS</span>
+          </div>
+
           {/* Current */}
           <div
-            className="rounded-xl p-2.5 text-right"
-            style={{ background: "hsl(0, 60%, 97%)", border: "1px solid hsl(0, 50%, 90%)" }}
+            className="flex flex-col gap-4 p-3.5 rounded-2xl"
+            style={{ background: "hsl(180, 12%, 97%)", border: `1px solid ${C.hairline}` }}
           >
-            <p className="text-[9px] font-bold uppercase mb-1.5" style={{ color: "hsl(0, 55%, 45%)" }}>הנוכחית</p>
-            <div className="flex items-center gap-1.5 mb-2">
-              <ProviderLogo provider={product.provider} size={24} />
-              <span className="text-[11px] font-bold truncate" style={{ color: C.ink }}>{product.provider}</span>
+            <div className="flex flex-col items-center gap-2">
+              <div className="p-1.5 rounded-xl bg-white" style={{ boxShadow: "0 1px 3px hsla(178, 70%, 14%, 0.06)" }}>
+                <ProviderLogo provider={product.provider} size={36} />
+              </div>
+              <div className="text-center">
+                <p className="text-[9.5px] font-extrabold tracking-wider" style={{ color: "hsl(0, 60%, 55%)" }}>
+                  הנוכחית
+                </p>
+                <p className="text-[12px] font-bold leading-tight" style={{ color: C.ink }}>
+                  {product.provider}
+                </p>
+              </div>
             </div>
-            <MetricRow label="דמי ניהול" value={`${product.managementFromBalance}%`} bad />
-            <MetricRow label="תשואה 3ש׳" value={`${product.return3y}%`} />
-            <MetricRow label="צבירה" value={formatNIS(product.balance)} />
+
+            <div className="space-y-3.5">
+              <div className="text-right">
+                <p className="text-[9px] font-bold mb-1 tracking-wider" style={{ color: C.muted }}>דמי ניהול</p>
+                <p className="text-[18px] font-extrabold leading-none tracking-tight" style={{ color: C.ink }}>
+                  {product.managementFromBalance}%
+                </p>
+                <div className="h-1.5 w-full rounded-full mt-2 overflow-hidden" style={{ background: "hsl(0, 30%, 92%)" }}>
+                  <div className="h-full rounded-full" style={{ background: "hsl(0, 60%, 60%)", width: `${currMgmtW}%` }} />
+                </div>
+              </div>
+
+              <div className="text-right">
+                <p className="text-[9px] font-bold mb-1 tracking-wider" style={{ color: C.muted }}>תשואה (3ש׳)</p>
+                <p className="text-[18px] font-extrabold leading-none tracking-tight" style={{ color: C.ink }}>
+                  {product.return3y}%
+                </p>
+                <div className="h-1.5 w-full rounded-full mt-2 overflow-hidden" style={{ background: "hsl(180, 15%, 90%)" }}>
+                  <div className="h-full rounded-full" style={{ background: "hsl(200, 10%, 55%)", width: `${currRetW}%` }} />
+                </div>
+              </div>
+
+              <div className="pt-2.5" style={{ borderTop: `1px solid ${C.hairline}` }}>
+                <p className="text-[9px] font-bold mb-0.5 tracking-wider" style={{ color: C.muted }}>צבירה</p>
+                <p className="text-[13px] font-extrabold tabular-nums" style={{ color: C.ink }}>
+                  {formatNIS(product.balance)}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Recommended */}
           <div
-            className="relative rounded-xl p-2.5 text-right"
+            className="relative flex flex-col gap-4 p-3.5 rounded-2xl"
             style={{
-              background: C.mint,
-              border: `1.5px solid ${C.fresh}`,
-              boxShadow: `0 4px 12px hsla(178, 70%, 30%, 0.15)`,
+              background: "hsla(176, 55%, 91%, 0.45)",
+              border: `2px solid ${C.fresh}`,
+              boxShadow: `0 10px 30px -10px hsla(174, 65%, 30%, 0.25)`,
             }}
           >
             <span
-              className="absolute -top-2 right-2 text-[8.5px] font-extrabold px-2 py-0.5 rounded-full text-white"
-              style={{ background: C.fresh }}
+              className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[9.5px] font-extrabold px-3 py-1 rounded-full text-white whitespace-nowrap"
+              style={{ background: C.fresh, boxShadow: "0 4px 10px hsla(174, 65%, 30%, 0.3)" }}
             >
-              ✨ מומלצת
+              ✨ המלצה חכמה
             </span>
-            <p className="text-[9px] font-bold uppercase mb-1.5" style={{ color: C.core }}>מומלצת</p>
-            <div className="flex items-center gap-1.5 mb-2">
-              <ProviderLogo provider={alternative.provider} size={24} />
-              <span className="text-[11px] font-bold truncate" style={{ color: C.ink }}>{alternative.provider}</span>
+
+            <div className="flex flex-col items-center gap-2 mt-1">
+              <div className="p-1.5 rounded-xl bg-white" style={{ boxShadow: "0 1px 3px hsla(178, 70%, 14%, 0.08)" }}>
+                <ProviderLogo provider={alternative.provider} size={36} />
+              </div>
+              <div className="text-center">
+                <p className="text-[9.5px] font-extrabold tracking-wider" style={{ color: C.fresh }}>מומלצת</p>
+                <p className="text-[12px] font-bold leading-tight" style={{ color: C.deep }}>
+                  {alternative.provider}
+                </p>
+              </div>
             </div>
-            <MetricRow label="דמי ניהול" value={`${alternative.mgmt}%`} good />
-            <MetricRow label="תשואה 3ש׳" value={`${alternative.return3y}%`} good />
-            <MetricRow label="חיסכון" value={formatNIS(savings)} good bold />
+
+            <div className="space-y-3.5">
+              <div className="text-right">
+                <p className="text-[9px] font-bold mb-1 tracking-wider" style={{ color: C.core, opacity: 0.7 }}>דמי ניהול</p>
+                <div className="flex items-center gap-1.5">
+                  <p className="text-[18px] font-extrabold leading-none tracking-tight" style={{ color: C.fresh }}>
+                    {alternative.mgmt}%
+                  </p>
+                  <span
+                    className="text-[9px] font-extrabold px-1.5 py-0.5 rounded"
+                    style={{ background: "white", color: "hsl(150, 60%, 30%)", border: "1px solid hsl(150, 50%, 85%)" }}
+                  >
+                    −{mgmtDelta}%
+                  </span>
+                </div>
+                <div className="h-1.5 w-full rounded-full mt-2 overflow-hidden" style={{ background: "hsla(178, 70%, 26%, 0.1)" }}>
+                  <div className="h-full rounded-full" style={{ background: C.fresh, width: `${altMgmtW}%` }} />
+                </div>
+              </div>
+
+              <div className="text-right">
+                <p className="text-[9px] font-bold mb-1 tracking-wider" style={{ color: C.core, opacity: 0.7 }}>תשואה (3ש׳)</p>
+                <div className="flex items-end gap-1">
+                  <p className="text-[18px] font-extrabold leading-none tracking-tight" style={{ color: C.deep }}>
+                    {alternative.return3y}%
+                  </p>
+                  <span className="text-[12px] mb-0.5" style={{ color: C.fresh }}>↑</span>
+                </div>
+                <div className="h-1.5 w-full rounded-full mt-2 overflow-hidden" style={{ background: "white" }}>
+                  <div className="h-full rounded-full" style={{ background: C.fresh, width: `${altRetW}%` }} />
+                </div>
+              </div>
+
+              <div className="pt-2.5" style={{ borderTop: `1px solid hsla(174, 65%, 42%, 0.2)` }}>
+                <p className="text-[9px] font-bold mb-0.5 tracking-wider" style={{ color: C.core, opacity: 0.7 }}>פוטנציאל</p>
+                <p className="text-[13px] font-extrabold tabular-nums" style={{ color: C.deep }}>
+                  {formatNIS(savings)}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
+        {/* Market Benchmark */}
         <div
-          className="mt-3 rounded-xl py-2.5 px-3 text-center"
-          style={{ background: `linear-gradient(135deg, ${C.deep}, ${C.core})` }}
+          className="mx-4 mb-4 px-3.5 py-2 rounded-2xl flex items-center justify-between"
+          style={{ background: "hsl(180, 12%, 97%)", border: `1px solid ${C.hairline}` }}
         >
-          <p className="text-[9.5px] text-white/75 mb-0.5">פער מצטבר עד גיל הפרישה</p>
-          <p className="text-[18px] font-extrabold text-white tracking-tight">
-            +{formatNIS(savings)}
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(220, 70%, 55%)" }} />
+            <span className="text-[10.5px] font-bold" style={{ color: C.muted }}>ממוצע השוק</span>
+          </div>
+          <div className="text-[10px] font-medium" style={{ color: C.muted }}>
+            <span className="font-extrabold" style={{ color: C.ink }}>
+              {product.marketAvgFromBalance}%
+            </span>{" "}
+            דמי ניהול
+          </div>
+        </div>
+
+        {/* Bottom Power Banner */}
+        <div
+          className="m-4 mt-0 rounded-3xl p-5 flex flex-col items-center text-center overflow-hidden relative"
+          style={{ background: `linear-gradient(135deg, ${C.deep} 0%, ${C.core} 100%)` }}
+        >
+          <div className="absolute inset-0 opacity-10 pointer-events-none" aria-hidden>
+            <svg width="100%" height="100%" fill="none" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M0 100 C 20 0 50 0 100 100" stroke="white" strokeWidth="0.5" fill="none" />
+              <path d="M0 80 C 30 20 60 20 100 80" stroke="white" strokeWidth="0.5" fill="none" />
+            </svg>
+          </div>
+
+          <p
+            className="text-[10px] font-extrabold uppercase mb-1 relative z-10"
+            style={{ color: "hsla(176, 55%, 91%, 0.7)", letterSpacing: "0.18em" }}
+          >
+            רווח מצטבר צפוי לפרישה
           </p>
+          <h2 className="text-[32px] font-extrabold text-white tabular-nums leading-none tracking-tight relative z-10">
+            +{formatNIS(savings)}
+          </h2>
+          <div
+            className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full relative z-10"
+            style={{ background: C.fresh }}
+          >
+            <span className="text-white text-[10.5px] font-bold">החיסכון המקסימלי האפשרי עבורך</span>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-const MetricRow = ({ label, value, good, bad, bold }: { label: string; value: string; good?: boolean; bad?: boolean; bold?: boolean }) => (
-  <div className="flex items-center justify-between py-0.5">
-    <span className="text-[9.5px]" style={{ color: C.muted }}>{label}</span>
-    <span
-      className={`text-[11px] ${bold ? "font-extrabold" : "font-bold"} flex items-center gap-0.5`}
-      style={{ color: good ? "hsl(150, 60%, 30%)" : bad ? "hsl(0, 60%, 45%)" : C.ink }}
-    >
-      {good && <span>●</span>}
-      {bad && <span>●</span>}
-      {value}
-    </span>
-  </div>
-);
 
 function CtaBlock({ onClose }: { onClose: () => void }) {
   return (
