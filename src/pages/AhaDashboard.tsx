@@ -945,7 +945,7 @@ const AhaDashboard = () => {
                       collectStep === 1 ? (usePhoto || (idNumber.length === 9 && idDate.trim().length >= 8)) :
                       collectStep === 2 ? consents.pension :
                       collectStep === 3 ? consents.copies :
-                      consents.harBituach;
+                      (consents.harBituach && signed);
                     return (
                       <button
                         onClick={() => setCollectStep((s) => (s === 4 ? 5 : (s + 1) as 1 | 2 | 3 | 4))}
