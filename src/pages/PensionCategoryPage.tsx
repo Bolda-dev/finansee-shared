@@ -62,7 +62,7 @@ const PensionCategoryPage = () => {
   const visible = pensionProducts.filter(currentFilter.test);
 
   return (
-    <div className="min-h-screen max-w-[430px] mx-auto relative page-enter" dir="rtl" style={{ background: C.soft }}>
+    <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
       {/* Compact teal banner — short, just identity */}
       <div
         className="relative px-5 pt-8 pb-20 overflow-hidden hero-rise"

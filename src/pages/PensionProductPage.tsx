@@ -122,7 +122,7 @@ const PensionProductPage = () => {
   ];
 
   return (
-    <div className="min-h-screen max-w-[430px] mx-auto relative page-enter" dir="rtl" style={{ background: C.soft }}>
+    <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
       {/* Banner — IDENTICAL to PensionCategoryPage */}
       <div
         className="relative px-5 pt-8 pb-20 overflow-hidden hero-rise"
