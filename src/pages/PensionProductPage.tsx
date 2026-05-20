@@ -241,7 +241,7 @@ const PensionProductPage = () => {
       {/* Sheet content with curved top */}
       <div
         className="relative -mt-4 rounded-t-3xl pb-32"
-        style={{ background: C.soft, boxShadow: `0 -8px 24px ${C.sheetShadow ?? "hsla(178, 70%, 14%, 0.18)"}` }}
+        style={{ background: C.soft, boxShadow: `0 -8px 24px hsla(178, 70%, 14%, 0.18)` }}
       >
         <div className="flex justify-center pt-2.5 pb-1">
           <div className="w-10 h-1.5 rounded-full" style={{ background: C.hairline }} />
