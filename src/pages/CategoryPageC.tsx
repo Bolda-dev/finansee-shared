@@ -210,17 +210,40 @@ export const CategoryPageC = ({
         }}
         dir="rtl"
       >
-        <div className="flex items-center justify-between px-4 py-3" style={{ color: heroText }}>
+        <div className="flex items-center px-4 py-3" style={{ color: heroText }} dir="rtl">
           <button
             onClick={() => navigate(parentPath ?? "/")}
-            className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
+            className="flex items-center justify-center w-7 h-7 -mr-1 opacity-90 hover:opacity-100 transition-opacity"
             aria-label="חזרה"
           >
-            <ChevronRight className="h-4 w-4" />
-            חזרה
+            <ChevronRight className="h-5 w-5" />
           </button>
-          <h2 className="text-[14px] font-bold" style={{ color: heroText }}>{title}</h2>
-          <span className="w-12" aria-hidden />
+          <nav
+            className="flex-1 inline-flex items-center gap-1 text-[12.5px] font-semibold mr-1 truncate"
+            aria-label="breadcrumb"
+          >
+            <button
+              onClick={() => navigate("/")}
+              className="transition-opacity hover:opacity-100"
+              style={{ color: heroText, opacity: 0.6 }}
+            >
+              בית
+            </button>
+            {parentLabel && (
+              <>
+                <span style={{ opacity: 0.4 }}>›</span>
+                <button
+                  onClick={() => navigate(parentPath ?? "/")}
+                  className="transition-opacity hover:opacity-100"
+                  style={{ color: heroText, opacity: 0.6 }}
+                >
+                  {parentLabel}
+                </button>
+              </>
+            )}
+            <span style={{ opacity: 0.4 }}>›</span>
+            <span style={{ color: heroText, fontWeight: 800 }} className="truncate">{title}</span>
+          </nav>
         </div>
       </div>
 
