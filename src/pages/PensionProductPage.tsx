@@ -297,14 +297,15 @@ const PensionProductPage = () => {
                   style={{ background: "hsl(150, 65%, 45%)", boxShadow: "0 0 0 3px hsla(150, 65%, 45%, 0.18)" }}
                   aria-hidden
                 />
-                <p className="text-[15px] font-extrabold tracking-tight" style={{ color: "hsl(250, 50%, 12%)" }}>
-                  התובנות של דנה
+                <p className="text-[14px] font-extrabold tracking-tight leading-snug" style={{ color: "hsl(250, 50%, 12%)" }}>
+                  אני מזהה פה בעיה! אבל יש לי את הפתרון!
                 </p>
               </div>
-              <p className="text-[12.5px] mt-1" style={{ color: "hsl(230, 15%, 50%)" }}>
-                פעולות לשיפור מחכות לך
+              <p className="text-[11.5px] mt-1" style={{ color: "hsl(230, 15%, 50%)" }}>
+                בלחיצה כאן אפשר להרוויח מעל {formatNIS(alt.savings)}
               </p>
             </div>
+
             <ChevronLeft className="h-5 w-5 flex-shrink-0" style={{ color: "hsl(230, 15%, 60%)" }} />
           </button>
         </div>
