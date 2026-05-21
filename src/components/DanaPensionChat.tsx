@@ -201,7 +201,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             {messages.map((m) => {
               if (m.role === "user") {
                 return (
-                  <div key={m.id} className="flex justify-start">
+                  <div key={m.id} className="flex justify-start" dir="rtl">
                     <div
                       className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5 text-[13px] font-medium text-right"
                       style={{
@@ -209,6 +209,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                         color: "white",
                         boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)",
                       }}
+                      dir="rtl"
                     >
                       {m.text}
                     </div>
