@@ -72,38 +72,61 @@ export const ConsentStep = ({
           >
             {signed ? (
               <div className="flex flex-col items-center gap-1">
-                {/* Faux signature stroke */}
-                <svg width="160" height="48" viewBox="0 0 160 48" fill="none" aria-hidden>
-                  <path
-                    d="M6 32 Q 18 6, 30 28 T 58 26 Q 70 8, 84 30 T 114 22 Q 128 6, 142 30 L 152 24"
+                {/* Animated signature with pen following the stroke */}
+                <svg width="180" height="56" viewBox="0 0 180 56" fill="none" aria-hidden>
+                  <defs>
+                    <path
+                      id="sig-path"
+                      d="M8 36 Q 22 6, 36 32 T 66 28 Q 80 6, 96 34 T 128 22 Q 144 6, 158 32 L 172 26"
+                      fill="none"
+                    />
+                  </defs>
+                  <use
+                    href="#sig-path"
                     stroke="hsl(250, 50%, 20%)"
-                    strokeWidth="2.2"
+                    strokeWidth="2.4"
                     strokeLinecap="round"
-                    fill="none"
+                    strokeLinejoin="round"
+                    style={{
+                      strokeDasharray: 360,
+                      strokeDashoffset: 360,
+                      animation: "sig-draw 1.1s ease-out forwards",
+                    }}
                   />
+                  {/* Pen nib following the stroke */}
+                  <g style={{ animation: "sig-pen 1.1s ease-out forwards", offsetPath: "path('M8 36 Q 22 6, 36 32 T 66 28 Q 80 6, 96 34 T 128 22 Q 144 6, 158 32 L 172 26')" } as React.CSSProperties}>
+                    <path
+                      d="M-10 -14 L 0 0 L -4 4 Z"
+                      fill="hsl(262, 75%, 55%)"
+                    />
+                    <rect x="-14" y="-22" width="6" height="10" rx="1.5" fill="hsl(250, 45%, 25%)" transform="rotate(35)" />
+                  </g>
                 </svg>
                 <span
                   className="inline-flex items-center gap-1 text-[11px] font-bold"
                   style={{ color: "hsl(150, 60%, 26%)" }}
                 >
                   <Check className="h-3.5 w-3.5" />
-                  נחתם
+                  נחתם בהצלחה
                 </span>
               </div>
             ) : (
               <div className="flex flex-col items-center gap-1.5">
+                {/* Hand + pen illustration hint */}
                 <span
-                  className="w-9 h-9 rounded-full flex items-center justify-center"
+                  className="relative w-11 h-11 rounded-full flex items-center justify-center"
                   style={{ background: "hsl(250, 30%, 96%)", color: "hsl(262, 75%, 55%)" }}
                 >
-                  <PenLine className="h-4 w-4" />
+                  <PenLine className="h-5 w-5" style={{ animation: "sig-hint 1.8s ease-in-out infinite" }} />
                 </span>
                 <span className="text-[12px] font-bold" style={{ color: "hsl(250, 40%, 25%)" }}>
-                  חתמו כאן
+                  חתמו כאן באצבע
                 </span>
-                <span className="text-[10.5px]" style={{ color: "hsl(230, 15%, 55%)" }}>
-                  השאירו טביעה לאישור הגישה
-                </span>
+                {/* Dotted signature line */}
+                <svg width="140" height="14" viewBox="0 0 140 14" fill="none" aria-hidden className="mt-0.5">
+                  <line x1="6" y1="10" x2="134" y2="10" stroke="hsl(250, 30%, 80%)" strokeWidth="1.5" strokeDasharray="3 4" strokeLinecap="round" />
+                  <text x="70" y="6" textAnchor="middle" fontSize="7" fill="hsl(230, 15%, 55%)">X</text>
+                </svg>
               </div>
             )}
           </button>
