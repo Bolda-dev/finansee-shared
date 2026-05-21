@@ -3,6 +3,7 @@ import menoraLogo from "@/assets/logos/menora.jpg";
 import harelLogo from "@/assets/logos/harel.webp";
 import migdalLogo from "@/assets/logos/migdal.png";
 import clalLogo from "@/assets/logos/clal.png";
+import phoenixLogo from "@/assets/provider-phoenix.png";
 
 type Brand = { bg: string; fg: string; initials: string; image?: string };
 
