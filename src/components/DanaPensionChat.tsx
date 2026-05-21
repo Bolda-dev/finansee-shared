@@ -24,7 +24,8 @@ type Msg =
   | { id: string; role: "dana"; kind: "text"; text: React.ReactNode }
   | { id: string; role: "user"; kind: "text"; text: string }
   | { id: string; role: "dana"; kind: "compare" }
-  | { id: string; role: "dana"; kind: "ctas" };
+  | { id: string; role: "dana"; kind: "ctas" }
+  | { id: string; role: "dana"; kind: "leaks" };
 
 interface Props {
   open: boolean;
