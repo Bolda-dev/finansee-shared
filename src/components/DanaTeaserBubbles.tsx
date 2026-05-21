@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { X, ChevronLeft } from "lucide-react";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
 
@@ -20,8 +20,7 @@ export function DanaTeaserBubbles({ productId, savings, onOpen, onClose }: Props
 
   if (!show) return null;
 
-  const dismiss = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const dismiss = () => {
     sessionStorage.setItem(`dana-teaser-${productId}`, "1");
     onClose();
   };
@@ -33,62 +32,50 @@ export function DanaTeaserBubbles({ productId, savings, onOpen, onClose }: Props
 
   return (
     <div
-      className="fixed bottom-4 left-4 z-40 pointer-events-none"
+      className="fixed bottom-[88px] left-1/2 -translate-x-1/2 w-full max-w-[430px] z-50 px-4 pointer-events-none"
       dir="rtl"
-      style={{ animation: "danaBubbleIn 0.35s ease-out both" }}
     >
-      <div className="relative pointer-events-auto">
-        {/* Tooltip tail */}
-        <span
-          aria-hidden
-          className="absolute -bottom-1.5 left-6 w-3 h-3 rotate-45"
-          style={{
-            background: "white",
-            borderRight: "1px solid hsl(230, 20%, 92%)",
-            borderBottom: "1px solid hsl(230, 20%, 92%)",
-          }}
-        />
-
-        <button
-          onClick={open}
-          className="relative flex flex-col items-end gap-2 max-w-[280px] pl-3 pr-4 py-3 rounded-2xl text-right active:scale-[0.98] transition-transform"
+      <div
+        className="pointer-events-auto max-w-[320px] ml-auto mr-1"
+        style={{
+          animation: "bubble-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
+          transformOrigin: "bottom right",
+        }}
+      >
+        <div
+          className="relative rounded-2xl rounded-br-sm pt-6 pb-3.5 px-3.5 pr-4"
           style={{
             background: "white",
             border: "1px solid hsl(230, 20%, 92%)",
-            boxShadow: "0 10px 28px hsla(250, 30%, 15%, 0.18)",
+            boxShadow: "0 8px 28px hsla(250, 30%, 25%, 0.18)",
           }}
         >
-          {/* Dismiss — matches home page style */}
-          <span
+          <button
             onClick={dismiss}
-            role="button"
+            className="absolute top-2 left-2 w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
             aria-label="סגור"
-            className="absolute top-1.5 left-1.5 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-colors hover:bg-black/5"
           >
-            <X className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
-          </span>
-
-          <span
-            className="text-[12px] leading-snug pr-1"
-            style={{ color: "hsl(250, 35%, 25%)" }}
+            <X className="h-3 w-3" style={{ color: "hsl(230, 15%, 55%)" }} />
+          </button>
+          <p
+            className="text-[12px] leading-relaxed pr-1 text-right"
+            style={{ color: "hsl(250, 35%, 20%)" }}
           >
             מצאתי לך חיסכון של{" "}
             <strong style={{ color: "hsl(250, 50%, 12%)" }}>
               {formatNIS(savings)}
             </strong>{" "}
             ✨
-          </span>
-          <span
-            className="text-[11px] font-bold px-3 py-1.5 rounded-full text-white inline-flex items-center gap-1"
-            style={{
-              background: "hsl(250, 30%, 8%)",
-              boxShadow: "0 4px 12px hsla(250, 30%, 15%, 0.35)",
-            }}
+          </p>
+          <button
+            onClick={open}
+            className="mt-2.5 w-full flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] font-bold transition-transform hover:scale-[1.01] active:scale-[0.99]"
+            style={{ background: "hsl(0, 0%, 8%)", color: "white" }}
           >
             ספרי לי איך
-            <span aria-hidden>←</span>
-          </span>
-        </button>
+            <ChevronLeft className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
     </div>
   );
