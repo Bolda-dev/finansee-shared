@@ -373,8 +373,8 @@ const AhaDashboard2 = () => {
                           className="w-full text-start rounded-xl p-3 flex items-center gap-3 transition-transform active:scale-[0.98]"
                           style={{ background: "hsl(230, 30%, 97%)", border: "1px solid hsl(230, 20%, 92%)" }}
                         >
-                          <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: p.gradient }}>
-                            <item.Icon className="h-4 w-4 text-white" />
+                          <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: p.soft }}>
+                            <item.Icon className="h-4 w-4" style={{ color: p.solid }} />
                           </span>
                           <span className="flex-1 min-w-0">
                             <span className="block text-[12.5px] font-extrabold" style={{ color: "hsl(250, 40%, 15%)" }}>{item.label}</span>
