@@ -178,26 +178,23 @@ const PensionProductPage = () => {
           ))}
         </svg>
 
-        {/* Breadcrumb */}
-        <nav
-          className="relative inline-flex items-center text-[12px] font-semibold text-white/85"
-          aria-label="breadcrumb"
-        >
-          <button onClick={() => navigate("/")} className="inline-flex items-center gap-0.5 px-1.5 py-1 opacity-75 hover:opacity-100 transition-opacity">
-            <ChevronLeft className="h-3.5 w-3.5 rotate-180" />
-            <span>בית</span>
+        {/* Top bar: back button + centered title */}
+        <div className="relative flex items-center justify-center min-h-[40px]" dir="rtl">
+          <button
+            onClick={() => navigate("/assets/pension")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full text-white transition-all hover:scale-105 active:scale-95"
+            style={{
+              background: "hsla(0,0%,100%,0.18)",
+              border: "1px solid hsla(0,0%,100%,0.25)",
+              backdropFilter: "blur(8px)",
+            }}
+            aria-label="חזרה"
+          >
+            <ChevronLeft className="h-5 w-5 rotate-180" />
           </button>
-          <span className="mx-2.5 opacity-50">/</span>
-          <button onClick={() => navigate("/assets")} className="px-1.5 py-1 opacity-75 hover:opacity-100 transition-opacity">
-            נכסים
-          </button>
-          <span className="mx-2.5 opacity-50">/</span>
-          <button onClick={() => navigate("/assets/pension")} className="px-1.5 py-1 opacity-75 hover:opacity-100 transition-opacity">
-            פנסיה
-          </button>
-          <span className="mx-2.5 opacity-50">/</span>
-          <span className="font-extrabold text-white truncate max-w-[120px]">{product.label}</span>
-        </nav>
+          <h1 className="text-[15px] font-extrabold text-white truncate max-w-[230px]">{product.label}</h1>
+        </div>
+
 
         <div className="relative flex items-center justify-between mt-4">
           <h2 className="text-[14px] font-medium text-white/75">{product.typeLabel}</h2>
