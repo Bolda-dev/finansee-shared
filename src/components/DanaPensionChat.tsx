@@ -164,6 +164,14 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
     sayDana("שאלה מצוינת! אני בודקת את הנתונים שלך ואחזור אליך עם המלצה מותאמת אישית בעוד רגע 💡", 900);
   };
 
+  const handleShowLeaks = () => {
+    setTyping(true);
+    setTimeout(() => {
+      setTyping(false);
+      push({ id: crypto.randomUUID(), role: "dana", kind: "leaks" });
+    }, 900);
+  };
+
   const freeInputEnabled = step === "free" || step === "ctas" || step === "declined";
 
   return (
