@@ -78,7 +78,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             <>
               היי משה 👋 הסתכלתי על <strong>{product.label}</strong> ב{product.provider} —
               <br />
-              מצאתי דרך שיכולה להרוויח לך{" "}
+              מצאתי שתי קרנות שיכולות להרוויח לך{" "}
               <span
                 className="inline-block font-extrabold px-1.5 py-0.5 rounded-md"
                 style={{ background: "hsl(45, 95%, 88%)", color: "hsl(28, 80%, 25%)" }}
@@ -87,14 +87,25 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
               </span>{" "}
               עד הפרישה 💰
               <br />
-              רוצה לשמוע איך?
+              הנה ההשוואה ביניהן 👇
             </>
           ),
         },
       ]);
-    }, 900);
+      setTyping(true);
+      setTimeout(() => {
+        setTyping(false);
+        setMessages((p) => [
+          ...p,
+          { id: "m2", role: "dana", kind: "compare" },
+          { id: "m3", role: "dana", kind: "ctas" },
+        ]);
+        setStep("free");
+      }, 900);
+    }, 700);
     return () => clearTimeout(t1);
   }, [open, product, savings]);
+
 
   useEffect(() => {
     const el = scrollRef.current;
