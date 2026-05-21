@@ -11,6 +11,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { ProviderLogo } from "@/lib/providerLogo";
+import { StickyHeader } from "@/components/StickyHeader";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
 
@@ -129,6 +130,12 @@ const MortgageInvestmentPage = () => {
 
   return (
     <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
+      <StickyHeader
+        title="דירה להשקעה"
+        backTo="/liabilities"
+        gradient={`linear-gradient(160deg, ${C.deep} 0%, ${C.core} 70%, ${C.fresh} 130%)`}
+        shadowColor="hsla(222, 70%, 14%, 0.3)"
+      />
       {/* Banner */}
       <div
         className="relative px-5 pt-8 pb-20 overflow-hidden hero-rise"

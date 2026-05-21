@@ -13,6 +13,7 @@ import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
 import { ProviderLogo } from "@/lib/providerLogo";
+import { StickyHeader } from "@/components/StickyHeader";
 
 // Brand palette — same teal as Assets, applied with a different LAYOUT
 const C = {
@@ -63,6 +64,12 @@ const PensionCategoryPage = () => {
 
   return (
     <div className="min-h-screen max-w-[430px] mx-auto relative" dir="rtl" style={{ background: C.soft }}>
+      <StickyHeader
+        title="פנסיה"
+        backTo="/assets"
+        gradient={`linear-gradient(160deg, ${C.deep} 0%, ${C.core} 70%, ${C.fresh} 130%)`}
+        shadowColor="hsla(178, 70%, 12%, 0.25)"
+      />
       {/* Compact teal banner — short, just identity */}
       <div
         className="relative px-5 pt-10 pb-20 overflow-hidden hero-rise"
