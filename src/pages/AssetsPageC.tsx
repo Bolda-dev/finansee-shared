@@ -55,18 +55,23 @@ const AssetsPageC = () => {
           navigate("/assets/pension");
         }
       }}
-      renderItemSubtitle={(item) => item.subLabel ?? ""}
+      renderItemSubtitle={(item) => {
+        const sub = item.subLabel ?? "";
+        const p = item.provider;
+        if (p && p !== "—" && p !== "פרטי") return sub ? `${p} · ${sub}` : p;
+        return sub;
+      }}
       renderItemTrailing={(item) => (
         <span className="flex flex-col items-end gap-1 leading-tight">
           <span
-            className="block text-[13px] font-bold text-primary tracking-tight"
+            className="block text-[13px] font-bold tracking-tight"
             style={{ color: "hsl(250, 50%, 12%)" }}
           >
             {formatNIS(item.amount ?? 0)}
           </span>
           {item.label === "פנסיה" ? (
             <span
-              className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+              className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full"
               style={{
                 background: "hsl(176, 55%, 91%)",
                 color: "hsl(178, 70%, 22%)",
@@ -78,19 +83,16 @@ const AssetsPageC = () => {
             </span>
           ) : item.monthly ? (
             <span
-              className="block text-[10px] font-medium"
-              style={{ color: "hsl(150, 55%, 38%)" }}
+              className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full"
+              style={{
+                background: "hsl(150, 60%, 93%)",
+                color: "hsl(150, 65%, 26%)",
+                border: "1px solid hsl(150, 55%, 84%)",
+              }}
             >
               +{formatNIS(item.monthly)}/חודש
             </span>
-          ) : (
-            <span
-              className="block text-[10px] font-medium"
-              style={{ color: "hsl(230, 15%, 55%)" }}
-            >
-              סך הצבירה
-            </span>
-          )}
+          ) : null}
         </span>
       )}
     />

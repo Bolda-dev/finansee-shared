@@ -85,9 +85,13 @@ const InsurancePageC = () => {
       }
       danaBubbleCta="בוא/י נחסוך ביחד"
       emptyText="אין פוליסות בקטגוריה זו"
-      renderItemSubtitle={(item) =>
-        item.status === "פעיל" ? item.coverage ?? "" : "אין כיסוי פעיל"
-      }
+      renderItemSubtitle={(item) => {
+        if (item.status !== "פעיל") return "אין כיסוי פעיל";
+        const cov = item.coverage ?? "";
+        const p = item.provider;
+        if (p && p !== "—" && p !== "פרטי") return cov ? `${p} · ${cov}` : p;
+        return cov;
+      }}
       renderItemTrailing={(item) => {
         const isActive = item.status === "פעיל";
         const monthlyCost =
@@ -97,16 +101,20 @@ const InsurancePageC = () => {
 
         if (isActive && monthlyCost > 0) {
           return (
-            <span className="text-end leading-tight">
+            <span className="flex flex-col items-end gap-1 leading-tight">
               <span
-                className="block text-[13px] font-bold text-primary tracking-tight"
+                className="block text-[13px] font-bold tracking-tight"
                 style={{ color: "hsl(250, 50%, 12%)" }}
               >
                 {formatNIS(monthlyCost)}
               </span>
               <span
-                className="block text-[10px] font-medium"
-                style={{ color: "hsl(230, 15%, 55%)" }}
+                className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full"
+                style={{
+                  background: "hsl(260, 75%, 95%)",
+                  color: "hsl(262, 65%, 32%)",
+                  border: "1px solid hsl(260, 65%, 88%)",
+                }}
               >
                 /חודש
               </span>

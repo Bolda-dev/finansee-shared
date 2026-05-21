@@ -50,19 +50,28 @@ const LiabilitiesPageC = () => {
       }
       danaBubbleCta="בוא/י נחסוך ביחד"
       emptyText="אין התחייבויות בקטגוריה זו"
-      renderItemSubtitle={(item) => item.subLabel ?? ""}
+      renderItemSubtitle={(item) => {
+        const sub = item.subLabel ?? "";
+        const p = item.provider;
+        if (p && p !== "—" && p !== "פרטי") return sub ? `${p} · ${sub}` : p;
+        return sub;
+      }}
       renderItemTrailing={(item) => (
-        <span className="text-end leading-tight">
+        <span className="flex flex-col items-end gap-1 leading-tight">
           <span
-            className="block text-[13px] font-bold text-primary tracking-tight"
+            className="block text-[13px] font-bold tracking-tight"
             style={{ color: "hsl(250, 50%, 12%)" }}
           >
             {formatNIS(item.balance ?? 0)}
           </span>
           {item.monthly ? (
             <span
-              className="block text-[10px] font-medium"
-              style={{ color: "hsl(178, 65%, 26%)" }}
+              className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full"
+              style={{
+                background: "hsl(15, 90%, 95%)",
+                color: "hsl(8, 70%, 38%)",
+                border: "1px solid hsl(15, 80%, 88%)",
+              }}
             >
               -{formatNIS(item.monthly)}/חודש
             </span>
