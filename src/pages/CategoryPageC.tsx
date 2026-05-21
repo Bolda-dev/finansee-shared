@@ -550,12 +550,12 @@ export const CategoryPageC = ({
                           strokeWidth={2}
                         />
                       </span>
-                      {item.alert && (
+                      {(item.alert || (item.badgeCount && item.badgeCount > 0)) && (
                         <span
                           className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
                           style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
                         >
-                          1
+                          {item.badgeCount && item.badgeCount > 0 ? item.badgeCount : 1}
                         </span>
                       )}
                     </span>
