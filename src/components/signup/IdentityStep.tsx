@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShieldCheck, FileText, Camera, UserSquare2, Check } from "lucide-react";
+import { ShieldCheck, FileText, Camera, UserSquare2, Check, ChevronDown } from "lucide-react";
 
 interface IdentityStepProps {
   idNumber: string;
