@@ -107,16 +107,7 @@ const InsurancePageC = () => {
                 style={{ color: "hsl(250, 50%, 12%)" }}
               >
                 {formatNIS(monthlyCost)}
-              </span>
-              <span
-                className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full"
-                style={{
-                  background: "hsl(260, 75%, 95%)",
-                  color: "hsl(262, 65%, 32%)",
-                  border: "1px solid hsl(260, 65%, 88%)",
-                }}
-              >
-                /חודש
+                <span className="text-[10px] font-medium opacity-60"> /חודש</span>
               </span>
             </span>
           );
