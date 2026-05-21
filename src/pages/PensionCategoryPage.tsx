@@ -107,8 +107,8 @@ const PensionCategoryPage = () => {
 
 
         <div className="relative flex items-center justify-between mt-4">
-          <span className="text-[11px] font-medium text-white/60">מעודכן להיום</span>
           <h2 className="text-[14px] font-medium text-white/75">סך החיסכון הפנסיוני</h2>
+          <span className="text-[11px] font-medium text-white/60">מעודכן להיום</span>
         </div>
       </div>
 
