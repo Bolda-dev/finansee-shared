@@ -163,21 +163,6 @@ const MortgageInvestmentPage = () => {
           </button>
           <h1 className="text-[15px] font-extrabold text-white truncate max-w-[230px]">דירה להשקעה</h1>
         </div>
-
-
-        <div className="relative flex items-center justify-between mt-4">
-          <h2 className="text-[14px] font-medium text-white/75">{mortgage.typeLabel}</h2>
-          <span
-            className="inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full text-white"
-            style={{
-              background: "hsla(0,0%,100%,0.16)",
-              border: "1px solid hsla(0,0%,100%,0.18)",
-              backdropFilter: "blur(6px)",
-            }}
-          >
-            פעיל
-          </span>
-        </div>
       </div>
 
       {/* Floating Summary Card */}
