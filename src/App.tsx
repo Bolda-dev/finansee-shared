@@ -44,6 +44,7 @@ const App = () => (
               <Route path="/signup2" element={<Signup2 />} />
               <Route path="/aha" element={<AhaDashboard />} />
               <Route path="/aha2" element={<AhaDashboard2 />} />
+              <Route path="/design-system" element={<DesignSystemPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
