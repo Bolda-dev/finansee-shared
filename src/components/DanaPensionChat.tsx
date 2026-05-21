@@ -575,31 +575,31 @@ function CompareCard({
             <span className="text-white text-[10.5px] font-bold">החיסכון המקסימלי האפשרי עבורך</span>
           </div>
         </div>
+
+        {/* CTAs inside card, centered, below the power banner */}
+        <div className="px-4 pb-5 flex flex-col items-center gap-2" dir="rtl">
+          <button
+            className="w-full max-w-[280px] rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.97]"
+            style={{
+              background: "hsl(250, 30%, 8%)",
+              boxShadow: "0 6px 18px hsla(250, 30%, 15%, 0.40)",
+            }}
+          >
+            ⚡ עברו לקרן המומלצת
+          </button>
+          <button
+            className="w-full max-w-[280px] rounded-full py-2.5 text-[11.5px] font-semibold"
+            style={{ color: "hsl(230, 15%, 55%)", background: "transparent" }}
+          >
+            השוואה מפורטת ›
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 function CtaBlock() {
-  return (
-    <div className="flex justify-end mr-9" dir="rtl">
-      <div className="w-full max-w-[82%] flex flex-col gap-2">
-        <button
-          className="w-full rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.97]"
-          style={{
-            background: "hsl(250, 30%, 8%)",
-            boxShadow: "0 6px 18px hsla(250, 30%, 15%, 0.40)",
-          }}
-        >
-          ⚡ עברו לקרן המומלצת
-        </button>
-        <button
-          className="w-full rounded-full py-2.5 text-[11.5px] font-semibold"
-          style={{ color: "hsl(230, 15%, 55%)", background: "transparent" }}
-        >
-          השוואה מפורטת ›
-        </button>
-      </div>
-    </div>
-  );
+  return null;
 }
+
