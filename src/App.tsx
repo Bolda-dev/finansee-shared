@@ -20,6 +20,7 @@ const AhaDashboard = lazy(() => import("./pages/AhaDashboard"));
 const AhaDashboard2 = lazy(() => import("./pages/AhaDashboard2"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const DesignSystemPage = lazy(() => import("./pages/DesignSystemPage"));
+const SitemapPage = lazy(() => import("./pages/SitemapPage"));
 
 const queryClient = new QueryClient();
 
