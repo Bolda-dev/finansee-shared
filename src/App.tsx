@@ -7,8 +7,6 @@ import { lazy, Suspense } from "react";
 import { VersionCSettingsProvider } from "./contexts/VersionCSettings";
 
 const IndexC = lazy(() => import("./pages/IndexC"));
-const IncomePage = lazy(() => import("./pages/IncomePage"));
-const ExpensesPage = lazy(() => import("./pages/ExpensesPage"));
 const InsurancePageC = lazy(() => import("./pages/InsurancePageC"));
 const AssetsPageC = lazy(() => import("./pages/AssetsPageC"));
 const PensionCategoryPage = lazy(() => import("./pages/PensionCategoryPage"));
@@ -32,8 +30,6 @@ const App = () => (
           <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<IndexC />} />
-              <Route path="/income" element={<IncomePage />} />
-              <Route path="/expenses" element={<ExpensesPage />} />
               <Route path="/insurance" element={<InsurancePageC />} />
               <Route path="/assets" element={<AssetsPageC />} />
               <Route path="/assets/pension" element={<PensionCategoryPage />} />
