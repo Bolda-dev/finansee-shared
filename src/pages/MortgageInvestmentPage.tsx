@@ -11,6 +11,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { ProviderLogo } from "@/lib/providerLogo";
+import { StickyHeader } from "@/components/StickyHeader";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
 
