@@ -219,7 +219,7 @@ export const CategoryPageC = ({
             <ChevronRight className="h-5 w-5" />
           </button>
           <nav
-            className="flex-1 inline-flex items-center gap-1 text-[12.5px] font-semibold mr-1 truncate"
+            className="flex-1 inline-flex items-center gap-2.5 text-[12.5px] font-semibold mr-1 truncate"
             aria-label="breadcrumb"
           >
             <button
@@ -231,7 +231,7 @@ export const CategoryPageC = ({
             </button>
             {parentLabel && (
               <>
-                <span style={{ opacity: 0.4 }}>›</span>
+                <span style={{ opacity: 0.4 }}>/</span>
                 <button
                   onClick={() => navigate(parentPath ?? "/")}
                   className="transition-opacity hover:opacity-100"
@@ -241,7 +241,7 @@ export const CategoryPageC = ({
                 </button>
               </>
             )}
-            <span style={{ opacity: 0.4 }}>›</span>
+            <span style={{ opacity: 0.4 }}>/</span>
             <span style={{ color: heroText, fontWeight: 800 }} className="truncate">{title}</span>
           </nav>
         </div>
@@ -282,7 +282,7 @@ export const CategoryPageC = ({
             <ChevronRight className="h-5 w-5" />
           </button>
           <nav
-            className="flex-1 inline-flex items-center gap-1 text-[13px] font-semibold mr-1 truncate"
+            className="flex-1 inline-flex items-center gap-2.5 text-[13px] font-semibold mr-1 truncate"
             aria-label="breadcrumb"
             dir="rtl"
           >
@@ -295,7 +295,7 @@ export const CategoryPageC = ({
             </button>
             {parentLabel && (
               <>
-                <span style={{ opacity: 0.4 }}>›</span>
+                <span style={{ opacity: 0.4 }}>/</span>
                 <button
                   onClick={() => navigate(parentPath ?? "/")}
                   className="transition-opacity hover:opacity-100"
@@ -305,7 +305,7 @@ export const CategoryPageC = ({
                 </button>
               </>
             )}
-            <span style={{ opacity: 0.4 }}>›</span>
+            <span style={{ opacity: 0.4 }}>/</span>
             <span style={{ color: heroText, fontWeight: 800 }} className="truncate">{title}</span>
           </nav>
         </div>

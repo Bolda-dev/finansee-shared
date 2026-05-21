@@ -187,15 +187,15 @@ const PensionProductPage = () => {
             <ChevronLeft className="h-3.5 w-3.5 rotate-180" />
             <span>בית</span>
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
+          <span className="mx-2.5 opacity-50">/</span>
           <button onClick={() => navigate("/assets")} className="opacity-75 hover:opacity-100 transition-opacity">
             נכסים
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
+          <span className="mx-2.5 opacity-50">/</span>
           <button onClick={() => navigate("/assets/pension")} className="opacity-75 hover:opacity-100 transition-opacity">
             פנסיה
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
+          <span className="mx-2.5 opacity-50">/</span>
           <span className="font-extrabold text-white truncate max-w-[120px]">{product.label}</span>
         </nav>
 

@@ -153,11 +153,11 @@ const MortgageInvestmentPage = () => {
             <ChevronLeft className="h-3.5 w-3.5 rotate-180" />
             <span>בית</span>
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
+          <span className="mx-2.5 opacity-50">/</span>
           <button onClick={() => navigate("/liabilities")} className="opacity-75 hover:opacity-100 transition-opacity">
             התחייבויות
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
+          <span className="mx-2.5 opacity-50">/</span>
           <span className="font-extrabold text-white truncate max-w-[160px]">דירה להשקעה</span>
         </nav>
 
