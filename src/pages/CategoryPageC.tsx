@@ -391,7 +391,7 @@ export const CategoryPageC = ({
 
         {/* Filter chips */}
         <div className="px-4 pt-3 pb-3">
-          <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
+          <div className="flex gap-1.5 overflow-x-auto overflow-y-visible py-2 -my-1" style={{ scrollbarWidth: "none" }}>
             {filters.map((chip) => {
               const isActive = chip.key === activeFilter;
               return (

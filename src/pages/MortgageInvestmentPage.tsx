@@ -237,7 +237,7 @@ const MortgageInvestmentPage = () => {
 
       {/* Filter chips */}
       <div className="px-4 pt-5 pb-1">
-        <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
+        <div className="flex gap-1.5 overflow-x-auto overflow-y-visible py-2 -my-1" style={{ scrollbarWidth: "none" }}>
           {tabs.map((t) => {
             const isActive = tab === t.key;
             return (
