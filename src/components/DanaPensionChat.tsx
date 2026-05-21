@@ -535,7 +535,15 @@ function CompareCard({
                 </p>
               </div>
             </div>
+
+            <button
+              className="w-full rounded-full py-2 text-[11px] font-bold transition-transform active:scale-[0.97]"
+              style={{ background: "white", color: C.ink, border: `1px solid ${C.hairline}` }}
+            >
+              בחינת הקרן ›
+            </button>
           </div>
+
         </div>
 
         {/* Bottom Power Banner */}
