@@ -237,10 +237,13 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                 );
               }
               if (m.kind === "compare") {
-                return <CompareCard key={m.id} recommended={alternative} other={secondAlt} savings={savings} />;
+                return <CompareCard key={m.id} recommended={alternative} other={secondAlt} savings={savings} onShowLeaks={handleShowLeaks} />;
               }
               if (m.kind === "ctas") {
                 return <CtaBlock key={m.id} />;
+              }
+              if (m.kind === "leaks") {
+                return <LeaksCard key={m.id} />;
               }
               return null;
             })}
