@@ -81,14 +81,18 @@ const PensionCategoryPage = () => {
           ))}
         </svg>
 
-        {/* Breadcrumb — clean inline */}
+        {/* Breadcrumb — בית › נכסים › פנסיה */}
         <nav
           className="relative inline-flex items-center text-[12px] font-semibold text-white/85"
           aria-label="breadcrumb"
         >
-          <button onClick={() => navigate("/assets")} className="inline-flex items-center gap-0.5 opacity-75 hover:opacity-100 transition-opacity">
+          <button onClick={() => navigate("/")} className="inline-flex items-center gap-0.5 opacity-75 hover:opacity-100 transition-opacity">
             <ChevronLeft className="h-3.5 w-3.5 rotate-180" />
-            <span>נכסים</span>
+            <span>בית</span>
+          </button>
+          <span className="mx-1.5 opacity-50">/</span>
+          <button onClick={() => navigate("/assets")} className="opacity-75 hover:opacity-100 transition-opacity">
+            נכסים
           </button>
           <span className="mx-1.5 opacity-50">/</span>
           <span className="font-extrabold text-white">פנסיה</span>
