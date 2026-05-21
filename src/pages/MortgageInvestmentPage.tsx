@@ -9,9 +9,13 @@ import {
   UserCog,
   Home,
   MapPin,
+  Mic,
+  Send,
 } from "lucide-react";
 import { ProviderLogo } from "@/lib/providerLogo";
 import { StickyHeader } from "@/components/StickyHeader";
+import { InsightsSheetC } from "@/components/InsightsSheetC";
+import advisorImg from "@/assets/advisor-avatar.jpg";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
 
