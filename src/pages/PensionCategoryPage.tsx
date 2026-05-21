@@ -149,7 +149,7 @@ const PensionCategoryPage = () => {
 
       {/* Filter chips */}
       <div className="px-4 pt-3 pb-1">
-        <div className="flex gap-1.5 overflow-x-auto overflow-y-visible py-2 -my-1" style={{ scrollbarWidth: "none" }}>
+        <div className="flex gap-1.5 overflow-x-auto overflow-y-visible px-2 py-4 -mx-2 -my-3" style={{ scrollbarWidth: "none" }}>
           {filters.map((chip) => {
             const isActive = chip.key === active;
             return (
