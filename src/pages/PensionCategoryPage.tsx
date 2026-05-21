@@ -13,6 +13,7 @@ import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
 import { ProviderLogo } from "@/lib/providerLogo";
+import { StickyHeader } from "@/components/StickyHeader";
 
 // Brand palette — same teal as Assets, applied with a different LAYOUT
 const C = {
