@@ -357,9 +357,15 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                 <img src={advisorImg} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col items-end max-w-[92%] flex-1 min-w-0">
-                <div className="rounded-2xl rounded-br-md p-3.5 w-full" style={{ background: "white", border: "1px solid hsl(230, 20%, 92%)", boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)" }}>
+                <div
+                  className="rounded-2xl rounded-br-md p-3.5 w-full relative overflow-hidden"
+                  style={{
+                    background: tab.gradient,
+                    boxShadow: `0 8px 24px hsla(${tab.accent.match(/\d+/)?.[0] || 280}, 60%, 30%, 0.35)`,
+                  }}
+                >
                   {/* Tabs */}
-                  <div className="flex gap-1.5 mb-3">
+                  <div className="flex gap-1.5 mb-3 relative z-10">
                     {(Object.keys(contextTabs) as ContextTabKey[]).map((key) => {
                       const t = contextTabs[key];
                       const isActive = activeTab === key;
@@ -369,9 +375,10 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                           onClick={() => setActiveTab(key)}
                           className="flex-1 py-1.5 rounded-lg text-[11px] font-semibold transition-all"
                           style={{
-                            background: isActive ? t.gradient : "hsl(230, 20%, 96%)",
-                            color: isActive ? "white" : "hsl(230, 15%, 45%)",
-                            boxShadow: isActive ? `0 3px 10px hsla(${t.accent.match(/\d+/)?.[0] || 280}, 60%, 50%, 0.3)` : "none",
+                            background: isActive ? "hsla(0,0%,100%,0.95)" : "hsla(0,0%,100%,0.18)",
+                            color: isActive ? t.accent : "hsla(0,0%,100%,0.92)",
+                            border: isActive ? "none" : "1px solid hsla(0,0%,100%,0.22)",
+                            backdropFilter: "blur(6px)",
                           }}
                         >
                           {t.label}
@@ -380,30 +387,28 @@ export const InsightsSheetC = ({ open, onOpenChange, mode = "context" }: Insight
                     })}
                   </div>
 
-                  <p className="text-[10px] mb-2.5" style={{ color: "hsl(230, 15%, 55%)" }}>{tab.headline}</p>
+                  <p className="text-[10px] mb-2.5 relative z-10" style={{ color: "hsla(0,0%,100%,0.85)" }}>{tab.headline}</p>
 
-                  <div className="flex items-center gap-3">
-                    <Donut
-                      data={tab.items.map((i) => ({ label: i.label, value: Math.max(i.value, 0.001) }))}
-                      centerLabel={isInsurance ? "פעילות" : "סה״כ"}
-                      centerValue={isInsurance ? `${tab.items.filter((i) => i.value === 1).length}/${tab.items.length}` : formatNIS(total)}
-                      baseColor={tab.accent}
-                    />
+                  <div className="flex items-center gap-3 relative z-10">
+                    <div className="rounded-full p-2" style={{ background: "hsla(0,0%,100%,0.95)" }}>
+                      <Donut
+                        data={tab.items.map((i) => ({ label: i.label, value: Math.max(i.value, 0.001) }))}
+                        centerLabel={isInsurance ? "פעילות" : "סה״כ"}
+                        centerValue={isInsurance ? `${tab.items.filter((i) => i.value === 1).length}/${tab.items.length}` : formatNIS(total)}
+                        baseColor={tab.accent}
+                      />
+                    </div>
                     <div className="flex-1 space-y-1.5 min-w-0">
                       {tab.items.slice(0, 5).map((item, i) => {
-                        const match = tab.accent.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
-                        const h = match ? parseInt(match[1]) : 280;
-                        const s = match ? parseInt(match[2]) : 70;
-                        const baseL = match ? parseInt(match[3]) : 55;
-                        const lightness = Math.max(35, Math.min(78, baseL - 18 + i * 9));
                         const pct = isInsurance
                           ? item.value === 1 ? "פעיל" : "חסר"
                           : `${Math.round((item.value / (total || 1)) * 100)}%`;
+                        const dotAlpha = 0.4 + (i * 0.12);
                         return (
                           <div key={i} className="flex items-center gap-2 text-[11px]">
-                            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: `hsl(${h}, ${s}%, ${lightness}%)` }} />
-                            <span className="truncate flex-1" style={{ color: "hsl(250, 35%, 25%)" }}>{item.label}</span>
-                            <span className="font-bold flex-shrink-0" style={{ color: "hsl(250, 40%, 20%)" }}>{pct}</span>
+                            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: `hsla(0,0%,100%,${Math.min(1, dotAlpha)})` }} />
+                            <span className="truncate flex-1" style={{ color: "hsla(0,0%,100%,0.92)" }}>{item.label}</span>
+                            <span className="font-bold flex-shrink-0" style={{ color: "white" }}>{pct}</span>
                           </div>
                         );
                       })}
