@@ -349,7 +349,7 @@ const IndexB = () => {
                 category: Category;
                 onClick?: () => void;
               }> = [
-                { label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500", subLabel: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית", category: "assets" },
+                { label: "פנסיה", Icon: PiggyBank, value: "₪1,233,500", subLabel: "סך החיסכון", extra: "₪9,069", extraSub: "צפי קצבה חודשית", badge: 2, category: "assets", onClick: () => navigate("/assets/pension") },
                 { label: "השקעות", Icon: LineChart, value: "₪2,095,000", subLabel: "תיק השקעות", badge: 1, category: "assets" },
                 { label: "חשבון עו״ש", Icon: CreditCard, value: "₪24,500", subLabel: "יתרה שוטפת", category: "assets" },
                 { label: "הלוואות", Icon: Briefcase, value: "₪320,000", subLabel: "סה״כ הלוואות", extra: "₪8,200", extraSub: "תשלום חודשי", extraSuffix: "/חודש", category: "liabilities" },
