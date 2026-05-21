@@ -219,29 +219,29 @@ export const CategoryPageC = ({
             <ChevronRight className="h-5 w-5" />
           </button>
           <nav
-            className="flex-1 inline-flex items-center gap-1 text-[12.5px] font-semibold mr-1 truncate"
+            className="flex-1 inline-flex items-center gap-2.5 text-[12.5px] font-semibold mr-1 truncate"
             aria-label="breadcrumb"
           >
             <button
               onClick={() => navigate("/")}
-              className="transition-opacity hover:opacity-100"
+              className="px-1.5 py-1 transition-opacity hover:opacity-100"
               style={{ color: heroText, opacity: 0.6 }}
             >
               בית
             </button>
             {parentLabel && (
               <>
-                <span style={{ opacity: 0.4 }}>›</span>
+                <span style={{ opacity: 0.4 }}>/</span>
                 <button
                   onClick={() => navigate(parentPath ?? "/")}
-                  className="transition-opacity hover:opacity-100"
+                  className="px-1.5 py-1 transition-opacity hover:opacity-100"
                   style={{ color: heroText, opacity: 0.6 }}
                 >
                   {parentLabel}
                 </button>
               </>
             )}
-            <span style={{ opacity: 0.4 }}>›</span>
+            <span style={{ opacity: 0.4 }}>/</span>
             <span style={{ color: heroText, fontWeight: 800 }} className="truncate">{title}</span>
           </nav>
         </div>
@@ -282,30 +282,30 @@ export const CategoryPageC = ({
             <ChevronRight className="h-5 w-5" />
           </button>
           <nav
-            className="flex-1 inline-flex items-center gap-1 text-[13px] font-semibold mr-1 truncate"
+            className="flex-1 inline-flex items-center gap-2.5 text-[13px] font-semibold mr-1 truncate"
             aria-label="breadcrumb"
             dir="rtl"
           >
             <button
               onClick={() => navigate("/")}
-              className="transition-opacity hover:opacity-100"
+              className="px-1.5 py-1 transition-opacity hover:opacity-100"
               style={{ color: heroText, opacity: 0.6 }}
             >
               בית
             </button>
             {parentLabel && (
               <>
-                <span style={{ opacity: 0.4 }}>›</span>
+                <span style={{ opacity: 0.4 }}>/</span>
                 <button
                   onClick={() => navigate(parentPath ?? "/")}
-                  className="transition-opacity hover:opacity-100"
+                  className="px-1.5 py-1 transition-opacity hover:opacity-100"
                   style={{ color: heroText, opacity: 0.6 }}
                 >
                   {parentLabel}
                 </button>
               </>
             )}
-            <span style={{ opacity: 0.4 }}>›</span>
+            <span style={{ opacity: 0.4 }}>/</span>
             <span style={{ color: heroText, fontWeight: 800 }} className="truncate">{title}</span>
           </nav>
         </div>

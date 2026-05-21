@@ -183,19 +183,19 @@ const PensionProductPage = () => {
           className="relative inline-flex items-center text-[12px] font-semibold text-white/85"
           aria-label="breadcrumb"
         >
-          <button onClick={() => navigate("/")} className="inline-flex items-center gap-0.5 opacity-75 hover:opacity-100 transition-opacity">
+          <button onClick={() => navigate("/")} className="inline-flex items-center gap-0.5 px-1.5 py-1 opacity-75 hover:opacity-100 transition-opacity">
             <ChevronLeft className="h-3.5 w-3.5 rotate-180" />
             <span>בית</span>
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
-          <button onClick={() => navigate("/assets")} className="opacity-75 hover:opacity-100 transition-opacity">
+          <span className="mx-2.5 opacity-50">/</span>
+          <button onClick={() => navigate("/assets")} className="px-1.5 py-1 opacity-75 hover:opacity-100 transition-opacity">
             נכסים
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
-          <button onClick={() => navigate("/assets/pension")} className="opacity-75 hover:opacity-100 transition-opacity">
+          <span className="mx-2.5 opacity-50">/</span>
+          <button onClick={() => navigate("/assets/pension")} className="px-1.5 py-1 opacity-75 hover:opacity-100 transition-opacity">
             פנסיה
           </button>
-          <span className="mx-1.5 opacity-50">/</span>
+          <span className="mx-2.5 opacity-50">/</span>
           <span className="font-extrabold text-white truncate max-w-[120px]">{product.label}</span>
         </nav>
 
