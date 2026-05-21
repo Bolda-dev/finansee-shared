@@ -48,7 +48,7 @@ function buildSecondAlternative(primary: { provider: string; label: string; mgmt
     provider,
     label: "מסלול כללי",
     mgmt: Math.round((primary.mgmt + 0.08) * 100) / 100,
-    return3y: Math.max(0, primary.return3y - 2.4),
+    return3y: Math.round(Math.max(0, primary.return3y - 2.4) * 10) / 10,
   };
 }
 
@@ -78,7 +78,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             <>
               היי משה 👋 הסתכלתי על <strong>{product.label}</strong> ב{product.provider} —
               <br />
-              מצאתי דרך שיכולה להרוויח לך{" "}
+              מצאתי שתי קרנות שיכולות להרוויח לך{" "}
               <span
                 className="inline-block font-extrabold px-1.5 py-0.5 rounded-md"
                 style={{ background: "hsl(45, 95%, 88%)", color: "hsl(28, 80%, 25%)" }}
@@ -87,14 +87,25 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
               </span>{" "}
               עד הפרישה 💰
               <br />
-              רוצה לשמוע איך?
+              הנה ההשוואה ביניהן 👇
             </>
           ),
         },
       ]);
-    }, 900);
+      setTyping(true);
+      setTimeout(() => {
+        setTyping(false);
+        setMessages((p) => [
+          ...p,
+          { id: "m2", role: "dana", kind: "compare" },
+          { id: "m3", role: "dana", kind: "ctas" },
+        ]);
+        setStep("free");
+      }, 900);
+    }, 700);
     return () => clearTimeout(t1);
   }, [open, product, savings]);
+
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -190,7 +201,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
             {messages.map((m) => {
               if (m.role === "user") {
                 return (
-                  <div key={m.id} className="flex justify-start">
+                  <div key={m.id} className="flex justify-start" dir="rtl">
                     <div
                       className="max-w-[80%] rounded-2xl rounded-bl-md px-3.5 py-2.5 text-[13px] font-medium text-right"
                       style={{
@@ -198,6 +209,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                         color: "white",
                         boxShadow: "0 4px 14px hsla(250, 30%, 15%, 0.35)",
                       }}
+                      dir="rtl"
                     >
                       {m.text}
                     </div>
@@ -206,7 +218,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
               }
               if (m.kind === "text") {
                 return (
-                  <div key={m.id} className="flex justify-end gap-2 items-end">
+                  <div key={m.id} className="flex justify-end gap-2 items-end" dir="rtl">
                     <div
                       className="max-w-[82%] rounded-2xl rounded-br-md px-3.5 py-2.5 text-[13px] leading-relaxed text-right"
                       style={{
@@ -215,6 +227,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                         border: "1px solid hsl(230, 20%, 92%)",
                         boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
                       }}
+                      dir="rtl"
                     >
                       {m.text}
                     </div>
@@ -464,7 +477,15 @@ function CompareCard({
                 </p>
               </div>
             </div>
+
+            <button
+              className="w-full rounded-full py-2 text-[11px] font-bold text-white transition-transform active:scale-[0.97]"
+              style={{ background: C.fresh, boxShadow: "0 4px 12px hsla(174, 65%, 30%, 0.25)" }}
+            >
+              בחינת הקרן ›
+            </button>
           </div>
+
 
           {/* Other alternative — appears on LEFT in RTL (second child) */}
           <div
@@ -514,7 +535,15 @@ function CompareCard({
                 </p>
               </div>
             </div>
+
+            <button
+              className="w-full rounded-full py-2 text-[11px] font-bold transition-transform active:scale-[0.97]"
+              style={{ background: "white", color: C.ink, border: `1px solid ${C.hairline}` }}
+            >
+              בחינת הקרן ›
+            </button>
           </div>
+
         </div>
 
         {/* Bottom Power Banner */}
@@ -546,31 +575,31 @@ function CompareCard({
             <span className="text-white text-[10.5px] font-bold">החיסכון המקסימלי האפשרי עבורך</span>
           </div>
         </div>
+
+        {/* CTAs inside card, centered, below the power banner */}
+        <div className="px-4 pb-5 flex flex-col items-center gap-2" dir="rtl">
+          <button
+            className="w-full max-w-[280px] rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.97]"
+            style={{
+              background: "hsl(250, 30%, 8%)",
+              boxShadow: "0 6px 18px hsla(250, 30%, 15%, 0.40)",
+            }}
+          >
+            ⚡ עברו לקרן המומלצת
+          </button>
+          <button
+            className="w-full max-w-[280px] rounded-full py-2.5 text-[11.5px] font-semibold"
+            style={{ color: "hsl(230, 15%, 55%)", background: "transparent" }}
+          >
+            השוואה מפורטת ›
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
 function CtaBlock() {
-  return (
-    <div className="flex justify-end mr-9" dir="rtl">
-      <div className="w-full max-w-[82%] flex flex-col gap-2">
-        <button
-          className="w-full rounded-full py-3 text-[13px] font-extrabold text-white flex items-center justify-center gap-1.5 transition-transform active:scale-[0.97]"
-          style={{
-            background: "hsl(250, 30%, 8%)",
-            boxShadow: "0 6px 18px hsla(250, 30%, 15%, 0.40)",
-          }}
-        >
-          ⚡ עברו לקרן המומלצת
-        </button>
-        <button
-          className="w-full rounded-full py-2.5 text-[11.5px] font-semibold"
-          style={{ color: "hsl(230, 15%, 55%)", background: "transparent" }}
-        >
-          השוואה מפורטת ›
-        </button>
-      </div>
-    </div>
-  );
+  return null;
 }
+
