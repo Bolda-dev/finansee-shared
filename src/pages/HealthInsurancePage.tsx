@@ -418,10 +418,47 @@ const HealthInsurancePage = () => {
           </div>
         </SectionCard>
 
-        <p className="text-[10.5px] text-center mt-2 px-6" style={{ color: C.muted }}>
+        <p className="text-[10.5px] text-center mt-2 px-6 pb-24" style={{ color: C.muted }}>
           הנתונים מתעדכנים אוטומטית מחברת הביטוח
         </p>
       </div>
+
+      {/* Bottom Chat Bar */}
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-40 px-4 pb-4 pointer-events-none before:content-[''] before:absolute before:inset-x-0 before:bottom-0 before:h-[160px] before:bg-gradient-to-t before:from-white before:via-white/85 before:to-transparent before:-z-10 before:pointer-events-none" dir="rtl">
+        <button
+          onClick={() => setChatOpen(true)}
+          dir="rtl"
+          className="pointer-events-auto w-full flex items-center gap-2 rounded-full pr-2 pl-4 py-2 transition-all hover:scale-[1.01] active:scale-[0.99]"
+          style={{
+            background: "white",
+            boxShadow: "0 8px 32px hsla(250, 30%, 30%, 0.14), 0 2px 8px hsla(250, 30%, 30%, 0.06)",
+            border: "1px solid hsl(230, 20%, 92%)",
+          }}
+          aria-label="פתח צ׳אט עם Finansee AI"
+        >
+          <span className="tri-ring-c relative w-11 h-11 rounded-full flex-shrink-0" style={{ transform: "translateY(-2px)" }}>
+            <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 6px 20px hsla(250, 30%, 20%, 0.35)" }}>
+              <img src={advisorImg} alt="Finansee AI" className="w-full h-full object-cover" />
+            </span>
+          </span>
+          <span className="flex-1 text-start text-sm" style={{ color: "hsl(230, 15%, 55%)" }}>
+            שאל את Finansee AI
+          </span>
+          <span
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+            style={{ background: "hsl(230, 25%, 96%)", border: "1px solid hsl(230, 20%, 90%)" }}
+          >
+            <Mic className="h-4 w-4" style={{ color: "hsl(230, 15%, 45%)" }} />
+          </span>
+          <span className="tri-ring-c relative w-9 h-9 rounded-full flex-shrink-0">
+            <span className="flex w-full h-full rounded-full items-center justify-center cta-tri-c">
+              <Send className="h-4 w-4 -rotate-90" style={{ color: "white" }} />
+            </span>
+          </span>
+        </button>
+      </div>
+
+      <InsightsSheetC open={chatOpen} onOpenChange={setChatOpen} mode="context" />
     </div>
   );
 };
