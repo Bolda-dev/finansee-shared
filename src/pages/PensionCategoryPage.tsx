@@ -237,8 +237,12 @@ const PensionCategoryPage = () => {
                 </p>
                 {p.monthlyDeposit ? (
                   <span
-                    className="inline-block text-[9.5px] font-bold px-1.5 py-0.5 rounded mt-0.5"
-                    style={{ background: C.mint, color: C.core }}
+                    className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1"
+                    style={{
+                      background: "hsl(150, 60%, 93%)",
+                      color: "hsl(150, 65%, 26%)",
+                      border: "1px solid hsl(150, 55%, 84%)",
+                    }}
                   >
                     +{formatNIS(p.monthlyDeposit)}/ח
                   </span>
