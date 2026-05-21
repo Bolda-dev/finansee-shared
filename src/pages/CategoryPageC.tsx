@@ -224,7 +224,7 @@ export const CategoryPageC = ({
           >
             <button
               onClick={() => navigate("/")}
-              className="transition-opacity hover:opacity-100"
+              className="px-1.5 py-1 transition-opacity hover:opacity-100"
               style={{ color: heroText, opacity: 0.6 }}
             >
               בית
@@ -234,7 +234,7 @@ export const CategoryPageC = ({
                 <span style={{ opacity: 0.4 }}>/</span>
                 <button
                   onClick={() => navigate(parentPath ?? "/")}
-                  className="transition-opacity hover:opacity-100"
+                  className="px-1.5 py-1 transition-opacity hover:opacity-100"
                   style={{ color: heroText, opacity: 0.6 }}
                 >
                   {parentLabel}
@@ -288,7 +288,7 @@ export const CategoryPageC = ({
           >
             <button
               onClick={() => navigate("/")}
-              className="transition-opacity hover:opacity-100"
+              className="px-1.5 py-1 transition-opacity hover:opacity-100"
               style={{ color: heroText, opacity: 0.6 }}
             >
               בית
@@ -298,7 +298,7 @@ export const CategoryPageC = ({
                 <span style={{ opacity: 0.4 }}>/</span>
                 <button
                   onClick={() => navigate(parentPath ?? "/")}
-                  className="transition-opacity hover:opacity-100"
+                  className="px-1.5 py-1 transition-opacity hover:opacity-100"
                   style={{ color: heroText, opacity: 0.6 }}
                 >
                   {parentLabel}
