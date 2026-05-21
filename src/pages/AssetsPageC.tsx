@@ -5,7 +5,10 @@ import { Layers } from "lucide-react";
 
 const AssetsPageC = () => {
   const navigate = useNavigate();
-  const items: CategoryItem[] = assetItems.map((a) => ({ ...a }));
+  const problematicPensions = pensionProducts.filter((p) => !!p.alert).length;
+  const items: CategoryItem[] = assetItems.map((a) =>
+    a.label === "פנסיה" ? { ...a, badgeCount: problematicPensions } : { ...a }
+  );
 
   const totalValue = items.reduce((s, i) => s + (i.amount ?? 0), 0);
   const monthlyIncome = items.reduce((s, i) => s + (i.monthly ?? 0), 0);
