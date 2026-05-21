@@ -251,38 +251,49 @@ const HealthInsurancePage = () => {
         </div>
       </div>
 
-      {/* Dana banner — recommendation */}
-      <div className="px-5 mt-4">
-        <div
-          className="relative rounded-2xl p-4 text-right overflow-hidden"
+      {/* Dana banner — recommendation (matches Pension product) */}
+      <div className="px-4 pt-5">
+        <button
+          onClick={() => {}}
           dir="rtl"
+          className="w-full flex items-center gap-3 rounded-2xl bg-white p-4 text-right transition-transform hover:scale-[1.01] active:scale-[0.99]"
           style={{
-            background: `linear-gradient(135deg, ${C.mint} 0%, white 100%)`,
-            border: `1px solid hsl(265, 50%, 88%)`,
-            boxShadow: "0 4px 14px hsla(262, 50%, 30%, 0.08)",
+            boxShadow: "0 8px 24px hsla(262, 30%, 25%, 0.08), 0 1px 3px hsla(262, 30%, 25%, 0.04)",
+            border: "1px solid hsl(260, 20%, 92%)",
           }}
         >
-          <div className="flex items-start gap-3">
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[14px] font-bold"
-              style={{ background: `linear-gradient(135deg, ${C.fresh}, ${C.bright})` }}
+          <span className="relative w-14 h-14 rounded-full flex-shrink-0">
+            <span
+              className="block w-full h-full rounded-full overflow-hidden"
+              style={{ border: "2px solid hsl(265, 60%, 70%)" }}
             >
-              ד
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[11px] font-bold mb-1" style={{ color: C.core }}>דנה ממליצה</p>
-              <p className="text-[12.5px] leading-snug" style={{ color: C.ink }}>
-                זיהיתי <strong>כפל ביטוח</strong> של <strong>{formatNIS(duplicationTotal)}/חודש</strong> מול מכבי וביטוח העבודה. ניתן לחסוך עד <strong>{formatNIS(duplicationTotal * 12)}</strong> בשנה.
+              <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
+            </span>
+            <span
+              className="absolute -top-1 -right-1 min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center text-[12px] font-extrabold text-white"
+              style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
+              aria-label="התראה"
+            >
+              !
+            </span>
+          </span>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-end gap-1.5">
+              <span
+                className="inline-block w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: "hsl(150, 65%, 45%)", boxShadow: "0 0 0 3px hsla(150, 65%, 45%, 0.18)" }}
+                aria-hidden
+              />
+              <p className="text-[14px] font-extrabold tracking-tight leading-snug truncate" style={{ color: C.ink }}>
+                זיהיתי כפל ביטוח שאפשר לחסוך!
               </p>
-              <button
-                className="mt-2 inline-flex items-center text-[11px] font-bold px-3 py-1.5 rounded-full text-white transition-transform active:scale-[0.97]"
-                style={{ background: `linear-gradient(135deg, ${C.fresh}, ${C.core})` }}
-              >
-                בוא/י נבדוק יחד
-              </button>
             </div>
+            <p className="text-[11.5px] mt-1" style={{ color: "hsl(260, 15%, 50%)" }}>
+              חיסכון אפשרי של עד {formatNIS(duplicationTotal * 12)} בשנה
+            </p>
           </div>
-        </div>
+          <ChevronLeft className="h-5 w-5 flex-shrink-0" style={{ color: "hsl(260, 15%, 60%)" }} />
+        </button>
       </div>
 
       {/* Filter chips */}
