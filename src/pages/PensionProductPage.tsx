@@ -73,14 +73,14 @@ const SectionCard = ({ title, children }: { title: string; children: React.React
     dir="rtl"
   >
     <span
-      className="absolute top-3 bottom-3 right-0 w-[3px] rounded-full"
-      style={{ background: `linear-gradient(180deg, ${C.fresh}, ${C.core})` }}
+      className="absolute top-0 left-0 right-0 h-[3px]"
+      style={{ background: C.core }}
       aria-hidden
     />
-    <h3 className="text-[12px] font-bold mb-3 pr-2" style={{ color: C.ink, letterSpacing: "-0.01em" }}>
+    <h3 className="text-[12px] font-bold mb-3" style={{ color: C.ink, letterSpacing: "-0.01em" }}>
       {title}
     </h3>
-    <div className="pr-2">{children}</div>
+    <div>{children}</div>
   </div>
 );
 
