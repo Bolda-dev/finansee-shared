@@ -66,6 +66,8 @@ export type CategoryItem = {
   icon: string;
   provider?: string;
   alert?: boolean;
+  /** Optional numeric badge count rendered as red dot on icon (overrides alert "1"). */
+  badgeCount?: number;
   /** When true, render this item with expanded layout (more details, larger card) */
   expanded?: boolean;
   /** Extra detail rows (label → value) shown under the title in expanded mode */
