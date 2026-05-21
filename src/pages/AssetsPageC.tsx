@@ -5,7 +5,10 @@ import { Layers } from "lucide-react";
 
 const AssetsPageC = () => {
   const navigate = useNavigate();
-  const items: CategoryItem[] = assetItems.map((a) => ({ ...a }));
+  const problematicPensions = pensionProducts.filter((p) => !!p.alert).length;
+  const items: CategoryItem[] = assetItems.map((a) =>
+    a.label === "פנסיה" ? { ...a, badgeCount: problematicPensions } : { ...a }
+  );
 
   const totalValue = items.reduce((s, i) => s + (i.amount ?? 0), 0);
   const monthlyIncome = items.reduce((s, i) => s + (i.monthly ?? 0), 0);
@@ -62,39 +65,16 @@ const AssetsPageC = () => {
             {formatNIS(item.amount ?? 0)}
           </span>
           {item.label === "פנסיה" ? (
-            <span className="inline-flex items-center gap-1">
-              {(() => {
-                const problematic = pensionProducts.filter((p) => !!p.alert).length;
-                return problematic > 0 ? (
-                  <span
-                    className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
-                    style={{
-                      background: "hsl(0, 85%, 96%)",
-                      color: "hsl(0, 75%, 38%)",
-                      border: "1px solid hsl(0, 75%, 85%)",
-                    }}
-                  >
-                    <span
-                      className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full text-white text-[9px] font-extrabold"
-                      style={{ background: "hsl(0, 75%, 50%)" }}
-                    >
-                      {problematic}
-                    </span>
-                    בעייתיים
-                  </span>
-                ) : null;
-              })()}
-              <span
-                className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
-                style={{
-                  background: "hsl(176, 55%, 91%)",
-                  color: "hsl(178, 70%, 22%)",
-                  border: "1px solid hsl(176, 50%, 82%)",
-                }}
-              >
-                <Layers className="h-2.5 w-2.5" strokeWidth={2.5} />
-                {pensionProducts.length} מוצרים
-              </span>
+            <span
+              className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+              style={{
+                background: "hsl(176, 55%, 91%)",
+                color: "hsl(178, 70%, 22%)",
+                border: "1px solid hsl(176, 50%, 82%)",
+              }}
+            >
+              <Layers className="h-2.5 w-2.5" strokeWidth={2.5} />
+              {pensionProducts.length} מוצרים
             </span>
           ) : item.monthly ? (
             <span

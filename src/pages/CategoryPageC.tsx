@@ -66,6 +66,8 @@ export type CategoryItem = {
   icon: string;
   provider?: string;
   alert?: boolean;
+  /** Optional numeric badge count rendered as red dot on icon (overrides alert "1"). */
+  badgeCount?: number;
   /** When true, render this item with expanded layout (more details, larger card) */
   expanded?: boolean;
   /** Extra detail rows (label → value) shown under the title in expanded mode */
@@ -450,7 +452,7 @@ export const CategoryPageC = ({
                       strokeWidth={2}
                     />
                   </span>
-                  {item.alert && (
+                  {(item.alert || (item.badgeCount && item.badgeCount > 0)) && (
                     <span
                       className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
                       style={{
@@ -458,7 +460,7 @@ export const CategoryPageC = ({
                         border: "2px solid white",
                       }}
                     >
-                      1
+                      {item.badgeCount && item.badgeCount > 0 ? item.badgeCount : 1}
                     </span>
                   )}
                 </span>
@@ -548,12 +550,12 @@ export const CategoryPageC = ({
                           strokeWidth={2}
                         />
                       </span>
-                      {item.alert && (
+                      {(item.alert || (item.badgeCount && item.badgeCount > 0)) && (
                         <span
                           className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-full flex items-center justify-center text-[9px] font-bold text-white"
                           style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
                         >
-                          1
+                          {item.badgeCount && item.badgeCount > 0 ? item.badgeCount : 1}
                         </span>
                       )}
                     </span>
