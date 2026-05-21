@@ -367,10 +367,12 @@ function CompareCard({
   recommended,
   other,
   savings,
+  onShowLeaks,
 }: {
   recommended: AltOption;
   other: AltOption;
   savings: number;
+  onShowLeaks?: () => void;
 }) {
   const maxMgmt = Math.max(recommended.mgmt, other.mgmt, 0.5);
   const recMgmtW = (recommended.mgmt / maxMgmt) * 100;
