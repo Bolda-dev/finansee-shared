@@ -68,12 +68,12 @@ const LiabilitiesPageC = () => {
             <span
               className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full"
               style={{
-                background: "hsl(15, 90%, 95%)",
-                color: "hsl(8, 70%, 38%)",
-                border: "1px solid hsl(15, 80%, 88%)",
+                background: "hsl(176, 55%, 91%)",
+                color: "hsl(178, 70%, 22%)",
+                border: "1px solid hsl(176, 50%, 82%)",
               }}
             >
-              -{formatNIS(item.monthly)}/חודש
+              -{formatNIS(item.monthly)}/ח
             </span>
           ) : null}
         </span>
