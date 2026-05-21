@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { TrendingUp, TrendingDown, ShieldCheck, Menu, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Check, ArrowLeft, ChevronDown, Loader } from "lucide-react";
+import { TrendingUp, TrendingDown, ShieldCheck, Menu, Plus, PiggyBank, LineChart, Briefcase, Building2, Mic, Send, X, Check, ArrowLeft, ChevronDown, Loader, Info, AlertTriangle } from "lucide-react";
 import { ConsentAnnex } from "@/components/aha/ConsentAnnex";
 import { userData } from "@/lib/data";
 import advisorImg from "@/assets/advisor-avatar.jpg";
@@ -78,6 +78,7 @@ const AhaDashboard2 = () => {
 
   const [chatOpen, setChatOpen] = useState(false);
   const [tipOpen, setTipOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
   const [stage, setStage] = useState<Stage>("intro");
   // creditReport: 1=consent assets, 2=consent liab, 3=collecting
   // investStyle: 0..2 = three questions
@@ -213,15 +214,85 @@ const AhaDashboard2 = () => {
 
       {/* Hero — estimated range */}
       <div className="relative z-10 px-3 mb-6">
-        <p className="text-sm font-medium mb-2" style={{ color: "hsl(250, 35%, 30%)" }}>
-          הערכה ראשונית
-        </p>
+        <div className="flex items-center gap-1.5 mb-2">
+          <p className="text-sm font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>
+            הערכה ראשונית
+          </p>
+          <button
+            type="button"
+            onClick={() => setInfoOpen((v) => !v)}
+            className="w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+            aria-label="מידע נוסף"
+          >
+            <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 35%, 45%)" }} />
+          </button>
+        </div>
         <p className="font-extrabold tracking-tight text-4xl mb-1" style={{ color: "hsl(250, 50%, 10%)" }}>
           ₪450K - ₪1.2M
         </p>
         <p className="text-[12px]" style={{ color: "hsl(230, 15%, 55%)" }}>
           הערכה לפי הפרופיל שלך
         </p>
+
+        {/* Info popover — missing connections */}
+        {infoOpen && (
+          <div
+            className="relative mt-3 rounded-2xl p-3.5 animate-fade-in"
+            style={{
+              background: "white",
+              border: "1px solid hsl(230, 20%, 92%)",
+              boxShadow: "0 10px 28px hsla(250, 30%, 15%, 0.12)",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setInfoOpen(false)}
+              className="absolute top-2 left-2 w-7 h-7 rounded-full flex items-center justify-center hover:bg-black/5"
+              aria-label="סגור"
+            >
+              <X className="h-3.5 w-3.5" style={{ color: "hsl(230, 15%, 45%)" }} />
+            </button>
+            <p className="text-[12.5px] font-bold mb-1 pr-1" style={{ color: "hsl(250, 45%, 18%)" }}>
+              כדי לתת מצב מלא יש לחבר את הנתונים הבאים
+            </p>
+            <p className="text-[11px] mb-3 pr-1" style={{ color: "hsl(230, 15%, 50%)" }}>
+              חיבור הנתונים יחשף את התמונה המלאה ויאפשר לנו לתת המלצות מדויקות
+            </p>
+            <div className="space-y-1.5">
+              {[
+                { label: "התחייבויות", desc: "הלוואות, משכנתא וכרטיסי אשראי" },
+                { label: "נתוני אשראי", desc: "דוח אשראי ממאגר בנק ישראל" },
+                { label: "פנסיה והשתלמות", desc: "השלמת קופות חסרות" },
+              ].map((row) => (
+                <div
+                  key={row.label}
+                  className="flex items-center justify-between gap-2 rounded-xl px-2.5 py-2"
+                  style={{ background: "hsl(230, 30%, 97%)" }}
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[12px] font-bold leading-tight" style={{ color: "hsl(250, 40%, 18%)" }}>
+                      {row.label}
+                    </p>
+                    <p className="text-[10.5px] leading-snug" style={{ color: "hsl(230, 15%, 50%)" }}>
+                      {row.desc}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => { setInfoOpen(false); openCreditChat(); }}
+                    className="text-[11px] font-bold px-3 py-1 rounded-full flex-shrink-0"
+                    style={{
+                      background: "white",
+                      color: "hsl(262, 75%, 50%)",
+                      border: "1.5px solid hsl(262, 60%, 88%)",
+                    }}
+                  >
+                    חיבור
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 3 hero cards (insurance bold, others dashed at same height) */}
@@ -255,6 +326,48 @@ const AhaDashboard2 = () => {
                       {card.label}
                     </p>
                     <p className="font-extrabold text-base text-white">5 פוליסות</p>
+                  </div>
+                </button>
+              );
+            }
+            // Assets card → connected with partial-data disclaimer
+            if (card.category === "assets") {
+              return (
+                <button
+                  key={card.label}
+                  onClick={() => navigate(card.route)}
+                  className="relative rounded-2xl px-2.5 py-3 text-start flex flex-col transition-transform active:scale-[0.97]"
+                  style={{
+                    background: "white",
+                    border: `1px solid ${p.soft}`,
+                    boxShadow: "0 4px 14px -8px hsla(176, 70%, 22%, 0.18)",
+                    minHeight: `${CARD_MIN_H}px`,
+                  }}
+                >
+                  <div
+                    className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
+                    style={{ background: p.soft }}
+                  >
+                    <card.Icon className="h-4 w-4" style={{ color: p.solid }} />
+                  </div>
+                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 18%, 40%)" }}>
+                    {card.label}
+                  </p>
+                  <p className="font-extrabold text-base mb-1.5" style={{ color: "hsl(250, 50%, 12%)" }}>
+                    ₪3.3M
+                  </p>
+                  <div className="mt-auto flex">
+                    <span
+                      className="inline-flex items-center gap-1 text-[9.5px] font-bold px-1.5 py-0.5 rounded-full leading-tight"
+                      style={{
+                        background: "hsl(35, 100%, 95%)",
+                        color: "hsl(28, 85%, 32%)",
+                        border: "1px solid hsl(35, 90%, 82%)",
+                      }}
+                    >
+                      <AlertTriangle className="h-2.5 w-2.5" strokeWidth={2.5} />
+                      נתונים חלקיים
+                    </span>
                   </div>
                 </button>
               );
