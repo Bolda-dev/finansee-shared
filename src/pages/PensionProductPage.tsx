@@ -17,6 +17,7 @@ import { InsightsSheetC } from "@/components/InsightsSheetC";
 import { DanaPensionChat } from "@/components/DanaPensionChat";
 import { DanaTeaserBubbles } from "@/components/DanaTeaserBubbles";
 import { ProviderLogo } from "@/lib/providerLogo";
+import { StickyHeader } from "@/components/StickyHeader";
 
 const formatNIS = (n: number) => "₪" + n.toLocaleString("he-IL");
 
