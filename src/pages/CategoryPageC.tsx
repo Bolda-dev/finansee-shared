@@ -210,41 +210,25 @@ export const CategoryPageC = ({
         }}
         dir="rtl"
       >
-        <div className="flex items-center px-4 py-3" style={{ color: heroText }} dir="rtl">
+        <div className="relative flex items-center justify-center px-4 py-3 min-h-[44px]" style={{ color: heroText }} dir="rtl">
           <button
             onClick={() => navigate(parentPath ?? "/")}
-            className="flex items-center justify-center w-7 h-7 -mr-1 opacity-90 hover:opacity-100 transition-opacity"
+            className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full transition-all hover:scale-105 active:scale-95"
+            style={{
+              background: heroText === "white" ? "hsla(0,0%,100%,0.18)" : "hsla(0,0%,0%,0.08)",
+              border: heroText === "white" ? "1px solid hsla(0,0%,100%,0.25)" : "1px solid hsla(0,0%,0%,0.10)",
+              backdropFilter: "blur(8px)",
+              color: heroText,
+            }}
             aria-label="חזרה"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
-          <nav
-            className="flex-1 inline-flex items-center gap-2.5 text-[12.5px] font-semibold mr-1 truncate"
-            aria-label="breadcrumb"
-          >
-            <button
-              onClick={() => navigate("/")}
-              className="px-1.5 py-1 transition-opacity hover:opacity-100"
-              style={{ color: heroText, opacity: 0.6 }}
-            >
-              בית
-            </button>
-            {parentLabel && (
-              <>
-                <span style={{ opacity: 0.4 }}>/</span>
-                <button
-                  onClick={() => navigate(parentPath ?? "/")}
-                  className="px-1.5 py-1 transition-opacity hover:opacity-100"
-                  style={{ color: heroText, opacity: 0.6 }}
-                >
-                  {parentLabel}
-                </button>
-              </>
-            )}
-            <span style={{ opacity: 0.4 }}>/</span>
-            <span style={{ color: heroText, fontWeight: 800 }} className="truncate">{title}</span>
-          </nav>
+          <h1 className="text-[14px] font-extrabold truncate max-w-[230px]" style={{ color: heroText }}>
+            {title}
+          </h1>
         </div>
+
       </div>
 
       {/* === Hero — stays in place; sheet scrolls up over it === */}
@@ -272,43 +256,26 @@ export const CategoryPageC = ({
           ))}
         </svg>
 
-        {/* Top bar: breadcrumb (בית › [parent] › current) */}
-        <div className="relative flex items-center mb-5 min-h-[28px]" style={{ color: heroText }}>
+        {/* Top bar: back button + centered title */}
+        <div className="relative flex items-center justify-center mb-5 min-h-[40px]" style={{ color: heroText }} dir="rtl">
           <button
             onClick={() => navigate(parentPath ?? "/")}
-            className="flex items-center justify-center w-7 h-7 -mr-1 opacity-90 hover:opacity-100 transition-opacity"
+            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full transition-all hover:scale-105 active:scale-95"
+            style={{
+              background: heroText === "white" ? "hsla(0,0%,100%,0.18)" : "hsla(0,0%,0%,0.08)",
+              border: heroText === "white" ? "1px solid hsla(0,0%,100%,0.25)" : "1px solid hsla(0,0%,0%,0.10)",
+              backdropFilter: "blur(8px)",
+              color: heroText,
+            }}
             aria-label="חזרה"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
-          <nav
-            className="flex-1 inline-flex items-center gap-2.5 text-[13px] font-semibold mr-1 truncate"
-            aria-label="breadcrumb"
-            dir="rtl"
-          >
-            <button
-              onClick={() => navigate("/")}
-              className="px-1.5 py-1 transition-opacity hover:opacity-100"
-              style={{ color: heroText, opacity: 0.6 }}
-            >
-              בית
-            </button>
-            {parentLabel && (
-              <>
-                <span style={{ opacity: 0.4 }}>/</span>
-                <button
-                  onClick={() => navigate(parentPath ?? "/")}
-                  className="px-1.5 py-1 transition-opacity hover:opacity-100"
-                  style={{ color: heroText, opacity: 0.6 }}
-                >
-                  {parentLabel}
-                </button>
-              </>
-            )}
-            <span style={{ opacity: 0.4 }}>/</span>
-            <span style={{ color: heroText, fontWeight: 800 }} className="truncate">{title}</span>
-          </nav>
+          <h1 className="text-[15px] font-extrabold truncate max-w-[230px]" style={{ color: heroText }}>
+            {title}
+          </h1>
         </div>
+
 
         {/* Hero KPI */}
         <div className="relative flex flex-col items-center text-center" style={{ color: heroText }}>
