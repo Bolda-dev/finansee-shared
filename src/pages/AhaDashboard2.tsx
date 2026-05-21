@@ -214,15 +214,85 @@ const AhaDashboard2 = () => {
 
       {/* Hero — estimated range */}
       <div className="relative z-10 px-3 mb-6">
-        <p className="text-sm font-medium mb-2" style={{ color: "hsl(250, 35%, 30%)" }}>
-          הערכה ראשונית
-        </p>
+        <div className="flex items-center gap-1.5 mb-2">
+          <p className="text-sm font-medium" style={{ color: "hsl(250, 35%, 30%)" }}>
+            הערכה ראשונית
+          </p>
+          <button
+            type="button"
+            onClick={() => setInfoOpen((v) => !v)}
+            className="w-5 h-5 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+            aria-label="מידע נוסף"
+          >
+            <Info className="h-3.5 w-3.5" style={{ color: "hsl(250, 35%, 45%)" }} />
+          </button>
+        </div>
         <p className="font-extrabold tracking-tight text-4xl mb-1" style={{ color: "hsl(250, 50%, 10%)" }}>
           ₪450K - ₪1.2M
         </p>
         <p className="text-[12px]" style={{ color: "hsl(230, 15%, 55%)" }}>
           הערכה לפי הפרופיל שלך
         </p>
+
+        {/* Info popover — missing connections */}
+        {infoOpen && (
+          <div
+            className="relative mt-3 rounded-2xl p-3.5 animate-fade-in"
+            style={{
+              background: "white",
+              border: "1px solid hsl(230, 20%, 92%)",
+              boxShadow: "0 10px 28px hsla(250, 30%, 15%, 0.12)",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setInfoOpen(false)}
+              className="absolute top-2 left-2 w-7 h-7 rounded-full flex items-center justify-center hover:bg-black/5"
+              aria-label="סגור"
+            >
+              <X className="h-3.5 w-3.5" style={{ color: "hsl(230, 15%, 45%)" }} />
+            </button>
+            <p className="text-[12.5px] font-bold mb-1 pr-1" style={{ color: "hsl(250, 45%, 18%)" }}>
+              כדי לתת מצב מלא יש לחבר את הנתונים הבאים
+            </p>
+            <p className="text-[11px] mb-3 pr-1" style={{ color: "hsl(230, 15%, 50%)" }}>
+              חיבור הנתונים יחשף את התמונה המלאה ויאפשר לנו לתת המלצות מדויקות
+            </p>
+            <div className="space-y-1.5">
+              {[
+                { label: "התחייבויות", desc: "הלוואות, משכנתא וכרטיסי אשראי" },
+                { label: "נתוני אשראי", desc: "דוח אשראי ממאגר בנק ישראל" },
+                { label: "פנסיה והשתלמות", desc: "השלמת קופות חסרות" },
+              ].map((row) => (
+                <div
+                  key={row.label}
+                  className="flex items-center justify-between gap-2 rounded-xl px-2.5 py-2"
+                  style={{ background: "hsl(230, 30%, 97%)" }}
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[12px] font-bold leading-tight" style={{ color: "hsl(250, 40%, 18%)" }}>
+                      {row.label}
+                    </p>
+                    <p className="text-[10.5px] leading-snug" style={{ color: "hsl(230, 15%, 50%)" }}>
+                      {row.desc}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => { setInfoOpen(false); openCreditChat(); }}
+                    className="text-[11px] font-bold px-3 py-1 rounded-full flex-shrink-0"
+                    style={{
+                      background: "white",
+                      color: "hsl(262, 75%, 50%)",
+                      border: "1.5px solid hsl(262, 60%, 88%)",
+                    }}
+                  >
+                    חיבור
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 3 hero cards (insurance bold, others dashed at same height) */}
