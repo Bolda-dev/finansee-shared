@@ -217,7 +217,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
               }
               if (m.kind === "text") {
                 return (
-                  <div key={m.id} className="flex justify-end gap-2 items-end">
+                  <div key={m.id} className="flex justify-end gap-2 items-end" dir="rtl">
                     <div
                       className="max-w-[82%] rounded-2xl rounded-br-md px-3.5 py-2.5 text-[13px] leading-relaxed text-right"
                       style={{
@@ -226,6 +226,7 @@ export function DanaPensionChat({ open, onOpenChange, product, alternative, savi
                         border: "1px solid hsl(230, 20%, 92%)",
                         boxShadow: "0 2px 10px hsla(230, 30%, 50%, 0.06)",
                       }}
+                      dir="rtl"
                     >
                       {m.text}
                     </div>
