@@ -73,14 +73,14 @@ const SectionCard = ({ title, children }: { title: string; children: React.React
     dir="rtl"
   >
     <span
-      className="absolute top-3 bottom-3 right-0 w-[3px] rounded-full"
-      style={{ background: `linear-gradient(180deg, ${C.fresh}, ${C.core})` }}
+      className="absolute top-0 left-0 right-0 h-[3px]"
+      style={{ background: C.core }}
       aria-hidden
     />
-    <h3 className="text-[12px] font-bold mb-3 pr-2" style={{ color: C.ink, letterSpacing: "-0.01em" }}>
+    <h3 className="text-[12px] font-bold mb-3" style={{ color: C.ink, letterSpacing: "-0.01em" }}>
       {title}
     </h3>
-    <div className="pr-2">{children}</div>
+    <div>{children}</div>
   </div>
 );
 
@@ -276,7 +276,7 @@ const PensionProductPage = () => {
                 <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
               </span>
               <span
-                className="absolute -top-1 -left-1 min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center text-[12px] font-extrabold text-white"
+                className="absolute -top-1 -right-1 min-w-[20px] h-[20px] px-1 rounded-full flex items-center justify-center text-[12px] font-extrabold text-white"
                 style={{ background: "hsl(0, 78%, 55%)", border: "2px solid white" }}
                 aria-label="התראה"
               >
@@ -286,12 +286,12 @@ const PensionProductPage = () => {
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-end gap-1.5">
                 <span
-                  className="inline-block w-2 h-2 rounded-full"
+                  className="inline-block w-2 h-2 rounded-full flex-shrink-0"
                   style={{ background: "hsl(150, 65%, 45%)", boxShadow: "0 0 0 3px hsla(150, 65%, 45%, 0.18)" }}
                   aria-hidden
                 />
-                <p className="text-[14px] font-extrabold tracking-tight leading-snug" style={{ color: "hsl(250, 50%, 12%)" }}>
-                  אני מזהה פה בעיה! אבל יש לי את הפתרון!
+                <p className="text-[14px] font-extrabold tracking-tight leading-snug truncate" style={{ color: "hsl(250, 50%, 12%)" }}>
+                  מצאתי לך הזדמנות לשפר!
                 </p>
               </div>
               <p className="text-[11.5px] mt-1" style={{ color: "hsl(230, 15%, 50%)" }}>
