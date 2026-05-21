@@ -330,6 +330,48 @@ const AhaDashboard2 = () => {
                 </button>
               );
             }
+            // Assets card → connected with partial-data disclaimer
+            if (card.category === "assets") {
+              return (
+                <button
+                  key={card.label}
+                  onClick={() => navigate(card.route)}
+                  className="relative rounded-2xl px-2.5 py-3 text-start flex flex-col transition-transform active:scale-[0.97]"
+                  style={{
+                    background: "white",
+                    border: `1px solid ${p.soft}`,
+                    boxShadow: "0 4px 14px -8px hsla(176, 70%, 22%, 0.18)",
+                    minHeight: `${CARD_MIN_H}px`,
+                  }}
+                >
+                  <div
+                    className="w-9 h-9 mb-3 rounded-full flex items-center justify-center"
+                    style={{ background: p.soft }}
+                  >
+                    <card.Icon className="h-4 w-4" style={{ color: p.solid }} />
+                  </div>
+                  <p className="text-[11px] font-medium mb-1" style={{ color: "hsl(230, 18%, 40%)" }}>
+                    {card.label}
+                  </p>
+                  <p className="font-extrabold text-base mb-1.5" style={{ color: "hsl(250, 50%, 12%)" }}>
+                    ₪3.3M
+                  </p>
+                  <div className="mt-auto flex">
+                    <span
+                      className="inline-flex items-center gap-1 text-[9.5px] font-bold px-1.5 py-0.5 rounded-full leading-tight"
+                      style={{
+                        background: "hsl(35, 100%, 95%)",
+                        color: "hsl(28, 85%, 32%)",
+                        border: "1px solid hsl(35, 90%, 82%)",
+                      }}
+                    >
+                      <AlertTriangle className="h-2.5 w-2.5" strokeWidth={2.5} />
+                      נתונים חלקיים
+                    </span>
+                  </div>
+                </button>
+              );
+            }
             return (
               <div
                 key={card.label}
