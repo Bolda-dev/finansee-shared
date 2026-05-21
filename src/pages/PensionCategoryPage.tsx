@@ -239,12 +239,12 @@ const PensionCategoryPage = () => {
                   <span
                     className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1"
                     style={{
-                      background: "hsl(150, 60%, 93%)",
-                      color: "hsl(150, 65%, 26%)",
-                      border: "1px solid hsl(150, 55%, 84%)",
+                      background: "hsl(176, 55%, 91%)",
+                      color: "hsl(178, 70%, 22%)",
+                      border: "1px solid hsl(176, 50%, 82%)",
                     }}
                   >
-                    +{formatNIS(p.monthlyDeposit)}/חודש
+                    +{formatNIS(p.monthlyDeposit)}/ח
                   </span>
                 ) : (
                   <span className="block text-[10px] font-medium mt-0.5" style={{ color: "hsl(230, 15%, 55%)" }}>ללא הפקדה</span>
