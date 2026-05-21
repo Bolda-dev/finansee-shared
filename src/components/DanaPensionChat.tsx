@@ -48,7 +48,7 @@ function buildSecondAlternative(primary: { provider: string; label: string; mgmt
     provider,
     label: "מסלול כללי",
     mgmt: Math.round((primary.mgmt + 0.08) * 100) / 100,
-    return3y: Math.max(0, primary.return3y - 2.4),
+    return3y: Math.round(Math.max(0, primary.return3y - 2.4) * 10) / 10,
   };
 }
 
