@@ -607,6 +607,19 @@ function CompareCard({
           >
             השוואה מפורטת ›
           </button>
+          {onShowLeaks && (
+            <button
+              onClick={onShowLeaks}
+              className="mt-1 w-full max-w-[280px] rounded-full py-2.5 text-[11.5px] font-bold transition-transform active:scale-[0.97]"
+              style={{
+                color: C.deep,
+                background: "white",
+                border: `1px dashed ${C.fresh}`,
+              }}
+            >
+              ✨ הצג איך נראים בולטים בשיחה
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -616,4 +629,105 @@ function CompareCard({
 function CtaBlock() {
   return null;
 }
+
+function LeaksCard() {
+  const sections: { title: string; body: React.ReactNode }[] = [
+    {
+      title: "דמי ניהול פנסיה גבוהים (מנורה)",
+      body: (
+        <>
+          הקרן של מנורה גובה <strong>0.9%</strong> בשנה — זה כפול מהנורמה של <strong>0.3–0.5%</strong>.
+          על <strong>₪160,000</strong> שיש לך שם, אתה משלם <strong>~₪80</strong> יותר כל חודש.
+          בחזרה על 27 שנה עד פרישה — זה כ-<strong>₪17,280</strong> בהפסד.
+        </>
+      ),
+    },
+    {
+      title: "כפל בביטוח בריאות",
+      body: (
+        <>
+          יש לך <strong>2 פוליסות</strong> בריאות (מכבי וכלל) בעלות כוללת של <strong>₪670</strong> בחודש —
+          ייתכן שיש כיסויים חופפים. ביטול אחת מהן יחסוך לך <strong>₪164</strong> בחודש
+          (<strong>₪1,962</strong> בשנה).
+        </>
+      ),
+    },
+    {
+      title: "עודף בקרנות השתלמות",
+      body: (
+        <>
+          הקרן שלך צברה <strong>₪95,000</strong> עם תשואה של <strong>5.8%</strong> בלבד —
+          נמוכה מתיק מגוון. כסף "תקוע" שיכול להעבודות יותר.
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <div className="flex justify-end gap-2 items-end" dir="rtl">
+      <div
+        className="max-w-[88%] rounded-2xl rounded-br-md text-right overflow-hidden"
+        style={{
+          background: "white",
+          border: "1px solid hsl(230, 20%, 92%)",
+          boxShadow: "0 8px 24px hsla(230, 30%, 50%, 0.10)",
+        }}
+        dir="rtl"
+      >
+        <div className="px-4 pt-3.5 pb-2">
+          <p className="text-[13px] leading-relaxed" style={{ color: "hsl(250, 35%, 22%)" }}>
+            יוסי, יש לך <strong>3 מקומות</strong> שבהם כסף זולג בשקט:
+          </p>
+        </div>
+
+        <div className="px-4 pb-3 flex flex-col gap-2.5">
+          {sections.map((s, i) => (
+            <div
+              key={i}
+              className="rounded-2xl p-3 relative"
+              style={{
+                background: "hsl(180, 30%, 97%)",
+                border: `1px solid ${C.hairline}`,
+              }}
+            >
+              <div className="flex items-start gap-2 mb-1.5">
+                <span
+                  className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10.5px] font-extrabold text-white"
+                  style={{ background: C.fresh }}
+                >
+                  {i + 1}
+                </span>
+                <p className="text-[12.5px] font-extrabold leading-tight" style={{ color: C.deep }}>
+                  {s.title}
+                </p>
+              </div>
+              <p
+                className="text-[11.5px] leading-relaxed pr-7"
+                style={{ color: "hsl(230, 18%, 32%)" }}
+              >
+                {s.body}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="mx-4 mb-3 mt-1 p-3 rounded-xl"
+          style={{
+            background: `linear-gradient(135deg, ${C.deep} 0%, ${C.core} 100%)`,
+          }}
+        >
+          <p className="text-[11px] font-extrabold uppercase tracking-wider mb-0.5" style={{ color: "hsla(176, 55%, 91%, 0.75)" }}>
+            הצעד הבא
+          </p>
+          <p className="text-[12.5px] leading-relaxed text-white">
+            נתחיל בביטוח — זה השיווין הגדול ביותר להסרה תוך שבוע. המתכנן הפיננסי שלך יוביל את הביצוע.
+          </p>
+        </div>
+      </div>
+      <img src={advisorImg} alt="" className="w-7 h-7 rounded-full object-cover flex-shrink-0" />
+    </div>
+  );
+}
+
 
