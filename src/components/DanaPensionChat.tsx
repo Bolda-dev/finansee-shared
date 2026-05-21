@@ -477,7 +477,15 @@ function CompareCard({
                 </p>
               </div>
             </div>
+
+            <button
+              className="w-full rounded-full py-2 text-[11px] font-bold text-white transition-transform active:scale-[0.97]"
+              style={{ background: C.fresh, boxShadow: "0 4px 12px hsla(174, 65%, 30%, 0.25)" }}
+            >
+              בחינת הקרן ›
+            </button>
           </div>
+
 
           {/* Other alternative — appears on LEFT in RTL (second child) */}
           <div
