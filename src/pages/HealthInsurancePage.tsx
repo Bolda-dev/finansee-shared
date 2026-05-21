@@ -130,6 +130,7 @@ type TabKey = "overview" | "benefits" | "claims";
 const HealthInsurancePage = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<TabKey>("overview");
+  const [chatOpen, setChatOpen] = useState(false);
 
   const tabs: { key: TabKey; label: string }[] = [
     { key: "overview", label: "סקירה" },
