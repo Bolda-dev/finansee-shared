@@ -9,7 +9,7 @@ import {
   ArrowLeftRight,
   RefreshCw,
   UserCog,
-  
+  Zap,
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { pensionProducts, type PensionProduct } from "@/lib/data";
@@ -263,8 +263,63 @@ const PensionProductPage = () => {
         </div>
       </div>
 
+      {/* Dana opportunity card — at top, above chips */}
+      {hasOpportunity && (
+        <div className="px-4 pt-5">
+          <div
+            className="rounded-2xl p-4 text-right relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, hsl(0, 0%, 6%) 0%, hsl(0, 0%, 12%) 100%)",
+              boxShadow: "0 10px 28px hsla(0, 0%, 0%, 0.28)",
+              border: "1px solid hsl(0, 0%, 18%)",
+            }}
+            dir="rtl"
+          >
+            <div className="flex items-start gap-3 mb-3">
+              <span className="relative w-12 h-12 rounded-full flex-shrink-0">
+                <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 4px 10px hsla(0, 0%, 0%, 0.4)", border: "2px solid hsl(0, 0%, 18%)" }}>
+                  <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
+                </span>
+                <span
+                  className="absolute -top-1 -left-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-[11px] font-extrabold text-white"
+                  style={{ background: "hsl(0, 78%, 55%)", border: "2px solid hsl(0, 0%, 6%)" }}
+                  aria-label="התראה"
+                >
+                  !
+                </span>
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="text-[11px] font-bold uppercase tracking-wider mb-1" style={{ color: "hsl(0, 0%, 65%)" }}>
+                  דנה — מה לשפר
+                </p>
+                <p className="text-[13px] font-extrabold text-white leading-snug mb-1.5">
+                  {isExpensive
+                    ? <>זוהתה בעיה: דמי ניהול גבוהים ({product.managementFromBalance}%)</>
+                    : product.return12m < 5
+                    ? <>זוהתה בעיה: תשואה נמוכה במסלול הנוכחי</>
+                    : <>זוהתה בעיה: המסלול לא ממוצה</>}
+                </p>
+                <p className="text-[12px] leading-relaxed" style={{ color: "hsl(0, 0%, 80%)" }}>
+                  יש לי פתרון בשבילך — מעבר חכם יחסוך לך
+                  <strong className="text-white"> {formatNIS(alt.savings)}</strong> לאורך השנים.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setDanaOpen(true)}
+              className="w-full rounded-xl py-3 text-[13px] font-extrabold flex items-center justify-center gap-1.5 bg-white transition-transform hover:scale-[1.01] active:scale-[0.98]"
+              style={{ color: "hsl(0, 0%, 8%)" }}
+            >
+              <Zap className="h-4 w-4" fill="hsl(45, 100%, 55%)" strokeWidth={2} style={{ color: "hsl(45, 100%, 45%)" }} />
+              בואו נשפר את הפוליסה!
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Filter chips — identical to Assets / Pension category */}
       <div className="px-4 pt-5 pb-1">
+
         <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
           {tabs.map((t) => {
             const isActive = tab === t.key;
@@ -377,52 +432,6 @@ const PensionProductPage = () => {
           </div>
         </SectionCard>
 
-        <div
-          className="rounded-2xl p-5 text-right"
-          style={{
-            background: `linear-gradient(135deg, ${C.deep} 0%, ${C.core} 100%)`,
-            boxShadow: `0 8px 24px hsla(178, 70%, 14%, 0.30)`,
-          }}
-          dir="rtl"
-        >
-          <div className="flex items-start gap-3 mb-4">
-            <span className="tri-ring-c relative w-12 h-12 rounded-full flex-shrink-0">
-              <span className="block w-full h-full rounded-full overflow-hidden" style={{ boxShadow: "0 4px 10px hsla(0, 0%, 0%, 0.3)" }}>
-                <img src={advisorImg} alt="דנה" className="w-full h-full object-cover" />
-              </span>
-            </span>
-            <div className="flex-1 min-w-0">
-              <p className="text-[13px] font-extrabold text-white mb-1.5">דנה — תובנה אישית</p>
-              <p className="text-[12px] leading-relaxed text-white/90">
-                {isExpensive ? (
-                  <>
-                    דמי הניהול שלך ({product.managementFromBalance}%) גבוהים מממוצע השוק. מעבר למסלול דומה
-                    בדמי ניהול 0.3% יחסוך לך כ-
-                    <strong> {formatNIS(Math.round((product.managementFromBalance - 0.3) * product.balance / 100))}</strong> בשנה.
-                  </>
-                ) : product.return12m > 7 ? (
-                  <>
-                    ביצועי המוצר טובים — תשואה של {product.return12m}% ב-12 החודשים האחרונים.
-                    בוא נבדוק יחד אם המסלול מתאים לפרופיל הסיכון שלך.
-                  </>
-                ) : (
-                  <>
-                    התשואה כאן נמוכה יחסית. שווה לבחון מסלול עם חשיפה גבוהה יותר למניות
-                    בהתאם לטווח הפרישה שלך.
-                  </>
-                )}
-              </p>
-            </div>
-          </div>
-          <button
-            onClick={() => setChatOpen(true)}
-            className="w-full rounded-xl py-3 text-[12.5px] font-bold flex items-center justify-center gap-1.5 bg-white"
-            style={{ color: C.deep }}
-          >
-            פתחי שיחה איתי
-            <Send className="h-3.5 w-3.5 -rotate-90" />
-          </button>
-        </div>
 
         <p className="text-[10.5px] text-center mt-2 px-6" style={{ color: C.muted }}>
           הנתונים מתעדכנים אוטומטית מהמסלקה הפנסיונית
