@@ -232,7 +232,7 @@ export const CategoryPageC = ({
 
       {/* === Hero — stays in place; sheet scrolls up over it === */}
       <div
-        className="sticky top-0 z-0 px-5 pt-10 pb-12"
+        className="sticky top-0 z-0 px-5 pt-8 pb-12"
         style={{ background: theme.gradient }}
       >
         {/* Decorative ripples — same style as category cards */}
