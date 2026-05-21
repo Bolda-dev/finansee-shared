@@ -12,6 +12,7 @@ const AssetsPageC = lazy(() => import("./pages/AssetsPageC"));
 const PensionCategoryPage = lazy(() => import("./pages/PensionCategoryPage"));
 const PensionProductPage = lazy(() => import("./pages/PensionProductPage"));
 const LiabilitiesPageC = lazy(() => import("./pages/LiabilitiesPageC"));
+const MortgageInvestmentPage = lazy(() => import("./pages/MortgageInvestmentPage"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Signup2 = lazy(() => import("./pages/Signup2"));
 const AhaDashboard = lazy(() => import("./pages/AhaDashboard"));
