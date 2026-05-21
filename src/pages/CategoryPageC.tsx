@@ -212,7 +212,7 @@ export const CategoryPageC = ({
       >
         <div className="flex items-center justify-between px-4 py-3" style={{ color: heroText }}>
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(parentPath ?? "/")}
             className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
             aria-label="חזרה"
           >
@@ -258,7 +258,7 @@ export const CategoryPageC = ({
               dir="rtl"
             >
               <button
-                onClick={() => (parentPath ? navigate(parentPath) : navigate(-1))}
+                onClick={() => navigate(parentPath ?? "/")}
                 className="inline-flex items-center gap-0.5 transition-opacity hover:opacity-100"
                 style={{ color: heroText, opacity: 0.65 }}
                 aria-label={`חזרה ל${parentLabel}`}
@@ -272,7 +272,7 @@ export const CategoryPageC = ({
           ) : (
             <>
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate(parentPath ?? "/")}
                 className="flex items-center gap-1 text-[12px] font-medium opacity-90 hover:opacity-100 transition-opacity"
                 aria-label="חזרה"
               >
