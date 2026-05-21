@@ -12,6 +12,7 @@ export const IdentityStep = ({ idNumber, issueDate, onChange }: IdentityStepProp
   const [scanningSelfie, setScanningSelfie] = useState(false);
   const [idDone, setIdDone] = useState(false);
   const [selfieDone, setSelfieDone] = useState(false);
+  const [manualOpen, setManualOpen] = useState(false);
 
   const handleScanId = () => {
     setScanningId(true);
