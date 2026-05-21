@@ -196,40 +196,6 @@ export const CategoryPageC = ({
       dir="rtl"
       style={{ background: theme.gradient }}
     >
-      {/* === Sticky compact header — appears on scroll === */}
-      <div
-        className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-30 transition-all duration-300"
-        style={{
-          background: theme.gradient,
-          boxShadow: stickyVisible ? `0 4px 14px ${theme.sheetShadow}` : "none",
-          transform: stickyVisible
-            ? "translate(-50%, 0)"
-            : "translate(-50%, -100%)",
-          opacity: stickyVisible ? 1 : 0,
-          pointerEvents: stickyVisible ? "auto" : "none",
-        }}
-        dir="rtl"
-      >
-        <div className="relative flex items-center justify-center px-4 py-3 min-h-[44px]" style={{ color: heroText }} dir="rtl">
-          <button
-            onClick={() => navigate(parentPath ?? "/")}
-            className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-9 h-9 rounded-full transition-all hover:scale-105 active:scale-95"
-            style={{
-              background: heroText === "white" ? "hsla(0,0%,100%,0.18)" : "hsla(0,0%,0%,0.08)",
-              border: heroText === "white" ? "1px solid hsla(0,0%,100%,0.25)" : "1px solid hsla(0,0%,0%,0.10)",
-              backdropFilter: "blur(8px)",
-              color: heroText,
-            }}
-            aria-label="חזרה"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-          <h1 className="text-[14px] font-extrabold truncate max-w-[230px]" style={{ color: heroText }}>
-            {title}
-          </h1>
-        </div>
-
-      </div>
 
       {/* === Hero — stays in place; sheet scrolls up over it === */}
       <div
