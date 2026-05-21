@@ -54,22 +54,71 @@ const groups: { title: string; links: { to: string; label: string; note?: string
 
 const SitemapPage = () => {
   return (
-    <div style={{ padding: 16, fontFamily: "system-ui, sans-serif", direction: "rtl" }}>
-      <h1>Sitemap</h1>
-      <p>רשימת כל המסלולים באפליקציה.</p>
+    <div
+      style={{
+        padding: 20,
+        fontFamily: "system-ui, -apple-system, sans-serif",
+        direction: "rtl",
+        background: "#f7f7fa",
+        minHeight: "100vh",
+        color: "#111",
+      }}
+    >
+      <h1 style={{ fontSize: 22, fontWeight: 700, margin: "4px 0 4px" }}>Sitemap</h1>
+      <p style={{ color: "#555", margin: "0 0 20px", fontSize: 13 }}>
+        רשימת כל המסלולים באפליקציה.
+      </p>
       {groups.map((g) => (
-        <section key={g.title} style={{ marginTop: 20 }}>
-          <h2 style={{ fontSize: 16 }}>{g.title}</h2>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        <section key={g.title} style={{ marginBottom: 22 }}>
+          <h2
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: 0.5,
+              color: "#666",
+              margin: "0 0 10px",
+            }}
+          >
+            {g.title}
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {g.links.map((l) => (
-              <li key={l.to} style={{ marginBottom: 8 }}>
-                <Link to={l.to}>
-                  <button type="button">{l.label}</button>
-                </Link>
-                {l.note && <span style={{ marginInlineStart: 8, color: "#555" }}>— {l.note}</span>}
-              </li>
+              <Link
+                key={l.to}
+                to={l.to}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  padding: "10px 14px",
+                  background: "#fff",
+                  border: "1px solid #e2e2e8",
+                  borderRadius: 10,
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
+                  textDecoration: "none",
+                  color: "#111",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "#1e40af",
+                  }}
+                >
+                  {l.label}
+                </span>
+                {l.note && (
+                  <span style={{ fontSize: 12, color: "#666", textAlign: "start" }}>
+                    {l.note}
+                  </span>
+                )}
+              </Link>
             ))}
-          </ul>
+          </div>
         </section>
       ))}
     </div>
