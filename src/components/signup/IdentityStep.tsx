@@ -112,21 +112,39 @@ export const IdentityStep = ({ idNumber, issueDate, onChange }: IdentityStepProp
         />
       </div>
 
-      {/* Inputs */}
-      <div className="space-y-2.5">
-        <FieldInput
-          label="מספר תעודת זהות"
-          placeholder="9 ספרות"
-          value={idNumber}
-          inputMode="numeric"
-          onChange={(v) => onChange({ idNumber: v.replace(/\D/g, "").slice(0, 9), issueDate })}
-        />
-        <FieldInput
-          label="תאריך הוצאת תעודה"
-          placeholder="DD/MM/YYYY"
-          value={issueDate}
-          onChange={(v) => onChange({ idNumber, issueDate: v })}
-        />
+      {/* Manual ID fields — collapsed by default */}
+      <div className="mt-1">
+        <button
+          type="button"
+          onClick={() => setManualOpen((v) => !v)}
+          className="w-full flex items-center justify-between text-right py-2.5 px-1"
+          style={{ color: "hsl(250, 35%, 30%)" }}
+        >
+          <ChevronDown
+            className="h-4 w-4 transition-transform"
+            style={{ transform: manualOpen ? "rotate(180deg)" : "rotate(0deg)", color: "hsl(262, 75%, 55%)" }}
+          />
+          <span className="text-[12.5px] font-semibold">
+            במידה ואנחנו עדיין צריכים את השדות של תעודת הזהות
+          </span>
+        </button>
+        {manualOpen && (
+          <div className="space-y-2.5 pt-1 animate-fade-in">
+            <FieldInput
+              label="מספר תעודת זהות"
+              placeholder="9 ספרות"
+              value={idNumber}
+              inputMode="numeric"
+              onChange={(v) => onChange({ idNumber: v.replace(/\D/g, "").slice(0, 9), issueDate })}
+            />
+            <FieldInput
+              label="תאריך הוצאת תעודה"
+              placeholder="DD/MM/YYYY"
+              value={issueDate}
+              onChange={(v) => onChange({ idNumber, issueDate: v })}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
