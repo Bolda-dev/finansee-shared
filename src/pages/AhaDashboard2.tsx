@@ -78,6 +78,7 @@ const AhaDashboard2 = () => {
 
   const [chatOpen, setChatOpen] = useState(false);
   const [tipOpen, setTipOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
   const [stage, setStage] = useState<Stage>("intro");
   // creditReport: 1=consent assets, 2=consent liab, 3=collecting
   // investStyle: 0..2 = three questions
