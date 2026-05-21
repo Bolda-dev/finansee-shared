@@ -13,6 +13,7 @@ const PensionCategoryPage = lazy(() => import("./pages/PensionCategoryPage"));
 const PensionProductPage = lazy(() => import("./pages/PensionProductPage"));
 const LiabilitiesPageC = lazy(() => import("./pages/LiabilitiesPageC"));
 const MortgageInvestmentPage = lazy(() => import("./pages/MortgageInvestmentPage"));
+const HealthInsurancePage = lazy(() => import("./pages/HealthInsurancePage"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Signup2 = lazy(() => import("./pages/Signup2"));
 const AhaDashboard = lazy(() => import("./pages/AhaDashboard"));
@@ -32,6 +33,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<IndexC />} />
               <Route path="/insurance" element={<InsurancePageC />} />
+              <Route path="/insurance/health" element={<HealthInsurancePage />} />
               <Route path="/assets" element={<AssetsPageC />} />
               <Route path="/assets/pension" element={<PensionCategoryPage />} />
               <Route path="/assets/pension/:id" element={<PensionProductPage />} />

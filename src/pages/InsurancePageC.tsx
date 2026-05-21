@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { CategoryPageC, formatNIS, type CategoryItem } from "./CategoryPageC";
 import { insuranceItems } from "@/lib/data";
 
 const InsurancePageC = () => {
+  const navigate = useNavigate();
   const items: CategoryItem[] = insuranceItems.map((i) => {
     const next: CategoryItem = { ...i };
     if (i.label.includes("רכב")) {
@@ -33,6 +35,11 @@ const InsurancePageC = () => {
 
   return (
     <CategoryPageC
+      onItemClick={(item) => {
+        if (item.label.includes("בריאות")) {
+          navigate("/insurance/health");
+        }
+      }}
       title="ביטוח"
       theme={{
         gradient:
