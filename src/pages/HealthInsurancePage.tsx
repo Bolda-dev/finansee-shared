@@ -173,22 +173,6 @@ const HealthInsurancePage = () => {
           </button>
           <h1 className="text-[15px] font-extrabold text-white truncate max-w-[230px]">ביטוח בריאות</h1>
         </div>
-
-
-        <div className="relative flex items-center justify-between mt-4">
-          <h2 className="text-[14px] font-medium text-white/75">{policy.typeLabel}</h2>
-          <span
-            className="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full text-white"
-            style={{
-              background: "hsla(0,80%,60%,0.25)",
-              border: "1px solid hsla(0,80%,80%,0.35)",
-              backdropFilter: "blur(6px)",
-            }}
-          >
-            <AlertTriangle className="h-2.5 w-2.5" />
-            דורש בדיקה
-          </span>
-        </div>
       </div>
 
       {/* Floating Summary Card */}
