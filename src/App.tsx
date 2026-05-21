@@ -30,8 +30,6 @@ const App = () => (
           <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<IndexC />} />
-              <Route path="/income" element={<IncomePage />} />
-              <Route path="/expenses" element={<ExpensesPage />} />
               <Route path="/insurance" element={<InsurancePageC />} />
               <Route path="/assets" element={<AssetsPageC />} />
               <Route path="/assets/pension" element={<PensionCategoryPage />} />
