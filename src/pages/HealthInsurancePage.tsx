@@ -8,7 +8,7 @@ import {
   Stethoscope,
   UserCog,
   ShieldCheck,
-  AlertTriangle,
+  
   Calendar,
 } from "lucide-react";
 import { ProviderLogo } from "@/lib/providerLogo";
