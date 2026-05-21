@@ -13,7 +13,7 @@ const BRANDS: Record<string, Brand> = {
   "כלל": { bg: "#fff", fg: "#1a1a1a", initials: "כל", image: clalLogo },
   "הראל": { bg: "#fff", fg: "#1a1a1a", initials: "הר", image: harelLogo },
   "מגדל": { bg: "#fff", fg: "#1a1a1a", initials: "מג", image: migdalLogo },
-  "הפניקס": { bg: "hsl(15, 80%, 48%)", fg: "#fff", initials: "הפ" },
+  "הפניקס": { bg: "#fff", fg: "#1a1a1a", initials: "הפ", image: phoenixLogo },
   "אלטשולר שחם": { bg: "hsl(210, 30%, 18%)", fg: "#fff", initials: "אש" },
   "בנק הפועלים": { bg: "hsl(8, 75%, 50%)", fg: "#fff", initials: "בה" },
   "בנק לאומי": { bg: "hsl(220, 80%, 38%)", fg: "#fff", initials: "בל" },
