@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import advisorImg from "@/assets/advisor-avatar.jpg";
 import { InsightsSheetC } from "@/components/InsightsSheetC";
+import { StickyHeader } from "@/components/StickyHeader";
 import { useVersionCSettings } from "@/contexts/VersionCSettings";
 
 const iconMap: Record<string, typeof Heart> = {
