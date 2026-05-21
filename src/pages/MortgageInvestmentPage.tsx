@@ -119,6 +119,7 @@ type TabKey = "overview" | "payments" | "property";
 const MortgageInvestmentPage = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<TabKey>("overview");
+  const [chatOpen, setChatOpen] = useState(false);
 
   const paidSoFar = mortgage.originalAmount - mortgage.balance;
   const paidPct = Math.round((paidSoFar / mortgage.originalAmount) * 100);
