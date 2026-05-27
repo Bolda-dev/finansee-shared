@@ -291,9 +291,115 @@ const DesignSystemPage = () => {
         </Section>
       ))}
 
-      {/* 2 — Typography (real sizes incl. .5) */}
+      {/* 2a — Font families (system stack) */}
       <Section
-        title="Typography"
+        title="Font families"
+        source="native system stack · index.css → --font-* · tailwind: font-sans/display/body/mono/numeric"
+      >
+        {[
+          {
+            token: "--font-display",
+            tw: "font-display",
+            usage: "כותרות, KPI גדולים, hero",
+            sample: "₪7.4M · ביטוח בריאות",
+            weight: 800,
+            size: 22,
+          },
+          {
+            token: "--font-sans",
+            tw: "font-sans (ברירת מחדל)",
+            usage: "כל ה-UI הכללי",
+            sample: "מסך בית · פוטנציאל פיננסי אישי",
+            weight: 600,
+            size: 15,
+          },
+          {
+            token: "--font-body",
+            tw: "font-body",
+            usage: "פסקאות, תיאורים",
+            sample: "נכסים, התחייבויות וביטוחים — מתעדכנים אוטומטית",
+            weight: 400,
+            size: 13,
+          },
+          {
+            token: "--font-numeric",
+            tw: "font-numeric / .tabular-nums",
+            usage: "כל סכום, אחוז, ספרה בטבלה",
+            sample: "₪1,234,567.89  ·  12.5%",
+            weight: 700,
+            size: 16,
+            numeric: true,
+          },
+          {
+            token: "--font-mono",
+            tw: "font-mono",
+            usage: "תוויות טכניות, קוד, מטא",
+            sample: "DesignSystemPage.tsx · 12/700",
+            weight: 500,
+            size: 12,
+            mono: true,
+          },
+        ].map((f) => (
+          <div
+            key={f.token}
+            className="rounded-xl p-3"
+            style={{
+              border: "1px solid hsl(230, 20%, 92%)",
+              background: "hsl(230, 30%, 99%)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span
+                className="text-[10px] font-bold uppercase tracking-wider"
+                style={{ color: "hsl(230, 15%, 45%)" }}
+              >
+                {f.tw}
+              </span>
+              <span
+                className="text-[9px] font-mono"
+                style={{ color: "hsl(230, 15%, 55%)" }}
+              >
+                {f.token}
+              </span>
+            </div>
+            <div
+              style={{
+                fontFamily: `var(${f.token})`,
+                fontSize: f.size,
+                fontWeight: f.weight,
+                color: "hsl(250, 50%, 12%)",
+                lineHeight: 1.2,
+                fontVariantNumeric: f.numeric ? "tabular-nums" : undefined,
+              }}
+            >
+              {f.sample}
+            </div>
+            <p
+              className="text-[10.5px] mt-1.5"
+              style={{ color: "hsl(230, 15%, 50%)" }}
+            >
+              {f.usage}
+            </p>
+          </div>
+        ))}
+        <div
+          className="rounded-xl p-3 text-[10.5px] leading-relaxed"
+          style={{
+            background: "hsl(45, 90%, 96%)",
+            border: "1px solid hsl(45, 70%, 85%)",
+            color: "hsl(35, 50%, 25%)",
+          }}
+        >
+          ⚠ אין web fonts. הסטאק: Apple (SF Pro) → Segoe UI (Windows) → Roboto
+          (Android) → Heebo / Assistant / Arial Hebrew לעברית. כל מספר במערכת
+          חייב להיות עם <code className="font-mono">tabular-nums</code> כדי
+          שעמודות סכומים יישרו.
+        </div>
+      </Section>
+
+      {/* 2b — Typography sizes (real sizes incl. .5) */}
+      <Section
+        title="Typography scale"
         source="כל הגדלים שבאמת רצים, כולל ערכי .5"
       >
         {[
