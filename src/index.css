@@ -92,6 +92,22 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  :root {
+    /* ============================================================
+       Typography tokens — native system font stack
+       Headings/UI: San Francisco on Apple, Segoe UI on Windows,
+       Roboto on Android. Numerals: tabular for financial data.
+       ============================================================ */
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+      "SF Pro Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue",
+      Arial, "Noto Sans Hebrew", "Arial Hebrew", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-display: var(--font-sans);
+    --font-body: var(--font-sans);
+    --font-numeric: var(--font-sans);
+  }
 }
 
 @layer base {
@@ -99,8 +115,24 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    font-feature-settings: "kern", "liga", "calt";
+  }
+
+  .font-numeric,
+  [data-numeric] {
+    font-family: var(--font-numeric);
+    font-feature-settings: "tnum", "lnum";
+    font-variant-numeric: tabular-nums lining-nums;
   }
 }
 
