@@ -292,6 +292,14 @@ const DesignSystemPage = () => {
         </Section>
       ))}
 
+      {/* 2-pre — Resolved font + all weights (live on this device) */}
+      <Section
+        title="Resolved font on this device"
+        source="getComputedStyle + font detection · משקלים 100→900"
+      >
+        <ResolvedFontReport />
+      </Section>
+
       {/* 2a — Font families (system stack) */}
       <Section
         title="Font families"
