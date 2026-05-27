@@ -28,6 +28,170 @@ import advisorImg from "@/assets/advisor-avatar.jpg";
  * where each element lives. Per-category palettes are kept separate.
  */
 
+/* ===== Live font detector =====
+   Measures candidate font widths against monospace/serif/sans-serif baselines
+   to figure out which font in the CSS stack the browser actually rendered. */
+const FONT_CANDIDATES = [
+  "SF Pro Display",
+  "SF Pro Text",
+  "-apple-system",
+  "BlinkMacSystemFont",
+  "Segoe UI",
+  "Roboto",
+  "Helvetica Neue",
+  "Heebo",
+  "Assistant",
+  "Arial Hebrew",
+  "Arial",
+  "SF Mono",
+  "Menlo",
+  "Consolas",
+  "ui-monospace",
+];
+
+const detectFont = (stack: string): string => {
+  if (typeof document === "undefined") return "—";
+  const test = "mmmmmmmmmmlliABCDEabcde0123אבגדהוז₪";
+  const baseFonts = ["monospace", "serif", "sans-serif"];
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return "—";
+
+  const baseline: Record<string, number> = {};
+  for (const b of baseFonts) {
+    ctx.font = `16px ${b}`;
+    baseline[b] = ctx.measureText(test).width;
+  }
+
+  // First try each candidate independently
+  for (const cand of FONT_CANDIDATES) {
+    let detected = false;
+    for (const b of baseFonts) {
+      ctx.font = `16px "${cand}", ${b}`;
+      const w = ctx.measureText(test).width;
+      if (Math.abs(w - baseline[b]) > 0.5) {
+        detected = true;
+        break;
+      }
+    }
+    if (detected) {
+      // Confirm this candidate is what the actual stack resolves to
+      ctx.font = `16px "${cand}", monospace`;
+      const candWidth = ctx.measureText(test).width;
+      ctx.font = `16px ${stack}`;
+      const stackWidth = ctx.measureText(test).width;
+      if (Math.abs(candWidth - stackWidth) < 0.5) return cand;
+    }
+  }
+  return "system default";
+};
+
+const ResolvedFontReport = () => {
+  const tokens = [
+    { token: "--font-display", label: "font-display" },
+    { token: "--font-sans", label: "font-sans" },
+    { token: "--font-body", label: "font-body" },
+    { token: "--font-numeric", label: "font-numeric" },
+    { token: "--font-mono", label: "font-mono" },
+  ];
+  const [info, setInfo] = useState<
+    Record<string, { stack: string; detected: string }>
+  >({});
+
+  useEffect(() => {
+    const out: Record<string, { stack: string; detected: string }> = {};
+    const root = getComputedStyle(document.documentElement);
+    for (const t of tokens) {
+      const stack = root.getPropertyValue(t.token).trim() || "sans-serif";
+      out[t.token] = { stack, detected: detectFont(stack) };
+    }
+    setInfo(out);
+  }, []);
+
+  const weights = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+
+  return (
+    <div className="space-y-4">
+      {tokens.map((t) => {
+        const i = info[t.token];
+        return (
+          <div
+            key={t.token}
+            className="rounded-xl p-3"
+            style={{
+              border: "1px solid hsl(230, 20%, 92%)",
+              background: "white",
+            }}
+          >
+            <div className="flex items-baseline justify-between mb-1.5">
+              <span
+                className="text-[11px] font-bold"
+                style={{ color: "hsl(250, 50%, 12%)" }}
+              >
+                {t.label}
+              </span>
+              <span
+                className="text-[10px] font-mono"
+                style={{ color: "hsl(220, 70%, 45%)" }}
+              >
+                → {i?.detected ?? "…"}
+              </span>
+            </div>
+            <p
+              className="text-[9px] font-mono mb-2 leading-snug break-all"
+              style={{ color: "hsl(230, 15%, 55%)" }}
+              dir="ltr"
+            >
+              {i?.stack ?? "—"}
+            </p>
+            <div className="space-y-1">
+              {weights.map((w) => (
+                <div
+                  key={w}
+                  className="flex items-baseline justify-between gap-3 py-0.5 border-b last:border-0"
+                  style={{ borderColor: "hsl(230, 20%, 96%)" }}
+                >
+                  <span
+                    style={{
+                      fontFamily: `var(${t.token})`,
+                      fontWeight: w,
+                      fontSize: 16,
+                      color: "hsl(250, 50%, 12%)",
+                      lineHeight: 1.15,
+                    }}
+                  >
+                    Aa אב ₪123,456
+                  </span>
+                  <span
+                    className="text-[9px] font-mono"
+                    style={{ color: "hsl(230, 15%, 55%)" }}
+                  >
+                    {w}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+      <div
+        className="rounded-xl p-3 text-[10.5px] leading-relaxed"
+        style={{
+          background: "hsl(210, 80%, 96%)",
+          border: "1px solid hsl(210, 70%, 88%)",
+          color: "hsl(220, 50%, 25%)",
+        }}
+      >
+        ℹ הפונט שמופיע בחץ ← הוא הפונט האמיתי שהדפדפן בחר מהסטאק במכשיר הזה.
+        ב-iOS / macOS זה תמיד <b>SF Pro</b> (Display לכותרות, Text לגוף).
+        ב-Windows: <b>Segoe UI</b>. באנדרואיד: <b>Roboto</b>. SF Pro תומך במשקלים
+        100, 200, 300, 400, 500, 600, 700, 800, 900 — כולם מותקנים במכשיר.
+      </div>
+    </div>
+  );
+};
+
+
 const Section = ({
   title,
   source,
