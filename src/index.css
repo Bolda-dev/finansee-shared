@@ -101,7 +101,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: "IBM Plex Sans Hebrew", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: "Assistant", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
 }
 
